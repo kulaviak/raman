@@ -7,7 +7,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="Implement Close application" />
+    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="In progress">
+      <change afterPath="$PROJECT_DIR$/Raman/Core/DataPoint.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Raman/Core/FileReader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Raman.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Raman.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/RamanForm.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/RamanForm.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/RamanForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/RamanForm.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/RamanForm.resx" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/RamanForm.resx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,6 +32,9 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="2VDDDXkjhHZlkfp8ISvvjapSCOJ" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -40,7 +51,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.environmentSetup",
+    "settings.editor.selected.configurable": "inlay.hints",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -80,7 +91,7 @@
       <option name="presentableId" value="Default" />
       <updated>1694361641646</updated>
       <workItem from="1694361646549" duration="2148000" />
-      <workItem from="1694368098212" duration="2261000" />
+      <workItem from="1694368098212" duration="3439000" />
     </task>
     <task id="LOCAL-00001" summary="Add .gitignore files">
       <option name="closed" value="true" />
@@ -106,7 +117,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694371358500</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="In progress">
+      <option name="closed" value="true" />
+      <created>1694372232078</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1694372232078</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -118,7 +137,8 @@
     <MESSAGE value="Add .gitignore files" />
     <MESSAGE value="Init version" />
     <MESSAGE value="Implement Close application" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement Close application" />
+    <MESSAGE value="In progress" />
+    <option name="LAST_COMMIT_MESSAGE" value="In progress" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

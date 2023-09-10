@@ -46,15 +46,17 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="RamanForm.cs">
-            <SubType>Form</SubType>
+        <Compile Include="Controls\RamanForm.cs">
+          <SubType>Form</SubType>
         </Compile>
-        <Compile Include="RamanForm.Designer.cs">
-            <DependentUpon>RamanForm.cs</DependentUpon>
+        <Compile Include="Controls\RamanForm.Designer.cs">
+          <DependentUpon>RamanForm.cs</DependentUpon>
         </Compile>
+        <Compile Include="Core\DataPoint.cs" />
+        <Compile Include="Core\FileReader.cs" />
         <Compile Include="Program.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
-        <EmbeddedResource Include="RamanForm.resx">
+        <EmbeddedResource Include="Controls\RamanForm.resx">
           <DependentUpon>RamanForm.cs</DependentUpon>
         </EmbeddedResource>
         <EmbeddedResource Include="Properties\Resources.resx">
