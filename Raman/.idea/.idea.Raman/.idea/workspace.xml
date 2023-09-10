@@ -7,14 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="Init version">
-      <change afterPath="$PROJECT_DIR$/Raman/RamanForm.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Form1.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/RamanForm.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Form1.resx" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/RamanForm.resx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Raman.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Raman.csproj" afterDir="false" />
-    </list>
+    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="Implement Close application" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,7 +80,7 @@
       <option name="presentableId" value="Default" />
       <updated>1694361641646</updated>
       <workItem from="1694361646549" duration="2148000" />
-      <workItem from="1694368098212" duration="1958000" />
+      <workItem from="1694368098212" duration="2261000" />
     </task>
     <task id="LOCAL-00001" summary="Add .gitignore files">
       <option name="closed" value="true" />
@@ -105,7 +98,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694370437475</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Implement Close application">
+      <option name="closed" value="true" />
+      <created>1694371358500</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1694371358500</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,7 +117,8 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Add .gitignore files" />
     <MESSAGE value="Init version" />
-    <option name="LAST_COMMIT_MESSAGE" value="Init version" />
+    <MESSAGE value="Implement Close application" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement Close application" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
