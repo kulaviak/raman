@@ -11,12 +11,14 @@ namespace Raman.Core
 
         private readonly List<string> _ignoredLines = new List<string>();
 
+        public List<string> IgnoredLines => _ignoredLines;
+
         public FileReader(string filePath)
         {
             _filePath = filePath;
         }
         
-        public List<DataPoint> TryReadFile()
+        public List<Point> TryReadFile()
         {
             List<string> lines;
             try
@@ -31,9 +33,9 @@ namespace Raman.Core
             }
         }
 
-        private List<DataPoint> TryParseLines(List<string> lines)
+        private List<Point> TryParseLines(List<string> lines)
         {
-            var ret = new List<DataPoint>();
+            var ret = new List<Point>();
             try
             {
                 foreach (var line in lines)
@@ -57,7 +59,7 @@ namespace Raman.Core
             }      
         }
 
-        public static DataPoint TryParseLine(string line)
+        public static Point TryParseLine(string line)
         {
             try
             {
@@ -67,7 +69,7 @@ namespace Raman.Core
                 {
                     if (Decimal.TryParse(parts[0], out decimal x) && Decimal.TryParse(parts[1], out decimal y))
                     {
-                        return new DataPoint(x, y);
+                        return new Point(x, y);
                     }
                     else
                     {

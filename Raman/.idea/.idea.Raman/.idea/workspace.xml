@@ -8,9 +8,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="In progress">
-      <change afterPath="$PROJECT_DIR$/Raman/Core/AppException.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Raman/Core/Canvas.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Raman/Core/Chart.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Raman/Core/IDrawable.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Raman.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman.Test/FileReaderTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman.Test/FileReaderTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Controls/RamanForm.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/RamanForm.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Controls/RamanForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/RamanForm.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Core/DataPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Core/Point.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Raman/Core/FileReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Core/FileReader.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Raman/Raman.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Raman.csproj" afterDir="false" />
     </list>
@@ -62,7 +67,7 @@
     ]
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected=".NET Project.Raman">
     <configuration name="Raman" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -93,7 +98,7 @@
       <workItem from="1694361646549" duration="2148000" />
       <workItem from="1694368098212" duration="4870000" />
       <workItem from="1694422951310" duration="91000" />
-      <workItem from="1694423070036" duration="2847000" />
+      <workItem from="1694423070036" duration="5952000" />
     </task>
     <task id="LOCAL-00001" summary="Add .gitignore files">
       <option name="closed" value="true" />
@@ -143,7 +148,31 @@
       <option name="project" value="LOCAL" />
       <updated>1694423139247</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Add NLog">
+      <option name="closed" value="true" />
+      <created>1694426010457</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1694426010457</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Add test project">
+      <option name="closed" value="true" />
+      <created>1694426022603</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1694426022603</updated>
+    </task>
+    <task id="LOCAL-00009" summary="In progress">
+      <option name="closed" value="true" />
+      <created>1694426029661</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1694426029661</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,6 +184,8 @@
     <MESSAGE value="Add .gitignore files" />
     <MESSAGE value="Init version" />
     <MESSAGE value="Implement Close application" />
+    <MESSAGE value="Add NLog" />
+    <MESSAGE value="Add test project" />
     <MESSAGE value="In progress" />
     <option name="LAST_COMMIT_MESSAGE" value="In progress" />
   </component>

@@ -58,7 +58,10 @@
           <DependentUpon>RamanForm.cs</DependentUpon>
         </Compile>
         <Compile Include="Core\AppException.cs" />
-        <Compile Include="Core\DataPoint.cs" />
+        <Compile Include="Core\Canvas.cs" />
+        <Compile Include="Core\Chart.cs" />
+        <Compile Include="Core\IDrawable.cs" />
+        <Compile Include="Core\Point.cs" />
         <Compile Include="Core\FileReader.cs" />
         <Compile Include="Program.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
