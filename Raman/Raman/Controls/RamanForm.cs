@@ -17,11 +17,11 @@ namespace Raman
 
         private void RamanForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Do you really want to exit?", "Exit Confirmation", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question) == DialogResult.No)
-            {
-                e.Cancel = true;
-            }
+            // if (MessageBox.Show("Do you really want to exit?", "Exit Confirmation", MessageBoxButtons.YesNo,
+            //         MessageBoxIcon.Question) == DialogResult.No)
+            // {
+            //     e.Cancel = true;
+            // }
         }
     }
 }

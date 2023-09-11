@@ -54,13 +54,13 @@
       // miOpenFiles
       // 
       this.miOpenFiles.Name = "miOpenFiles";
-      this.miOpenFiles.Size = new System.Drawing.Size(152, 22);
+      this.miOpenFiles.Size = new System.Drawing.Size(129, 22);
       this.miOpenFiles.Text = "Open Files";
       // 
       // miExit
       // 
       this.miExit.Name = "miExit";
-      this.miExit.Size = new System.Drawing.Size(152, 22);
+      this.miExit.Size = new System.Drawing.Size(129, 22);
       this.miExit.Text = "Exit";
       this.miExit.Click += new System.EventHandler(this.miExit_Click);
       // 

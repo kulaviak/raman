@@ -7,14 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="In progress">
-      <change afterPath="$PROJECT_DIR$/Raman/Core/DataPoint.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Raman/Core/FileReader.cs" afterDir="false" />
+    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Raman.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Raman.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/RamanForm.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/RamanForm.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/RamanForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/RamanForm.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/RamanForm.resx" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/RamanForm.resx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Controls/RamanForm.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/RamanForm.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Controls/RamanForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/RamanForm.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,28 +37,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "inlay.hints",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\jakub\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache",
-      "C:\\Users\\jakub\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache",
-      "C:\\Users\\jakub\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\jakub\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\jakub\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\jakub\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Raman" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -91,7 +88,8 @@
       <option name="presentableId" value="Default" />
       <updated>1694361641646</updated>
       <workItem from="1694361646549" duration="2148000" />
-      <workItem from="1694368098212" duration="3439000" />
+      <workItem from="1694368098212" duration="4870000" />
+      <workItem from="1694422951310" duration="91000" />
     </task>
     <task id="LOCAL-00001" summary="Add .gitignore files">
       <option name="closed" value="true" />
@@ -125,7 +123,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694372232078</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="In progress">
+      <option name="closed" value="true" />
+      <created>1694373034929</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1694373034929</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
