@@ -7,11 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="">
+    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="In progress">
+      <change afterPath="$PROJECT_DIR$/Raman/Core/AppException.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Controls/RamanForm.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/RamanForm.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Controls/RamanForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/RamanForm.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Raman.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Core/FileReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Core/FileReader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Raman.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Raman.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +23,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Form1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f8507cae17da4a048c26c1ad6a304248574b88/0c/9fa44078/Exception.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Core/FileReader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Program.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -90,6 +93,7 @@
       <workItem from="1694361646549" duration="2148000" />
       <workItem from="1694368098212" duration="4870000" />
       <workItem from="1694422951310" duration="91000" />
+      <workItem from="1694423070036" duration="2847000" />
     </task>
     <task id="LOCAL-00001" summary="Add .gitignore files">
       <option name="closed" value="true" />
@@ -131,7 +135,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694373034929</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="In progress">
+      <option name="closed" value="true" />
+      <created>1694423139247</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1694423139247</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
