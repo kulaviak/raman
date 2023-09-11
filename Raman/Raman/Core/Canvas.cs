@@ -1,42 +1,38 @@
 using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Raman.Core
 {
     public class Canvas
     {
+        private readonly PictureBox _pictureBox;
+        
         private static Canvas instance = null;
         
-        private static readonly object lockObject = new object();
-
-        private Canvas()
+        public Canvas(PictureBox pictureBox)
         {
-            // Private constructor to prevent instantiation from outside
+            _pictureBox = pictureBox;
+            _pictureBox.Paint += pictureBox_Paint;
         }
-
-        // Chat GPT: how to implement singleton pattern in c#
-        public static Canvas Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    lock (lockObject)
-                    {
-                        if (instance == null)
-                        {
-                            instance = new Canvas();
-                        }
-                    }
-                }
-                return instance;
-            }
-        }
-
+        
         public List<Chart> Charts { get; set; } = new List<Chart>();
         
         public void Refresh()
         {
             Charts.ForEach(x => x.Draw(this));
+        }
+        
+        private void pictureBox_Paint(object sender, PaintEventArgs e)
+        {
+            // Create a Graphics object from the PictureBox
+            Graphics g = e.Graphics;
+
+            // Define the pen for drawing points
+            Pen pointPen = new Pen(Color.Red, 3);
+
+            // Draw some points at specific coordinates
+            g.DrawRectangle(pointPen, 50, 50, 1, 1); // 
         }
     }
 }

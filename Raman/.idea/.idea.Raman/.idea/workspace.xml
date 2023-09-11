@@ -7,10 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="Load data points from data files">
+    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="Add picture box">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Controls/RamanForm.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/RamanForm.Designer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Raman/Controls/RamanForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/RamanForm.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Core/Chart.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Core/Chart.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Core/Canvas.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Core/Canvas.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +174,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694429279275</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Add picture box">
+      <option name="closed" value="true" />
+      <created>1694441632318</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1694441632318</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,7 +198,8 @@
     <MESSAGE value="Add test project" />
     <MESSAGE value="In progress" />
     <MESSAGE value="Load data points from data files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Load data points from data files" />
+    <MESSAGE value="Add picture box" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add picture box" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -206,19 +216,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Raman/Controls/RamanForm.cs</url>
-          <line>38</line>
-          <properties documentPath="C:\github\kulaviak\raman\Raman\Raman\Controls\RamanForm.cs" initialLine="38" containingFunctionPresentation="Method 'miOpenFiles_Click'">
-            <startOffsets>
-              <option value="1152" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1203" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

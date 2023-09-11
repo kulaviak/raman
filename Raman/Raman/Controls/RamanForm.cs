@@ -8,10 +8,12 @@ namespace Raman
 {
     public partial class RamanForm : Form
     {
+        private readonly Canvas _canvas;
+
         public RamanForm()
         {
             InitializeComponent();
-            // _canvas = new Canvas(pic);
+            _canvas = new Canvas(pictureBox);
         }
 
         private void miExit_Click(object sender, EventArgs e)
@@ -58,7 +60,7 @@ namespace Raman
             {
                 var fileReader = new FileReader(filePath);
                 var points = fileReader.TryReadFile();
-                Canvas.Instance.Charts.Add(new Chart(points));
+                _canvas.Charts.Add(new Chart(points));
                 if (fileReader.IgnoredLines.Count != 0)
                 {
                     ignoredLines.AddRange(fileReader.IgnoredLines);
