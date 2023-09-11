@@ -11,6 +11,7 @@ namespace Raman
         public RamanForm()
         {
             InitializeComponent();
+            // _canvas = new Canvas(pic);
         }
 
         private void miExit_Click(object sender, EventArgs e)
