@@ -7,17 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="In progress">
-      <change afterPath="$PROJECT_DIR$/Raman/Core/Canvas.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Raman/Core/Chart.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Raman/Core/IDrawable.cs" afterDir="false" />
+    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="Load data points from data files">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman.Test/FileReaderTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman.Test/FileReaderTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Controls/RamanForm.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/RamanForm.Designer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Raman/Controls/RamanForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/RamanForm.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Core/DataPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Core/Point.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Core/FileReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Core/FileReader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Raman.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Raman.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Core/Chart.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Core/Chart.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +91,7 @@
       <workItem from="1694361646549" duration="2148000" />
       <workItem from="1694368098212" duration="4870000" />
       <workItem from="1694422951310" duration="91000" />
-      <workItem from="1694423070036" duration="5952000" />
+      <workItem from="1694423070036" duration="6652000" />
     </task>
     <task id="LOCAL-00001" summary="Add .gitignore files">
       <option name="closed" value="true" />
@@ -172,7 +165,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694426029661</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Load data points from data files">
+      <option name="closed" value="true" />
+      <created>1694429279275</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1694429279275</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,7 +188,40 @@
     <MESSAGE value="Add NLog" />
     <MESSAGE value="Add test project" />
     <MESSAGE value="In progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="In progress" />
+    <MESSAGE value="Load data points from data files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Load data points from data files" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Raman/Core/Chart.cs</url>
+          <line>22</line>
+          <properties documentPath="C:\github\kulaviak\raman\Raman\Raman\Core\Chart.cs" initialLine="22" containingFunctionPresentation="Method 'Draw'">
+            <startOffsets>
+              <option value="463" />
+            </startOffsets>
+            <endOffsets>
+              <option value="493" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Raman/Controls/RamanForm.cs</url>
+          <line>38</line>
+          <properties documentPath="C:\github\kulaviak\raman\Raman\Raman\Controls\RamanForm.cs" initialLine="38" containingFunctionPresentation="Method 'miOpenFiles_Click'">
+            <startOffsets>
+              <option value="1152" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1203" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
