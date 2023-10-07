@@ -1,7 +1,9 @@
+using System.Drawing;
+
 namespace Raman.Core
 {
     public interface IDrawable
     {
-        void Draw(Canvas canvas);
+        void Draw(Graphics canvas);
     }
 }

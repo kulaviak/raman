@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Raman.Core
 {
@@ -18,9 +19,9 @@ namespace Raman.Core
             return $"Points.Count: {_points.Count}";
         }
 
-        public void Draw(Canvas canvas)
+        public void Draw(Graphics graphics, Canvas canvas)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }
