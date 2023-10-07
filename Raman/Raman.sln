@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raman", "Raman\Raman.csproj", "{30472D99-09B1-4C8A-83C6-5F3A9BF40A07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raman.Test", "Raman.Test\Raman.Test.csproj", "{237378BD-FA91-43A3-8F90-8FD7F6BD1A56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{30472D99-09B1-4C8A-83C6-5F3A9BF40A07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30472D99-09B1-4C8A-83C6-5F3A9BF40A07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30472D99-09B1-4C8A-83C6-5F3A9BF40A07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{237378BD-FA91-43A3-8F90-8FD7F6BD1A56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{237378BD-FA91-43A3-8F90-8FD7F6BD1A56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{237378BD-FA91-43A3-8F90-8FD7F6BD1A56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{237378BD-FA91-43A3-8F90-8FD7F6BD1A56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
