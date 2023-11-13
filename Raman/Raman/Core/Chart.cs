@@ -19,6 +19,11 @@ namespace Raman.Core
             return $"Points.Count: {_points.Count}";
         }
 
+        public void Draw(Graphics canvas)
+        {
+            
+        }
+
         public void Draw(Graphics graphics, Canvas canvas)
         {
             

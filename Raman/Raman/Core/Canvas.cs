@@ -41,7 +41,7 @@ namespace Raman.Core
         {
             var x = ((point.X - MinX) / ValueWidth) * PixelWidth + MinX;
             var y = ((point.Y - MinY) / ValueHeight) * PixelHeight; //
-            DrawPixelPoint()
+            // DrawPixelPoint();
         }
         
         private void pictureBox_Paint(object sender, PaintEventArgs e)
