@@ -46,6 +46,7 @@ namespace Raman.Core
         
         private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
+            throw new Exception("demo)");
             var graphics = e.Graphics;
             DrawCharts(graphics);
             var pointPen = new Pen(Color.Red, 3);

@@ -1,7 +1,9 @@
 Todo
 =============
-- zbuildit
-- rozjet logovani pomoci NLogu
 - nacitani souboru
-- zobrazit jednoduchy graf bez os
+- zobrazit je``dnoduchy graf bez os
 - zobrazit graf s osami
+
+Hotovo
+=============
+- rozjet logovani pomoci NLogu
