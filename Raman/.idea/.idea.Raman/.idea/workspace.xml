@@ -7,10 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="In progress">
-      <change beforePath="$PROJECT_DIR$/Raman/Controls/MainForm.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/MainForm.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Controls/MainForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/MainForm.cs" afterDir="false" />
+    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="Change picturebox to panel">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Raman/Core/Canvas.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Core/Canvas.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Core/Chart.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Core/Chart.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +21,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c0f8d183e43847009e4e164aee6d042f91960/da/15e1d0d3/Graphics.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5a83f26a7bb1cfdddba86fba3e3a9df693c5327962694fdeeb76548f26299323/Logger-generated.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Raman/Core/Canvas.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Core/Canvas.cs" root0="SKIP_HIGHLIGHTING" />
@@ -102,7 +103,7 @@
       <workItem from="1698693911368" duration="95000" />
       <workItem from="1699611557180" duration="640000" />
       <workItem from="1699903451380" duration="403000" />
-      <workItem from="1699904161461" duration="5754000" />
+      <workItem from="1699904161461" duration="7688000" />
     </task>
     <task id="LOCAL-00001" summary="Add .gitignore files">
       <option name="closed" value="true" />
@@ -232,7 +233,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700118878543</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Change picturebox to panel">
+      <option name="closed" value="true" />
+      <created>1700119321278</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1700119321278</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,7 +261,8 @@
     <MESSAGE value="Draw point on picture box" />
     <MESSAGE value="Add logging" />
     <MESSAGE value="In progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="In progress" />
+    <MESSAGE value="Change picturebox to panel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change picturebox to panel" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,10 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace Raman.Core
 {
+    /// <summary>
+    /// Core class for drawing all the stuff. It puts together objects that should be drawn and the panel on which are drawn. Objects
+    /// are drawn by PanelPaint method.
+    /// </summary>
     public class Canvas
     {
         private readonly Panel _panel;
@@ -48,15 +51,15 @@ namespace Raman.Core
         {
             var graphics = e.Graphics;
             DrawCharts(graphics);
-            var pointPen = new Pen(Color.Red, 3);
-            graphics.DrawRectangle(pointPen, 50, 50, 1, 1); // 
+            // var pointPen = new Pen(Color.Red, 3);
+            // graphics.DrawRectangle(pointPen, 50, 50, 1, 1);  
         }
 
         private void DrawCharts(Graphics graphics)
         {
             foreach (var chart in Charts)
             {
-                chart.Draw(graphics, this);
+                chart.Draw(graphics);
             }
         }
     }

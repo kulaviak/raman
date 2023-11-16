@@ -19,14 +19,20 @@ namespace Raman.Core
             return $"Points.Count: {_points.Count}";
         }
 
-        public void Draw(Graphics canvas)
+        public void Draw(Graphics graphics)
         {
-            
+            var pen = new Pen(Color.Black, 3);
+            foreach (var point in _points)
+            {
+                DrawPoint(point, pen, graphics);
+            }
         }
 
-        public void Draw(Graphics graphics, Canvas canvas)
+        private void DrawPoint(Point point, Pen pen, Graphics graphics)
         {
-            
+            var x = point.X;
+            var y = point.Y;
+            graphics.DrawRectangle(pen, x, y, 1, 1);  
         }
     }
 }
