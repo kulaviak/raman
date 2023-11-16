@@ -7,8 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="Chart successfuly drawn">
+    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="Show X axis numbers">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Controls/MainForm.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/MainForm.Designer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Raman/Core/Canvas.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Core/Canvas.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,7 +104,7 @@
       <workItem from="1699611557180" duration="640000" />
       <workItem from="1699903451380" duration="403000" />
       <workItem from="1699904161461" duration="15186000" />
-      <workItem from="1700137799896" duration="6447000" />
+      <workItem from="1700137799896" duration="7283000" />
     </task>
     <task id="LOCAL-00001" summary="Add .gitignore files">
       <option name="closed" value="true" />
@@ -281,7 +282,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700152891908</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Show X axis numbers">
+      <option name="closed" value="true" />
+      <created>1700155526837</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1700155526837</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,7 +312,8 @@
     <MESSAGE value="Change picturebox to panel" />
     <MESSAGE value="In progress" />
     <MESSAGE value="Chart successfuly drawn" />
-    <option name="LAST_COMMIT_MESSAGE" value="Chart successfuly drawn" />
+    <MESSAGE value="Show X axis numbers" />
+    <option name="LAST_COMMIT_MESSAGE" value="Show X axis numbers" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

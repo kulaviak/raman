@@ -8,7 +8,7 @@ namespace Raman.Core
 
         private static int TICK_LINE_LENGTH = 5;
         
-        private static int DISTANCE_FROM_TICK_TO_NUMBER = 5;
+        private static int DISTANCE_FROM_TICK_TO_NUMBER = 8;
         
         private readonly Graphics _graphics;
 
@@ -90,9 +90,10 @@ namespace Raman.Core
             var pos = ToGraphicsX(number);
             DrawXAxisTick(pos);
             var numberStr = number + "";
-            var x = pos - 5;
+            var font = SystemFonts.DefaultFont;
+            var x = pos - GetDrawnStringLength(numberStr, font) / 2;
             var y = ToGraphicsY(_minY) + TICK_LINE_LENGTH + DISTANCE_FROM_TICK_TO_NUMBER;
-            _graphics.DrawString(numberStr, SystemFonts.DefaultFont, Brushes.Black, x, y);   
+            _graphics.DrawString(numberStr, font, Brushes.Black, x, y);   
         }
 
         private void DrawXAxisTick(float pos)
@@ -100,11 +101,17 @@ namespace Raman.Core
             var y = ToGraphicsY(_minY);
             _graphics.DrawLine(Pens.Black, pos, y, pos, y + TICK_LINE_LENGTH);
         }
+        
+        private float GetDrawnStringLength(string str, Font font)
+        {
+            var ret = _graphics.MeasureString(str, font).Width;
+            return ret;
+        }
 
         private List<decimal> GetAxisNumbers(decimal min, decimal max, int gap)
         {
             var firstNumber = ((int) min / gap + 1) * gap;
-            var lastNumber = ((int) max / gap - 1) * gap;
+            var lastNumber = (int) max / gap * gap;
             var ret = new List<decimal>();
             for (var number = firstNumber; number <= lastNumber; number += gap)
             {
