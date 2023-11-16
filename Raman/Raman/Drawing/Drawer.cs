@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
-namespace Raman.Core
+namespace Raman.Drawing
 {
     public class Drawer
     {

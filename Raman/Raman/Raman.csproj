@@ -59,12 +59,12 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\AppException.cs" />
-    <Compile Include="Core\Canvas.cs" />
-    <Compile Include="Core\Chart.cs" />
-    <Compile Include="Core\IDrawable.cs" />
-    <Compile Include="Core\Drawer.cs" />
     <Compile Include="Core\Point.cs" />
     <Compile Include="Core\FileReader.cs" />
+    <Compile Include="Drawing\Canvas.cs" />
+    <Compile Include="Drawing\Chart.cs" />
+    <Compile Include="Drawing\Drawer.cs" />
+    <Compile Include="Drawing\IDrawable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\MainForm.resx">

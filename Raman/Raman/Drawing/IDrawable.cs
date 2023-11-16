@@ -1,4 +1,4 @@
-namespace Raman.Core
+namespace Raman.Drawing
 {
     public interface IDrawable
     {

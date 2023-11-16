@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Drawing;
+using Point = Raman.Core.Point;
 
-namespace Raman.Core
+namespace Raman.Drawing
 {
     public class Canvas
     {
