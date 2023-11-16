@@ -1,9 +1,15 @@
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Raman.Core
 {
     public class Canvas
     {
+
+        private static int TICK_LINE_LENGTH = 5;
+        
+        private static int DISTANCE_FROM_TICK_TO_NUMBER = 5;
+        
         private readonly Graphics _graphics;
 
         private readonly int _graphicsWidth;
@@ -61,6 +67,70 @@ namespace Raman.Core
             var x2 = BORDER + PixelWidth;
             var y2 = BORDER + PixelHeight;
             _graphics.DrawLine(Pens.Black, x1, y1, x2, y2);
+            DrawXAxisNumbers();
+        }
+
+        private void DrawXAxisNumbers()
+        {
+            var gap = GetValueGap(ValueWidth, PixelWidth);
+            var numbers = GetAxisNumbers(_minX, _maxX, gap);
+            DrawXAxisNumbersInternal(numbers);
+        }
+
+        private void DrawXAxisNumbersInternal(List<decimal> numbers)
+        {
+            foreach (var number in numbers)
+            {
+                DrawXAxisNumber(number);
+            }
+        }
+
+        private void DrawXAxisNumber(decimal number)
+        {
+            var pos = ToGraphicsX(number);
+            DrawXAxisTick(pos);
+            var numberStr = number + "";
+            var x = pos - 5;
+            var y = ToGraphicsY(_minY) + TICK_LINE_LENGTH + DISTANCE_FROM_TICK_TO_NUMBER;
+            _graphics.DrawString(numberStr, SystemFonts.DefaultFont, Brushes.Black, x, y);   
+        }
+
+        private void DrawXAxisTick(float pos)
+        {
+            var y = ToGraphicsY(_minY);
+            _graphics.DrawLine(Pens.Black, pos, y, pos, y + TICK_LINE_LENGTH);
+        }
+
+        private List<decimal> GetAxisNumbers(decimal min, decimal max, int gap)
+        {
+            var firstNumber = ((int) min / gap + 1) * gap;
+            var lastNumber = ((int) max / gap - 1) * gap;
+            var ret = new List<decimal>();
+            for (var number = firstNumber; number <= lastNumber; number += gap)
+            {
+                ret.Add(number);    
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// Get reasonable value gap between numbers on axis - so the gap is 1 or 10 or 100. 
+        /// </summary>
+        private int GetValueGap(float valueDistance, float pixelDistance)
+        {
+            var pixelGap = 50;
+            var valueGap = valueDistance / pixelDistance * pixelGap;
+            if (valueGap < 1)
+            {
+                return 1;
+            } else if (valueGap < 10)
+            {
+                return 10;
+            } else if (valueGap < 100)
+            {
+                return 100;
+            }
+            return 100;
         }
 
         void DrawYAxis()
