@@ -8,12 +8,12 @@ namespace Raman
 {
     public partial class MainForm : Form
     {
-        private readonly Canvas _canvas;
+        private List<Chart> _charts = new List<Chart>();
 
         public MainForm()
         {
             InitializeComponent();
-            _canvas = new Canvas(_mainPanel);
+            LoadDemoSpectrum();
         }
 
         private void miExit_Click(object sender, EventArgs e)
@@ -60,7 +60,7 @@ namespace Raman
             {
                 var fileReader = new FileReader(filePath);
                 var points = fileReader.TryReadFile();
-                _canvas.Charts.Add(new Chart(points));
+                _charts.Add(new Chart(points));
                 if (points.Count < 2)
                 {
                     MessageBox.Show($"File {filePath} has less 2 points. File is ignored.", "Error", MessageBoxButtons.OK,
@@ -87,6 +87,19 @@ namespace Raman
         {
             // to enforce paint event, when form is resized
             Invalidate();
+        }
+
+        private void _mainPanel_Paint(object sender, PaintEventArgs e)
+        {
+            new Drawer().Draw(_charts, e.Graphics, _mainPanel.Width, _mainPanel.Height);
+        }
+
+        private void LoadDemoSpectrum()
+        {
+            var filePath = "c:/github/kulaviak/raman/data/spectrum.txt";
+            var fileReader = new FileReader(filePath);
+            var points = fileReader.TryReadFile();
+            _charts.Add(new Chart(points));
         }
     }
 }

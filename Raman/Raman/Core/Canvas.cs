@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
 
 namespace Raman.Core
 {
@@ -10,55 +8,84 @@ namespace Raman.Core
     /// </summary>
     public class Canvas
     {
-        private readonly Panel _panel;
+        private readonly Graphics _graphics;
 
-        public int X_BORDER = 50;
-        
-        public int Y_BORDER = 50;
+        private readonly int _graphicsWidth;
 
-        public int PixelWidth => _panel.Width - 2 * X_BORDER;
+        private readonly int _graphicsHeight;
 
-        public int PixelHeight => _panel.Height - 2 * Y_BORDER;
+        private readonly decimal _minX;
 
-        public decimal ValueWidth => MaxX - MinX;
+        private readonly decimal _maxX;
 
-        public decimal ValueHeight => MaxY - MinY;
-        
-        public decimal MinX { get; set; }
-        
-        public decimal MaxX { get; set; }
-        
-        public decimal MinY { get; set; }
-        
-        public decimal MaxY { get; set; }
-        
-        public List<Chart> Charts { get; set; } = new List<Chart>();
-        
-        public Canvas(Panel panel)
+        private readonly decimal _minY;
+
+        private readonly decimal _maxY;
+
+        private static float BORDER = 50;
+
+        public float PixelWidth => _graphicsWidth - 2 * BORDER;
+
+        public float PixelHeight => _graphicsHeight - 2 * BORDER;
+
+        public decimal ValueWidth => _maxX - _minX;
+
+        public decimal ValueHeight => _maxY - _minY;
+
+        public Canvas(Graphics graphics, int graphicsWidth, int graphicsHeight, decimal minX, decimal maxX, decimal minY, decimal maxY)
         {
-            _panel = panel;
-            _panel.Paint += PanelPaint;
+            _graphics = graphics;
+            _graphicsWidth = graphicsWidth;
+            _graphicsHeight = graphicsHeight;
+            _minX = minX;
+            _maxX = maxX;
+            _minY = minY;
+            _maxY = maxY;
         }
 
-        public void DrawPoint(Point point, Color color)
+        public void DrawLine(Point point1, Point point2)
         {
-            var x = ((point.X - MinX) / ValueWidth) * PixelWidth + MinX;
-            var y = ((point.Y - MinY) / ValueHeight) * PixelHeight; //
-            // DrawPixelPoint();
-        }
-        
-        private void PanelPaint(object sender, PaintEventArgs e)
-        {
-            var graphics = e.Graphics;
-            DrawCharts(graphics);
+            var point1X = ToGraphicsX(point1.X);
+            var point1Y = ToGraphicsY(point1.Y);
+            var point2X = ToGraphicsX(point2.X);
+            var point2Y = ToGraphicsY(point2.Y);
+            _graphics.DrawLine(Pens.Blue, point1X, point1Y, point2X, point2Y);
         }
 
-        private void DrawCharts(Graphics graphics)
+        public void DrawAxes()
         {
-            foreach (var chart in Charts)
-            {
-                chart.Draw(graphics);
-            }
+            DrawXAxis();
+            DrawYAxis();
+        }
+
+        private void DrawXAxis()
+        {
+            var x1 = BORDER;
+            var y1 = BORDER + PixelHeight;
+            var x2 = BORDER + PixelWidth;
+            var y2 = BORDER + PixelHeight;
+            _graphics.DrawLine(Pens.Black, x1, y1, x2, y2);
+        }
+
+        void DrawYAxis()
+        {
+            var x1 = BORDER;
+            var y1 = BORDER + PixelHeight;
+            var x2 = BORDER;
+            var y2 = BORDER;
+            _graphics.DrawLine(Pens.Black, x1, y1, x2, y2);
+        }
+
+        private float ToGraphicsY(decimal y)
+        {
+            var ret = BORDER + PixelHeight / (double) ValueHeight * (double) (ValueHeight - y);
+            return (float) ret;
+        }
+
+        private float ToGraphicsX(decimal x)
+        {
+            var ret = BORDER + (float) (((decimal) (PixelWidth / (double) ValueWidth)) * x);
+            return ret;
         }
     }
 }
