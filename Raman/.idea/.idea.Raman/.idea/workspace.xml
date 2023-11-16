@@ -7,11 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="In progress">
+    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="Add logging">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/App.config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Raman/Core/Canvas.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Core/Canvas.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Raman/todo.md" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/todo.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,7 +101,7 @@
       <workItem from="1698693911368" duration="95000" />
       <workItem from="1699611557180" duration="640000" />
       <workItem from="1699903451380" duration="403000" />
-      <workItem from="1699904161461" duration="1579000" />
+      <workItem from="1699904161461" duration="5180000" />
     </task>
     <task id="LOCAL-00001" summary="Add .gitignore files">
       <option name="closed" value="true" />
@@ -209,7 +207,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699905144263</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Add logging">
+      <option name="closed" value="true" />
+      <created>1699905764396</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1699905764396</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,7 +234,8 @@
     <MESSAGE value="Add picture box" />
     <MESSAGE value="Draw point on picture box" />
     <MESSAGE value="In progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="In progress" />
+    <MESSAGE value="Add logging" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add logging" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

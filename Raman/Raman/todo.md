@@ -1,7 +1,7 @@
 Todo
 =============
 - nacitani souboru
-- zobrazit je``dnoduchy graf bez os
+- zobrazit jednoduchy graf bez os
 - zobrazit graf s osami
 
 Hotovo
