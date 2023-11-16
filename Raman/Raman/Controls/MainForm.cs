@@ -82,13 +82,7 @@ namespace Raman
                     MessageBoxIcon.Error);
             }
         }
-
-        private void MainForm_Resize(object sender, EventArgs e)
-        {
-            // to enforce paint event, when form is resized
-            Invalidate();
-        }
-
+        
         private void _mainPanel_Paint(object sender, PaintEventArgs e)
         {
             new Drawer().Draw(_charts, e.Graphics, _mainPanel.Width, _mainPanel.Height);
@@ -100,6 +94,11 @@ namespace Raman
             var fileReader = new FileReader(filePath);
             var points = fileReader.TryReadFile();
             _charts.Add(new Chart(points));
+        }
+        
+        private void _mainPanel_Resize(object sender, EventArgs e)
+        {
+            _mainPanel.Invalidate();
         }
     }
 }
