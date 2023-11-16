@@ -51,8 +51,6 @@ namespace Raman.Core
         {
             var graphics = e.Graphics;
             DrawCharts(graphics);
-            // var pointPen = new Pen(Color.Red, 3);
-            // graphics.DrawRectangle(pointPen, 50, 50, 1, 1);  
         }
 
         private void DrawCharts(Graphics graphics)

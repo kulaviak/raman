@@ -61,6 +61,12 @@ namespace Raman
                 var fileReader = new FileReader(filePath);
                 var points = fileReader.TryReadFile();
                 _canvas.Charts.Add(new Chart(points));
+                if (points.Count < 2)
+                {
+                    MessageBox.Show($"File {filePath} has less 2 points. File is ignored.", "Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    continue;
+                }
                 if (fileReader.IgnoredLines.Count != 0)
                 {
                     ignoredLines.AddRange(fileReader.IgnoredLines);
@@ -75,6 +81,12 @@ namespace Raman
                 MessageBox.Show($"Following lines were ignored (Showing max {maxCount} lines): {str}", "Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            // to enforce paint event, when form is resized
+            Invalidate();
         }
     }
 }
