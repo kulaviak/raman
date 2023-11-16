@@ -17,7 +17,6 @@ namespace Raman.Core
 
         public void Draw(Canvas canvas)
         {
-            var pen = new Pen(Color.Black, 3);
             if (_points.Count < 2)
             {
                 throw new Exception("Chart has less than 2 points.");
@@ -34,6 +33,5 @@ namespace Raman.Core
         {
             return $"Points.Count: {_points.Count}";
         }
-        
     }
 }

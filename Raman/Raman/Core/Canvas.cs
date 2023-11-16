@@ -2,10 +2,6 @@ using System.Drawing;
 
 namespace Raman.Core
 {
-    /// <summary>
-    /// Core class for drawing all the stuff. It puts together objects that should be drawn and the panel on which are drawn. Objects
-    /// are drawn by PanelPaint method.
-    /// </summary>
     public class Canvas
     {
         private readonly Graphics _graphics;
@@ -28,9 +24,9 @@ namespace Raman.Core
 
         public float PixelHeight => _graphicsHeight - 2 * BORDER;
 
-        public decimal ValueWidth => _maxX - _minX;
+        public float ValueWidth => (float) (_maxX - _minX);
 
-        public decimal ValueHeight => _maxY - _minY;
+        public float ValueHeight => (float) (_maxY - _minY);
 
         public Canvas(Graphics graphics, int graphicsWidth, int graphicsHeight, decimal minX, decimal maxX, decimal minY, decimal maxY)
         {
@@ -78,13 +74,15 @@ namespace Raman.Core
 
         private float ToGraphicsY(decimal y)
         {
-            var ret = BORDER + PixelHeight / (double) ValueHeight * (double) (ValueHeight - y);
-            return (float) ret;
+            var valueDistance = _maxY - y;
+            var ret = BORDER + PixelHeight / ValueHeight * (float) valueDistance;
+            return ret;
         }
 
         private float ToGraphicsX(decimal x)
         {
-            var ret = BORDER + (float) (((decimal) (PixelWidth / (double) ValueWidth)) * x);
+            var valueDistance = x - _minX;
+            var ret = BORDER + PixelWidth / ValueWidth * (float) valueDistance;
             return ret;
         }
     }
