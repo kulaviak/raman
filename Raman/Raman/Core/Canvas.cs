@@ -7,15 +7,15 @@ namespace Raman.Core
 {
     public class Canvas
     {
-        private readonly PictureBox _pictureBox;
+        private readonly Panel _panel;
 
         public int X_BORDER = 50;
         
         public int Y_BORDER = 50;
 
-        public int PixelWidth => _pictureBox.Width - 2 * X_BORDER;
+        public int PixelWidth => _panel.Width - 2 * X_BORDER;
 
-        public int PixelHeight => _pictureBox.Height - 2 * Y_BORDER;
+        public int PixelHeight => _panel.Height - 2 * Y_BORDER;
 
         public decimal ValueWidth => MaxX - MinX;
 
@@ -31,10 +31,10 @@ namespace Raman.Core
         
         public List<Chart> Charts { get; set; } = new List<Chart>();
         
-        public Canvas(PictureBox pictureBox)
+        public Canvas(Panel panel)
         {
-            _pictureBox = pictureBox;
-            _pictureBox.Paint += pictureBox_Paint;
+            _panel = panel;
+            _panel.Paint += PanelPaint;
         }
 
         public void DrawPoint(Point point, Color color)
@@ -44,7 +44,7 @@ namespace Raman.Core
             // DrawPixelPoint();
         }
         
-        private void pictureBox_Paint(object sender, PaintEventArgs e)
+        private void PanelPaint(object sender, PaintEventArgs e)
         {
             var graphics = e.Graphics;
             DrawCharts(graphics);

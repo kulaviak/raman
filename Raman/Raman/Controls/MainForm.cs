@@ -13,7 +13,7 @@ namespace Raman
         public MainForm()
         {
             InitializeComponent();
-            _canvas = new Canvas(pictureBox);
+            _canvas = new Canvas(_mainPanel);
         }
 
         private void miExit_Click(object sender, EventArgs e)

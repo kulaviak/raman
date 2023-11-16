@@ -28,73 +28,76 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.menuStrip = new System.Windows.Forms.MenuStrip();
-      this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.miOpenFiles = new System.Windows.Forms.ToolStripMenuItem();
-      this.miExit = new System.Windows.Forms.ToolStripMenuItem();
-      this.pictureBox = new System.Windows.Forms.PictureBox();
-      this.menuStrip.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize) (this.pictureBox)).BeginInit();
-      this.SuspendLayout();
-      // 
-      // menuStrip
-      // 
-      this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.fileToolStripMenuItem});
-      this.menuStrip.Location = new System.Drawing.Point(0, 0);
-      this.menuStrip.Name = "menuStrip";
-      this.menuStrip.Size = new System.Drawing.Size(800, 24);
-      this.menuStrip.TabIndex = 0;
-      this.menuStrip.Text = "menuStrip1";
-      // 
-      // fileToolStripMenuItem
-      // 
-      this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miOpenFiles, this.miExit});
-      this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-      this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-      this.fileToolStripMenuItem.Text = "File";
-      // 
-      // miOpenFiles
-      // 
-      this.miOpenFiles.Name = "miOpenFiles";
-      this.miOpenFiles.Size = new System.Drawing.Size(129, 22);
-      this.miOpenFiles.Text = "Open Files";
-      this.miOpenFiles.Click += new System.EventHandler(this.miOpenFiles_Click);
-      // 
-      // miExit
-      // 
-      this.miExit.Name = "miExit";
-      this.miExit.Size = new System.Drawing.Size(129, 22);
-      this.miExit.Text = "Exit";
-      this.miExit.Click += new System.EventHandler(this.miExit_Click);
-      // 
-      // pictureBox
-      // 
-      this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.pictureBox.Location = new System.Drawing.Point(0, 24);
-      this.pictureBox.Name = "pictureBox";
-      this.pictureBox.Size = new System.Drawing.Size(800, 426);
-      this.pictureBox.TabIndex = 1;
-      this.pictureBox.TabStop = false;
-      // 
-      // RamanForm
-      // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(800, 450);
-      this.Controls.Add(this.pictureBox);
-      this.Controls.Add(this.menuStrip);
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-      this.MainMenuStrip = this.menuStrip;
-      this.Name = "MainForm";
-      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-      this.Text = "Raman";
-      this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RamanForm_FormClosing);
-      this.menuStrip.ResumeLayout(false);
-      this.menuStrip.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize) (this.pictureBox)).EndInit();
-      this.ResumeLayout(false);
-      this.PerformLayout();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.miOpenFiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.miExit = new System.Windows.Forms.ToolStripMenuItem();
+            this._mainPanel = new System.Windows.Forms.Panel();
+            this.menuStrip.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // menuStrip
+            // 
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip.TabIndex = 0;
+            this.menuStrip.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miOpenFiles,
+            this.miExit});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // miOpenFiles
+            // 
+            this.miOpenFiles.Name = "miOpenFiles";
+            this.miOpenFiles.Size = new System.Drawing.Size(129, 22);
+            this.miOpenFiles.Text = "Open Files";
+            this.miOpenFiles.Click += new System.EventHandler(this.miOpenFiles_Click);
+            // 
+            // miExit
+            // 
+            this.miExit.Name = "miExit";
+            this.miExit.Size = new System.Drawing.Size(129, 22);
+            this.miExit.Text = "Exit";
+            this.miExit.Click += new System.EventHandler(this.miExit_Click);
+            // 
+            // _mainPanel
+            // 
+            this._mainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._mainPanel.Location = new System.Drawing.Point(0, 0);
+            this._mainPanel.Name = "_mainPanel";
+            this._mainPanel.Size = new System.Drawing.Size(800, 453);
+            this._mainPanel.TabIndex = 1;
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this._mainPanel);
+            this.Controls.Add(this.menuStrip);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MainMenuStrip = this.menuStrip;
+            this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Raman";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RamanForm_FormClosing);
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
     }
 
     private System.Windows.Forms.MenuStrip menuStrip;
@@ -104,7 +107,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.Panel _mainPanel;
     }
 }
 
