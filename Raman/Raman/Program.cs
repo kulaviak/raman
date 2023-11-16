@@ -15,7 +15,7 @@ namespace Raman
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             AppDomain.CurrentDomain.UnhandledException += UnexpectedExceptionHandler;
-            Application.Run(new RamanForm());
+            Application.Run(new MainForm());
         }
 
         static void UnexpectedExceptionHandler(object sender, UnhandledExceptionEventArgs args)

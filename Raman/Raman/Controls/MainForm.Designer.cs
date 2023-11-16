@@ -1,6 +1,6 @@
 ﻿namespace Raman
 {
-  partial class RamanForm
+  partial class MainForm
   {
     /// <summary>
     /// Required designer variable.
@@ -85,7 +85,7 @@
       this.Controls.Add(this.menuStrip);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.MainMenuStrip = this.menuStrip;
-      this.Name = "RamanForm";
+      this.Name = "MainForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Raman";
       this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

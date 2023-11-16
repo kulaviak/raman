@@ -52,11 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\RamanForm.cs">
+    <Compile Include="Controls\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\RamanForm.Designer.cs">
-      <DependentUpon>RamanForm.cs</DependentUpon>
+    <Compile Include="Controls\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\AppException.cs" />
     <Compile Include="Core\Canvas.cs" />
@@ -66,8 +66,8 @@
     <Compile Include="Core\FileReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\RamanForm.resx">
-      <DependentUpon>RamanForm.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

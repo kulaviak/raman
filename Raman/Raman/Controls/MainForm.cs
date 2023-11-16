@@ -6,11 +6,11 @@ using Raman.Core;
 
 namespace Raman
 {
-    public partial class RamanForm : Form
+    public partial class MainForm : Form
     {
         private readonly Canvas _canvas;
 
-        public RamanForm()
+        public MainForm()
         {
             InitializeComponent();
             _canvas = new Canvas(pictureBox);
