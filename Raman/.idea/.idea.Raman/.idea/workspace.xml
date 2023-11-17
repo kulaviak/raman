@@ -11,7 +11,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Raman/Drawing/Drawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Drawing/Drawer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Raman/Drawing/XAxis.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Drawing/XAxis.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Drawing/YAxis.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Drawing/YAxis.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,11 +23,12 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c0f8d183e43847009e4e164aee6d042f91960/da/15e1d0d3/Graphics.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5a83f26a7bb1cfdddba86fba3e3a9df693c5327962694fdeeb76548f26299323/Logger-generated.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Raman/Core/Canvas.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Core/Canvas.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Core/Canvas.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Raman/Drawing/Canvas.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/XAxis.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/XAxis.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/XAxis.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/XAxis.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Raman/Program.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Properties/Settings.Designer.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -331,6 +331,17 @@
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Add .gitignore files" />
