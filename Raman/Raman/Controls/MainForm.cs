@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Forms;
 using Raman.Core;
@@ -60,12 +61,13 @@ namespace Raman
 
         private void OpenFilesInternal(List<string> filePaths)
         {
+            var charts = new List<Chart>();
             var ignoredLines = new List<string>();
             foreach (var filePath in filePaths)
             {
                 var fileReader = new FileReader(filePath);
                 var points = fileReader.TryReadFile();
-                _canvasPanel.Charts.Add(new Chart(points));
+                charts.Add(new Chart(points));
                 if (points.Count < 2)
                 {
                     MessageBox.Show($"File {filePath} has less 2 points. File is ignored.", "Error", MessageBoxButtons.OK,
@@ -86,16 +88,13 @@ namespace Raman
                 MessageBox.Show($"Following lines were ignored (Showing max {maxCount} lines): {str}", "Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+            _canvasPanel.Charts = new ReadOnlyCollection<Chart>(charts);
         }
         
         private void LoadDemoSpectrum()
         {
-            var filePath = "c:/github/kulaviak/raman/data/spectrum.txt";
-            var fileReader = new FileReader(filePath);
-            var points = fileReader.TryReadFile();
-            _canvasPanel.Charts.Add(new Chart(points));
+            OpenFilesInternal(new List<string>{"c:/github/kulaviak/raman/data/spectrum.txt"});
         }
-        
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -9,10 +10,18 @@ namespace Raman.Drawing
     public class CanvasPanel : Panel
     {
         
-        private List<Chart> _charts = new List<Chart>();
+        private ReadOnlyCollection<Chart> _charts = new ReadOnlyCollection<Chart>(new List<Chart>());
 
-        public List<Chart> Charts => _charts;
-        
+        public ReadOnlyCollection<Chart> Charts
+        {
+            get => _charts;
+            set
+            {
+                _charts = value;
+                _coordSystem = GetCoordSystemFromCharts(_charts);
+            }
+        }
+
         public bool IsZooming { get; set; }
         
         private Point? _zoomStart;
@@ -53,29 +62,41 @@ namespace Raman.Drawing
         private void Draw(Graphics graphics)
         {
             graphics.Clear(Color.FromArgb(240, 240, 240));
-            DrawCharts(_charts, graphics, Width, Height);
+            DrawCharts(_charts, graphics);
             if (IsZooming && _zoomRectangle != null)
             {
                 graphics.DrawRectangle(Pens.Black, _zoomRectangle.Value);
             }
         }
         
-        public void DrawCharts(List<Chart> charts, Graphics graphics, int graphicsWidth, int graphicsHeight)
+        public void DrawCharts(IList<Chart> charts, Graphics graphics)
         {
+            if (_coordSystem != null)
+            {
+                foreach (var chart in charts)
+                { 
+                    chart.Draw(_coordSystem, graphics);
+                }
+                new XAxis(_coordSystem, graphics).Draw();
+                new YAxis(_coordSystem, graphics).Draw();
+            }
+        }
+
+        private CanvasCoordSystem GetCoordSystemFromCharts(IList<Chart> charts)
+        {
+            if (charts.Count == 0)
+            {
+                return null;
+            }
             var allPoints = charts.SelectMany(x => x.Points).ToList();
             var minX = allPoints.Min(point => point.X);
             var maxX = allPoints.Max(point => point.X);
             var minY = allPoints.Min(point => point.Y);
             var maxY = allPoints.Max(point => point.Y);
-            var coordSystem = new CanvasCoordSystem(graphicsWidth, graphicsHeight, minX, maxX, minY, maxY);
-            foreach (var chart in charts)
-            { 
-                chart.Draw(coordSystem, graphics);
-            }
-            new XAxis(coordSystem, graphics).Draw();
-            new YAxis(coordSystem, graphics).Draw();
-        }       
-        
+            var coordSystem = new CanvasCoordSystem(Width, Height, minX, maxX, minY, maxY);
+            return coordSystem;
+        }
+
         private void InitializeBuffer()
         {
             _buffer = new Bitmap(Width, Height);
@@ -85,10 +106,7 @@ namespace Raman.Drawing
         private void HandleResize(object sender, EventArgs e)
         {
             // Recreate the buffer when the form is resized
-            if (_buffer != null)
-            {
-                _buffer.Dispose();
-            }
+            _buffer?.Dispose();
             if (_bufferGraphics != null)
             {
                 _bufferGraphics.Dispose();
