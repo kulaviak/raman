@@ -30,18 +30,23 @@ namespace Raman.Drawing
         {
             var gap = GetValueGap(_canvas.ValueWidth, _canvas.PixelWidth);
             var numbers = GetNumbers(_canvas.MinX, _canvas.MaxX, gap);
-            numbers.ForEach(x => DrawNumber(x));
+            numbers.ForEach(x => DrawNumberWithTicks(x));
         }
         
-        private void DrawNumber(decimal number)
+        private void DrawNumberWithTicks(decimal number)
         {
             var pos = _canvas.ToGraphicsX(number);
             DrawTick(pos);
+            DrawNumber(number, pos);
+        }
+
+        private void DrawNumber(decimal number, float pos)
+        {
             var numberStr = number + "";
             var font = SystemFonts.DefaultFont;
             var x = pos - GetDrawnStringLength(numberStr, font) / 2;
             var y = _canvas.ToGraphicsY(_canvas.MinY) + TICK_LINE_LENGTH + DISTANCE_FROM_TICK_TO_NUMBER;
-            _canvas._graphics.DrawString(numberStr, font, Brushes.Black, x, y);   
+            _canvas._graphics.DrawString(numberStr, font, Brushes.Black, x, y);
         }
 
         private void DrawTick(float pos)
