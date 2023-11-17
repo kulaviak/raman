@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Raman.Drawing
@@ -50,12 +51,28 @@ namespace Raman.Drawing
         private void Draw(Graphics graphics)
         {
             graphics.Clear(Color.FromArgb(240, 240, 240));
-            new Drawer().Draw(_charts, graphics, Width, Height);
+            DrawCharts(_charts, graphics, Width, Height);
             if (IsZooming && _zoomRectangle != null)
             {
                 graphics.DrawRectangle(Pens.Black, _zoomRectangle.Value);
             }
         }
+        
+        public void DrawCharts(List<Chart> charts, Graphics graphics, int graphicsWidth, int graphicsHeight)
+        {
+            var allPoints = charts.SelectMany(x => x.Points).ToList();
+            var minX = allPoints.Min(point => point.X);
+            var maxX = allPoints.Max(point => point.X);
+            var minY = allPoints.Min(point => point.Y);
+            var maxY = allPoints.Max(point => point.Y);
+            var canvas = new CanvasOld(graphics, graphicsWidth, graphicsHeight, minX, maxX, minY, maxY);
+            foreach (var chart in charts)
+            { 
+                chart.Draw(canvas);
+            }
+            new XAxis(canvas).Draw();
+            new YAxis(canvas).Draw();
+        }       
         
         private void InitializeBuffer()
         {
