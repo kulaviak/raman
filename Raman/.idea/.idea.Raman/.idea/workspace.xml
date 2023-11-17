@@ -7,11 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="Move files">
-      <change afterPath="$PROJECT_DIR$/Raman/Drawing/XAxis.cs" afterDir="false" />
+    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="Rename fields, methods">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Drawing/Canvas.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Drawing/Canvas.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Raman.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Raman.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Drawing/Drawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Drawing/Drawer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Drawing/XAxis.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Drawing/XAxis.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Drawing/YAxis.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Drawing/YAxis.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +105,7 @@
       <workItem from="1699611557180" duration="640000" />
       <workItem from="1699903451380" duration="403000" />
       <workItem from="1699904161461" duration="15186000" />
-      <workItem from="1700137799896" duration="9761000" />
+      <workItem from="1700137799896" duration="11327000" />
     </task>
     <task id="LOCAL-00001" summary="Add .gitignore files">
       <option name="closed" value="true" />
@@ -307,7 +307,23 @@
       <option name="project" value="LOCAL" />
       <updated>1700156472040</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Refactor">
+      <option name="closed" value="true" />
+      <created>1700204306732</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1700204306732</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Rename fields, methods">
+      <option name="closed" value="true" />
+      <created>1700204637131</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1700204637131</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -331,7 +347,9 @@
     <MESSAGE value="Show X axis numbers" />
     <MESSAGE value="In progress" />
     <MESSAGE value="Move files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Move files" />
+    <MESSAGE value="Refactor" />
+    <MESSAGE value="Rename fields, methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rename fields, methods" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

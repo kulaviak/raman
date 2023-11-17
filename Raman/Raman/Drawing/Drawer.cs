@@ -19,6 +19,7 @@ namespace Raman.Drawing
                 chart.Draw(canvas);
             }
             new XAxis(canvas).Draw();
+            new YAxis(canvas).Draw();
         }       
     }
 }
