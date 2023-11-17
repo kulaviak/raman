@@ -5,37 +5,37 @@ namespace Raman.Drawing
 {
     public class XAxis
     {
-        private readonly Canvas _canvas;
+        private readonly CanvasOld _canvasOld;
 
         private static int TICK_LINE_LENGTH = 5;
         
         private static int DISTANCE_FROM_TICK_TO_NUMBER = 8;
 
-        public XAxis(Canvas canvas)
+        public XAxis(CanvasOld canvasOld)
         {
-            _canvas = canvas;
+            _canvasOld = canvasOld;
         }
 
         public void Draw()
         {
-            var x1 = _canvas.Border;
-            var y1 = _canvas.Border + _canvas.PixelHeight;
-            var x2 = _canvas.Border + _canvas.PixelWidth;
-            var y2 = _canvas.Border + _canvas.PixelHeight;
-            _canvas._graphics.DrawLine(Pens.Black, x1, y1, x2, y2);
+            var x1 = _canvasOld.Border;
+            var y1 = _canvasOld.Border + _canvasOld.PixelHeight;
+            var x2 = _canvasOld.Border + _canvasOld.PixelWidth;
+            var y2 = _canvasOld.Border + _canvasOld.PixelHeight;
+            _canvasOld._graphics.DrawLine(Pens.Black, x1, y1, x2, y2);
             DrawNumbers();
         }
 
         private void DrawNumbers()
         {
-            var gap = GetValueGap(_canvas.ValueWidth, _canvas.PixelWidth);
-            var numbers = GetNumbers(_canvas.MinX, _canvas.MaxX, gap);
+            var gap = GetValueGap(_canvasOld.ValueWidth, _canvasOld.PixelWidth);
+            var numbers = GetNumbers(_canvasOld.MinX, _canvasOld.MaxX, gap);
             numbers.ForEach(x => DrawNumberWithTicks(x));
         }
         
         private void DrawNumberWithTicks(decimal number)
         {
-            var x = _canvas.ToGraphicsX(number);
+            var x = _canvasOld.ToGraphicsX(number);
             DrawTick(x);
             DrawNumber(number, x);
         }
@@ -45,19 +45,19 @@ namespace Raman.Drawing
             var numberStr = number + "";
             var font = SystemFonts.DefaultFont;
             var numberX = pos - GetDrawnStringLength(numberStr, font) / 2;
-            var numberY = _canvas.ToGraphicsY(_canvas.MinY) + TICK_LINE_LENGTH + DISTANCE_FROM_TICK_TO_NUMBER;
-            _canvas._graphics.DrawString(numberStr, font, Brushes.Black, numberX, numberY);
+            var numberY = _canvasOld.ToGraphicsY(_canvasOld.MinY) + TICK_LINE_LENGTH + DISTANCE_FROM_TICK_TO_NUMBER;
+            _canvasOld._graphics.DrawString(numberStr, font, Brushes.Black, numberX, numberY);
         }
 
         private void DrawTick(float pos)
         {
-            var y = _canvas.ToGraphicsY(_canvas.MinY);
-            _canvas._graphics.DrawLine(Pens.Black, pos, y, pos, y + TICK_LINE_LENGTH);
+            var y = _canvasOld.ToGraphicsY(_canvasOld.MinY);
+            _canvasOld._graphics.DrawLine(Pens.Black, pos, y, pos, y + TICK_LINE_LENGTH);
         }
         
         private float GetDrawnStringLength(string str, Font font)
         {
-            var ret = _canvas._graphics.MeasureString(str, font).Width;
+            var ret = _canvasOld._graphics.MeasureString(str, font).Width;
             return ret;
         }
 

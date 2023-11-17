@@ -1,41 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Raman.Core;
 using Raman.Drawing;
-using Point = System.Drawing.Point;
 
 namespace Raman
 {
     // window zoom made according to Chat GTP query How to implement zoom to area in graphics in windows forms
     public partial class MainForm : Form
     {
-        private List<Chart> _charts = new List<Chart>();
-        
-        private bool _isZooming;
-        
-        private Point? _zoomStart;
-        
-        private Rectangle? _zoomRectangle;
-
-        private Bitmap _buffer;
-
-        private Graphics _bufferGraphics;
-
         public MainForm()
         {
             InitializeComponent();
             LoadDemoSpectrum();
         }
         
-        private void InitializeBuffer()
-        {
-            _buffer = new Bitmap(_mainPanel.ClientSize.Width, _mainPanel.ClientSize.Height);
-            _bufferGraphics = Graphics.FromImage(_buffer);
-        }
-
         private void miExit_Click(object sender, EventArgs e)
         {
             Close();            
@@ -85,7 +65,7 @@ namespace Raman
             {
                 var fileReader = new FileReader(filePath);
                 var points = fileReader.TryReadFile();
-                _charts.Add(new Chart(points));
+                _mainPanel.Charts.Add(new Chart(points));
                 if (points.Count < 2)
                 {
                     MessageBox.Show($"File {filePath} has less 2 points. File is ignored.", "Error", MessageBoxButtons.OK,
@@ -110,47 +90,17 @@ namespace Raman
         
         private void _mainPanel_Paint(object sender, PaintEventArgs e)
         {
-            if (_buffer == null)
-            {
-                InitializeBuffer();
-            }
-            Draw(_bufferGraphics);
-            // Copy the content of the off-screen buffer to the form's graphics
-            e.Graphics.DrawImage(_buffer, 0, 0);
         }
         
-        private void Draw(Graphics graphics)
-        {
-            graphics.Clear(Color.FromArgb(240, 240, 240));
-            new Drawer().Draw(_charts, graphics, _mainPanel.Width, _mainPanel.Height);
-            if (_isZooming && _zoomRectangle != null)
-            {
-                graphics.DrawRectangle(Pens.Black, _zoomRectangle.Value);
-            }
-        }
 
         private void LoadDemoSpectrum()
         {
             var filePath = "c:/github/kulaviak/raman/data/spectrum.txt";
             var fileReader = new FileReader(filePath);
             var points = fileReader.TryReadFile();
-            _charts.Add(new Chart(points));
+            _mainPanel.Charts.Add(new Chart(points));
         }
         
-        private void _mainPanel_Resize(object sender, EventArgs e)
-        {
-            // Recreate the buffer when the form is resized
-            if (_buffer != null)
-            {
-                _buffer.Dispose();
-            }
-            if (_bufferGraphics != null)
-            {
-                _bufferGraphics.Dispose();
-            }
-            InitializeBuffer();
-            Refresh();
-        }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
@@ -183,7 +133,7 @@ namespace Raman
 
         private void miZoomWindow_Click(object sender, EventArgs e)
         {
-            _isZooming = true;
+            _mainPanel.IsZooming = true;
         }
 
         private void miZoomToOriginalSize_Click(object sender, EventArgs e)
@@ -194,45 +144,6 @@ namespace Raman
         private void miRefresh_Click(object sender, EventArgs e)
         {
             Refresh();
-        }
-
-        private void _mainPanel_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (_isZooming && e.Button == MouseButtons.Left)
-            {
-                _zoomStart = e.Location;
-            }
-        }
-
-        private void _mainPanel_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (_isZooming && _zoomStart != null)
-            {
-                var x = Math.Min(_zoomStart.Value.X, e.X);
-                var y = Math.Min(_zoomStart.Value.Y, e.Y);
-                var width = Math.Abs(_zoomStart.Value.X - e.X);
-                var height = Math.Abs(_zoomStart.Value.Y - e.Y);
-                _zoomRectangle = new Rectangle(x, y, width, height);
-                Refresh(); 
-            }
-        }
-
-        private void _mainPanel_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left && _isZooming)
-            {
-                _isZooming = false;
-                // var zoomedArea = new RectangleF(
-                //     _zoomRectangle.X / (float) _mainPanel.Width,
-                //     _zoomRectangle.Y / (float) _mainPanel.Height,
-                //     _zoomRectangle.Width / (float) _mainPanel.Width,
-                //     _zoomRectangle.Height / (float) _mainPanel.Height
-                // );
-                _isZooming = false;
-                _zoomStart = null;
-                _zoomRectangle = null;
-                // ZoomToArea(zoomedArea);
-            }
         }
     }
 }

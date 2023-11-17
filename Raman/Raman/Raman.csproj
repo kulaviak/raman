@@ -61,7 +61,10 @@
     <Compile Include="Core\AppException.cs" />
     <Compile Include="Core\Point.cs" />
     <Compile Include="Core\FileReader.cs" />
-    <Compile Include="Drawing\Canvas.cs" />
+    <Compile Include="Drawing\Canvas.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Drawing\CanvasOld.cs" />
     <Compile Include="Drawing\Chart.cs" />
     <Compile Include="Drawing\Drawer.cs" />
     <Compile Include="Drawing\IDrawable.cs" />

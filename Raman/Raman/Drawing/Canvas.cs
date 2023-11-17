@@ -1,67 +1,121 @@
+using System;
+using System.Collections.Generic;
 using System.Drawing;
-using Point = Raman.Core.Point;
+using System.Windows.Forms;
 
 namespace Raman.Drawing
 {
-    public class Canvas
+    public class Canvas : Panel
     {
         
-        public readonly Graphics _graphics;
+        private List<Chart> _charts = new List<Chart>();
 
-        public int GraphicsWidth { get; }
+        public List<Chart> Charts => _charts;
+        
+        public bool IsZooming { get; set; }
+        
+        private Point? _zoomStart;
+        
+        private Rectangle? _zoomRectangle;
 
-        public int GraphicsHeight { get; }
+        private Bitmap _buffer;
 
-        public decimal MinX { get; }
-
-        public decimal MaxX { get; }
-
-        public decimal MinY { get; }
-
-        public decimal MaxY { get; }
-
-        public float Border => 50;
-
-        public float PixelWidth => GraphicsWidth - 2 * Border;
-
-        public float PixelHeight => GraphicsHeight - 2 * Border;
-
-        public float ValueWidth => (float) (MaxX - MinX);
-
-        public float ValueHeight => (float) (MaxY - MinY);
-
-        public Canvas(Graphics graphics, int graphicsWidth, int graphicsHeight, decimal minX, decimal maxX, decimal minY, decimal maxY)
+        private Graphics _bufferGraphics;
+        
+        public Canvas()
         {
-            _graphics = graphics;
-            GraphicsWidth = graphicsWidth;
-            GraphicsHeight = graphicsHeight;
-            MinX = minX;
-            MaxX = maxX;
-            MinY = minY;
-            MaxY = maxY;
+            InitializeComponent();
         }
 
-        public void DrawLine(Point point1, Point point2)
+        private void InitializeComponent()
         {
-            var point1X = ToGraphicsX(point1.X);
-            var point1Y = ToGraphicsY(point1.Y);
-            var point2X = ToGraphicsX(point2.X);
-            var point2Y = ToGraphicsY(point2.Y);
-            _graphics.DrawLine(Pens.Blue, point1X, point1Y, point2X, point2Y);
+            Paint += HandlePaint;
+            MouseDown += HandleMouseDown;
+            MouseMove += HandleMouseMove;
+            MouseUp += HandleMouseUp;
+            Resize += HandleResize;
+        }
+
+        private void HandlePaint(object sender, PaintEventArgs e)
+        {
+            if (_buffer == null)
+            {
+                InitializeBuffer();
+            }
+            Draw(_bufferGraphics);
+            // Copy the content of the off-screen buffer to the form's graphics
+            e.Graphics.DrawImage(_buffer, 0, 0);
         }
         
-        public float ToGraphicsY(decimal y)
+        private void Draw(Graphics graphics)
         {
-            var valueDistance = MaxY - y;
-            var ret = Border + PixelHeight / ValueHeight * (float) valueDistance;
-            return ret;
+            graphics.Clear(Color.FromArgb(240, 240, 240));
+            new Drawer().Draw(_charts, graphics, Width, Height);
+            if (IsZooming && _zoomRectangle != null)
+            {
+                graphics.DrawRectangle(Pens.Black, _zoomRectangle.Value);
+            }
+        }
+        
+        private void InitializeBuffer()
+        {
+            _buffer = new Bitmap(ClientSize.Width, ClientSize.Height);
+            _bufferGraphics = Graphics.FromImage(_buffer);
         }
 
-        public float ToGraphicsX(decimal x)
+        private void HandleResize(object sender, EventArgs e)
         {
-            var valueDistance = x - MinX;
-            var ret = Border + PixelWidth / ValueWidth * (float) valueDistance;
-            return ret;
+            // Recreate the buffer when the form is resized
+            if (_buffer != null)
+            {
+                _buffer.Dispose();
+            }
+            if (_bufferGraphics != null)
+            {
+                _bufferGraphics.Dispose();
+            }
+            InitializeBuffer();
+            Refresh();
         }
+
+        private void HandleMouseDown(object sender, MouseEventArgs e)
+        {
+            if (IsZooming && e.Button == MouseButtons.Left)
+            {
+                _zoomStart = e.Location;
+            }
+        }
+
+        private void HandleMouseMove(object sender, MouseEventArgs e)
+        {
+            if (IsZooming && _zoomStart != null)
+            {
+                var x = Math.Min(_zoomStart.Value.X, e.X);
+                var y = Math.Min(_zoomStart.Value.Y, e.Y);
+                var width = Math.Abs(_zoomStart.Value.X - e.X);
+                var height = Math.Abs(_zoomStart.Value.Y - e.Y);
+                _zoomRectangle = new Rectangle(x, y, width, height);
+                Refresh(); 
+            }
+        }
+
+        private void HandleMouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && IsZooming)
+            {
+                IsZooming = false;
+                // var zoomedArea = new RectangleF(
+                //     _zoomRectangle.X / (float) _mainPanel.Width,
+                //     _zoomRectangle.Y / (float) _mainPanel.Height,
+                //     _zoomRectangle.Width / (float) _mainPanel.Width,
+                //     _zoomRectangle.Height / (float) _mainPanel.Height
+                // );
+                IsZooming = false;
+                _zoomStart = null;
+                _zoomRectangle = null;
+                // ZoomToArea(zoomedArea);
+            }
+        }
+        
     }
 }

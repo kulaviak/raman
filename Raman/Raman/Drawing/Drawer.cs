@@ -13,7 +13,7 @@ namespace Raman.Drawing
             var maxX = allPoints.Max(point => point.X);
             var minY = allPoints.Min(point => point.Y);
             var maxY = allPoints.Max(point => point.Y);
-            var canvas = new Canvas(graphics, graphicsWidth, graphicsHeight, minX, maxX, minY, maxY);
+            var canvas = new CanvasOld(graphics, graphicsWidth, graphicsHeight, minX, maxX, minY, maxY);
             foreach (var chart in charts)
             { 
                 chart.Draw(canvas);

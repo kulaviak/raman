@@ -2,6 +2,6 @@ namespace Raman.Drawing
 {
     public interface IDrawable
     {
-        void Draw(Canvas canvas);
+        void Draw(CanvasOld canvasOld);
     }
 }

@@ -15,7 +15,7 @@ namespace Raman.Drawing
             _points = points;
         }
 
-        public void Draw(Canvas canvas)
+        public void Draw(CanvasOld canvasOld)
         {
             if (_points.Count < 2)
             {
@@ -25,7 +25,7 @@ namespace Raman.Drawing
             {
                 var point1 = _points[i];
                 var point2 = _points[i + 1];
-                canvas.DrawLine(point1, point2);
+                canvasOld.DrawLine(point1, point2);
             }
         }
         
