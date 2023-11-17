@@ -66,6 +66,7 @@
     <Compile Include="Drawing\Drawer.cs" />
     <Compile Include="Drawing\IDrawable.cs" />
     <Compile Include="Drawing\XAxis.cs" />
+    <Compile Include="Drawing\YAxis.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\MainForm.resx">

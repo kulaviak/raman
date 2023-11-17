@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Drawing;
 using Point = Raman.Core.Point;
 
@@ -9,37 +8,37 @@ namespace Raman.Drawing
         
         public readonly Graphics _graphics;
 
-        public readonly int _graphicsWidth;
+        public int GraphicsWidth { get; }
 
-        public readonly int _graphicsHeight;
+        public int GraphicsHeight { get; }
 
-        public readonly decimal _minX;
+        public decimal MinX { get; }
 
-        public readonly decimal _maxX;
+        public decimal MaxX { get; }
 
-        public readonly decimal _minY;
+        public decimal MinY { get; }
 
-        public readonly decimal _maxY;
+        public decimal MaxY { get; }
 
-        public float BORDER = 50;
+        public float Border => 50;
 
-        public float PixelWidth => _graphicsWidth - 2 * BORDER;
+        public float PixelWidth => GraphicsWidth - 2 * Border;
 
-        public float PixelHeight => _graphicsHeight - 2 * BORDER;
+        public float PixelHeight => GraphicsHeight - 2 * Border;
 
-        public float ValueWidth => (float) (_maxX - _minX);
+        public float ValueWidth => (float) (MaxX - MinX);
 
-        public float ValueHeight => (float) (_maxY - _minY);
+        public float ValueHeight => (float) (MaxY - MinY);
 
         public Canvas(Graphics graphics, int graphicsWidth, int graphicsHeight, decimal minX, decimal maxX, decimal minY, decimal maxY)
         {
             _graphics = graphics;
-            _graphicsWidth = graphicsWidth;
-            _graphicsHeight = graphicsHeight;
-            _minX = minX;
-            _maxX = maxX;
-            _minY = minY;
-            _maxY = maxY;
+            GraphicsWidth = graphicsWidth;
+            GraphicsHeight = graphicsHeight;
+            MinX = minX;
+            MaxX = maxX;
+            MinY = minY;
+            MaxY = maxY;
         }
 
         public void DrawLine(Point point1, Point point2)
@@ -53,15 +52,15 @@ namespace Raman.Drawing
         
         public float ToGraphicsY(decimal y)
         {
-            var valueDistance = _maxY - y;
-            var ret = BORDER + PixelHeight / ValueHeight * (float) valueDistance;
+            var valueDistance = MaxY - y;
+            var ret = Border + PixelHeight / ValueHeight * (float) valueDistance;
             return ret;
         }
 
         public float ToGraphicsX(decimal x)
         {
-            var valueDistance = x - _minX;
-            var ret = BORDER + PixelWidth / ValueWidth * (float) valueDistance;
+            var valueDistance = x - MinX;
+            var ret = Border + PixelWidth / ValueWidth * (float) valueDistance;
             return ret;
         }
     }

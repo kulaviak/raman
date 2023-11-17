@@ -18,43 +18,35 @@ namespace Raman.Drawing
 
         public void Draw()
         {
-            var x1 = _canvas.BORDER;
-            var y1 = _canvas.BORDER + _canvas.PixelHeight;
-            var x2 = _canvas.BORDER + _canvas.PixelWidth;
-            var y2 = _canvas.BORDER + _canvas.PixelHeight;
+            var x1 = _canvas.Border;
+            var y1 = _canvas.Border + _canvas.PixelHeight;
+            var x2 = _canvas.Border + _canvas.PixelWidth;
+            var y2 = _canvas.Border + _canvas.PixelHeight;
             _canvas._graphics.DrawLine(Pens.Black, x1, y1, x2, y2);
-            DrawXAxisNumbers();
+            DrawNumbers();
         }
 
-        private void DrawXAxisNumbers()
+        private void DrawNumbers()
         {
             var gap = GetValueGap(_canvas.ValueWidth, _canvas.PixelWidth);
-            var numbers = GetAxisNumbers(_canvas._minX, _canvas._maxX, gap);
-            DrawXAxisNumbersInternal(numbers);
+            var numbers = GetNumbers(_canvas.MinX, _canvas.MaxX, gap);
+            numbers.ForEach(x => DrawNumber(x));
         }
-
-        private void DrawXAxisNumbersInternal(List<decimal> numbers)
-        {
-            foreach (var number in numbers)
-            {
-                DrawXAxisNumber(number);
-            }
-        }
-
-        private void DrawXAxisNumber(decimal number)
+        
+        private void DrawNumber(decimal number)
         {
             var pos = _canvas.ToGraphicsX(number);
-            DrawXAxisTick(pos);
+            DrawTick(pos);
             var numberStr = number + "";
             var font = SystemFonts.DefaultFont;
             var x = pos - GetDrawnStringLength(numberStr, font) / 2;
-            var y = _canvas.ToGraphicsY(_canvas._minY) + TICK_LINE_LENGTH + DISTANCE_FROM_TICK_TO_NUMBER;
+            var y = _canvas.ToGraphicsY(_canvas.MinY) + TICK_LINE_LENGTH + DISTANCE_FROM_TICK_TO_NUMBER;
             _canvas._graphics.DrawString(numberStr, font, Brushes.Black, x, y);   
         }
 
-        private void DrawXAxisTick(float pos)
+        private void DrawTick(float pos)
         {
-            var y = _canvas.ToGraphicsY(_canvas._minY);
+            var y = _canvas.ToGraphicsY(_canvas.MinY);
             _canvas._graphics.DrawLine(Pens.Black, pos, y, pos, y + TICK_LINE_LENGTH);
         }
         
@@ -64,7 +56,7 @@ namespace Raman.Drawing
             return ret;
         }
 
-        private List<decimal> GetAxisNumbers(decimal min, decimal max, int gap)
+        private List<decimal> GetNumbers(decimal min, decimal max, int gap)
         {
             var firstNumber = ((int) min / gap + 1) * gap;
             var lastNumber = (int) max / gap * gap;
@@ -98,12 +90,11 @@ namespace Raman.Drawing
 
         void DrawYAxis()
         {
-            var x1 = _canvas.BORDER;
-            var y1 = _canvas.BORDER + _canvas.PixelHeight;
-            var x2 = _canvas.BORDER;
-            var y2 = _canvas.BORDER;
+            var x1 = _canvas.Border;
+            var y1 = _canvas.Border + _canvas.PixelHeight;
+            var x2 = _canvas.Border;
+            var y2 = _canvas.Border;
             _canvas._graphics.DrawLine(Pens.Black, x1, y1, x2, y2);
         }
-
     }
 }
