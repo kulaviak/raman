@@ -23,7 +23,7 @@ namespace Raman.Drawing
 
         private Graphics _bufferGraphics;
 
-        private CanvasCoordinateSystem _system = null;
+        private CanvasCoordSystem _coordSystem = null;
         
         public CanvasPanel()
         {
@@ -67,13 +67,13 @@ namespace Raman.Drawing
             var maxX = allPoints.Max(point => point.X);
             var minY = allPoints.Min(point => point.Y);
             var maxY = allPoints.Max(point => point.Y);
-            var canvas = new CanvasOld(graphics, graphicsWidth, graphicsHeight, minX, maxX, minY, maxY);
+            var coordSystem = new CanvasCoordSystem(graphicsWidth, graphicsHeight, minX, maxX, minY, maxY);
             foreach (var chart in charts)
             { 
-                chart.Draw(canvas);
+                chart.Draw(coordSystem, graphics);
             }
-            new XAxis(canvas).Draw();
-            new YAxis(canvas).Draw();
+            new XAxis(coordSystem, graphics).Draw();
+            new YAxis(coordSystem, graphics).Draw();
         }       
         
         private void InitializeBuffer()

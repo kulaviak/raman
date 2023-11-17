@@ -2,7 +2,7 @@ using System.Drawing;
 
 namespace Raman.Drawing
 {
-    public class CanvasCoordinateSystem
+    public class CanvasCoordSystem
     {
         public int GraphicsWidth { get; }
 
@@ -26,7 +26,7 @@ namespace Raman.Drawing
 
         public float ValueHeight => (float) (MaxY - MinY);
 
-        public CanvasCoordinateSystem(int graphicsWidth, int graphicsHeight, decimal minX, decimal maxX, decimal minY, decimal maxY)
+        public CanvasCoordSystem(int graphicsWidth, int graphicsHeight, decimal minX, decimal maxX, decimal minY, decimal maxY)
         {
             GraphicsWidth = graphicsWidth;
             GraphicsHeight = graphicsHeight;

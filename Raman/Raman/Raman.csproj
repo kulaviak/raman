@@ -61,13 +61,12 @@
     <Compile Include="Core\AppException.cs" />
     <Compile Include="Core\Point.cs" />
     <Compile Include="Core\FileReader.cs" />
-    <Compile Include="Drawing\CanvasCoordinateSystem.cs" />
+    <Compile Include="Drawing\CanvasCoordSystem.cs" />
+    <Compile Include="Drawing\CanvasDrawer.cs" />
     <Compile Include="Drawing\CanvasPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Drawing\CanvasOld.cs" />
     <Compile Include="Drawing\Chart.cs" />
-    <Compile Include="Drawing\IDrawable.cs" />
     <Compile Include="Drawing\XAxis.cs" />
     <Compile Include="Drawing\YAxis.cs" />
     <Compile Include="Program.cs" />

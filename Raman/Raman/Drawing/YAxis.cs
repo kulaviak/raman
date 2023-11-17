@@ -5,7 +5,9 @@ namespace Raman.Drawing
 {
     public class YAxis
     {
-        private readonly CanvasOld _canvasOld;
+        private readonly CanvasCoordSystem _coordSystem;
+        
+        private readonly Graphics _graphics;
 
         private static int TICK_LINE_LENGTH = 5;
         
@@ -13,31 +15,32 @@ namespace Raman.Drawing
         
         private const double GAP_BETWEEN_TICKS = 50;
 
-        public YAxis(CanvasOld canvasOld)
+        public YAxis(CanvasCoordSystem coordSystem, Graphics graphics)
         {
-            _canvasOld = canvasOld;
+            _coordSystem = coordSystem;
+            _graphics = graphics;
         }
 
         public void Draw()
         {
-            var x1 = _canvasOld.Border;
-            var y1 = _canvasOld.Border + _canvasOld.PixelHeight;
-            var x2 = _canvasOld.Border;
-            var y2 = _canvasOld.Border;
-            _canvasOld._graphics.DrawLine(Pens.Black, x1, y1, x2, y2);
+            var x1 = _coordSystem.Border;
+            var y1 = _coordSystem.Border + _coordSystem.PixelHeight;
+            var x2 = _coordSystem.Border;
+            var y2 = _coordSystem.Border;
+            _graphics.DrawLine(Pens.Black, x1, y1, x2, y2);
             DrawNumbers();
         }
 
         private void DrawNumbers()
         {
-            var gap = GetValueGap(_canvasOld.ValueHeight, _canvasOld.PixelHeight);
-            var numbers = GetNumbers(_canvasOld.MinY, _canvasOld.MaxY, gap);
+            var gap = GetValueGap(_coordSystem.ValueHeight, _coordSystem.PixelHeight);
+            var numbers = GetNumbers(_coordSystem.MinY, _coordSystem.MaxY, gap);
             numbers.ForEach(x => DrawNumberWithTick(x));
         }
         
         private void DrawNumberWithTick(decimal number)
         {
-            var pos = _canvasOld.ToGraphicsY(number);
+            var pos = _coordSystem.ToGraphicsY(number);
             DrawTick(pos);
             DrawNumber(number, pos);
         }
@@ -46,12 +49,12 @@ namespace Raman.Drawing
         {
             var numberStr = number + "";
             var font = SystemFonts.DefaultFont;
-            var numberX = _canvasOld.ToGraphicsX(_canvasOld.MinX) - TICK_LINE_LENGTH - DISTANCE_FROM_TICK_TO_NUMBER - GetDrawnStringLength(numberStr, font);
-            var numberY = pos - GetDrawnStringHeight(numberStr, font);
-            _canvasOld._graphics.DrawString(numberStr, font, Brushes.Black, numberX, numberY);
+            var numberX = _coordSystem.ToGraphicsX(_coordSystem.MinX) - TICK_LINE_LENGTH - DISTANCE_FROM_TICK_TO_NUMBER - GetDrawnStringLength(numberStr, font);
+            var numberY = pos - GetDrawnStringHeight(font);
+            _graphics.DrawString(numberStr, font, Brushes.Black, numberX, numberY);
         }
 
-        private float GetDrawnStringHeight(string str, Font font)
+        private static float GetDrawnStringHeight(Font font)
         {
             var ret = font.SizeInPoints;
             return ret;
@@ -59,17 +62,17 @@ namespace Raman.Drawing
 
         private void DrawTick(float pos)
         {
-            var x = _canvasOld.ToGraphicsX(_canvasOld.MinX);
-            _canvasOld._graphics.DrawLine(Pens.Black, x, pos, x - TICK_LINE_LENGTH, pos);
+            var x = _coordSystem.ToGraphicsX(_coordSystem.MinX);
+            _graphics.DrawLine(Pens.Black, x, pos, x - TICK_LINE_LENGTH, pos);
         }
         
         private float GetDrawnStringLength(string str, Font font)
         {
-            var ret = _canvasOld._graphics.MeasureString(str, font).Width;
+            var ret = _graphics.MeasureString(str, font).Width;
             return ret;
         }
 
-        private List<decimal> GetNumbers(decimal min, decimal max, int gap)
+        private static List<decimal> GetNumbers(decimal min, decimal max, int gap)
         {
             var firstNumber = ((int) min / gap + 1) * gap;
             var lastNumber = (int) max / gap * gap;
@@ -84,7 +87,7 @@ namespace Raman.Drawing
         /// <summary>
         /// Get reasonable value gap between numbers on axis - so the gap is 1 or 10 or 100. 
         /// </summary>
-        private int GetValueGap(float valueDistance, float pixelDistance)
+        private static int GetValueGap(float valueDistance, float pixelDistance)
         {
             var valueGap = valueDistance / pixelDistance * GAP_BETWEEN_TICKS;
             if (valueGap < 1)
