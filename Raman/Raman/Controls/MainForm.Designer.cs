@@ -39,6 +39,10 @@
             this.btnOpenFiles = new System.Windows.Forms.ToolStripButton();
             this.btnZoomArea = new System.Windows.Forms.ToolStripButton();
             this.zoomToOriginalSize = new System.Windows.Forms.ToolStripButton();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoomAreaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoomToOriginalSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this._mainPanel.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -47,7 +51,8 @@
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.viewToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(800, 24);
@@ -66,7 +71,8 @@
             // miOpenFiles
             // 
             this.miOpenFiles.Name = "miOpenFiles";
-            this.miOpenFiles.Size = new System.Drawing.Size(129, 22);
+            this.miOpenFiles.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0)));
+            this.miOpenFiles.Size = new System.Drawing.Size(180, 22);
             this.miOpenFiles.Text = "Open Files";
             this.miOpenFiles.Click += new System.EventHandler(this.miOpenFiles_Click);
             // 
@@ -144,6 +150,37 @@
             this.zoomToOriginalSize.Text = "Zoom To Original Size";
             this.zoomToOriginalSize.Click += new System.EventHandler(this.zoomToOriginalSize_Click);
             // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zoomAreaToolStripMenuItem,
+            this.zoomToOriginalSizeToolStripMenuItem,
+            this.refreshToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // zoomAreaToolStripMenuItem
+            // 
+            this.zoomAreaToolStripMenuItem.Name = "zoomAreaToolStripMenuItem";
+            this.zoomAreaToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+            this.zoomAreaToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.zoomAreaToolStripMenuItem.Text = "Zoom Window";
+            // 
+            // zoomToOriginalSizeToolStripMenuItem
+            // 
+            this.zoomToOriginalSizeToolStripMenuItem.Name = "zoomToOriginalSizeToolStripMenuItem";
+            this.zoomToOriginalSizeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.zoomToOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.zoomToOriginalSizeToolStripMenuItem.Text = "Zoom To Original Size";
+            // 
+            // refreshToolStripMenuItem
+            // 
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.refreshToolStripMenuItem.Text = "Refresh";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -184,6 +221,10 @@
         private System.Windows.Forms.ToolStripButton btnOpenFiles;
         private System.Windows.Forms.ToolStripButton btnZoomArea;
         private System.Windows.Forms.ToolStripButton zoomToOriginalSize;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zoomAreaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zoomToOriginalSizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
     }
 }
 
