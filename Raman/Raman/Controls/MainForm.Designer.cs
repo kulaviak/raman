@@ -39,14 +39,14 @@ namespace Raman
       this.miZoomWindow = new System.Windows.Forms.ToolStripMenuItem();
       this.miZoomToOriginalSize = new System.Windows.Forms.ToolStripMenuItem();
       this.miRefresh = new System.Windows.Forms.ToolStripMenuItem();
-      this._mainPanel = new Raman.Drawing.Canvas();
+      this._canvasPanel = new Raman.Drawing.CanvasPanel();
       this.toolStrip2 = new System.Windows.Forms.ToolStrip();
       this.btnRefresh = new System.Windows.Forms.ToolStripButton();
       this.btnOpenFiles = new System.Windows.Forms.ToolStripButton();
       this.btnZoomWindow = new System.Windows.Forms.ToolStripButton();
       this.zoomToOriginalSize = new System.Windows.Forms.ToolStripButton();
       this.menuStrip.SuspendLayout();
-      this._mainPanel.SuspendLayout();
+      this._canvasPanel.SuspendLayout();
       this.toolStrip2.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -114,14 +114,13 @@ namespace Raman
       // 
       // _mainPanel
       // 
-      this._mainPanel.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-      this._mainPanel.BackColor = System.Drawing.SystemColors.Control;
-      this._mainPanel.Controls.Add(this.toolStrip2);
-      this._mainPanel.Location = new System.Drawing.Point(0, 27);
-      this._mainPanel.Name = "_mainPanel";
-      this._mainPanel.Size = new System.Drawing.Size(800, 428);
-      this._mainPanel.TabIndex = 1;
-      this._mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this._mainPanel_Paint);
+      this._canvasPanel.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+      this._canvasPanel.BackColor = System.Drawing.SystemColors.Control;
+      this._canvasPanel.Controls.Add(this.toolStrip2);
+      this._canvasPanel.Location = new System.Drawing.Point(0, 27);
+      this._canvasPanel.Name = "_canvasPanel";
+      this._canvasPanel.Size = new System.Drawing.Size(800, 428);
+      this._canvasPanel.TabIndex = 1;
       // 
       // toolStrip2
       // 
@@ -178,7 +177,7 @@ namespace Raman
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.SystemColors.Control;
       this.ClientSize = new System.Drawing.Size(800, 450);
-      this.Controls.Add(this._mainPanel);
+      this.Controls.Add(this._canvasPanel);
       this.Controls.Add(this.menuStrip);
       this.MainMenuStrip = this.menuStrip;
       this.Name = "MainForm";
@@ -188,8 +187,8 @@ namespace Raman
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RamanForm_FormClosing);
       this.menuStrip.ResumeLayout(false);
       this.menuStrip.PerformLayout();
-      this._mainPanel.ResumeLayout(false);
-      this._mainPanel.PerformLayout();
+      this._canvasPanel.ResumeLayout(false);
+      this._canvasPanel.PerformLayout();
       this.toolStrip2.ResumeLayout(false);
       this.toolStrip2.PerformLayout();
       this.ResumeLayout(false);
@@ -203,7 +202,7 @@ namespace Raman
 
         #endregion
 
-        private Raman.Drawing.Canvas _mainPanel;
+        private Raman.Drawing.CanvasPanel _canvasPanel;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStrip toolStrip2;

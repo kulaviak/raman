@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace Raman.Drawing
 {
-    public class Canvas : Panel
+    public class CanvasPanel : Panel
     {
         
         private List<Chart> _charts = new List<Chart>();
@@ -22,7 +22,7 @@ namespace Raman.Drawing
 
         private Graphics _bufferGraphics;
         
-        public Canvas()
+        public CanvasPanel()
         {
             InitializeComponent();
         }

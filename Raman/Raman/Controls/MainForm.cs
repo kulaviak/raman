@@ -65,7 +65,7 @@ namespace Raman
             {
                 var fileReader = new FileReader(filePath);
                 var points = fileReader.TryReadFile();
-                _mainPanel.Charts.Add(new Chart(points));
+                _canvasPanel.Charts.Add(new Chart(points));
                 if (points.Count < 2)
                 {
                     MessageBox.Show($"File {filePath} has less 2 points. File is ignored.", "Error", MessageBoxButtons.OK,
@@ -88,17 +88,12 @@ namespace Raman
             }
         }
         
-        private void _mainPanel_Paint(object sender, PaintEventArgs e)
-        {
-        }
-        
-
         private void LoadDemoSpectrum()
         {
             var filePath = "c:/github/kulaviak/raman/data/spectrum.txt";
             var fileReader = new FileReader(filePath);
             var points = fileReader.TryReadFile();
-            _mainPanel.Charts.Add(new Chart(points));
+            _canvasPanel.Charts.Add(new Chart(points));
         }
         
 
@@ -109,7 +104,7 @@ namespace Raman
 
         private void Refresh()
         {
-            _mainPanel.Invalidate();
+            _canvasPanel.Invalidate();
         }
 
         private void btnOpenFiles_Click(object sender, EventArgs e)
@@ -133,7 +128,7 @@ namespace Raman
 
         private void miZoomWindow_Click(object sender, EventArgs e)
         {
-            _mainPanel.IsZooming = true;
+            _canvasPanel.IsZooming = true;
         }
 
         private void miZoomToOriginalSize_Click(object sender, EventArgs e)
