@@ -5,6 +5,7 @@ using Point = Raman.Core.Point;
 
 namespace Raman.Drawing
 {
+    [Serializable]
     public class Chart
     {
         private readonly List<Point> _points;
