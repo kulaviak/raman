@@ -32,7 +32,7 @@ namespace Raman.Drawing
 
         private Graphics _bufferGraphics;
 
-        private CanvasCoordSystem _coordSystem = null;
+        private CanvasCoordSystem _coordSystem;
         
         public CanvasPanel()
         {
@@ -55,7 +55,7 @@ namespace Raman.Drawing
                 InitializeBuffer();
             }
             Draw(_bufferGraphics);
-            // Copy the content of the off-screen buffer to the form's graphics
+            // copy the content of the off-screen buffer to the form's graphics
             e.Graphics.DrawImage(_buffer, 0, 0);
         }
         
@@ -105,7 +105,8 @@ namespace Raman.Drawing
 
         private void HandleResize(object sender, EventArgs e)
         {
-            // Recreate the buffer when the form is resized
+            _coordSystem = GetCoordSystemFromCharts(_charts);
+            // recreate the buffer when the form is resized
             _buffer?.Dispose();
             if (_bufferGraphics != null)
             {

@@ -1,5 +1,3 @@
-using System.Drawing;
-
 namespace Raman.Drawing
 {
     public class CanvasCoordSystem
