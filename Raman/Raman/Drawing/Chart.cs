@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.Serialization;
 using Point = Raman.Core.Point;
 
 namespace Raman.Drawing
 {
     [Serializable]
-    public class Chart
+    public class Chart : ISerializable
     {
         private readonly List<Point> _points;
 
@@ -35,6 +36,11 @@ namespace Raman.Drawing
         public override string ToString()
         {
             return $"Points.Count: {_points.Count}";
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            
         }
     }
 }

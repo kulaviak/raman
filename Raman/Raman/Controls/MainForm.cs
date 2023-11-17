@@ -113,13 +113,9 @@ namespace Raman
 
         private void btnZoomWindow_Click(object sender, EventArgs e)
         {
-            ZoomWindow();
+            _canvasPanel.IsZooming = true;
         }
-
-        private void ZoomWindow()
-        {
-        }
-
+        
         private void zoomToOriginalSize_Click(object sender, EventArgs e)
         {
             _canvasPanel.ZoomToOriginalSize();
@@ -132,7 +128,7 @@ namespace Raman
 
         private void miZoomToOriginalSize_Click(object sender, EventArgs e)
         {
-
+            _canvasPanel.ZoomToOriginalSize();
         }
 
         private void miRefresh_Click(object sender, EventArgs e)

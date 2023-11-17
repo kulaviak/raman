@@ -44,6 +44,11 @@ namespace Raman.Drawing
             _coordSystem = GetCoordSystemFromCharts(_charts);
             Refresh();
         }
+        
+        private void Refresh()
+        {
+            Invalidate();
+        }
 
         private void InitializeComponent()
         {

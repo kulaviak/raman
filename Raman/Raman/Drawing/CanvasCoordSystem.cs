@@ -51,7 +51,7 @@ namespace Raman.Drawing
         public decimal ToValueX(float pixelX)
         {
             var pixelDistance = pixelX - Border;
-            var ret = ValueWidth / PixelWidth * pixelDistance;
+            var ret = ValueWidth / PixelWidth * pixelDistance + (double) MinX;
             return (decimal) ret;
         }
         
