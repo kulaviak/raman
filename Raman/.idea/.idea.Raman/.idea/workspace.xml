@@ -7,10 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="Show X axis numbers">
+    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="Move files">
+      <change afterPath="$PROJECT_DIR$/Raman/Drawing/XAxis.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Controls/MainForm.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Controls/MainForm.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Core/Canvas.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Core/Canvas.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Drawing/Canvas.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Drawing/Canvas.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Raman.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Raman.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +105,7 @@
       <workItem from="1699611557180" duration="640000" />
       <workItem from="1699903451380" duration="403000" />
       <workItem from="1699904161461" duration="15186000" />
-      <workItem from="1700137799896" duration="7283000" />
+      <workItem from="1700137799896" duration="9761000" />
     </task>
     <task id="LOCAL-00001" summary="Add .gitignore files">
       <option name="closed" value="true" />
@@ -290,7 +291,23 @@
       <option name="project" value="LOCAL" />
       <updated>1700155526837</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="In progress">
+      <option name="closed" value="true" />
+      <created>1700156215406</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1700156215406</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Move files">
+      <option name="closed" value="true" />
+      <created>1700156472040</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1700156472040</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -310,10 +327,11 @@
     <MESSAGE value="Draw point on picture box" />
     <MESSAGE value="Add logging" />
     <MESSAGE value="Change picturebox to panel" />
-    <MESSAGE value="In progress" />
     <MESSAGE value="Chart successfuly drawn" />
     <MESSAGE value="Show X axis numbers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Show X axis numbers" />
+    <MESSAGE value="In progress" />
+    <MESSAGE value="Move files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Move files" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
