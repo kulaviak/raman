@@ -22,8 +22,8 @@ namespace Raman.Drawing
         {
             var x1 = _canvas.Border;
             var y1 = _canvas.Border + _canvas.PixelHeight;
-            var x2 = _canvas.Border + _canvas.PixelWidth;
-            var y2 = _canvas.Border + _canvas.PixelHeight;
+            var x2 = _canvas.Border;
+            var y2 = _canvas.Border;
             _canvas._graphics.DrawLine(Pens.Black, x1, y1, x2, y2);
             DrawNumbers();
         }
@@ -32,10 +32,10 @@ namespace Raman.Drawing
         {
             var gap = GetValueGap(_canvas.ValueWidth, _canvas.PixelWidth);
             var numbers = GetNumbers(_canvas.MinX, _canvas.MaxX, gap);
-            numbers.ForEach(x => DrawNumber(x));
+            numbers.ForEach(x => DrawNumberWithTick(x));
         }
         
-        private void DrawNumber(decimal number)
+        private void DrawNumberWithTick(decimal number)
         {
             var y = _canvas.ToGraphicsY(number);
             DrawTick(y);

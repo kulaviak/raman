@@ -8,8 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="Refactor">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Raman/Drawing/Drawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Drawing/Drawer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Raman/Drawing/XAxis.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Drawing/XAxis.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Raman/Drawing/YAxis.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Drawing/YAxis.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +27,14 @@
     <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/Drawer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/Drawer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/Drawer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/Drawer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/Drawer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/XAxis.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/XAxis.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/XAxis.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/XAxis.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/XAxis.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/XAxis.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/XAxis.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/XAxis.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/XAxis.cs" root0="SKIP_HIGHLIGHTING" />
@@ -349,7 +358,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700207396133</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Refactor">
+      <option name="closed" value="true" />
+      <created>1700207567969</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1700207567969</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
