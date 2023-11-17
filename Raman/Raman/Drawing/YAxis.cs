@@ -37,13 +37,18 @@ namespace Raman.Drawing
         
         private void DrawNumberWithTick(decimal number)
         {
-            var y = _canvas.ToGraphicsY(number);
-            DrawTick(y);
+            var pos = _canvas.ToGraphicsY(number);
+            DrawTick(pos);
+            DrawNumber(number, pos);
+        }
+
+        private void DrawNumber(decimal number, float y)
+        {
             var numberStr = number + "";
             var font = SystemFonts.DefaultFont;
             var numberX = _canvas.ToGraphicsX(_canvas.MinX) - TICK_LINE_LENGTH - DISTANCE_FROM_TICK_TO_NUMBER - GetDrawnStringLength(numberStr, font);
             var numberY = y + GetDrawnStringHeight(numberStr, font);
-            _canvas._graphics.DrawString(numberStr, font, Brushes.Black, numberX, numberY);   
+            _canvas._graphics.DrawString(numberStr, font, Brushes.Black, numberX, numberY);
         }
 
         private float GetDrawnStringHeight(string str, Font font)
