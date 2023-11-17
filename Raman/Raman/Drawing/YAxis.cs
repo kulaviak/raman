@@ -9,7 +9,7 @@ namespace Raman.Drawing
 
         private static int TICK_LINE_LENGTH = 5;
         
-        private static int DISTANCE_FROM_TICK_TO_NUMBER = 8;
+        private static int DISTANCE_FROM_TICK_TO_NUMBER = 2;
         
         private const double GAP_BETWEEN_TICKS = 50;
 
@@ -30,8 +30,8 @@ namespace Raman.Drawing
 
         private void DrawNumbers()
         {
-            var gap = GetValueGap(_canvas.ValueWidth, _canvas.PixelWidth);
-            var numbers = GetNumbers(_canvas.MinX, _canvas.MaxX, gap);
+            var gap = GetValueGap(_canvas.ValueHeight, _canvas.PixelHeight);
+            var numbers = GetNumbers(_canvas.MinY, _canvas.MaxY, gap);
             numbers.ForEach(x => DrawNumberWithTick(x));
         }
         
@@ -42,25 +42,25 @@ namespace Raman.Drawing
             DrawNumber(number, pos);
         }
 
-        private void DrawNumber(decimal number, float y)
+        private void DrawNumber(decimal number, float pos)
         {
             var numberStr = number + "";
             var font = SystemFonts.DefaultFont;
             var numberX = _canvas.ToGraphicsX(_canvas.MinX) - TICK_LINE_LENGTH - DISTANCE_FROM_TICK_TO_NUMBER - GetDrawnStringLength(numberStr, font);
-            var numberY = y + GetDrawnStringHeight(numberStr, font);
+            var numberY = pos - GetDrawnStringHeight(numberStr, font);
             _canvas._graphics.DrawString(numberStr, font, Brushes.Black, numberX, numberY);
         }
 
         private float GetDrawnStringHeight(string str, Font font)
         {
-            var ret = _canvas._graphics.MeasureString(str, font).Height;
+            var ret = font.SizeInPoints;
             return ret;
         }
 
-        private void DrawTick(float x)
+        private void DrawTick(float pos)
         {
-            var y = _canvas.ToGraphicsY(_canvas.MinY);
-            _canvas._graphics.DrawLine(Pens.Black, x, y, x, y + TICK_LINE_LENGTH);
+            var x = _canvas.ToGraphicsX(_canvas.MinX);
+            _canvas._graphics.DrawLine(Pens.Black, x, pos, x - TICK_LINE_LENGTH, pos);
         }
         
         private float GetDrawnStringLength(string str, Font font)
@@ -93,11 +93,20 @@ namespace Raman.Drawing
             } else if (valueGap < 10)
             {
                 return 10;
-            } else if (valueGap < 100)
+            } else if (valueGap < 100)  
             {
                 return 100;
-            }
-            return 100;
+            } else if (valueGap < 200)  
+            {
+                return 200;
+            } else if (valueGap < 300)  
+            {
+                return 300;
+            } else if (valueGap < 400)  
+            {
+                return 400;
+            } 
+            return 500;
         }
     }
 }

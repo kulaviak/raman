@@ -101,5 +101,10 @@ namespace Raman
         {
             _mainPanel.Invalidate();
         }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            _mainPanel.Invalidate();
+        }
     }
 }
