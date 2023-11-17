@@ -10,8 +10,6 @@ namespace Raman.Drawing
         private static int TICK_LINE_LENGTH = 5;
         
         private static int DISTANCE_FROM_TICK_TO_NUMBER = 8;
-        
-        private static int GAP_BETWEEN_TICKS = 50;
 
         public XAxis(Canvas canvas)
         {
@@ -75,7 +73,8 @@ namespace Raman.Drawing
         /// </summary>
         private int GetValueGap(float valueDistance, float pixelDistance)
         {
-            var valueGap = valueDistance / pixelDistance * GAP_BETWEEN_TICKS;
+            var pixelGap = 50;
+            var valueGap = valueDistance / pixelDistance * pixelGap;
             if (valueGap < 1)
             {
                 return 1;

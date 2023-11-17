@@ -7,8 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="Rename fields, methods">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Raman/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="bdc9680d-cb19-423b-8e7b-67121d092bd4" name="Changes" comment="Fix">
       <change beforePath="$PROJECT_DIR$/Raman/Drawing/Drawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Drawing/Drawer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Raman/Drawing/XAxis.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Raman/Drawing/XAxis.cs" afterDir="false" />
     </list>
@@ -24,6 +23,8 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c0f8d183e43847009e4e164aee6d042f91960/da/15e1d0d3/Graphics.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5a83f26a7bb1cfdddba86fba3e3a9df693c5327962694fdeeb76548f26299323/Logger-generated.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Raman/Drawing/Canvas.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/Drawer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/Drawer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/XAxis.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/XAxis.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/github/kulaviak/raman/Raman/Raman/Drawing/XAxis.cs" root0="SKIP_HIGHLIGHTING" />
@@ -323,7 +324,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700204637131</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Fix">
+      <option name="closed" value="true" />
+      <created>1700207127828</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1700207127828</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -360,7 +369,8 @@
     <MESSAGE value="Move files" />
     <MESSAGE value="Refactor" />
     <MESSAGE value="Rename fields, methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rename fields, methods" />
+    <MESSAGE value="Fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
