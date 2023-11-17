@@ -122,7 +122,7 @@ namespace Raman
 
         private void zoomToOriginalSize_Click(object sender, EventArgs e)
         {
-
+            _canvasPanel.ZoomToOriginalSize();
         }
 
         private void miZoomWindow_Click(object sender, EventArgs e)

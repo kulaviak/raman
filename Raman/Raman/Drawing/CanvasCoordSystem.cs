@@ -34,17 +34,31 @@ namespace Raman.Drawing
             MaxY = maxY;
         }
         
-        public float ToGraphicsY(decimal y)
+        public float ToPixelX(decimal valueX)
         {
-            var valueDistance = MaxY - y;
+            var valueDistance = valueX - MinX;
+            var ret = Border + PixelWidth / ValueWidth * (float) valueDistance;
+            return ret;
+        }
+        
+        public float ToPixelY(decimal valueY)
+        {
+            var valueDistance = MaxY - valueY;
             var ret = Border + PixelHeight / ValueHeight * (float) valueDistance;
             return ret;
         }
 
-        public float ToGraphicsX(decimal x)
+        public decimal ToValueX(float pixelX)
         {
-            var valueDistance = x - MinX;
-            var ret = Border + PixelWidth / ValueWidth * (float) valueDistance;
+            var pixelDistance = pixelX - Border;
+            var ret = ValueWidth / PixelWidth * pixelDistance;
+            return (decimal) ret;
+        }
+        
+        public decimal ToValueY(float pixelY)
+        {
+            var pixelDistance = pixelY - Border;
+            var ret = MaxY - (decimal) (ValueHeight / PixelHeight * pixelDistance);
             return ret;
         }
     }

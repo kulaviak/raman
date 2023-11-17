@@ -38,7 +38,7 @@ namespace Raman.Drawing
         
         private void DrawNumberWithTicks(decimal number)
         {
-            var x = _coordSystem.ToGraphicsX(number);
+            var x = _coordSystem.ToPixelX(number);
             DrawTick(x);
             DrawNumber(number, x);
         }
@@ -48,13 +48,13 @@ namespace Raman.Drawing
             var numberStr = number + "";
             var font = SystemFonts.DefaultFont;
             var numberX = pos - GetDrawnStringLength(numberStr, font) / 2;
-            var numberY = _coordSystem.ToGraphicsY(_coordSystem.MinY) + TICK_LINE_LENGTH + DISTANCE_FROM_TICK_TO_NUMBER;
+            var numberY = _coordSystem.ToPixelY(_coordSystem.MinY) + TICK_LINE_LENGTH + DISTANCE_FROM_TICK_TO_NUMBER;
             _graphics.DrawString(numberStr, font, Brushes.Black, numberX, numberY);
         }
 
         private void DrawTick(float pos)
         {
-            var y = _coordSystem.ToGraphicsY(_coordSystem.MinY);
+            var y = _coordSystem.ToPixelY(_coordSystem.MinY);
             _graphics.DrawLine(Pens.Black, pos, y, pos, y + TICK_LINE_LENGTH);
         }
         
