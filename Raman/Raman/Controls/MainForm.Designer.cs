@@ -129,6 +129,9 @@
             this._mainPanel.Size = new System.Drawing.Size(800, 428);
             this._mainPanel.TabIndex = 1;
             this._mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this._mainPanel_Paint);
+            this._mainPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this._mainPanel_MouseDown);
+            this._mainPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this._mainPanel_MouseMove);
+            this._mainPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this._mainPanel_MouseUp);
             this._mainPanel.Resize += new System.EventHandler(this._mainPanel_Resize);
             // 
             // toolStrip2

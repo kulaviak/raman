@@ -1,15 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Raman.Core;
 using Raman.Drawing;
+using Point = System.Drawing.Point;
 
 namespace Raman
 {
+    // window zoom made according to Chat GTP query How to implement zoom to area in graphics in windows forms
     public partial class MainForm : Form
     {
         private List<Chart> _charts = new List<Chart>();
+        
+        private bool _isZooming;
+        
+        private Point _zoomStart;
+        
+        private Rectangle _zoomRectangle;
 
         public MainForm()
         {
@@ -149,6 +158,43 @@ namespace Raman
         private void miRefresh_Click(object sender, EventArgs e)
         {
             Refresh();
+        }
+
+        private void _mainPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                _isZooming = true;
+                _zoomStart = e.Location;
+            }
+        }
+
+        private void _mainPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_isZooming)
+            {
+                var x = Math.Min(_zoomStart.X, e.X);
+                var y = Math.Min(_zoomStart.Y, e.Y);
+                var width = Math.Abs(_zoomStart.X - e.X);
+                var height = Math.Abs(_zoomStart.Y - e.Y);
+                _zoomRectangle = new Rectangle(x, y, width, height);
+                Refresh(); 
+            }
+        }
+
+        private void _mainPanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && _isZooming)
+            {
+                _isZooming = false;
+                var zoomedArea = new RectangleF(
+                    _zoomRectangle.X / (float) _mainPanel.Width,
+                    _zoomRectangle.Y / (float) _mainPanel.Height,
+                    _zoomRectangle.Width / (float) _mainPanel.Width,
+                    _zoomRectangle.Height / (float) _mainPanel.Height
+                );
+                ZoomToArea(zoomedArea);
+            }
         }
     }
 }
