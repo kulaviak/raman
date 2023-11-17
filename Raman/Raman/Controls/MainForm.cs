@@ -101,6 +101,10 @@ namespace Raman
         private void _mainPanel_Paint(object sender, PaintEventArgs e)
         {
             new Drawer().Draw(_charts, e.Graphics, _mainPanel.Width, _mainPanel.Height);
+            if (_isZooming)
+            {
+                e.Graphics.DrawRectangle(Pens.Black, _zoomRectangle);
+            }
         }
 
         private void LoadDemoSpectrum()
@@ -123,7 +127,7 @@ namespace Raman
 
         private void Refresh()
         {
-            Refresh();
+            _mainPanel.Invalidate();
         }
 
         private void btnOpenFiles_Click(object sender, EventArgs e)
@@ -147,7 +151,7 @@ namespace Raman
 
         private void miZoomWindow_Click(object sender, EventArgs e)
         {
-            ZoomWindow();
+            _isZooming = true;
         }
 
         private void miZoomToOriginalSize_Click(object sender, EventArgs e)
@@ -164,7 +168,6 @@ namespace Raman
         {
             if (e.Button == MouseButtons.Left)
             {
-                _isZooming = true;
                 _zoomStart = e.Location;
             }
         }
@@ -178,6 +181,7 @@ namespace Raman
                 var width = Math.Abs(_zoomStart.X - e.X);
                 var height = Math.Abs(_zoomStart.Y - e.Y);
                 _zoomRectangle = new Rectangle(x, y, width, height);
+                Console.WriteLine($"Zoom rectangle set to width {width} and height {height}");
                 Refresh(); 
             }
         }
@@ -193,7 +197,8 @@ namespace Raman
                     _zoomRectangle.Width / (float) _mainPanel.Width,
                     _zoomRectangle.Height / (float) _mainPanel.Height
                 );
-                ZoomToArea(zoomedArea);
+                _isZooming = false;
+                // ZoomToArea(zoomedArea);
             }
         }
     }
