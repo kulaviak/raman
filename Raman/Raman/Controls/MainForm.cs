@@ -104,12 +104,17 @@ namespace Raman
         
         private void _mainPanel_Resize(object sender, EventArgs e)
         {
-            _mainPanel.Invalidate();
+            Refresh();
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            _mainPanel.Invalidate();
+            Refresh();
+        }
+
+        private void Refresh()
+        {
+            Refresh();
         }
 
         private void btnOpenFiles_Click(object sender, EventArgs e)
@@ -117,18 +122,33 @@ namespace Raman
             OpenFiles();
         }
 
-        private void btnZoomArea_Click(object sender, EventArgs e)
+        private void btnZoomWindow_Click(object sender, EventArgs e)
         {
-            ZoomArea();
+            ZoomWindow();
         }
 
-        private void ZoomArea()
+        private void ZoomWindow()
         {
         }
 
         private void zoomToOriginalSize_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void miZoomWindow_Click(object sender, EventArgs e)
+        {
+            ZoomWindow();
+        }
+
+        private void miZoomToOriginalSize_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void miRefresh_Click(object sender, EventArgs e)
+        {
+            Refresh();
         }
     }
 }
