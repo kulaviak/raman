@@ -142,6 +142,7 @@
             this.zoomToOriginalSize.Name = "zoomToOriginalSize";
             this.zoomToOriginalSize.Size = new System.Drawing.Size(23, 22);
             this.zoomToOriginalSize.Text = "Zoom To Original Size";
+            this.zoomToOriginalSize.Click += new System.EventHandler(this.zoomToOriginalSize_Click);
             // 
             // MainForm
             // 

@@ -125,5 +125,10 @@ namespace Raman
         private void ZoomArea()
         {
         }
+
+        private void zoomToOriginalSize_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
