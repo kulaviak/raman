@@ -33,6 +33,11 @@ namespace Raman
 
         private void miOpenFiles_Click(object sender, EventArgs e)
         {
+            OpenFiles();
+        }
+
+        private void OpenFiles()
+        {
             using (var openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.InitialDirectory = "C:\\"; 
@@ -49,12 +54,12 @@ namespace Raman
                             MessageBoxIcon.Error);
                         return;
                     }
-                    OpenFiles(filePaths);
+                    OpenFilesInternal(filePaths);
                 }
             }
         }
 
-        private void OpenFiles(List<string> filePaths)
+        private void OpenFilesInternal(List<string> filePaths)
         {
             var ignoredLines = new List<string>();
             foreach (var filePath in filePaths)
@@ -105,6 +110,20 @@ namespace Raman
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             _mainPanel.Invalidate();
+        }
+
+        private void btnOpenFiles_Click(object sender, EventArgs e)
+        {
+            OpenFiles();
+        }
+
+        private void btnZoomArea_Click(object sender, EventArgs e)
+        {
+            ZoomArea();
+        }
+
+        private void ZoomArea()
+        {
         }
     }
 }

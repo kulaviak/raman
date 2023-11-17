@@ -36,6 +36,9 @@
             this._mainPanel = new System.Windows.Forms.Panel();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.btnRefresh = new System.Windows.Forms.ToolStripButton();
+            this.btnOpenFiles = new System.Windows.Forms.ToolStripButton();
+            this.btnZoomArea = new System.Windows.Forms.ToolStripButton();
+            this.zoomToOriginalSize = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this._mainPanel.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -91,7 +94,10 @@
             // toolStrip2
             // 
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnRefresh});
+            this.btnRefresh,
+            this.btnOpenFiles,
+            this.btnZoomArea,
+            this.zoomToOriginalSize});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(800, 25);
@@ -107,6 +113,35 @@
             this.btnRefresh.Size = new System.Drawing.Size(23, 22);
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // btnOpenFiles
+            // 
+            this.btnOpenFiles.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnOpenFiles.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenFiles.Image")));
+            this.btnOpenFiles.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnOpenFiles.Name = "btnOpenFiles";
+            this.btnOpenFiles.Size = new System.Drawing.Size(23, 22);
+            this.btnOpenFiles.Text = "Open Files";
+            this.btnOpenFiles.Click += new System.EventHandler(this.btnOpenFiles_Click);
+            // 
+            // btnZoomArea
+            // 
+            this.btnZoomArea.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnZoomArea.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomArea.Image")));
+            this.btnZoomArea.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnZoomArea.Name = "btnZoomArea";
+            this.btnZoomArea.Size = new System.Drawing.Size(23, 22);
+            this.btnZoomArea.Text = "Zoom Area";
+            this.btnZoomArea.Click += new System.EventHandler(this.btnZoomArea_Click);
+            // 
+            // zoomToOriginalSize
+            // 
+            this.zoomToOriginalSize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.zoomToOriginalSize.Image = ((System.Drawing.Image)(resources.GetObject("zoomToOriginalSize.Image")));
+            this.zoomToOriginalSize.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.zoomToOriginalSize.Name = "zoomToOriginalSize";
+            this.zoomToOriginalSize.Size = new System.Drawing.Size(23, 22);
+            this.zoomToOriginalSize.Text = "Zoom To Original Size";
             // 
             // MainForm
             // 
@@ -145,6 +180,9 @@
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton btnRefresh;
+        private System.Windows.Forms.ToolStripButton btnOpenFiles;
+        private System.Windows.Forms.ToolStripButton btnZoomArea;
+        private System.Windows.Forms.ToolStripButton zoomToOriginalSize;
     }
 }
 
