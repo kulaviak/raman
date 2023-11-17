@@ -22,6 +22,8 @@ namespace Raman.Drawing
         private Bitmap _buffer;
 
         private Graphics _bufferGraphics;
+
+        private CanvasCoordinateSystem _system = null;
         
         public CanvasPanel()
         {
@@ -76,7 +78,7 @@ namespace Raman.Drawing
         
         private void InitializeBuffer()
         {
-            _buffer = new Bitmap(ClientSize.Width, ClientSize.Height);
+            _buffer = new Bitmap(Width, Height);
             _bufferGraphics = Graphics.FromImage(_buffer);
         }
 
@@ -133,6 +135,5 @@ namespace Raman.Drawing
                 // ZoomToArea(zoomedArea);
             }
         }
-        
     }
 }

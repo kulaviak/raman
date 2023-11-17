@@ -61,6 +61,7 @@
     <Compile Include="Core\AppException.cs" />
     <Compile Include="Core\Point.cs" />
     <Compile Include="Core\FileReader.cs" />
+    <Compile Include="Drawing\CanvasCoordinateSystem.cs" />
     <Compile Include="Drawing\CanvasPanel.cs">
       <SubType>Component</SubType>
     </Compile>
