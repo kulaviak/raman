@@ -16,14 +16,24 @@ namespace Raman
         
         private bool _isZooming;
         
-        private Point _zoomStart;
+        private Point? _zoomStart;
         
-        private Rectangle _zoomRectangle;
+        private Rectangle? _zoomRectangle;
+
+        private Bitmap _buffer;
+
+        private Graphics _bufferGraphics;
 
         public MainForm()
         {
             InitializeComponent();
             LoadDemoSpectrum();
+        }
+        
+        private void InitializeBuffer()
+        {
+            _buffer = new Bitmap(_mainPanel.ClientSize.Width, _mainPanel.ClientSize.Height);
+            _bufferGraphics = Graphics.FromImage(_buffer);
         }
 
         private void miExit_Click(object sender, EventArgs e)
@@ -100,10 +110,22 @@ namespace Raman
         
         private void _mainPanel_Paint(object sender, PaintEventArgs e)
         {
-            new Drawer().Draw(_charts, e.Graphics, _mainPanel.Width, _mainPanel.Height);
-            if (_isZooming)
+            if (_buffer == null)
             {
-                e.Graphics.DrawRectangle(Pens.Black, _zoomRectangle);
+                InitializeBuffer();
+            }
+            Draw(_bufferGraphics);
+            // Copy the content of the off-screen buffer to the form's graphics
+            e.Graphics.DrawImage(_buffer, 0, 0);
+        }
+        
+        private void Draw(Graphics graphics)
+        {
+            graphics.Clear(Color.FromArgb(240, 240, 240));
+            new Drawer().Draw(_charts, graphics, _mainPanel.Width, _mainPanel.Height);
+            if (_isZooming && _zoomRectangle != null)
+            {
+                graphics.DrawRectangle(Pens.Black, _zoomRectangle.Value);
             }
         }
 
@@ -117,6 +139,16 @@ namespace Raman
         
         private void _mainPanel_Resize(object sender, EventArgs e)
         {
+            // Recreate the buffer when the form is resized
+            if (_buffer != null)
+            {
+                _buffer.Dispose();
+            }
+            if (_bufferGraphics != null)
+            {
+                _bufferGraphics.Dispose();
+            }
+            InitializeBuffer();
             Refresh();
         }
 
@@ -166,7 +198,7 @@ namespace Raman
 
         private void _mainPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (_isZooming && e.Button == MouseButtons.Left)
             {
                 _zoomStart = e.Location;
             }
@@ -174,14 +206,13 @@ namespace Raman
 
         private void _mainPanel_MouseMove(object sender, MouseEventArgs e)
         {
-            if (_isZooming)
+            if (_isZooming && _zoomStart != null)
             {
-                var x = Math.Min(_zoomStart.X, e.X);
-                var y = Math.Min(_zoomStart.Y, e.Y);
-                var width = Math.Abs(_zoomStart.X - e.X);
-                var height = Math.Abs(_zoomStart.Y - e.Y);
+                var x = Math.Min(_zoomStart.Value.X, e.X);
+                var y = Math.Min(_zoomStart.Value.Y, e.Y);
+                var width = Math.Abs(_zoomStart.Value.X - e.X);
+                var height = Math.Abs(_zoomStart.Value.Y - e.Y);
                 _zoomRectangle = new Rectangle(x, y, width, height);
-                Console.WriteLine($"Zoom rectangle set to width {width} and height {height}");
                 Refresh(); 
             }
         }
@@ -191,13 +222,15 @@ namespace Raman
             if (e.Button == MouseButtons.Left && _isZooming)
             {
                 _isZooming = false;
-                var zoomedArea = new RectangleF(
-                    _zoomRectangle.X / (float) _mainPanel.Width,
-                    _zoomRectangle.Y / (float) _mainPanel.Height,
-                    _zoomRectangle.Width / (float) _mainPanel.Width,
-                    _zoomRectangle.Height / (float) _mainPanel.Height
-                );
+                // var zoomedArea = new RectangleF(
+                //     _zoomRectangle.X / (float) _mainPanel.Width,
+                //     _zoomRectangle.Y / (float) _mainPanel.Height,
+                //     _zoomRectangle.Width / (float) _mainPanel.Width,
+                //     _zoomRectangle.Height / (float) _mainPanel.Height
+                // );
                 _isZooming = false;
+                _zoomStart = null;
+                _zoomRectangle = null;
                 // ZoomToArea(zoomedArea);
             }
         }
