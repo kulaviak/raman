@@ -33,7 +33,7 @@ namespace Raman.Drawing
         private Graphics _bufferGraphics;
 
         private CanvasCoordSystem _coordSystem;
-        
+
         public CanvasPanel()
         {
             InitializeComponent();
@@ -76,7 +76,7 @@ namespace Raman.Drawing
             DrawCharts(_charts, graphics);
             if (IsZooming && _zoomRectangle != null)
             {
-                graphics.DrawRectangle(Pens.Black, _zoomRectangle.Value);
+                graphics.DrawRectangle(Pens.Gray, _zoomRectangle.Value);
             }
         }
         
@@ -142,9 +142,14 @@ namespace Raman.Drawing
                 var x = Math.Min(_zoomStart.Value.X, e.X);
                 var y = Math.Min(_zoomStart.Value.Y, e.Y);
                 var width = Math.Abs(_zoomStart.Value.X - e.X);
-                var height = Math.Abs(_zoomStart.Value.Y - e.Y);
-                _zoomRectangle = new Rectangle(x, y, width, height);
-                DoRefresh(); 
+                // calculate selection window height to have same aspect ratio as panel => after zoom chart will not change
+                // (aspect ratio of chart will not change)
+                var height = (int) (width * (Height / (float) Width));
+                if (width != 0 && height != 0)
+                {
+                    _zoomRectangle = new Rectangle(x, y, width, height);
+                    DoRefresh(); 
+                }
             }
         }
 
