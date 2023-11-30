@@ -61,5 +61,11 @@ namespace Raman.Drawing
             var ret = MaxY - (decimal) (ValueHeight / PixelHeight * pixelDistance);
             return ret;
         }
+
+        public override string ToString()
+        {
+            return $"MinX: {MinX}, MaxX: {MaxX}, MinY: {MinY}, MaxY: {MaxY}, PixelWidth: {PixelWidth}, PixelHeight: {PixelHeight}, " +
+                   $"ValueWidth: {ValueWidth}, ValueHeight: {ValueHeight}";
+        }
     }
 }

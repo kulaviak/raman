@@ -42,10 +42,10 @@ namespace Raman.Drawing
         public void ZoomToOriginalSize()
         {
             _coordSystem = GetCoordSystemFromCharts(_charts);
-            Refresh();
+            DoRefresh();
         }
         
-        private void Refresh()
+        private void DoRefresh()
         {
             Invalidate();
         }
@@ -124,7 +124,7 @@ namespace Raman.Drawing
                 _bufferGraphics.Dispose();
             }
             InitializeBuffer();
-            Refresh();
+            DoRefresh();
         }
 
         private void HandleMouseDown(object sender, MouseEventArgs e)
@@ -144,7 +144,7 @@ namespace Raman.Drawing
                 var width = Math.Abs(_zoomStart.Value.X - e.X);
                 var height = Math.Abs(_zoomStart.Value.Y - e.Y);
                 _zoomRectangle = new Rectangle(x, y, width, height);
-                Refresh(); 
+                DoRefresh(); 
             }
         }
 
@@ -153,7 +153,7 @@ namespace Raman.Drawing
             if (e.Button == MouseButtons.Left && IsZooming && _zoomRectangle != null)
             {
                 _coordSystem = GetCoordSystemForZoom(_coordSystem, _zoomRectangle.Value);
-                Refresh();
+                DoRefresh();
                 IsZooming = false;
                 _zoomStart = null;
                 _zoomRectangle = null;
@@ -164,7 +164,7 @@ namespace Raman.Drawing
         {
             var minX = oldCoordSystem.ToValueX(zoomRectangle.X);
             var maxX = oldCoordSystem.ToValueX(zoomRectangle.X + zoomRectangle.Width);
-            var minY = oldCoordSystem.ToValueY(zoomRectangle.Y - zoomRectangle.Height);
+            var minY = oldCoordSystem.ToValueY(zoomRectangle.Y + zoomRectangle.Height);
             var maxY = oldCoordSystem.ToValueY(zoomRectangle.Y);
             var ret = new CanvasCoordSystem(Width, Height, minX, maxX, minY, maxY);
             return ret;
