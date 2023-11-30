@@ -73,24 +73,44 @@ namespace Raman.Drawing
         private void Draw(Graphics graphics)
         {
             graphics.Clear(Color.FromArgb(240, 240, 240));
-            DrawCharts(_charts, graphics);
+            if (_coordSystem != null)
+            {
+                ClipGraphicsToOnlyChartArea(graphics);
+                foreach (var chart in (IList<Chart>) _charts)
+                { 
+                    chart.Draw(_coordSystem, graphics);
+                }
+                graphics.ResetClip();
+                DrawXAxis(graphics);
+                DrawYAxis(graphics);
+            }
             if (IsZooming && _zoomRectangle != null)
             {
                 graphics.DrawRectangle(Pens.Gray, _zoomRectangle.Value);
             }
         }
-        
-        public void DrawCharts(IList<Chart> charts, Graphics graphics)
+
+        /// <summary>
+        /// Clip only to chart area => nothing will be drawn outside of the axes.
+        /// </summary>
+        private void ClipGraphicsToOnlyChartArea(Graphics graphics)
         {
-            if (_coordSystem != null)
-            {
-                foreach (var chart in charts)
-                { 
-                    chart.Draw(_coordSystem, graphics);
-                }
-                new XAxis(_coordSystem, graphics).Draw();
-                new YAxis(_coordSystem, graphics).Draw();
-            }
+            var x = (int) _coordSystem.Border;
+            var y = (int) _coordSystem.Border;
+            var width = (int) (Width - 2 * _coordSystem.Border);
+            var height = (int) (Height - 2 * _coordSystem.Border);
+            var chartRectangle = new Rectangle(x, y, width, height);
+            graphics.SetClip(chartRectangle);
+        }
+
+        private void DrawYAxis(Graphics graphics)
+        {
+            new YAxis(_coordSystem, graphics).Draw();
+        }
+
+        private void DrawXAxis(Graphics graphics)
+        {
+            new XAxis(_coordSystem, graphics).Draw();
         }
 
         private CanvasCoordSystem GetCoordSystemFromCharts(IList<Chart> charts)
