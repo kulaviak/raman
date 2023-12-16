@@ -39,14 +39,15 @@ namespace Raman
             this.miZoomWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.miZoomToOriginalSize = new System.Windows.Forms.ToolStripMenuItem();
             this.miRefresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.miTools = new System.Windows.Forms.ToolStripMenuItem();
+            this.miBaselineCorrection = new System.Windows.Forms.ToolStripMenuItem();
             this._canvasPanel = new Raman.Drawing.CanvasPanel();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.btnOpenFiles = new System.Windows.Forms.ToolStripButton();
             this.btnZoomWindow = new System.Windows.Forms.ToolStripButton();
             this.zoomToOriginalSize = new System.Windows.Forms.ToolStripButton();
-            this.miTools = new System.Windows.Forms.ToolStripMenuItem();
-            this.miBaselineCorrection = new System.Windows.Forms.ToolStripMenuItem();
+            this.baselineCorrectionControl = new Raman.Controls.BaselineCorrectionControl();
             this.menuStrip.SuspendLayout();
             this._canvasPanel.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -122,12 +123,28 @@ namespace Raman
             this.miRefresh.Text = "Refresh";
             this.miRefresh.Click += new System.EventHandler(this.miRefresh_Click);
             // 
+            // miTools
+            // 
+            this.miTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miBaselineCorrection});
+            this.miTools.Name = "miTools";
+            this.miTools.Size = new System.Drawing.Size(46, 20);
+            this.miTools.Text = "Tools";
+            // 
+            // miBaselineCorrection
+            // 
+            this.miBaselineCorrection.Name = "miBaselineCorrection";
+            this.miBaselineCorrection.Size = new System.Drawing.Size(176, 22);
+            this.miBaselineCorrection.Text = "Baseline Correction";
+            this.miBaselineCorrection.Click += new System.EventHandler(this.miBaselineCorrection_Click);
+            // 
             // _canvasPanel
             // 
             this._canvasPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._canvasPanel.BackColor = System.Drawing.SystemColors.Control;
+            this._canvasPanel.Controls.Add(this.baselineCorrectionControl);
             this._canvasPanel.Controls.Add(this.toolStrip2);
             this._canvasPanel.IsZooming = false;
             this._canvasPanel.Location = new System.Drawing.Point(0, 27);
@@ -188,20 +205,13 @@ namespace Raman
             this.zoomToOriginalSize.Text = "Zoom To Original Size";
             this.zoomToOriginalSize.Click += new System.EventHandler(this.zoomToOriginalSize_Click);
             // 
-            // miTools
+            // baselineCorrectionControl
             // 
-            this.miTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miBaselineCorrection});
-            this.miTools.Name = "miTools";
-            this.miTools.Size = new System.Drawing.Size(46, 20);
-            this.miTools.Text = "Tools";
-            // 
-            // miBaselineCorrection
-            // 
-            this.miBaselineCorrection.Name = "miBaselineCorrection";
-            this.miBaselineCorrection.Size = new System.Drawing.Size(180, 22);
-            this.miBaselineCorrection.Text = "Baseline Correction";
-            this.miBaselineCorrection.Click += new System.EventHandler(this.miBaselineCorrection_Click);
+            this.baselineCorrectionControl.Dock = System.Windows.Forms.DockStyle.Right;
+            this.baselineCorrectionControl.Location = new System.Drawing.Point(567, 25);
+            this.baselineCorrectionControl.Name = "baselineCorrectionControl";
+            this.baselineCorrectionControl.Size = new System.Drawing.Size(233, 403);
+            this.baselineCorrectionControl.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -249,6 +259,7 @@ namespace Raman
         private System.Windows.Forms.ToolStripMenuItem miRefresh;
         private System.Windows.Forms.ToolStripMenuItem miTools;
         private System.Windows.Forms.ToolStripMenuItem miBaselineCorrection;
+        private Controls.BaselineCorrectionControl baselineCorrectionControl;
     }
 }
 
