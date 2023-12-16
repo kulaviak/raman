@@ -14,7 +14,8 @@ namespace Raman
         public MainForm()
         {
             InitializeComponent();
-            LoadDemoSpectrum();
+            // LoadDemoSpectrum();
+            LoadDemoSpectra();
         }
         
         private void miExit_Click(object sender, EventArgs e)
@@ -94,6 +95,23 @@ namespace Raman
         private void LoadDemoSpectrum()
         {
             OpenFilesInternal(new List<string>{"c:/github/kulaviak/raman/data/spectrum.txt"});
+        }
+        
+        private void LoadDemoSpectra()
+        {
+            var filePaths = new List<string>
+            {
+                "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y0_X0.txt",
+                "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y0_X1.txt",
+                "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y0_X3.txt",
+                "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y0_X4.txt",
+                "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X0.txt",
+                "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X1.txt",
+                "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X2.txt",
+                "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X3.txt",
+                "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X4.txt"
+            };
+            OpenFilesInternal(filePaths);
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
