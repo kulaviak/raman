@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -10,16 +11,13 @@ namespace Raman.Drawing
     public class CanvasPanel : Panel
     {
         
-        private ReadOnlyCollection<Chart> _charts = new ReadOnlyCollection<Chart>(new List<Chart>());
-
-        public ReadOnlyCollection<Chart> Charts
+        private List<Chart> _charts = new List<Chart>(new List<Chart>());
+        
+        // Avoid Charts to have as public property - it causes problems in IDE Designer
+        public void SetCharts(List<Chart> charts)
         {
-            get => _charts;
-            set
-            {
-                _charts = value;
+                _charts = charts;
                 _coordSystem = GetCoordSystemFromCharts(_charts);
-            }
         }
 
         public bool IsZooming { get; set; }

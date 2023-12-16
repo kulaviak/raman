@@ -128,7 +128,6 @@ namespace Raman
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._canvasPanel.BackColor = System.Drawing.SystemColors.Control;
-            this._canvasPanel.Charts = ((System.Collections.ObjectModel.ReadOnlyCollection<Raman.Drawing.Chart>)(resources.GetObject("_canvasPanel.Charts")));
             this._canvasPanel.Controls.Add(this.toolStrip2);
             this._canvasPanel.IsZooming = false;
             this._canvasPanel.Location = new System.Drawing.Point(0, 27);

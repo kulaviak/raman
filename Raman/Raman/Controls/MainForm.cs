@@ -89,7 +89,7 @@ namespace Raman
                 MessageBox.Show($"Following lines were ignored (Showing max {maxCount} lines): {str}", "Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
-            _canvasPanel.Charts = new ReadOnlyCollection<Chart>(charts);
+            _canvasPanel.SetCharts(charts);
         }
         
         private void LoadDemoSpectrum()
