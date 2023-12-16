@@ -120,6 +120,20 @@
   <metadata name="menuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>116, 17</value>
   </metadata>
+  <data name="_canvasPanel.Charts" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAIsBUmFtYW4sIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0
+        cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsXV0sIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1
+        cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OQUBAAAASFN5c3RlbS5Db2xs
+        ZWN0aW9ucy5PYmplY3RNb2RlbC5SZWFkT25seUNvbGxlY3Rpb25gMVtbUmFtYW4uRHJhd2luZy5DaGFy
+        dAEAAAAEbGlzdAQ2U3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuTGlzdGAxW1tSYW1hbi5EcmF3aW5n
+        LkNoYXJ0AgAAAAIAAAAJAwAAAAwEAAAAPFJhbWFuLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1cmU9bmV1
+        dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbAUDAAAANlN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxp
+        c3RgMVtbUmFtYW4uRHJhd2luZy5DaGFydAMAAAAGX2l0ZW1zBV9zaXplCF92ZXJzaW9uBAAAFVJhbWFu
+        LkRyYXdpbmcuQ2hhcnRbXQQAAAAICAIAAAAJBQAAAAAAAAAAAAAABwUAAAAAAQAAAAAAAAAEE1JhbWFu
+        LkRyYXdpbmcuQ2hhcnQEAAAACw==
+</value>
+  </data>
   <metadata name="toolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -140,9 +154,9 @@
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADASURBVDhPY0ABMTt7GGJ3xUJ5JIKkDbxAzV5A/JE0Q+L3
-        CzDE7FrHELvlA0Ps9rsM0bt+APnnlZSU5BQVFffDsIKCwlZ5eXkDqC4kELtzHtDGmQz2+1kY4nbGMETu
+        CzDE7FrHELv5A0Ps9rsM0bt+APnnlZSU5BQVFffDsIKCwlZ5eXkDqC4kELtzHtDGmQz2+1kY4nbGMETu
         eMIQv0NDRUWFXUpKShiGoQbtAIobQnVCQfjWNwzJO4TA7Ngd4dg0IxmAxRCQs6FATk5OEZtmNAPA3oFq
-        QQVAiS3YNKNjkCFQLagAJIFNAzoeNWCwG7ACJEkEXgHVQilgYAAAa0d1lb14f8AAAAAASUVORK5CYII=
+        QQVAiS3YNKNjkCFQLagAJIFNAzoeNWCwG7ACJEkEXgHVQilgYAAAZ8R1lDMf83kAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="btnZoomWindow.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

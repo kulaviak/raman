@@ -153,5 +153,10 @@ namespace Raman
         {
             Refresh();
         }
+
+        private void miBaselineCorrection_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
