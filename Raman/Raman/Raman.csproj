@@ -52,12 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\BaselineCorrectionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\BaselineCorrectionControl.Designer.cs">
-      <DependentUpon>BaselineCorrectionControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\BaselineCorrectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,9 +77,6 @@
     <Compile Include="Drawing\YAxis.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\BaselineCorrectionControl.resx">
-      <DependentUpon>BaselineCorrectionControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\BaselineCorrectionForm.resx">
       <DependentUpon>BaselineCorrectionForm.cs</DependentUpon>
     </EmbeddedResource>

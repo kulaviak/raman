@@ -42,12 +42,12 @@ namespace Raman
             this.miTools = new System.Windows.Forms.ToolStripMenuItem();
             this.miBaselineCorrection = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.canvasPanel = new Raman.Drawing.CanvasPanel();
             this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
             this.tsbOpenFiles = new System.Windows.Forms.ToolStripButton();
             this.tsbZoomToWindow = new System.Windows.Forms.ToolStripButton();
             this.tsbZoomToOriginalSize = new System.Windows.Forms.ToolStripButton();
+            this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.canvasPanel = new Raman.Drawing.CanvasPanel();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -80,14 +80,14 @@ namespace Raman
             // 
             this.miOpenFiles.Name = "miOpenFiles";
             this.miOpenFiles.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0)));
-            this.miOpenFiles.Size = new System.Drawing.Size(169, 22);
+            this.miOpenFiles.Size = new System.Drawing.Size(180, 22);
             this.miOpenFiles.Text = "Open Files";
             this.miOpenFiles.Click += new System.EventHandler(this.miOpenFiles_Click);
             // 
             // miExit
             // 
             this.miExit.Name = "miExit";
-            this.miExit.Size = new System.Drawing.Size(169, 22);
+            this.miExit.Size = new System.Drawing.Size(180, 22);
             this.miExit.Text = "Exit";
             this.miExit.Click += new System.EventHandler(this.miExit_Click);
             // 
@@ -130,13 +130,15 @@ namespace Raman
             this.miTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miBaselineCorrection});
             this.miTools.Name = "miTools";
+            this.miTools.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
             this.miTools.Size = new System.Drawing.Size(46, 20);
             this.miTools.Text = "Tools";
             // 
             // miBaselineCorrection
             // 
             this.miBaselineCorrection.Name = "miBaselineCorrection";
-            this.miBaselineCorrection.Size = new System.Drawing.Size(176, 22);
+            this.miBaselineCorrection.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
+            this.miBaselineCorrection.Size = new System.Drawing.Size(217, 22);
             this.miBaselineCorrection.Text = "Baseline Correction";
             this.miBaselineCorrection.Click += new System.EventHandler(this.miBaselineCorrection_Click);
             // 
@@ -152,28 +154,6 @@ namespace Raman
             this.toolStrip.Size = new System.Drawing.Size(800, 25);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip2";
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.Location = new System.Drawing.Point(0, 49);
-            this.splitContainer.Name = "splitContainer";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer.Panel1.Controls.Add(this.canvasPanel);
-            this.splitContainer.Size = new System.Drawing.Size(800, 401);
-            this.splitContainer.SplitterDistance = 590;
-            this.splitContainer.TabIndex = 2;
-            // 
-            // canvasPanel
-            // 
-            this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvasPanel.IsZooming = false;
-            this.canvasPanel.Location = new System.Drawing.Point(0, 0);
-            this.canvasPanel.Name = "canvasPanel";
-            this.canvasPanel.Size = new System.Drawing.Size(590, 401);
-            this.canvasPanel.TabIndex = 0;
             // 
             // tsbRefresh
             // 
@@ -214,6 +194,29 @@ namespace Raman
             this.tsbZoomToOriginalSize.Size = new System.Drawing.Size(23, 22);
             this.tsbZoomToOriginalSize.Text = "toolStripButton2";
             this.tsbZoomToOriginalSize.Click += new System.EventHandler(this.tsbZoomToOriginalSize_Click);
+            // 
+            // splitContainer
+            // 
+            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer.IsSplitterFixed = true;
+            this.splitContainer.Location = new System.Drawing.Point(0, 49);
+            this.splitContainer.Name = "splitContainer";
+            // 
+            // splitContainer.Panel1
+            // 
+            this.splitContainer.Panel1.Controls.Add(this.canvasPanel);
+            this.splitContainer.Size = new System.Drawing.Size(800, 401);
+            this.splitContainer.SplitterDistance = 590;
+            this.splitContainer.TabIndex = 2;
+            // 
+            // canvasPanel
+            // 
+            this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvasPanel.IsZooming = false;
+            this.canvasPanel.Location = new System.Drawing.Point(0, 0);
+            this.canvasPanel.Name = "canvasPanel";
+            this.canvasPanel.Size = new System.Drawing.Size(590, 401);
+            this.canvasPanel.TabIndex = 0;
             // 
             // MainForm
             // 

@@ -79,6 +79,7 @@
             this.Controls.Add(this.btnDoBaselineCorrection);
             this.Controls.Add(this.btnExportPoints);
             this.Controls.Add(this.btnImportPoints);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "BaselineCorrectionForm";
             this.Text = "Baseline Correction";
             this.ResumeLayout(false);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Raman.Controls;
 using Raman.Core;
 using Raman.Drawing;
 
@@ -32,9 +33,12 @@ namespace Raman
         
         private void ShowSidePanel(Form form)
         {
-            splitContainer.SplitterDistance = Width - SPLIT_PANEL_WIDTH;
-            splitContainer.Panel2.Controls.Clear();
+            form.TopLevel = false;
+            var borderWidth = 10;
+            splitContainer.SplitterDistance = Width - form.Width - 20;
+            // splitContainer.SplitterDistance = Width - SPLIT_PANEL_WIDTH;
             form.Dock = DockStyle.Fill;
+            splitContainer.Panel2.Controls.Clear();
             splitContainer.Panel2.Controls.Add(form);
             form.Show();
         }
@@ -157,7 +161,13 @@ namespace Raman
 
         private void miBaselineCorrection_Click(object sender, EventArgs e)
         {
+            DoBaselineCorrection();
+        }
 
+        private void DoBaselineCorrection()
+        {
+            var form = new BaselineCorrectionForm();
+            ShowSidePanel(form);
         }
 
         private void tsbRefresh_Click(object sender, EventArgs e)
