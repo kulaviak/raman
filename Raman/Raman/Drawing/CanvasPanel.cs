@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -16,12 +14,14 @@ namespace Raman.Drawing
         // Avoid Charts to have as public property - it causes problems in IDE Designer
         public void SetCharts(List<Chart> charts)
         {
-                _charts = charts;
-                _coordSystem = GetCoordSystemFromCharts(_charts);
+            _charts = charts;
+            CoordSystem = GetCoordSystemFromCharts(_charts);
         }
 
         public bool IsZooming { get; set; }
         
+        public LayerBase CurrentLayer { get; set; }
+
         private Point? _zoomStart;
         
         private Rectangle? _zoomRectangle;
@@ -32,6 +32,18 @@ namespace Raman.Drawing
 
         private CanvasCoordSystem _coordSystem;
 
+        public CanvasCoordSystem CoordSystem {
+            get => _coordSystem;
+            set
+            {
+                _coordSystem = value;
+                if (CurrentLayer != null)
+                {
+                    CurrentLayer.CoordSystem = value;
+                }
+            }
+        }
+
         public CanvasPanel()
         {
             InitializeComponent();
@@ -39,7 +51,7 @@ namespace Raman.Drawing
         
         public void ZoomToOriginalSize()
         {
-            _coordSystem = GetCoordSystemFromCharts(_charts);
+            CoordSystem = GetCoordSystemFromCharts(_charts);
             DoRefresh();
         }
         
@@ -71,12 +83,12 @@ namespace Raman.Drawing
         private void Draw(Graphics graphics)
         {
             graphics.Clear(Color.FromArgb(240, 240, 240));
-            if (_coordSystem != null)
+            if (CoordSystem != null)
             {
                 ClipGraphicsToOnlyChartArea(graphics);
                 foreach (var chart in (IList<Chart>) _charts)
                 { 
-                    chart.Draw(_coordSystem, graphics);
+                    chart.Draw(CoordSystem, graphics);
                 }
                 graphics.ResetClip();
                 DrawXAxis(graphics);
@@ -86,6 +98,7 @@ namespace Raman.Drawing
             {
                 graphics.DrawRectangle(Pens.Gray, _zoomRectangle.Value);
             }
+            CurrentLayer?.Draw(graphics);
         }
 
         /// <summary>
@@ -93,22 +106,22 @@ namespace Raman.Drawing
         /// </summary>
         private void ClipGraphicsToOnlyChartArea(Graphics graphics)
         {
-            var x = (int) _coordSystem.Border;
-            var y = (int) _coordSystem.Border;
-            var width = (int) (Width - 2 * _coordSystem.Border);
-            var height = (int) (Height - 2 * _coordSystem.Border);
+            var x = (int) CoordSystem.Border;
+            var y = (int) CoordSystem.Border;
+            var width = (int) (Width - 2 * CoordSystem.Border);
+            var height = (int) (Height - 2 * CoordSystem.Border);
             var chartRectangle = new Rectangle(x, y, width, height);
             graphics.SetClip(chartRectangle);
         }
 
         private void DrawYAxis(Graphics graphics)
         {
-            new YAxis(_coordSystem, graphics).Draw();
+            new YAxis(CoordSystem, graphics).Draw();
         }
 
         private void DrawXAxis(Graphics graphics)
         {
-            new XAxis(_coordSystem, graphics).Draw();
+            new XAxis(CoordSystem, graphics).Draw();
         }
 
         private CanvasCoordSystem GetCoordSystemFromCharts(IList<Chart> charts)
@@ -134,7 +147,7 @@ namespace Raman.Drawing
 
         private void HandleResize(object sender, EventArgs e)
         {
-            _coordSystem = GetCoordSystemFromCharts(_charts);
+            CoordSystem = GetCoordSystemFromCharts(_charts);
             // recreate the buffer when the form is resized
             _buffer?.Dispose();
             if (_bufferGraphics != null)
@@ -151,6 +164,7 @@ namespace Raman.Drawing
             {
                 _zoomStart = e.Location;
             }
+            CurrentLayer?.HandleMouseDown(sender, e);
         }
 
         private void HandleMouseMove(object sender, MouseEventArgs e)
@@ -169,18 +183,20 @@ namespace Raman.Drawing
                     DoRefresh(); 
                 }
             }
+            CurrentLayer?.HandleMouseMove(sender, e);
         }
 
         private void HandleMouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left && IsZooming && _zoomRectangle != null)
             {
-                _coordSystem = GetCoordSystemForZoom(_coordSystem, _zoomRectangle.Value);
+                CoordSystem = GetCoordSystemForZoom(CoordSystem, _zoomRectangle.Value);
                 DoRefresh();
                 IsZooming = false;
                 _zoomStart = null;
                 _zoomRectangle = null;
             }
+            CurrentLayer?.HandleMouseUp(sender, e);
         }
 
         private CanvasCoordSystem GetCoordSystemForZoom(CanvasCoordSystem oldCoordSystem, Rectangle zoomRectangle)

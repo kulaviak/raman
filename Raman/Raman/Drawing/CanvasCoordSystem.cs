@@ -1,3 +1,5 @@
+using System.Drawing;
+
 namespace Raman.Drawing
 {
     public class CanvasCoordSystem
@@ -59,6 +61,12 @@ namespace Raman.Drawing
         {
             var pixelDistance = pixelY - Border;
             var ret = MaxY - (decimal) (ValueHeight / PixelHeight * pixelDistance);
+            return ret;
+        }
+        
+        public Raman.Core.Point ToValuePoint(float pixelX, float pixelY)
+        {
+            var ret = new Raman.Core.Point(ToValueX(pixelX), ToValueY(pixelY));
             return ret;
         }
 

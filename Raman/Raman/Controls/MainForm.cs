@@ -164,15 +164,16 @@ namespace Raman
 
         private void miBaselineCorrection_Click(object sender, EventArgs e)
         {
-            DoBaselineCorrection();
+            BaselineCorrection();
         }
 
-        private void DoBaselineCorrection()
+        private void BaselineCorrection()
         {
             var form = new BaselineCorrectionForm();
             form.PointsImported += Form_PointsImported;
             form.PointsExported += Form_PointsExported;
             ShowSidePanel(form);
+            canvasPanel.CurrentLayer = new BaselineCorrectionLayer(canvasPanel.CoordSystem);
         }
 
         private void Form_PointsExported(object sender, string filePath)

@@ -75,12 +75,15 @@
     <Compile Include="Core\OnePointPerLineFileWriter.cs" />
     <Compile Include="Core\Point.cs" />
     <Compile Include="Core\OnePointPerLineFileReader.cs" />
+    <Compile Include="Drawing\BaselineCorrectionLayer.cs" />
     <Compile Include="Drawing\CanvasCoordSystem.cs" />
     <Compile Include="Drawing\CanvasDrawer.cs" />
     <Compile Include="Drawing\CanvasPanel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Drawing\Chart.cs" />
+    <Compile Include="Drawing\LayerBase.cs" />
+    <Compile Include="Drawing\Mark.cs" />
     <Compile Include="Drawing\XAxis.cs" />
     <Compile Include="Drawing\YAxis.cs" />
     <Compile Include="Program.cs" />
