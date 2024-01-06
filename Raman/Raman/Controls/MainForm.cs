@@ -15,7 +15,9 @@ namespace Raman
     {
 
         private static int SPLIT_PANEL_WIDTH = 200;
+        
         private static int MIN_CANVAS_WIDTH = 200;
+        
         private static int MIN_CANVAS_HEIGHT = 500;
         
         public MainForm()
@@ -169,12 +171,17 @@ namespace Raman
         {
             var form = new BaselineCorrectionForm();
             form.PointsImported += Form_PointsImported;
+            form.PointsExported += Form_PointsExported;
             ShowSidePanel(form);
+        }
+
+        private void Form_PointsExported(object sender, string filePath)
+        {
+            new OnePointPerLineFileWriter().WritePoints(new List<Point>(), filePath);   
         }
 
         private void Form_PointsImported(object sender, List<Point> points)
         {
-            var tmp = points;
         }
 
         private void tsbRefresh_Click(object sender, EventArgs e)

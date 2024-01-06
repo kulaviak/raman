@@ -58,6 +58,13 @@
     <Compile Include="Controls\BaselineCorrectionForm.Designer.cs">
       <DependentUpon>BaselineCorrectionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ErrorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ErrorForm.Designer.cs">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FormUtil.cs" />
     <Compile Include="Controls\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

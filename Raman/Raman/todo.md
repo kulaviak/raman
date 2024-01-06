@@ -1,8 +1,6 @@
 Todo
 =============
-- nacitani souboru
-- zobrazit jednoduchy graf bez os
-- zobrazit graf s osami
+- dodelat ErrorForm - kopirovani exceptiony do schranky a do logu
 
 Hotovo
 =============
