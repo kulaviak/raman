@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Forms;
 using Raman.Core;
@@ -89,7 +88,7 @@ namespace Raman
                 MessageBox.Show($"Following lines were ignored (Showing max {maxCount} lines): {str}", "Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
-            _canvasPanel.SetCharts(charts);
+            canvasPanel.SetCharts(charts);
         }
         
         private void LoadDemoSpectrum()
@@ -113,40 +112,20 @@ namespace Raman
             };
             OpenFilesInternal(filePaths);
         }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            Refresh();
-        }
-
-        private void Refresh()
-        {
-            _canvasPanel.Invalidate();
-        }
-
-        private void btnOpenFiles_Click(object sender, EventArgs e)
-        {
-            OpenFiles();
-        }
-
-        private void btnZoomWindow_Click(object sender, EventArgs e)
-        {
-            _canvasPanel.IsZooming = true;
-        }
         
-        private void zoomToOriginalSize_Click(object sender, EventArgs e)
-        {
-            _canvasPanel.ZoomToOriginalSize();
-        }
-
         private void miZoomWindow_Click(object sender, EventArgs e)
         {
-            _canvasPanel.IsZooming = true;
+            ZoomToWindow();
+        }
+
+        private void ZoomToWindow()
+        {
+            canvasPanel.IsZooming = true;
         }
 
         private void miZoomToOriginalSize_Click(object sender, EventArgs e)
         {
-            _canvasPanel.ZoomToOriginalSize();
+            canvasPanel.ZoomToOriginalSize();
         }
 
         private void miRefresh_Click(object sender, EventArgs e)
@@ -157,6 +136,26 @@ namespace Raman
         private void miBaselineCorrection_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void tsbRefresh_Click(object sender, EventArgs e)
+        {
+            Refresh();
+        }
+
+        private void tsbOpenFiles_Click(object sender, EventArgs e)
+        {
+            OpenFiles();
+        }
+
+        private void tsbZoomToWindow_Click(object sender, EventArgs e)
+        {
+            ZoomToWindow();
+        }
+
+        private void tsbZoomToOriginalSize_Click(object sender, EventArgs e)
+        {
+            canvasPanel.ZoomToOriginalSize();
         }
     }
 }

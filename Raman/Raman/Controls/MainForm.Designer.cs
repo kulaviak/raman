@@ -41,16 +41,18 @@ namespace Raman
             this.miRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.miTools = new System.Windows.Forms.ToolStripMenuItem();
             this.miBaselineCorrection = new System.Windows.Forms.ToolStripMenuItem();
-            this._canvasPanel = new Raman.Drawing.CanvasPanel();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.btnRefresh = new System.Windows.Forms.ToolStripButton();
-            this.btnOpenFiles = new System.Windows.Forms.ToolStripButton();
-            this.btnZoomWindow = new System.Windows.Forms.ToolStripButton();
-            this.zoomToOriginalSize = new System.Windows.Forms.ToolStripButton();
-            this.baselineCorrectionControl = new Raman.Controls.BaselineCorrectionControl();
+            this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.canvasPanel = new Raman.Drawing.CanvasPanel();
+            this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
+            this.tsbOpenFiles = new System.Windows.Forms.ToolStripButton();
+            this.tsbZoomToWindow = new System.Windows.Forms.ToolStripButton();
+            this.tsbZoomToOriginalSize = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
-            this._canvasPanel.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
+            this.toolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -138,80 +140,80 @@ namespace Raman
             this.miBaselineCorrection.Text = "Baseline Correction";
             this.miBaselineCorrection.Click += new System.EventHandler(this.miBaselineCorrection_Click);
             // 
-            // _canvasPanel
+            // toolStrip
             // 
-            this._canvasPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._canvasPanel.BackColor = System.Drawing.SystemColors.Control;
-            this._canvasPanel.Controls.Add(this.baselineCorrectionControl);
-            this._canvasPanel.Controls.Add(this.toolStrip2);
-            this._canvasPanel.IsZooming = false;
-            this._canvasPanel.Location = new System.Drawing.Point(0, 27);
-            this._canvasPanel.Name = "_canvasPanel";
-            this._canvasPanel.Size = new System.Drawing.Size(800, 428);
-            this._canvasPanel.TabIndex = 1;
+            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbRefresh,
+            this.tsbOpenFiles,
+            this.tsbZoomToWindow,
+            this.tsbZoomToOriginalSize});
+            this.toolStrip.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip.Name = "toolStrip";
+            this.toolStrip.Size = new System.Drawing.Size(800, 25);
+            this.toolStrip.TabIndex = 1;
+            this.toolStrip.Text = "toolStrip2";
             // 
-            // toolStrip2
+            // splitContainer1
             // 
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnRefresh,
-            this.btnOpenFiles,
-            this.btnZoomWindow,
-            this.zoomToOriginalSize});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(800, 25);
-            this.toolStrip2.TabIndex = 0;
-            this.toolStrip2.Text = "toolStrip2";
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 49);
+            this.splitContainer1.Name = "splitContainer1";
             // 
-            // btnRefresh
+            // splitContainer1.Panel1
             // 
-            this.btnRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
-            this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(23, 22);
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            this.splitContainer1.Panel1.Controls.Add(this.canvasPanel);
+            this.splitContainer1.Size = new System.Drawing.Size(800, 401);
+            this.splitContainer1.SplitterDistance = 590;
+            this.splitContainer1.TabIndex = 2;
             // 
-            // btnOpenFiles
+            // canvasPanel
             // 
-            this.btnOpenFiles.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnOpenFiles.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenFiles.Image")));
-            this.btnOpenFiles.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnOpenFiles.Name = "btnOpenFiles";
-            this.btnOpenFiles.Size = new System.Drawing.Size(23, 22);
-            this.btnOpenFiles.Text = "Open Files";
-            this.btnOpenFiles.Click += new System.EventHandler(this.btnOpenFiles_Click);
+            this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvasPanel.IsZooming = false;
+            this.canvasPanel.Location = new System.Drawing.Point(0, 0);
+            this.canvasPanel.Name = "canvasPanel";
+            this.canvasPanel.Size = new System.Drawing.Size(590, 401);
+            this.canvasPanel.TabIndex = 0;
             // 
-            // btnZoomWindow
+            // tsbRefresh
             // 
-            this.btnZoomWindow.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnZoomWindow.Image = ((System.Drawing.Image)(resources.GetObject("btnZoomWindow.Image")));
-            this.btnZoomWindow.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnZoomWindow.Name = "btnZoomWindow";
-            this.btnZoomWindow.Size = new System.Drawing.Size(23, 22);
-            this.btnZoomWindow.Text = "Zoom Area";
-            this.btnZoomWindow.Click += new System.EventHandler(this.btnZoomWindow_Click);
+            this.tsbRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbRefresh.Image = ((System.Drawing.Image)(resources.GetObject("tsbRefresh.Image")));
+            this.tsbRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRefresh.Name = "tsbRefresh";
+            this.tsbRefresh.Size = new System.Drawing.Size(23, 22);
+            this.tsbRefresh.Text = "Refresh";
+            this.tsbRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
             // 
-            // zoomToOriginalSize
+            // tsbOpenFiles
             // 
-            this.zoomToOriginalSize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.zoomToOriginalSize.Image = ((System.Drawing.Image)(resources.GetObject("zoomToOriginalSize.Image")));
-            this.zoomToOriginalSize.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.zoomToOriginalSize.Name = "zoomToOriginalSize";
-            this.zoomToOriginalSize.Size = new System.Drawing.Size(23, 22);
-            this.zoomToOriginalSize.Text = "Zoom To Original Size";
-            this.zoomToOriginalSize.Click += new System.EventHandler(this.zoomToOriginalSize_Click);
+            this.tsbOpenFiles.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbOpenFiles.Image = ((System.Drawing.Image)(resources.GetObject("tsbOpenFiles.Image")));
+            this.tsbOpenFiles.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbOpenFiles.Name = "tsbOpenFiles";
+            this.tsbOpenFiles.Size = new System.Drawing.Size(23, 22);
+            this.tsbOpenFiles.Text = "Open Spectrum Files";
+            this.tsbOpenFiles.Click += new System.EventHandler(this.tsbOpenFiles_Click);
             // 
-            // baselineCorrectionControl
+            // tsbZoomToWindow
             // 
-            this.baselineCorrectionControl.Dock = System.Windows.Forms.DockStyle.Right;
-            this.baselineCorrectionControl.Location = new System.Drawing.Point(567, 25);
-            this.baselineCorrectionControl.Name = "baselineCorrectionControl";
-            this.baselineCorrectionControl.Size = new System.Drawing.Size(233, 403);
-            this.baselineCorrectionControl.TabIndex = 1;
+            this.tsbZoomToWindow.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbZoomToWindow.Image = ((System.Drawing.Image)(resources.GetObject("tsbZoomToWindow.Image")));
+            this.tsbZoomToWindow.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbZoomToWindow.Name = "tsbZoomToWindow";
+            this.tsbZoomToWindow.Size = new System.Drawing.Size(23, 22);
+            this.tsbZoomToWindow.Text = "Zoom To Window";
+            this.tsbZoomToWindow.Click += new System.EventHandler(this.tsbZoomToWindow_Click);
+            // 
+            // tsbZoomToOriginalSize
+            // 
+            this.tsbZoomToOriginalSize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbZoomToOriginalSize.Image = ((System.Drawing.Image)(resources.GetObject("tsbZoomToOriginalSize.Image")));
+            this.tsbZoomToOriginalSize.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbZoomToOriginalSize.Name = "tsbZoomToOriginalSize";
+            this.tsbZoomToOriginalSize.Size = new System.Drawing.Size(23, 22);
+            this.tsbZoomToOriginalSize.Text = "toolStripButton2";
+            this.tsbZoomToOriginalSize.Click += new System.EventHandler(this.tsbZoomToOriginalSize_Click);
             // 
             // MainForm
             // 
@@ -219,7 +221,8 @@ namespace Raman
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this._canvasPanel);
+            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
@@ -229,10 +232,11 @@ namespace Raman
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RamanForm_FormClosing);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            this._canvasPanel.ResumeLayout(false);
-            this._canvasPanel.PerformLayout();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
+            this.toolStrip.ResumeLayout(false);
+            this.toolStrip.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,22 +248,21 @@ namespace Raman
     private System.Windows.Forms.ToolStripMenuItem miExit;
 
         #endregion
-
-        private Raman.Drawing.CanvasPanel _canvasPanel;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripButton btnRefresh;
-        private System.Windows.Forms.ToolStripButton btnOpenFiles;
-        private System.Windows.Forms.ToolStripButton btnZoomWindow;
-        private System.Windows.Forms.ToolStripButton zoomToOriginalSize;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem miZoomWindow;
         private System.Windows.Forms.ToolStripMenuItem miZoomToOriginalSize;
         private System.Windows.Forms.ToolStripMenuItem miRefresh;
         private System.Windows.Forms.ToolStripMenuItem miTools;
         private System.Windows.Forms.ToolStripMenuItem miBaselineCorrection;
-        private Controls.BaselineCorrectionControl baselineCorrectionControl;
+        private System.Windows.Forms.ToolStrip toolStrip;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private CanvasPanel canvasPanel;
+        private System.Windows.Forms.ToolStripButton tsbRefresh;
+        private System.Windows.Forms.ToolStripButton tsbOpenFiles;
+        private System.Windows.Forms.ToolStripButton tsbZoomToWindow;
+        private System.Windows.Forms.ToolStripButton tsbZoomToOriginalSize;
     }
 }
 
