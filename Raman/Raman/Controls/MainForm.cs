@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Raman.Controls;
 using Raman.Core;
 using Raman.Drawing;
+using Point = Raman.Core.Point;
 
 namespace Raman
 {
@@ -167,7 +168,13 @@ namespace Raman
         private void DoBaselineCorrection()
         {
             var form = new BaselineCorrectionForm();
+            form.PointsImported += Form_PointsImported;
             ShowSidePanel(form);
+        }
+
+        private void Form_PointsImported(object sender, List<Point> points)
+        {
+            var tmp = points;
         }
 
         private void tsbRefresh_Click(object sender, EventArgs e)
