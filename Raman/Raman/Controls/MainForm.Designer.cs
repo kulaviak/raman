@@ -42,7 +42,7 @@ namespace Raman
             this.miTools = new System.Windows.Forms.ToolStripMenuItem();
             this.miBaselineCorrection = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.canvasPanel = new Raman.Drawing.CanvasPanel();
             this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
             this.tsbOpenFiles = new System.Windows.Forms.ToolStripButton();
@@ -50,9 +50,9 @@ namespace Raman
             this.tsbZoomToOriginalSize = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
+            this.splitContainer.Panel1.SuspendLayout();
+            this.splitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -155,16 +155,16 @@ namespace Raman
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 49);
-            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer.Location = new System.Drawing.Point(0, 49);
+            this.splitContainer.Name = "splitContainer";
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.canvasPanel);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 401);
-            this.splitContainer1.SplitterDistance = 590;
-            this.splitContainer1.TabIndex = 2;
+            this.splitContainer.Panel1.Controls.Add(this.canvasPanel);
+            this.splitContainer.Size = new System.Drawing.Size(800, 401);
+            this.splitContainer.SplitterDistance = 590;
+            this.splitContainer.TabIndex = 2;
             // 
             // canvasPanel
             // 
@@ -221,7 +221,7 @@ namespace Raman
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
@@ -234,9 +234,9 @@ namespace Raman
             this.menuStrip.PerformLayout();
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.splitContainer.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
+            this.splitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -257,7 +257,7 @@ namespace Raman
         private System.Windows.Forms.ToolStripMenuItem miTools;
         private System.Windows.Forms.ToolStripMenuItem miBaselineCorrection;
         private System.Windows.Forms.ToolStrip toolStrip;
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainer;
         private CanvasPanel canvasPanel;
         private System.Windows.Forms.ToolStripButton tsbRefresh;
         private System.Windows.Forms.ToolStripButton tsbOpenFiles;

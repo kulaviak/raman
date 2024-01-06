@@ -58,6 +58,12 @@
     <Compile Include="Controls\BaselineCorrectionControl.Designer.cs">
       <DependentUpon>BaselineCorrectionControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BaselineCorrectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\BaselineCorrectionForm.Designer.cs">
+      <DependentUpon>BaselineCorrectionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +85,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\BaselineCorrectionControl.resx">
       <DependentUpon>BaselineCorrectionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BaselineCorrectionForm.resx">
+      <DependentUpon>BaselineCorrectionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

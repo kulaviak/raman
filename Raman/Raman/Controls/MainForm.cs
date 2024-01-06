@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Raman.Core;
@@ -10,13 +11,34 @@ namespace Raman
     // window zoom made according to Chat GTP query How to implement zoom to area in graphics in windows forms
     public partial class MainForm : Form
     {
+
+        private static int SPLIT_PANEL_WIDTH = 200;
+        private static int MIN_CANVAS_WIDTH = 200;
+        private static int MIN_CANVAS_HEIGHT = 500;
+        
         public MainForm()
         {
             InitializeComponent();
+            MinimumSize = new Size(MIN_CANVAS_WIDTH + SPLIT_PANEL_WIDTH, MIN_CANVAS_HEIGHT);
             // LoadDemoSpectrum();
             LoadDemoSpectra();
+            HideSidePanel();
+        }
+
+        private void HideSidePanel()
+        {
+            splitContainer.SplitterDistance = Width;
         }
         
+        private void ShowSidePanel(Form form)
+        {
+            splitContainer.SplitterDistance = Width - SPLIT_PANEL_WIDTH;
+            splitContainer.Panel2.Controls.Clear();
+            form.Dock = DockStyle.Fill;
+            splitContainer.Panel2.Controls.Add(form);
+            form.Show();
+        }
+
         private void miExit_Click(object sender, EventArgs e)
         {
             Close();            
