@@ -16,5 +16,25 @@ namespace Raman.Controls
         {
             InitializeComponent();
         }
+
+        private void btnImportPoints_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnExportPoints_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDoBaselineCorrection_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnUndoBaselineCorrection_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

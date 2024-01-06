@@ -42,15 +42,17 @@
             this.btnUndoBaselineCorrection.TabIndex = 8;
             this.btnUndoBaselineCorrection.Text = "Undo Baseline Correction";
             this.btnUndoBaselineCorrection.UseVisualStyleBackColor = true;
+            this.btnUndoBaselineCorrection.Click += new System.EventHandler(this.btnUndoBaselineCorrection_Click);
             // 
             // btnDoBaselineCorrection
             // 
-            this.btnDoBaselineCorrection.Location = new System.Drawing.Point(12, 70);
+            this.btnDoBaselineCorrection.Location = new System.Drawing.Point(13, 70);
             this.btnDoBaselineCorrection.Name = "btnDoBaselineCorrection";
             this.btnDoBaselineCorrection.Size = new System.Drawing.Size(142, 23);
             this.btnDoBaselineCorrection.TabIndex = 7;
             this.btnDoBaselineCorrection.Text = "Do Baseline Correction";
             this.btnDoBaselineCorrection.UseVisualStyleBackColor = true;
+            this.btnDoBaselineCorrection.Click += new System.EventHandler(this.btnDoBaselineCorrection_Click);
             // 
             // btnExportPoints
             // 
@@ -60,6 +62,7 @@
             this.btnExportPoints.TabIndex = 6;
             this.btnExportPoints.Text = "Export Points";
             this.btnExportPoints.UseVisualStyleBackColor = true;
+            this.btnExportPoints.Click += new System.EventHandler(this.btnExportPoints_Click);
             // 
             // btnImportPoints
             // 
@@ -69,6 +72,7 @@
             this.btnImportPoints.TabIndex = 5;
             this.btnImportPoints.Text = "Import Points";
             this.btnImportPoints.UseVisualStyleBackColor = true;
+            this.btnImportPoints.Click += new System.EventHandler(this.btnImportPoints_Click);
             // 
             // BaselineCorrectionForm
             // 

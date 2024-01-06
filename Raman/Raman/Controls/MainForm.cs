@@ -91,7 +91,7 @@ namespace Raman
             var ignoredLines = new List<string>();
             foreach (var filePath in filePaths)
             {
-                var fileReader = new FileReader(filePath);
+                var fileReader = new OnePointPerLineFileReader(filePath);
                 var points = fileReader.TryReadFile();
                 charts.Add(new Chart(points));
                 if (points.Count < 2)

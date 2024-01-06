@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Raman.Core
 {
-    public class FileReader
+    public class OnePointPerLineFileReader
     {
         private readonly string _filePath;
 
@@ -13,7 +13,7 @@ namespace Raman.Core
 
         public List<string> IgnoredLines => _ignoredLines;
 
-        public FileReader(string filePath)
+        public OnePointPerLineFileReader(string filePath)
         {
             _filePath = filePath;
         }
