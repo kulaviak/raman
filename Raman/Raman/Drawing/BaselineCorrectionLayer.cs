@@ -15,8 +15,11 @@ namespace Raman.Drawing
         
         public override void HandleMouseDown(object sender, MouseEventArgs e)
         {
-            var point = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
-            _points.Add(point);
+            if (e.Button == MouseButtons.Left)
+            {
+                var point = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
+                _points.Add(point);
+            }
         }
 
         public override void Draw(Graphics graphics)

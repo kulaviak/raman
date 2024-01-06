@@ -14,6 +14,8 @@ namespace Raman.Controls
         
         public event EventHandler<string> PointsExported;
         
+        public event EventHandler BaselineCorrectionReseted;
+        
         public BaselineCorrectionForm()
         {
             InitializeComponent();
@@ -89,6 +91,11 @@ namespace Raman.Controls
         private void btnUndoBaselineCorrection_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            BaselineCorrectionReseted?.Invoke(this, null);
         }
     }
 }

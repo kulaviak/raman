@@ -172,8 +172,13 @@ namespace Raman
             var form = new BaselineCorrectionForm();
             form.PointsImported += Form_PointsImported;
             form.PointsExported += Form_PointsExported;
+            form.BaselineCorrectionReseted += Form_BaselineCorrectionReseted;
             ShowSidePanel(form);
             canvasPanel.CurrentLayer = new BaselineCorrectionLayer(canvasPanel.CoordSystem);
+        }
+
+        private void Form_BaselineCorrectionReseted(object sender, EventArgs e)
+        {
         }
 
         private void Form_PointsExported(object sender, string filePath)
@@ -203,6 +208,11 @@ namespace Raman
         private void tsbZoomToOriginalSize_Click(object sender, EventArgs e)
         {
             canvasPanel.ZoomToOriginalSize();
+        }
+
+        private void tsbBaselineCorrection_Click(object sender, EventArgs e)
+        {
+            BaselineCorrection();
         }
     }
 }

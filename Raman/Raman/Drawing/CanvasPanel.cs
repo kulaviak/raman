@@ -165,6 +165,7 @@ namespace Raman.Drawing
                 _zoomStart = e.Location;
             }
             CurrentLayer?.HandleMouseDown(sender, e);
+            Refresh();
         }
 
         private void HandleMouseMove(object sender, MouseEventArgs e)

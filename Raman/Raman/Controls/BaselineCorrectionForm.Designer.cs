@@ -32,11 +32,12 @@
             this.btnDoBaselineCorrection = new System.Windows.Forms.Button();
             this.btnExportPoints = new System.Windows.Forms.Button();
             this.btnImportPoints = new System.Windows.Forms.Button();
+            this.btnReset = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnUndoBaselineCorrection
             // 
-            this.btnUndoBaselineCorrection.Location = new System.Drawing.Point(12, 99);
+            this.btnUndoBaselineCorrection.Location = new System.Drawing.Point(12, 173);
             this.btnUndoBaselineCorrection.Name = "btnUndoBaselineCorrection";
             this.btnUndoBaselineCorrection.Size = new System.Drawing.Size(142, 23);
             this.btnUndoBaselineCorrection.TabIndex = 8;
@@ -46,7 +47,7 @@
             // 
             // btnDoBaselineCorrection
             // 
-            this.btnDoBaselineCorrection.Location = new System.Drawing.Point(13, 70);
+            this.btnDoBaselineCorrection.Location = new System.Drawing.Point(12, 144);
             this.btnDoBaselineCorrection.Name = "btnDoBaselineCorrection";
             this.btnDoBaselineCorrection.Size = new System.Drawing.Size(142, 23);
             this.btnDoBaselineCorrection.TabIndex = 7;
@@ -74,11 +75,22 @@
             this.btnImportPoints.UseVisualStyleBackColor = true;
             this.btnImportPoints.Click += new System.EventHandler(this.btnImportPoints_Click);
             // 
+            // btnReset
+            // 
+            this.btnReset.Location = new System.Drawing.Point(12, 70);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(142, 23);
+            this.btnReset.TabIndex = 9;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
             // BaselineCorrectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(167, 450);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnUndoBaselineCorrection);
             this.Controls.Add(this.btnDoBaselineCorrection);
             this.Controls.Add(this.btnExportPoints);
@@ -87,8 +99,9 @@
             this.Name = "BaselineCorrectionForm";
             this.Text = "Baseline Correction";
             this.ResumeLayout(false);
-
         }
+
+        private System.Windows.Forms.Button btnReset;
 
         #endregion
 
