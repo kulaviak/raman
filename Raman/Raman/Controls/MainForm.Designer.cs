@@ -210,7 +210,6 @@ namespace Raman
       // canvasPanel
       // 
       this.canvasPanel.CoordSystem = null;
-      this.canvasPanel.CurrentLayer = null;
       this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
       this.canvasPanel.IsZooming = false;
       this.canvasPanel.Location = new System.Drawing.Point(0, 0);

@@ -14,5 +14,10 @@ namespace Raman.Controls
         {
             MessageBox.Show(text, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+        
+        public static void ShowInfo(string text, string caption)
+        {
+            MessageBox.Show(text, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

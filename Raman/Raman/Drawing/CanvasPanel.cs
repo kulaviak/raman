@@ -20,7 +20,7 @@ namespace Raman.Drawing
 
         public bool IsZooming { get; set; }
         
-        public LayerBase CurrentLayer { get; set; }
+        public BaselineCorrectionLayer BaselineCorrectionLayer { get; set; }
 
         private Point? _zoomStart;
         
@@ -37,9 +37,9 @@ namespace Raman.Drawing
             set
             {
                 _coordSystem = value;
-                if (CurrentLayer != null)
+                if (BaselineCorrectionLayer != null)
                 {
-                    CurrentLayer.CoordSystem = value;
+                    BaselineCorrectionLayer.CoordSystem = value;
                 }
             }
         }
@@ -98,7 +98,7 @@ namespace Raman.Drawing
             {
                 graphics.DrawRectangle(Pens.Gray, _zoomRectangle.Value);
             }
-            CurrentLayer?.Draw(graphics);
+            BaselineCorrectionLayer?.Draw(graphics);
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace Raman.Drawing
             {
                 _zoomStart = e.Location;
             }
-            CurrentLayer?.HandleMouseDown(sender, e);
+            BaselineCorrectionLayer?.HandleMouseDown(sender, e);
             Refresh();
         }
 
@@ -184,7 +184,7 @@ namespace Raman.Drawing
                     DoRefresh(); 
                 }
             }
-            CurrentLayer?.HandleMouseMove(sender, e);
+            BaselineCorrectionLayer?.HandleMouseMove(sender, e);
         }
 
         private void HandleMouseUp(object sender, MouseEventArgs e)
@@ -197,7 +197,7 @@ namespace Raman.Drawing
                 _zoomStart = null;
                 _zoomRectangle = null;
             }
-            CurrentLayer?.HandleMouseUp(sender, e);
+            BaselineCorrectionLayer?.HandleMouseUp(sender, e);
         }
 
         private CanvasCoordSystem GetCoordSystemForZoom(CanvasCoordSystem oldCoordSystem, Rectangle zoomRectangle)

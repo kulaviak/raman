@@ -10,7 +10,7 @@ namespace Raman.Drawing
 {
     public class BaselineCorrectionLayer : LayerBase
     {
-        private readonly Panel _panel;
+        private readonly CanvasPanel _canvasPanel;
         
         private static Color COLOR = Color.Red;
         
@@ -20,9 +20,9 @@ namespace Raman.Drawing
         
         private System.Drawing.Point _lastClickedLocation;
 
-        public BaselineCorrectionLayer(CanvasCoordSystem coordSystem, Panel panel) : base(coordSystem)
+        public BaselineCorrectionLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : base(coordSystem)
         {
-            _panel = panel;
+            this._canvasPanel = canvasPanel;
         }
         
         public override void HandleMouseDown(object sender, MouseEventArgs e)
@@ -41,6 +41,17 @@ namespace Raman.Drawing
                 ShowContextMenu(e.Location);
             }
         }
+        
+        public void Reset()
+        {
+            _points.Clear();
+            _canvasPanel.Refresh();
+        }
+        
+        public override void Draw(Graphics graphics)
+        {
+            DrawMarks(graphics);
+        }
 
         private void RemoveClosestPoint(System.Drawing.Point location)
         {
@@ -56,7 +67,7 @@ namespace Raman.Drawing
             _lastClickedLocation = location;
             var contextMenu = new ContextMenuStrip();
             contextMenu.Items.Add("Remove Closest Point", null, RemoveClosestPoint_Click);
-            contextMenu.Show(_panel, location);
+            contextMenu.Show(_canvasPanel, location);
         }
         
         private void RemoveClosestPoint_Click(object sender, EventArgs e)
@@ -74,18 +85,19 @@ namespace Raman.Drawing
             }
             return null;
         }
-
-        public override void Draw(Graphics graphics)
-        {
-            DrawMarks(graphics);
-        }
-
+        
         private void DrawMarks(Graphics graphics)
         {
             foreach (var point in _points)
             {
                 new Mark(CoordSystem, graphics, COLOR, point).Draw();
             }
+        }
+
+        public void ImportPoint(List<Point> points)
+        {
+            _points = points;
+            _canvasPanel.Refresh();
         }
     }
 }
