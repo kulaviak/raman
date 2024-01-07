@@ -106,10 +106,10 @@ namespace Raman.Drawing
         /// </summary>
         private void ClipGraphicsToOnlyChartArea(Graphics graphics)
         {
-            var x = (int) CoordSystem.Border;
-            var y = (int) CoordSystem.Border;
-            var width = (int) (Width - 2 * CoordSystem.Border);
-            var height = (int) (Height - 2 * CoordSystem.Border);
+            var x = (int) CoordSystem.LeftBorder;
+            var y = (int) CoordSystem.TopBorder;
+            var width = (int) CoordSystem.PixelWidth;
+            var height = (int) CoordSystem.PixelHeight;
             var chartRectangle = new Rectangle(x, y, width, height);
             graphics.SetClip(chartRectangle);
         }

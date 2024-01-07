@@ -21,10 +21,10 @@ namespace Raman.Drawing
 
         public void Draw()
         {
-            var x1 = _coordSystem.Border;
-            var y1 = _coordSystem.Border + _coordSystem.PixelHeight;
-            var x2 = _coordSystem.Border + _coordSystem.PixelWidth;
-            var y2 = _coordSystem.Border + _coordSystem.PixelHeight;
+            var x1 = _coordSystem.LeftBorder;
+            var y1 = _coordSystem.TopBorder + _coordSystem.PixelHeight;
+            var x2 = _coordSystem.LeftBorder + _coordSystem.PixelWidth;
+            var y2 = _coordSystem.TopBorder + _coordSystem.PixelHeight;
             _graphics.DrawLine(Pens.Black, x1, y1, x2, y2);
             DrawNumbers();
         }

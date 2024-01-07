@@ -16,11 +16,18 @@ namespace Raman.Drawing
 
         public decimal MaxY { get; }
 
-        public float Border => 50;
+        // left and top border are higher because they need more space for axis values
+        public float LeftBorder => 50;
+        
+        public float BottomBorder => 50;
+        
+        public float RightBorder => 20;
+        
+        public float TopBorder => 20;
 
-        public float PixelWidth => GraphicsWidth - 2 * Border;
+        public float PixelWidth => GraphicsWidth - LeftBorder - RightBorder;
 
-        public float PixelHeight => GraphicsHeight - 2 * Border;
+        public float PixelHeight => GraphicsHeight - TopBorder - BottomBorder;
 
         public float ValueWidth => (float) (MaxX - MinX);
 
@@ -39,27 +46,27 @@ namespace Raman.Drawing
         public float ToPixelX(decimal valueX)
         {
             var valueDistance = valueX - MinX;
-            var ret = Border + PixelWidth / ValueWidth * (float) valueDistance;
+            var ret = LeftBorder + PixelWidth / ValueWidth * (float) valueDistance;
             return ret;
         }
         
         public float ToPixelY(decimal valueY)
         {
             var valueDistance = MaxY - valueY;
-            var ret = Border + PixelHeight / ValueHeight * (float) valueDistance;
+            var ret = TopBorder + PixelHeight / ValueHeight * (float) valueDistance;
             return ret;
         }
 
         public decimal ToValueX(float pixelX)
         {
-            var pixelDistance = pixelX - Border;
+            var pixelDistance = pixelX - LeftBorder;
             var ret = ValueWidth / PixelWidth * pixelDistance + (double) MinX;
             return (decimal) ret;
         }
         
         public decimal ToValueY(float pixelY)
         {
-            var pixelDistance = pixelY - Border;
+            var pixelDistance = pixelY - TopBorder;
             var ret = MaxY - (decimal) (ValueHeight / PixelHeight * pixelDistance);
             return ret;
         }
