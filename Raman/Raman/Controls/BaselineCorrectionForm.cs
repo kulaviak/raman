@@ -16,6 +16,10 @@ namespace Raman.Controls
         
         public event EventHandler BaselineCorrectionReseted;
         
+        private const string INITIAL_DIRECTORY_PATH = "C:\\tmp";
+        
+        private const string FILE_DIALOG_FILTER = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+        
         public BaselineCorrectionForm()
         {
             InitializeComponent();
@@ -25,8 +29,8 @@ namespace Raman.Controls
         {
             using (var openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.InitialDirectory = "C:\\"; 
-                openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"; 
+                openFileDialog.InitialDirectory = INITIAL_DIRECTORY_PATH;
+                openFileDialog.Filter = FILE_DIALOG_FILTER; 
                 openFileDialog.FilterIndex = 1;
                 openFileDialog.Multiselect = false;
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -59,8 +63,8 @@ namespace Raman.Controls
         {
             using (var saveFileDialog = new SaveFileDialog())
             {
-                saveFileDialog.InitialDirectory = "C:\\"; 
-                saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"; 
+                saveFileDialog.InitialDirectory = INITIAL_DIRECTORY_PATH;
+                saveFileDialog.Filter = FILE_DIALOG_FILTER; 
                 saveFileDialog.FilterIndex = 1;
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
