@@ -13,13 +13,6 @@ namespace Raman
     // window zoom made according to Chat GTP query How to implement zoom to area in graphics in windows forms
     public partial class MainForm : Form
     {
-
-        private static int SPLIT_PANEL_WIDTH = 200;
-        
-        private static int MIN_CANVAS_WIDTH = 200;
-        
-        private static int MIN_CANVAS_HEIGHT = 500;
-
         private Form _sidePanel;
         
         public MainForm()
@@ -202,7 +195,7 @@ namespace Raman
         
         private void BaselineForm_PointsExported(object sender, string filePath)
         {
-            new OnePointPerLineFileWriter().WritePoints(new List<Point>(), filePath);   
+            canvasPanel.BaselineCorrectionLayer.ExportPoints(filePath);
         }
         
         private void BaselineForm_PointsImported(object sender, List<Point> points)

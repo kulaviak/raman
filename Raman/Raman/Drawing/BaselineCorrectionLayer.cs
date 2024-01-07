@@ -16,7 +16,7 @@ namespace Raman.Drawing
         
         private List<Point> _points = new List<Point>();
 
-        private static int MAX_PIXEL_DISTANCE = 20;
+        private const int MAX_PIXEL_DISTANCE = 20;
         
         private System.Drawing.Point _lastClickedLocation;
 
@@ -98,6 +98,11 @@ namespace Raman.Drawing
         {
             _points = points;
             _canvasPanel.Refresh();
+        }
+
+        public void ExportPoints(string filePath)
+        {
+            new OnePointPerLineFileWriter().WritePoints(_points, filePath);
         }
     }
 }

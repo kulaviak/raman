@@ -12,7 +12,7 @@ namespace Raman.Drawing
         
         private readonly Raman.Core.Point _point;
 
-        private static int RADIUS = 5;
+        private const int RADIUS = 5;
 
         public Mark(CanvasCoordSystem coordSystem, Graphics graphics, Color color, Raman.Core.Point point)
         {

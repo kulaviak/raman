@@ -9,9 +9,9 @@ namespace Raman.Drawing
         
         private readonly Graphics _graphics;
 
-        private static int TICK_LINE_LENGTH = 5;
+        private const int TICK_LINE_LENGTH = 5;
         
-        private static int DISTANCE_FROM_TICK_TO_NUMBER = 2;
+        private const int DISTANCE_FROM_TICK_TO_NUMBER = 2;
         
         private const double GAP_BETWEEN_TICKS = 50;
 
