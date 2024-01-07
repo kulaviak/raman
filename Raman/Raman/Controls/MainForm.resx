@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="menuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>116, 17</value>
+    <value>156, 17</value>
   </metadata>
   <metadata name="toolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>225, 17</value>
+    <value>259, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="tsbRefresh.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -148,12 +148,12 @@
   <data name="tsbZoomToWindow.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD+SURBVDhPzVJJCsJAEPQVQc02WT6hKIjn+BwfYRSEiD5N
-        cDu7HbyIeLQKWskko0TwYEHRTLqrujJJ7aeI49jxfX8GbizLuqOulVIL13WbMvIeQRB0Hcc5oo6iKGqF
-        Yeix4pzC6My+jJbBDZ7nncAEbBiY2LZ9oKlIdCDmnJsNwhfRH2NuKhIdGFgxblGUJ/u8G5HogPuN8Yqi
-        PLHdB68i0YHGtkKCNhYtRaKDnw7N1CR8EksmmMlEooPx0NyDA5OYz+UrWCIpA80+TbiJcWnK1+KZYv4j
-        SNqTcTP4P/B1INrB7MJbR81Q6xRXMvkEpOzQhGnl0ff4HxPehVJq+AAdtVkIaIszOgAAAABJRU5ErkJg
-        gg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD/SURBVDhPzVJJCsJAEPQPAVGzTZZPKAriOT7HRxgFIaJP
+        E9zObgcvIh6tglYyySgKHiwomkl3VVcmqfwUcRw7vu9PwbVlWTfUlVJq7rpuQ0ZeIwiCjuM4B9RhFEXN
+        MAw9VpxTGJ3Yl9EyuMHzvCOYgHUDE9u29zQViQ7EnHGzQfgk+iPMTUSiAwNLxi2K8mSfdyMSHXC/Ml5R
+        lCe2++BFJDrQ2HyQoIVFC5Ho4KdDMzUJH8SSMWYykehgPDR3YN8k5nP5ClWRlIFmjybcxLg05WvxTDH/
+        ESTtyrgZ/B/4OhBtYXbmraNmqDWKPzJ5B6Rs04Rp5dH3+B8T3oVSanAH/ElY//jRKGgAAAAASUVORK5C
+        YII=
 </value>
   </data>
   <data name="tsbZoomToOriginalSize.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

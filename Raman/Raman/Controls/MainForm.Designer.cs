@@ -267,6 +267,6 @@ namespace Raman
         private System.Windows.Forms.ToolStripButton tsbOpenFiles;
         private System.Windows.Forms.ToolStripButton tsbZoomToWindow;
         private System.Windows.Forms.ToolStripButton tsbZoomToOriginalSize;
-    }
+  }
 }
 

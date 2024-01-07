@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -9,13 +10,20 @@ namespace Raman.Drawing
 {
     public class BaselineCorrectionLayer : LayerBase
     {
+        private readonly Panel _panel;
+        
         private static Color COLOR = Color.Red;
         
-        public BaselineCorrectionLayer(CanvasCoordSystem coordSystem) : base(coordSystem) {}
-
         private List<Point> _points = new List<Point>();
 
         private static int MAX_PIXEL_DISTANCE = 20;
+        
+        private System.Drawing.Point _lastClickedLocation;
+
+        public BaselineCorrectionLayer(CanvasCoordSystem coordSystem, Panel panel) : base(coordSystem)
+        {
+            _panel = panel;
+        }
         
         public override void HandleMouseDown(object sender, MouseEventArgs e)
         {
@@ -26,12 +34,34 @@ namespace Raman.Drawing
             }
             else if (e.Button == MouseButtons.Middle)
             {
-                var point = GetPointToRemove(e.Location);
-                if (point != null)
-                {
-                    _points = _points.Where(x => x != point).ToList();
-                }
+                RemoveClosestPoint(e.Location);
             }
+            else if (e.Button == MouseButtons.Right)
+            {
+                ShowContextMenu(e.Location);
+            }
+        }
+
+        private void RemoveClosestPoint(System.Drawing.Point location)
+        {
+            var point = GetPointToRemove(location);
+            if (point != null)
+            {
+                _points = _points.Where(x => x != point).ToList();
+            }
+        }
+
+        private void ShowContextMenu(System.Drawing.Point location)
+        {
+            _lastClickedLocation = location;
+            var contextMenu = new ContextMenuStrip();
+            contextMenu.Items.Add("Remove Closest Point", null, RemoveClosestPoint_Click);
+            contextMenu.Show(_panel, location);
+        }
+        
+        private void RemoveClosestPoint_Click(object sender, EventArgs e)
+        {
+            RemoveClosestPoint(_lastClickedLocation);   
         }
 
         private Point GetPointToRemove(System.Drawing.Point pos)

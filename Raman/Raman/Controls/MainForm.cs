@@ -187,7 +187,7 @@ namespace Raman
             form.BaselineCorrectionReseted += BaselineForm_BaselineCorrectionReseted;
             form.Closed += BaselineForm_Closed;
             ShowSidePanel(form);
-            canvasPanel.CurrentLayer = new BaselineCorrectionLayer(canvasPanel.CoordSystem);
+            canvasPanel.CurrentLayer = new BaselineCorrectionLayer(canvasPanel.CoordSystem, canvasPanel);
         }
 
         private void BaselineForm_Closed(object sender, EventArgs e)
@@ -236,6 +236,11 @@ namespace Raman
         private void MainForm_Resize(object sender, EventArgs e)
         {
             UpdateSplitter();
+        }
+
+        private void miRemoveClosestPoint_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
