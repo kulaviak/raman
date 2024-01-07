@@ -16,6 +16,8 @@ namespace Raman.Drawing
         
         private List<Point> _points = new List<Point>();
 
+        public List<Point> Points => _points;
+
         private const int MAX_PIXEL_DISTANCE = 20;
         
         private System.Drawing.Point _lastClickedLocation;

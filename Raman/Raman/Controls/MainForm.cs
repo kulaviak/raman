@@ -178,6 +178,8 @@ namespace Raman
             form.PointsImported += BaselineForm_PointsImported;
             form.PointsExported += BaselineForm_PointsExported;
             form.BaselineCorrectionReseted += BaselineForm_BaselineCorrectionReseted;
+            form.DoBaselineCorrection += BaselineForm_DoBaselineCorrection;
+            form.UndoBaselineCorrection += BaselineForm_UndoBaselineCorrection;
             form.Closed += BaselineForm_Closed;
             ShowSidePanel(form);
             canvasPanel.BaselineCorrectionLayer = new BaselineCorrectionLayer(canvasPanel.CoordSystem, canvasPanel);
@@ -191,6 +193,16 @@ namespace Raman
         private void BaselineForm_BaselineCorrectionReseted(object sender, EventArgs e)
         {
             canvasPanel.BaselineCorrectionLayer.Reset();
+        }
+        
+        private void BaselineForm_DoBaselineCorrection(object sender, EventArgs e)
+        {
+            canvasPanel.BaselineCorrectionLayer.DoBaselineCorrection();
+        }
+        
+        private void BaselineForm_UndoBaselineCorrection(object sender, EventArgs e)
+        {
+            canvasPanel.BaselineCorrectionLayer.UndoBaselineCorrection();
         }
         
         private void BaselineForm_PointsExported(object sender, string filePath)

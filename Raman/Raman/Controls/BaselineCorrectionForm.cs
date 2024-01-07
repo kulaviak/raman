@@ -9,12 +9,15 @@ namespace Raman.Controls
 {
     public partial class BaselineCorrectionForm : Form
     {
-
         public event EventHandler<List<Point>> PointsImported;
         
         public event EventHandler<string> PointsExported;
         
         public event EventHandler BaselineCorrectionReseted;
+        
+        public event EventHandler DoBaselineCorrection;
+        
+        public event EventHandler UndoBaselineCorrection;
         
         private const string INITIAL_DIRECTORY_PATH = "C:\\tmp";
         
@@ -89,12 +92,12 @@ namespace Raman.Controls
         
         private void btnDoBaselineCorrection_Click(object sender, EventArgs e)
         {
-
+            DoBaselineCorrection?.Invoke(this, null);
         }
 
         private void btnUndoBaselineCorrection_Click(object sender, EventArgs e)
         {
-
+            UndoBaselineCorrection?.Invoke(this, null);
         }
 
         private void btnReset_Click(object sender, EventArgs e)
