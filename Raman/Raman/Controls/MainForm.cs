@@ -19,31 +19,44 @@ namespace Raman
         private static int MIN_CANVAS_WIDTH = 200;
         
         private static int MIN_CANVAS_HEIGHT = 500;
+
+        private Form _sidePanel;
         
         public MainForm()
         {
             InitializeComponent();
-            MinimumSize = new Size(MIN_CANVAS_WIDTH + SPLIT_PANEL_WIDTH, MIN_CANVAS_HEIGHT);
-            // LoadDemoSpectrum();
-            LoadDemoSpectra();
+            MinimumSize = new Size(800, 600);
+            LoadDemoSpectrum();
+            // LoadDemoSpectra();
             HideSidePanel();
         }
 
         private void HideSidePanel()
         {
-            splitContainer.SplitterDistance = Width;
+            _sidePanel = null;
+            splitContainer.Panel2Collapsed = true;
         }
-        
+
+        private void UpdateSplitter()
+        {
+            if (_sidePanel != null)
+            {
+                var borderWidth = 10;
+                splitContainer.SplitterDistance = Width - _sidePanel.Width - borderWidth;
+            }
+        }
+
         private void ShowSidePanel(Form form)
         {
             form.TopLevel = false;
-            var borderWidth = 10;
-            splitContainer.SplitterDistance = Width - form.Width - 20;
-            // splitContainer.SplitterDistance = Width - SPLIT_PANEL_WIDTH;
+            _sidePanel = form;
+            splitContainer.Panel2Collapsed = false;
+            UpdateSplitter();
             form.Dock = DockStyle.Fill;
             splitContainer.Panel2.Controls.Clear();
             splitContainer.Panel2.Controls.Add(form);
             form.Show();
+            form.Focus();
         }
 
         private void miExit_Click(object sender, EventArgs e)
@@ -170,23 +183,29 @@ namespace Raman
         private void BaselineCorrection()
         {
             var form = new BaselineCorrectionForm();
-            form.PointsImported += Form_PointsImported;
-            form.PointsExported += Form_PointsExported;
-            form.BaselineCorrectionReseted += Form_BaselineCorrectionReseted;
+            form.PointsImported += BaselineForm_PointsImported;
+            form.PointsExported += BaselineForm_PointsExported;
+            form.BaselineCorrectionReseted += BaselineForm_BaselineCorrectionReseted;
+            form.Closed += BaselineForm_Closed;
             ShowSidePanel(form);
             canvasPanel.CurrentLayer = new BaselineCorrectionLayer(canvasPanel.CoordSystem);
         }
 
-        private void Form_BaselineCorrectionReseted(object sender, EventArgs e)
+        private void BaselineForm_Closed(object sender, EventArgs e)
+        {
+            HideSidePanel();
+        }
+
+        private void BaselineForm_BaselineCorrectionReseted(object sender, EventArgs e)
         {
         }
 
-        private void Form_PointsExported(object sender, string filePath)
+        private void BaselineForm_PointsExported(object sender, string filePath)
         {
             new OnePointPerLineFileWriter().WritePoints(new List<Point>(), filePath);   
         }
 
-        private void Form_PointsImported(object sender, List<Point> points)
+        private void BaselineForm_PointsImported(object sender, List<Point> points)
         {
         }
 
@@ -213,6 +232,11 @@ namespace Raman
         private void tsbBaselineCorrection_Click(object sender, EventArgs e)
         {
             BaselineCorrection();
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            UpdateSplitter();
         }
     }
 }

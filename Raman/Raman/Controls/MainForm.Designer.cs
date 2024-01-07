@@ -46,9 +46,9 @@ namespace Raman
       this.tsbOpenFiles = new System.Windows.Forms.ToolStripButton();
       this.tsbZoomToWindow = new System.Windows.Forms.ToolStripButton();
       this.tsbZoomToOriginalSize = new System.Windows.Forms.ToolStripButton();
+      this.tsbBaselineCorrection = new System.Windows.Forms.ToolStripButton();
       this.splitContainer = new System.Windows.Forms.SplitContainer();
       this.canvasPanel = new Raman.Drawing.CanvasPanel();
-      this.tsbBaselineCorrection = new System.Windows.Forms.ToolStripButton();
       this.menuStrip.SuspendLayout();
       this.toolStrip.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize) (this.splitContainer)).BeginInit();
@@ -183,6 +183,16 @@ namespace Raman
       this.tsbZoomToOriginalSize.Text = "Zoom To Original Size";
       this.tsbZoomToOriginalSize.Click += new System.EventHandler(this.tsbZoomToOriginalSize_Click);
       // 
+      // tsbBaselineCorrection
+      // 
+      this.tsbBaselineCorrection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.tsbBaselineCorrection.Image = ((System.Drawing.Image) (resources.GetObject("tsbBaselineCorrection.Image")));
+      this.tsbBaselineCorrection.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.tsbBaselineCorrection.Name = "tsbBaselineCorrection";
+      this.tsbBaselineCorrection.Size = new System.Drawing.Size(23, 22);
+      this.tsbBaselineCorrection.Text = "Baseline Correction";
+      this.tsbBaselineCorrection.Click += new System.EventHandler(this.tsbBaselineCorrection_Click);
+      // 
       // splitContainer
       // 
       this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -208,16 +218,6 @@ namespace Raman
       this.canvasPanel.Size = new System.Drawing.Size(590, 401);
       this.canvasPanel.TabIndex = 0;
       // 
-      // tsbBaselineCorrection
-      // 
-      this.tsbBaselineCorrection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.tsbBaselineCorrection.Image = ((System.Drawing.Image) (resources.GetObject("tsbBaselineCorrection.Image")));
-      this.tsbBaselineCorrection.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.tsbBaselineCorrection.Name = "tsbBaselineCorrection";
-      this.tsbBaselineCorrection.Size = new System.Drawing.Size(23, 22);
-      this.tsbBaselineCorrection.Text = "Baseline Correction";
-      this.tsbBaselineCorrection.Click += new System.EventHandler(this.tsbBaselineCorrection_Click);
-      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -234,6 +234,7 @@ namespace Raman
       this.Text = "Raman";
       this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RamanForm_FormClosing);
+      this.Resize += new System.EventHandler(this.MainForm_Resize);
       this.menuStrip.ResumeLayout(false);
       this.menuStrip.PerformLayout();
       this.toolStrip.ResumeLayout(false);
@@ -261,7 +262,7 @@ namespace Raman
         private System.Windows.Forms.ToolStripMenuItem miBaselineCorrection;
         private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.SplitContainer splitContainer;
-        private CanvasPanel canvasPanel;
+        private Raman.Drawing.CanvasPanel canvasPanel;
         private System.Windows.Forms.ToolStripButton tsbRefresh;
         private System.Windows.Forms.ToolStripButton tsbOpenFiles;
         private System.Windows.Forms.ToolStripButton tsbZoomToWindow;
