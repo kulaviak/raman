@@ -1,5 +1,3 @@
-# raman
-
-- instalacky programu, ktery se soucasne pouziva?
-- nacitat vice spekter soucasne?
+# Raman
+Windows application for evaluating Raman spectra. Fully compatible with Windows 10 and onwards.
 

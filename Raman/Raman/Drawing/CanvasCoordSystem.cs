@@ -82,5 +82,11 @@ namespace Raman.Drawing
             return $"MinX: {MinX}, MaxX: {MaxX}, MinY: {MinY}, MaxY: {MaxY}, PixelWidth: {PixelWidth}, PixelHeight: {PixelHeight}, " +
                    $"ValueWidth: {ValueWidth}, ValueHeight: {ValueHeight}";
         }
+
+        public System.Drawing.Point ToPixelPoint(Point point)
+        {
+            var ret = new System.Drawing.Point((int) ToPixelX(point.X), (int) ToPixelY(point.Y));
+            return ret;
+        }
     }
 }

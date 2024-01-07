@@ -72,9 +72,11 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\AppException.cs" />
+    <Compile Include="Core\Extensions.cs" />
     <Compile Include="Core\OnePointPerLineFileWriter.cs" />
     <Compile Include="Core\Point.cs" />
     <Compile Include="Core\OnePointPerLineFileReader.cs" />
+    <Compile Include="Core\Util.cs" />
     <Compile Include="Drawing\BaselineCorrectionLayer.cs" />
     <Compile Include="Drawing\CanvasCoordSystem.cs" />
     <Compile Include="Drawing\CanvasDrawer.cs" />
