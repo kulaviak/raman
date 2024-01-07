@@ -56,7 +56,6 @@ namespace Raman
             splitContainer.Panel2.Controls.Clear();
             splitContainer.Panel2.Controls.Add(form);
             form.Show();
-            form.Focus();
         }
 
         private void miExit_Click(object sender, EventArgs e)

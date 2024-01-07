@@ -75,15 +75,15 @@ namespace Raman
       // miOpenFiles
       // 
       this.miOpenFiles.Name = "miOpenFiles";
-      this.miOpenFiles.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0)));
-      this.miOpenFiles.Size = new System.Drawing.Size(169, 22);
+      this.miOpenFiles.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+      this.miOpenFiles.Size = new System.Drawing.Size(172, 22);
       this.miOpenFiles.Text = "Open Files";
       this.miOpenFiles.Click += new System.EventHandler(this.miOpenFiles_Click);
       // 
       // miExit
       // 
       this.miExit.Name = "miExit";
-      this.miExit.Size = new System.Drawing.Size(169, 22);
+      this.miExit.Size = new System.Drawing.Size(172, 22);
       this.miExit.Text = "Exit";
       this.miExit.Click += new System.EventHandler(this.miExit_Click);
       // 

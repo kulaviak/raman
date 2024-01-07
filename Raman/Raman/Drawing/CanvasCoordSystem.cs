@@ -1,4 +1,4 @@
-using System.Drawing;
+using Raman.Core;
 
 namespace Raman.Drawing
 {
@@ -64,9 +64,9 @@ namespace Raman.Drawing
             return ret;
         }
         
-        public Raman.Core.Point ToValuePoint(float pixelX, float pixelY)
+        public Point ToValuePoint(float pixelX, float pixelY)
         {
-            var ret = new Raman.Core.Point(ToValueX(pixelX), ToValueY(pixelY));
+            var ret = new Point(ToValueX(pixelX), ToValueY(pixelY));
             return ret;
         }
 
