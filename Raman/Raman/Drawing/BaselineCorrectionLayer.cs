@@ -106,5 +106,13 @@ namespace Raman.Drawing
         {
             new OnePointPerLineFileWriter().WritePoints(_points, filePath);
         }
+
+        public void DoBaselineCorrection()
+        {
+        }
+
+        public void UndoBaselineCorrection()
+        {
+        }
     }
 }

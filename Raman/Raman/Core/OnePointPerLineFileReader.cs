@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -67,9 +68,11 @@ namespace Raman.Core
                 var parts = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
                 if (parts.Length >= 2)
                 {
-                    if (Decimal.TryParse(parts[0], out decimal x) && Decimal.TryParse(parts[1], out decimal y))
+                    var x = Util.UniversalParseDecimal(parts[0]);
+                    var y = Util.UniversalParseDecimal(parts[1]);
+                    if (x != null && y != null)
                     {
-                        return new Point(x, y);
+                        return new Point(x.Value, y.Value);
                     }
                     else
                     {
@@ -86,5 +89,6 @@ namespace Raman.Core
                 return null;
             }
         }
+
     }
 }
