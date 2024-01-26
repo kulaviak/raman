@@ -118,7 +118,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="README.md" />
-    <Content Include="todo.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
