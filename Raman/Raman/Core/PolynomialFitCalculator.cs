@@ -18,61 +18,16 @@ namespace Raman.Core
             var coefficients = Vector<double>.Build.DenseOfArray(array);
 
             // Generate baseline using the polynomial
-            var baseline = new double[x.Length];
+            var ret = new List<Point>();
             foreach (var chartPoint in chartPoints)
             {
-                baseline[i] = EvaluatePolynomial(coefficients, x[i]);
-                    
+                var baselineY = EvaluatePolynomial(coefficients, (double) chartPoint.X);
+                var baselinePoint = new Point(chartPoint.X, (decimal) baselineY);
+                ret.Add(baselinePoint);
             }
-            
-            for (var i = 0; i < x.Length; i++)
-            {
-            }
-
-            // Subtract the baseline from the original signal
-            double[] correctedSignal = new double[y.Length];
-            for (int i = 0; i < y.Length; i++)
-            {
-                correctedSignal[i] = y[i] - baseline[i];
-            }
-
-            return correctedSignal;
+            return ret;
         }
         
-        private List<Point> RemoveBaseline(List<Point> chartPoints, List<Point> baselinePoints)
-        {
-            throw new NotImplementedException();
-        }
-
-        private List<Point> CalculateBaselinePoints(List<Point> correctionPoints, int degree)
-        {
-            throw new NotImplementedException();
-        }
-        
-        static double[] BaselineCorrection(double[] x, double[] y, int degree)
-        {
-            // Fit a polynomial to the data
-            // https://numerics.mathdotnet.com/Regression
-            var array = Fit.Polynomial(x, y, degree);
-            var coefficients = Vector<double>.Build.DenseOfArray(array);
-
-            // Generate baseline using the polynomial
-            double[] baseline = new double[x.Length];
-            for (int i = 0; i < x.Length; i++)
-            {
-                baseline[i] = EvaluatePolynomial(coefficients, x[i]);
-            }
-
-            // Subtract the baseline from the original signal
-            double[] correctedSignal = new double[y.Length];
-            for (int i = 0; i < y.Length; i++)
-            {
-                correctedSignal[i] = y[i] - baseline[i];
-            }
-
-            return correctedSignal;
-        }
-
         static double EvaluatePolynomial(Vector<double> coefficients, double x)
         {
             double result = 0;
@@ -82,6 +37,5 @@ namespace Raman.Core
             }
             return result;
         }
-
     }
 }

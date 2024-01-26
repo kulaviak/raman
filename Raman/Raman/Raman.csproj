@@ -72,7 +72,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\AppException.cs" />
-    <Compile Include="Core\PerPartesBaselineCorrectionCalculator.cs" />
+    <Compile Include="Core\PerPartesBaselineCalculator.cs" />
     <Compile Include="Core\ExceptionFormatter.cs" />
     <Compile Include="Core\Extensions.cs" />
     <Compile Include="Core\OnePointPerLineFileWriter.cs" />
