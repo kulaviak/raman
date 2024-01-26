@@ -17,14 +17,10 @@ namespace Raman.Drawing
         private List<Point> _points = new List<Point>();
 
         public List<Point> Points => _points;
-
-        private const int MAX_PIXEL_DISTANCE = 20;
         
-        private System.Drawing.Point _lastClickedLocation;
-
         public BaselineCorrectionLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : base(coordSystem)
         {
-            this._canvasPanel = canvasPanel;
+            _canvasPanel = canvasPanel;
         }
         
         public override void HandleMouseDown(object sender, MouseEventArgs e)
@@ -66,22 +62,15 @@ namespace Raman.Drawing
 
         private void ShowContextMenu(System.Drawing.Point location)
         {
-            _lastClickedLocation = location;
             var contextMenu = new ContextMenuStrip();
-            contextMenu.Items.Add("Remove Closest Point", null, RemoveClosestPoint_Click);
+            contextMenu.Items.Add("Remove Closest Point", null, (sender, e) => RemoveClosestPoint(location));
             contextMenu.Show(_canvasPanel, location);
         }
         
-        private void RemoveClosestPoint_Click(object sender, EventArgs e)
-        {
-            RemoveClosestPoint(_lastClickedLocation);   
-        }
-
         private Point GetPointToRemove(System.Drawing.Point pos)
         {
             var closestPoint = _points.MinByOrDefault(x => Util.GetPixelDistance(CoordSystem.ToPixelPoint(x), pos));
-            var closestPointDistance = Util.GetPixelDistance(CoordSystem.ToPixelPoint(closestPoint), pos);
-            if (closestPoint != null && closestPointDistance < MAX_PIXEL_DISTANCE)
+            if (closestPoint != null)
             {
                 return closestPoint;
             }
