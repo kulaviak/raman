@@ -58,6 +58,7 @@ namespace Raman.Drawing
             {
                 _points = _points.Where(x => x != point).ToList();
             }
+            _canvasPanel.Refresh();
         }
 
         private void ShowContextMenu(System.Drawing.Point location)
