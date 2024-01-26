@@ -81,6 +81,7 @@
     <Compile Include="Drawing\Chart.cs" />
     <Compile Include="Drawing\LayerBase.cs" />
     <Compile Include="Drawing\Mark.cs" />
+    <Compile Include="Drawing\StatusBarLayer.cs" />
     <Compile Include="Drawing\XAxis.cs" />
     <Compile Include="Drawing\YAxis.cs" />
     <Compile Include="Program.cs" />

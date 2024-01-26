@@ -183,6 +183,7 @@ namespace Raman
             form.Closed += BaselineForm_Closed;
             ShowSidePanel(form);
             canvasPanel.BaselineCorrectionLayer = new BaselineCorrectionLayer(canvasPanel.CoordSystem, canvasPanel);
+            canvasPanel.StatusBarLayer = new StatusBarLayer(canvasPanel.CoordSystem, canvasPanel);
         }
 
         private void BaselineForm_Closed(object sender, EventArgs e)
