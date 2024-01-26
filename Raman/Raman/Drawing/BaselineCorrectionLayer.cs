@@ -15,9 +15,9 @@ namespace Raman.Drawing
         private static Color COLOR = Color.Red;
         
         private List<Point> _points = new List<Point>();
-
-        public List<Point> Points => _points;
         
+        private List<Chart> _oldCharts;
+
         public BaselineCorrectionLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : base(coordSystem)
         {
             _canvasPanel = canvasPanel;
@@ -97,12 +97,22 @@ namespace Raman.Drawing
             new OnePointPerLineFileWriter().WritePoints(_points, filePath);
         }
 
-        public void DoBaselineCorrection()
+        public void CorrectBaseline()
         {
+            _oldCharts = _canvasPanel.Charts;
+            _canvasPanel.Charts = _canvasPanel.Charts.Select(x => CorrectBaseline(x)).ToList();
+        }
+
+        private Chart CorrectBaseline(Chart chart)
+        {
+            var correctedPoints = new PerPartesBaselineCorrectionCalculator().CorrectBaseline(chart.Points, _points);
+            var ret = new Chart(correctedPoints);
+            return ret;
         }
 
         public void UndoBaselineCorrection()
         {
+            
         }
     }
 }

@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Raman</RootNamespace>
     <AssemblyName>Raman</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.5.0.0\lib\net48\MathNet.Numerics.dll</HintPath>
+    </Reference>
     <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.5.2.5\lib\net46\NLog.dll</HintPath>
     </Reference>
@@ -69,11 +72,13 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\AppException.cs" />
+    <Compile Include="Core\PerPartesBaselineCorrectionCalculator.cs" />
     <Compile Include="Core\ExceptionFormatter.cs" />
     <Compile Include="Core\Extensions.cs" />
     <Compile Include="Core\OnePointPerLineFileWriter.cs" />
     <Compile Include="Core\Point.cs" />
     <Compile Include="Core\OnePointPerLineFileReader.cs" />
+    <Compile Include="Core\PolynomialFitCalculator.cs" />
     <Compile Include="Core\Util.cs" />
     <Compile Include="Drawing\BaselineCorrectionLayer.cs" />
     <Compile Include="Drawing\CanvasCoordSystem.cs" />

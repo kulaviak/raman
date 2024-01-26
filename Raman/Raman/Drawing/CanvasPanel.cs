@@ -8,22 +8,24 @@ namespace Raman.Drawing
 {
     public class CanvasPanel : Panel
     {
-        
         private List<Chart> _charts = new List<Chart>(new List<Chart>());
-        
-        // Avoid Charts to have as public property - it causes problems in IDE Designer
-        public void SetCharts(List<Chart> charts)
-        {
-            _charts = charts;
-            CoordSystem = GetCoordSystemFromCharts(_charts);
-        }
 
-        public bool IsZooming { get; set; }
+        public List<Chart> Charts
+        {
+            get { return _charts; }
+            set
+            {
+                _charts = value;
+                CoordSystem = GetCoordSystemFromCharts(_charts);
+            }
+        }
         
+        public bool IsZooming { get; set; }
+
         public BaselineCorrectionLayer BaselineCorrectionLayer { get; set; }
 
         private Point? _zoomStart;
-        
+
         private Rectangle? _zoomRectangle;
 
         private Bitmap _buffer;
@@ -32,7 +34,8 @@ namespace Raman.Drawing
 
         private CanvasCoordSystem _coordSystem;
 
-        public CanvasCoordSystem CoordSystem {
+        public CanvasCoordSystem CoordSystem
+        {
             get => _coordSystem;
             set
             {
@@ -50,13 +53,13 @@ namespace Raman.Drawing
         {
             InitializeComponent();
         }
-        
+
         public void ZoomToOriginalSize()
         {
             CoordSystem = GetCoordSystemFromCharts(_charts);
             DoRefresh();
         }
-        
+
         private void DoRefresh()
         {
             Invalidate();
@@ -77,11 +80,12 @@ namespace Raman.Drawing
             {
                 InitializeBuffer();
             }
+
             Draw(_bufferGraphics);
             // copy the content of the off-screen buffer to the form's graphics
             e.Graphics.DrawImage(_buffer, 0, 0);
         }
-        
+
         private void Draw(Graphics graphics)
         {
             graphics.Clear(Color.FromArgb(240, 240, 240));
@@ -89,17 +93,20 @@ namespace Raman.Drawing
             {
                 ClipGraphicsToOnlyChartArea(graphics);
                 foreach (var chart in (IList<Chart>) _charts)
-                { 
+                {
                     chart.Draw(CoordSystem, graphics);
                 }
+
                 graphics.ResetClip();
                 DrawXAxis(graphics);
                 DrawYAxis(graphics);
             }
+
             if (IsZooming && _zoomRectangle != null)
             {
                 graphics.DrawRectangle(Pens.Gray, _zoomRectangle.Value);
             }
+
             BaselineCorrectionLayer?.Draw(graphics);
         }
 
@@ -132,6 +139,7 @@ namespace Raman.Drawing
             {
                 return null;
             }
+
             var allPoints = charts.SelectMany(x => x.Points).ToList();
             var minX = allPoints.Min(point => point.X);
             var maxX = allPoints.Max(point => point.X);
@@ -156,6 +164,7 @@ namespace Raman.Drawing
             {
                 _bufferGraphics.Dispose();
             }
+
             InitializeBuffer();
             DoRefresh();
         }
@@ -166,6 +175,7 @@ namespace Raman.Drawing
             {
                 _zoomStart = e.Location;
             }
+
             BaselineCorrectionLayer?.HandleMouseDown(sender, e);
             Refresh();
         }
@@ -183,9 +193,10 @@ namespace Raman.Drawing
                 if (width != 0 && height != 0)
                 {
                     _zoomRectangle = new Rectangle(x, y, width, height);
-                    DoRefresh(); 
+                    DoRefresh();
                 }
             }
+
             BaselineCorrectionLayer?.HandleMouseMove(sender, e);
             StatusStripLayer?.HandleMouseMove(sender, e);
         }
@@ -200,6 +211,7 @@ namespace Raman.Drawing
                 _zoomStart = null;
                 _zoomRectangle = null;
             }
+
             BaselineCorrectionLayer?.HandleMouseUp(sender, e);
         }
 

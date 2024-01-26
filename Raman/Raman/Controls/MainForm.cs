@@ -84,7 +84,6 @@ namespace Raman
                 openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"; 
                 openFileDialog.FilterIndex = 1;
                 openFileDialog.Multiselect = true;
-
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     var filePaths = openFileDialog.FileNames.ToList();
@@ -128,7 +127,7 @@ namespace Raman
                 MessageBox.Show($"Following lines were ignored (Showing max {maxCount} lines): {str}", "Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
-            canvasPanel.SetCharts(charts);
+            canvasPanel.Charts = charts;
         }
         
         private void LoadDemoSpectrum()
@@ -204,7 +203,7 @@ namespace Raman
         
         private void BaselineForm_DoBaselineCorrection(object sender, EventArgs e)
         {
-            canvasPanel.BaselineCorrectionLayer.DoBaselineCorrection();
+            canvasPanel.BaselineCorrectionLayer.CorrectBaseline();
         }
         
         private void BaselineForm_UndoBaselineCorrection(object sender, EventArgs e)
