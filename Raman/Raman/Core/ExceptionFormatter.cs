@@ -1,42 +1,41 @@
 using System.Text;
 
-namespace TurboLabs.EMOS.Common
+namespace Raman.Core;
+
+/// <summary>
+/// Util class for formatting exception to string.
+/// </summary>
+public class ExceptionFormatter
 {
     /// <summary>
-    /// Util class for formatting exception to string.
+    /// Convert exception and it's inner exceptions into string.
     /// </summary>
-    public class ExceptionFormatter
+    public string ToString(Exception ex)
     {
-        /// <summary>
-        /// Convert exception and it's inner exceptions into string.
-        /// </summary>
-        public string ToString(Exception ex)
+        try
         {
-            try
+            var ret = "";
+            var e = ex;
+            do
             {
-                var ret = "";
-                var e = ex;
-                do
-                {
-                    ret += ExceptionToString(e);
-                    e = e.InnerException;
-                } while (e != null);
-                return ret;
-            }
-            // make sure that formatting exception doesn't throw another exception
-            catch (Exception ex2)
-            {
-                return $"An error {ex2.Message} occurred during formatting other exception: {ex.Message}. Original exception is not available.";
-            }
+                ret += ExceptionToString(e);
+                e = e.InnerException;
+            } while (e != null);
+            return ret;
         }
+        // make sure that formatting exception doesn't throw another exception
+        catch (Exception ex2)
+        {
+            return $"An error {ex2.Message} occurred during formatting other exception: {ex.Message}. Original exception is not available.";
+        }
+    }
 
-        private static string ExceptionToString(Exception ex)
-        {
-            if (ex == null) return null;
-            var sb = new StringBuilder();
-            sb.AppendLine(ex.Message);
-            sb.AppendLine(ex.StackTrace);
-            return sb.ToString();
-        }
+    private static string ExceptionToString(Exception ex)
+    {
+        if (ex == null) return null;
+        var sb = new StringBuilder();
+        sb.AppendLine(ex.Message);
+        sb.AppendLine(ex.StackTrace);
+        return sb.ToString();
     }
 }

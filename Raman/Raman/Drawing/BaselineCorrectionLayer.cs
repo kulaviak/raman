@@ -1,138 +1,137 @@
 using Raman.Controls;
 using Point = Raman.Core.Point;
 
-namespace Raman.Drawing
+namespace Raman.Drawing;
+
+public class BaselineCorrectionLayer : LayerBase
 {
-    public class BaselineCorrectionLayer : LayerBase
+    private readonly CanvasPanel _canvasPanel;
+        
+    private static Color COLOR = Color.Red;
+        
+    private List<Point> _correctionPoints = new List<Point>();
+        
+    private List<Chart> _oldCharts;
+
+    public BaselineCorrectionLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : base(coordSystem)
     {
-        private readonly CanvasPanel _canvasPanel;
+        _canvasPanel = canvasPanel;
+    }
         
-        private static Color COLOR = Color.Red;
+    public override void HandleMouseDown(object sender, MouseEventArgs e)
+    {
+        if (e.Button == MouseButtons.Left)
+        {
+            var point = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
+            _correctionPoints.Add(point);
+        }
+        else if (e.Button == MouseButtons.Middle)
+        {
+            RemoveClosestPoint(e.Location);
+        }
+        else if (e.Button == MouseButtons.Right)
+        {
+            ShowContextMenu(e.Location);
+        }
+    }
         
-        private List<Point> _correctionPoints = new List<Point>();
+    public void Reset()
+    {
+        _correctionPoints.Clear();
+        Refresh();
+    }
         
-        private List<Chart> _oldCharts;
+    public override void Draw(Graphics graphics)
+    {
+        DrawMarks(graphics);
+        DrawBaselines(graphics);
+    }
 
-        public BaselineCorrectionLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : base(coordSystem)
+    private void DrawBaselines(Graphics graphics)
+    {
+        if (_canvasPanel.Charts.Any() && _correctionPoints.Any())
         {
-            _canvasPanel = canvasPanel;
-        }
-        
-        public override void HandleMouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
+            var chartPoints = _canvasPanel.Charts[0].Points;
+            try
             {
-                var point = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
-                _correctionPoints.Add(point);
+                var baselinePoints = new PerPartesBaselineCalculator().GetBaseline(chartPoints, _correctionPoints, 3);
+                new CanvasDrawer(_canvasPanel.CoordSystem, graphics).DrawLines(baselinePoints, Pens.Black);
             }
-            else if (e.Button == MouseButtons.Middle)
+            catch (Exception e)
             {
-                RemoveClosestPoint(e.Location);
-            }
-            else if (e.Button == MouseButtons.Right)
-            {
-                ShowContextMenu(e.Location);
-            }
-        }
-        
-        public void Reset()
-        {
-            _correctionPoints.Clear();
-            Refresh();
-        }
-        
-        public override void Draw(Graphics graphics)
-        {
-            DrawMarks(graphics);
-            DrawBaselines(graphics);
-        }
-
-        private void DrawBaselines(Graphics graphics)
-        {
-            if (_canvasPanel.Charts.Any() && _correctionPoints.Any())
-            {
-                var chartPoints = _canvasPanel.Charts[0].Points;
-                try
-                {
-                    var baselinePoints = new PerPartesBaselineCalculator().GetBaseline(chartPoints, _correctionPoints, 3);
-                    new CanvasDrawer(_canvasPanel.CoordSystem, graphics).DrawLines(baselinePoints, Pens.Black);
-                }
-                catch (Exception e)
-                {
-                    FormUtil.ShowAppError("Drawing baseline failed.", "Error", e);
-                }
+                FormUtil.ShowAppError("Drawing baseline failed.", "Error", e);
             }
         }
+    }
 
-        private void RemoveClosestPoint(System.Drawing.Point location)
+    private void RemoveClosestPoint(System.Drawing.Point location)
+    {
+        var point = GetPointToRemove(location);
+        if (point != null)
         {
-            var point = GetPointToRemove(location);
-            if (point != null)
-            {
-                _correctionPoints = _correctionPoints.Where(x => x != point).ToList();
-            }
-            Refresh();
+            _correctionPoints = _correctionPoints.Where(x => x != point).ToList();
         }
+        Refresh();
+    }
 
-        private void Refresh()
-        {
-            _canvasPanel.Refresh();
-        }
+    private void Refresh()
+    {
+        _canvasPanel.Refresh();
+    }
 
-        private void ShowContextMenu(System.Drawing.Point location)
-        {
-            var contextMenu = new ContextMenuStrip();
-            contextMenu.Items.Add("Remove Closest Point", null, (sender, e) => RemoveClosestPoint(location));
-            contextMenu.Show(_canvasPanel, location);
-        }
+    private void ShowContextMenu(System.Drawing.Point location)
+    {
+        var contextMenu = new ContextMenuStrip();
+        contextMenu.Items.Add("Remove Closest Point", null, (sender, e) => RemoveClosestPoint(location));
+        contextMenu.Show(_canvasPanel, location);
+    }
         
-        private Point GetPointToRemove(System.Drawing.Point pos)
+    private Point GetPointToRemove(System.Drawing.Point pos)
+    {
+        var closestPoint = _correctionPoints.MinByOrDefault(x => Util.GetPixelDistance(CoordSystem.ToPixelPoint(x), pos));
+        if (closestPoint != null)
         {
-            var closestPoint = _correctionPoints.MinByOrDefault(x => Util.GetPixelDistance(CoordSystem.ToPixelPoint(x), pos));
-            if (closestPoint != null)
-            {
-                return closestPoint;
-            }
-            return null;
+            return closestPoint;
         }
+        return null;
+    }
         
-        private void DrawMarks(Graphics graphics)
+    private void DrawMarks(Graphics graphics)
+    {
+        foreach (var point in _correctionPoints)
         {
-            foreach (var point in _correctionPoints)
-            {
-                new Mark(CoordSystem, graphics, COLOR, point).Draw();
-            }
-            Refresh();
+            new Mark(CoordSystem, graphics, COLOR, point).Draw();
         }
+        Refresh();
+    }
 
-        public void ImportPoint(List<Point> points)
-        {
-            _correctionPoints = points;
-            Refresh();
-        }
+    public void ImportPoint(List<Point> points)
+    {
+        _correctionPoints = points;
+        Refresh();
+    }
 
-        public void ExportPoints(string filePath)
-        {
-            new OnePointPerLineFileWriter().WritePoints(_correctionPoints, filePath);
-        }
+    public void ExportPoints(string filePath)
+    {
+        new OnePointPerLineFileWriter().WritePoints(_correctionPoints, filePath);
+    }
 
-        public void CorrectBaseline()
-        {
-            // _oldCharts = _canvasPanel.Charts;
-            // _canvasPanel.Charts = _canvasPanel.Charts.Select(x => CorrectBaseline(x)).ToList();
-        }
+    public void CorrectBaseline()
+    {
+        // _oldCharts = _canvasPanel.Charts;
+        // _canvasPanel.Charts = _canvasPanel.Charts.Select(x => CorrectBaseline(x)).ToList();
+    }
 
-        private Chart CorrectBaseline(Chart chart)
-        {
-            return null;
-            // var correctedPoints = new PerPartesBaselineCalculator().GetBaseline(chart.Points, _correctionPoints, );
-            // var ret = new Chart(correctedPoints);
-            // return ret;
-        }
+    private Chart CorrectBaseline(Chart chart)
+    {
+        return null;
+        // var correctedPoints = new PerPartesBaselineCalculator().GetBaseline(chart.Points, _correctionPoints, );
+        // var ret = new Chart(correctedPoints);
+        // return ret;
+    }
 
-        public void UndoBaselineCorrection()
-        {
+    public void UndoBaselineCorrection()
+    {
             
-        }
     }
 }
