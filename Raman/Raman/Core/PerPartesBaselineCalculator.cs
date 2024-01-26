@@ -16,7 +16,6 @@ namespace Raman.Core
             {
                 throw new AppException("Calculation of baseline failed. There are no chart points.");
             }
-            chartPoints = chartPoints.OrderBy(point => point.X).ToList();
             correctionPoints = correctionPoints.OrderBy(point => point.X).ToList();
             var ret = new List<Point>();
             var correctionStart = correctionPoints[0].X;

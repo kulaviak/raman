@@ -60,7 +60,7 @@ namespace Raman.Drawing
                 try
                 {
                     var baselinePoints = new PerPartesBaselineCalculator().GetBaseline(chartPoints, _correctionPoints, 3);
-                    new CanvasDrawer(_canvasPanel.CoordSystem, graphics).DrawLines(baselinePoints, Pens.GreenYellow);
+                    new CanvasDrawer(_canvasPanel.CoordSystem, graphics).DrawLines(baselinePoints, Pens.Black);
                 }
                 catch (Exception e)
                 {

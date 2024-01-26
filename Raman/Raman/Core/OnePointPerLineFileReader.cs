@@ -21,12 +21,12 @@ namespace Raman.Core
         
         public List<Point> TryReadFile()
         {
-            List<string> lines;
             try
             {
-                lines = File.ReadLines(_filePath).ToList().Where(x => !string.IsNullOrWhiteSpace(x)).ToList();
-                var ret = TryParseLines(lines);
-                return ret;
+                var lines = File.ReadLines(_filePath).ToList().Where(x => !string.IsNullOrWhiteSpace(x)).ToList();
+                var points = TryParseLines(lines);
+                points = points.OrderBy(x => x.X).ToList();
+                return points;
             }
             catch (Exception ex)
             {
