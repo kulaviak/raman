@@ -10,6 +10,7 @@ namespace Raman.Core
     {
         public List<Point> GetCorrectedPoints(List<Point> chartPoints, List<Point> correctionPoints, int degree)
         {
+            degree = Math.Min(correctionPoints.Count - 1, degree);
             // Fit a polynomial to the data
             // https://numerics.mathdotnet.com/Regression
             var x = correctionPoints.Select(point => (double) point.X).ToArray();
@@ -28,10 +29,10 @@ namespace Raman.Core
             return ret;
         }
         
-        static double EvaluatePolynomial(Vector<double> coefficients, double x)
+        private static double EvaluatePolynomial(Vector<double> coefficients, double x)
         {
             double result = 0;
-            for (int i = 0; i < coefficients.Count; i++)
+            for (var i = 0; i < coefficients.Count; i++)
             {
                 result += coefficients[i] * Math.Pow(x, i);
             }

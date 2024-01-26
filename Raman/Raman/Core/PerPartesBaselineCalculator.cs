@@ -34,17 +34,17 @@ namespace Raman.Core
             {
                 var correctionStart = batchPoints[0].X;
                 var correctionEnd = batchPoints[batchPoints.Count - 1].X;
-                var chartPointsBetweenCorrectionPoints = chartPoints.Where(point => correctionStart  <= point.X && point.X <= correctionEnd).ToList();
-                var baselinePoints = new PolynomialFitCalculator().GetCorrectedPoints(chartPointsBetweenCorrectionPoints, batchPoints, degree);
+                var chartPointsBetweenCorrectionPoints = chartPoints.Where(point => correctionStart <= point.X && point.X <= correctionEnd).ToList();
+                var baselinePoints = new PolynomialFitCalculator().GetCorrectedPoints(chartPointsBetweenCorrectionPoints, batchPoints, degree + 1);
                 ret.AddRange(baselinePoints);
             }
             return ret;
         }
         
-        static List<List<Point>> SplitList(List<Point> points, int batchSize)
+        private static List<List<Point>> SplitList(List<Point> points, int batchSize)
         {
             var batches = new List<List<Point>>();
-            for (int i = 0; i < points.Count; i += batchSize)
+            for (var i = 0; i < points.Count; i += batchSize)
             {
                 var batch = points.GetRange(i, Math.Min(batchSize, points.Count - i));
                 batches.Add(batch);

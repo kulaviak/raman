@@ -1,11 +1,15 @@
 using System;
 using System.Windows.Forms;
+using NLog;
 using TurboLabs.EMOS.Common;
 
 namespace Raman.Controls
 {
     public abstract class FormUtil
     {
+
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+        
         public static void ShowUserError(string text, string caption)
         {
             MessageBox.Show(text, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -13,10 +17,10 @@ namespace Raman.Controls
         
         public static void ShowAppError(string text, string caption, Exception ex)
         {
-            text += " Note: Error information was copied to clipboard.";
-            MessageBox.Show(text, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            var str = new ExceptionFormatter().ToString(ex);
-            Clipboard.SetText(str);           
+            // text += " Note: Error information was copied to clipboard.";
+            MessageBox.Show(text, caption + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            _logger.Error(ex, caption);
+            // var str = new ExceptionFormatter().ToString(ex);
         }
         
         public static void ShowInfo(string text, string caption)
