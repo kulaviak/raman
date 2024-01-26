@@ -52,6 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\AppStatusStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\BaselineCorrectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,7 +84,7 @@
     <Compile Include="Drawing\Chart.cs" />
     <Compile Include="Drawing\LayerBase.cs" />
     <Compile Include="Drawing\Mark.cs" />
-    <Compile Include="Drawing\StatusBarLayer.cs" />
+    <Compile Include="Drawing\StatusStripLayer.cs" />
     <Compile Include="Drawing\XAxis.cs" />
     <Compile Include="Drawing\YAxis.cs" />
     <Compile Include="Program.cs" />

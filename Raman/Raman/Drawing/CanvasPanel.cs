@@ -44,7 +44,7 @@ namespace Raman.Drawing
             }
         }
 
-        public StatusBarLayer StatusBarLayer { get; set; }
+        public StatusStripLayer StatusStripLayer { get; set; }
 
         public CanvasPanel()
         {
@@ -187,7 +187,7 @@ namespace Raman.Drawing
                 }
             }
             BaselineCorrectionLayer?.HandleMouseMove(sender, e);
-            StatusBarLayer?.HandleMouseMove(sender, e);
+            StatusStripLayer?.HandleMouseMove(sender, e);
         }
 
         private void HandleMouseUp(object sender, MouseEventArgs e)

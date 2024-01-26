@@ -32,5 +32,10 @@ namespace Raman.Core
                 return null;
             }
         }
+
+        public static string Round(decimal value, int decimalPlaces)
+        {
+            return Math.Round(value, decimalPlaces).ToString();
+        }
     }
 }

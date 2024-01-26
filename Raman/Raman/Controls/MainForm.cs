@@ -18,10 +18,16 @@ namespace Raman
         public MainForm()
         {
             InitializeComponent();
+            AdditionalInitialization();
+        }
+
+        private void AdditionalInitialization()
+        {
             MinimumSize = new Size(800, 600);
             LoadDemoSpectrum();
             // LoadDemoSpectra();
             HideSidePanel();
+            canvasPanel.StatusStripLayer = new StatusStripLayer(canvasPanel.CoordSystem, statusStrip);
         }
 
         private void HideSidePanel()
@@ -183,7 +189,7 @@ namespace Raman
             form.Closed += BaselineForm_Closed;
             ShowSidePanel(form);
             canvasPanel.BaselineCorrectionLayer = new BaselineCorrectionLayer(canvasPanel.CoordSystem, canvasPanel);
-            canvasPanel.StatusBarLayer = new StatusBarLayer(canvasPanel.CoordSystem, canvasPanel);
+            canvasPanel.StatusStripLayer = new StatusStripLayer(canvasPanel.CoordSystem, statusStrip);
         }
 
         private void BaselineForm_Closed(object sender, EventArgs e)
