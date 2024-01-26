@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Runtime.Serialization;
 using Point = Raman.Core.Point;
 

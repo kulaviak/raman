@@ -1,4 +1,3 @@
-using System.Windows.Forms;
 using Raman.Controls;
 
 namespace Raman.Drawing

@@ -1,6 +1,3 @@
-using System.Drawing;
-using System.Windows.Forms;
-
 namespace Raman.Drawing
 {
     public class LayerBase

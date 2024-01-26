@@ -1,26 +1,24 @@
-using System.Windows.Forms;
-using Raman.Core;
+using Point = Raman.Core.Point;
 
-namespace Raman.Controls
+namespace Raman.Controls;
+
+public class AppStatusStrip : StatusStrip
 {
-    public class AppStatusStrip : StatusStrip
+    private ToolStripStatusLabel _lblPosition;
+
+    public AppStatusStrip()
     {
-        private ToolStripStatusLabel _lblPosition;
+        InitializeComponent();
+    }
 
-        public AppStatusStrip()
-        {
-            InitializeComponent();
-        }
+    private void InitializeComponent()
+    {
+        _lblPosition = new ToolStripStatusLabel();
+        Items.AddRange(new ToolStripItem[] {_lblPosition});   
+    }
 
-        private void InitializeComponent()
-        {
-            _lblPosition = new ToolStripStatusLabel();
-            Items.AddRange(new ToolStripItem[] {_lblPosition});   
-        }
-
-        public void ShowPosition(Point position)
-        {
-            _lblPosition.Text = $"X: {Util.Round(position.X, 0)}  Y: {Util.Round(position.Y, 0)}";
-        }
+    public void ShowPosition(Point position)
+    {
+        _lblPosition.Text = $"X: {Util.Round(position.X, 0)}  Y: {Util.Round(position.Y, 0)}";
     }
 }

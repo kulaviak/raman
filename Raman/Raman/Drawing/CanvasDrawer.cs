@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Drawing;
-using Raman.Core;
 using Point = Raman.Core.Point;
 
 namespace Raman.Drawing

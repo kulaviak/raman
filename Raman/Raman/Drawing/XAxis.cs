@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Drawing;
-
 namespace Raman.Drawing
 {
     public class XAxis
