@@ -139,8 +139,12 @@ public class BaselineCorrectionLayer : LayerBase
 
     private Chart CorrectBaseline(Chart chart)
     {
-        var baselinePoints = new SplineBaselineCalculator().GetBaseline(chart.Points.Select(point => point.X).ToList(), CorrectionPoints);
-        var newChartPoints = new BaselineCorrector().CorrectChartByBaseline(chart.Points, baselinePoints);
+        var correctionStart = CorrectionPoints.Min(x => x.X);
+        var correctionEnd = CorrectionPoints.Max(x => x.X);
+        // get baseline only between correction points
+        var xPositions = chart.Points.Where(point => correctionStart <= point.X && point.X <= correctionEnd).Select(point => point.X).ToList();
+        var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, CorrectionPoints);
+        var newChartPoints = new SimpleBaselineCorrector().CorrectChartByBaseline(chart.Points, baselinePoints);
         var ret = new Chart(newChartPoints);
         return ret;
     }

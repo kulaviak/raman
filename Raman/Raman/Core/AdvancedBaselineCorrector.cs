@@ -1,6 +1,6 @@
 namespace Raman.Core;
 
-public class BaselineCorrector
+public class AdvancedBaselineCorrector
 {
     public List<Point> CorrectChartByBaseline(List<Point> chartPoints, List<Point> baselinePoints)
     {
