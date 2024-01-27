@@ -55,10 +55,10 @@ public class BaselineCorrectionLayer : LayerBase
     {
         if (_canvasPanel.Charts.Any() && CorrectionPoints.Count >= 4)
         {
-            var chartPoints = _canvasPanel.Charts[0].Points;
             try
             {
-                var baselinePoints = new SplineBaselineCalculator().GetBaseline(chartPoints, CorrectionPoints);
+                var xPositions = GetXPositions(CorrectionPoints.Min(point => point.X), CorrectionPoints.Max(point => point.X));
+                var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, CorrectionPoints);
                 new CanvasDrawer(_canvasPanel.CoordSystem, graphics).DrawLines(baselinePoints, Pens.Green);
             }
             catch (Exception e)
@@ -66,6 +66,17 @@ public class BaselineCorrectionLayer : LayerBase
                 FormUtil.ShowAppError("Drawing baseline failed.", "Error", e);
             }
         }
+    }
+
+    private List<decimal> GetXPositions(decimal start, decimal end)
+    {
+        var diff = (end - start) / 1000;
+        var ret = new List<decimal>();
+        for (var position = start; position  <= end; position += diff)
+        {
+            ret.Add(position);    
+        }
+        return ret;
     }
 
     private void RemoveClosestPoint(System.Drawing.Point location)
@@ -128,7 +139,7 @@ public class BaselineCorrectionLayer : LayerBase
 
     private Chart CorrectBaseline(Chart chart)
     {
-        var baselinePoints = new SplineBaselineCalculator().GetBaseline(chart.Points, CorrectionPoints);
+        var baselinePoints = new SplineBaselineCalculator().GetBaseline(chart.Points.Select(point => point.X).ToList(), CorrectionPoints);
         var newChartPoints = new BaselineCorrector().CorrectChartByBaseline(chart.Points, baselinePoints);
         var ret = new Chart(newChartPoints);
         return ret;
