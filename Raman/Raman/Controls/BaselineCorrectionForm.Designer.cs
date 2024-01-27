@@ -40,7 +40,7 @@ partial class BaselineCorrectionForm
         // 
         // btnUndoBaselineCorrection
         // 
-        this.btnUndoBaselineCorrection.Location = new System.Drawing.Point(7, 246);
+        this.btnUndoBaselineCorrection.Location = new System.Drawing.Point(7, 217);
         this.btnUndoBaselineCorrection.Name = "btnUndoBaselineCorrection";
         this.btnUndoBaselineCorrection.Size = new System.Drawing.Size(142, 23);
         this.btnUndoBaselineCorrection.TabIndex = 8;
@@ -108,7 +108,7 @@ partial class BaselineCorrectionForm
         // 
         // btnExportCorrectedCharts
         // 
-        this.btnExportCorrectedCharts.Location = new System.Drawing.Point(7, 217);
+        this.btnExportCorrectedCharts.Location = new System.Drawing.Point(7, 246);
         this.btnExportCorrectedCharts.Name = "btnExportCorrectedCharts";
         this.btnExportCorrectedCharts.Size = new System.Drawing.Size(142, 23);
         this.btnExportCorrectedCharts.TabIndex = 12;

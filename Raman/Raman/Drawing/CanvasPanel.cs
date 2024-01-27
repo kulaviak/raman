@@ -181,6 +181,8 @@ public class CanvasPanel : Panel
         if (IsZooming && e.Button == MouseButtons.Left)
         {
             _zoomStart = e.Location;
+            Refresh();
+            return;
         }
         BaselineCorrectionLayer?.HandleMouseDown(sender, e);
         Refresh();
