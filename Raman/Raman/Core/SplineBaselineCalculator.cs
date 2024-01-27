@@ -7,33 +7,31 @@ namespace Raman.Core;
 /// </summary>
 public class SplineBaselineCalculator
 {
-    public List<Point> GetBaseline(List<Point> chartPoints, List<Point> correctionPoints, int degree)
+    public List<Point> GetBaseline(List<Point> chartPoints, List<Point> correctionPoints)
     {
         if (correctionPoints.Count < 4)
         {
-            throw new AppException("Calculation of baseline failed. There are lcorrection points.");
+            throw new AppException("Calculation of baseline failed. There are less than 4 correction points.");
         }
-        if (chartPoints.Count < 4)
+        if (chartPoints.Count < 2)
         {
-            throw new AppException("Calculation of baseline failed. There are no chart points.");
+            throw new AppException("Calculation of baseline failed. There are less than 2 chart points.");
         }
         correctionPoints = correctionPoints.OrderBy(point => point.X).ToList();
         var ret = new List<Point>();
         var correctionStart = correctionPoints[0].X;
         var correctionEnd = correctionPoints[correctionPoints.Count - 1].X;
         var chartPointsBetweenCorrectionPoints = chartPoints.Where(point => correctionStart  <= point.X && point.X <= correctionEnd).ToList();
-        var baselinePoints = GetBaselineInternal(chartPointsBetweenCorrectionPoints, correctionPoints, degree);
+        var baselinePoints = GetBaselineInternal(chartPointsBetweenCorrectionPoints, correctionPoints);
         ret.AddRange(baselinePoints);
         return ret;
     }
 
-    private List<Point> GetBaselineInternal(List<Point> chartPoints, List<Point> correctionPoints, int degree)
+    private List<Point> GetBaselineInternal(List<Point> chartPoints, List<Point> correctionPoints)
     {
-        // Sample data points
         var xValues = correctionPoints.Select(point => (double) point.X).ToArray();
         var yValues = correctionPoints.Select(point => (double) point.Y).ToArray();
 
-        // Create cubic spline interpolation
         var spline = CubicSpline.InterpolateNatural(xValues, yValues);
 
         var ret = new List<Point>();

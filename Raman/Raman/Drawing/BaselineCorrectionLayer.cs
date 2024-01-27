@@ -56,7 +56,7 @@ public class BaselineCorrectionLayer : LayerBase
             var chartPoints = _canvasPanel.Charts[0].Points;
             try
             {
-                var baselinePoints = new SplineBaselineCalculator().GetBaseline(chartPoints, _correctionPoints, 3);
+                var baselinePoints = new SplineBaselineCalculator().GetBaseline(chartPoints, _correctionPoints);
                 new CanvasDrawer(_canvasPanel.CoordSystem, graphics).DrawLines(baselinePoints, Pens.Black);
             }
             catch (Exception e)
