@@ -60,7 +60,9 @@ public class BaselineCorrectionLayer : LayerBase
         {
             try
             {
-                var xPositions = GetXPositions(CorrectionPoints.Min(point => point.X), CorrectionPoints.Max(point => point.X));
+                var start = CorrectionPoints.Min(point => point.X);
+                var end = CorrectionPoints.Max(point => point.X);
+                var xPositions = GetXPositions(start, end);
                 var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, CorrectionPoints);
                 new CanvasDrawer(_canvasPanel.CoordSystem, graphics).DrawLines(baselinePoints, Pens.Green);
             }

@@ -8,6 +8,8 @@ namespace Raman;
 public partial class MainForm : Form
 {
     private Form _sidePanel;
+
+    private const int SIDE_PANEL_WIDTH = 175;
         
     public MainForm()
     {
@@ -32,11 +34,7 @@ public partial class MainForm : Form
 
     private void UpdateSplitter()
     {
-        if (_sidePanel != null)
-        {
-            var borderWidth = 10;
-            splitContainer.SplitterDistance = Width - _sidePanel.Width - borderWidth;
-        }
+        splitContainer.SplitterDistance = Width - SIDE_PANEL_WIDTH - 20;
     }
 
     private void ShowSidePanel(Form form)
@@ -44,10 +42,10 @@ public partial class MainForm : Form
         form.TopLevel = false;
         _sidePanel = form;
         splitContainer.Panel2Collapsed = false;
-        UpdateSplitter();
         form.Dock = DockStyle.Fill;
         splitContainer.Panel2.Controls.Clear();
         splitContainer.Panel2.Controls.Add(form);
+        UpdateSplitter();
         form.Show();
     }
 
@@ -74,7 +72,8 @@ public partial class MainForm : Form
     {
         using (var openFileDialog = new OpenFileDialog())
         {
-            openFileDialog.InitialDirectory = "C:\\"; 
+            // don't specify initial directory - it will remember the last one
+            // openFileDialog.InitialDirectory = "C:\\"; 
             openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"; 
             openFileDialog.FilterIndex = 1;
             openFileDialog.Multiselect = true;
@@ -122,6 +121,7 @@ public partial class MainForm : Form
                 MessageBoxIcon.Error);
         }
         canvasPanel.Charts = charts;
+        canvasPanel.Refresh();
     }
         
     private void LoadDemoSpectrum()
@@ -177,7 +177,6 @@ public partial class MainForm : Form
         var form = new BaselineCorrectionForm(canvasPanel.BaselineCorrectionLayer);
         form.Closed += BaselineForm_Closed;
         ShowSidePanel(form);
-        // canvasPanel.StatusStripLayer = new StatusStripLayer(canvasPanel.CoordSystem, statusStrip);
     }
 
     private void BaselineForm_Closed(object sender, EventArgs e)

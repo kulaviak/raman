@@ -35,11 +35,12 @@ partial class BaselineCorrectionForm
         this.btnReset = new System.Windows.Forms.Button();
         this.label1 = new System.Windows.Forms.Label();
         this.btnClose = new System.Windows.Forms.Button();
+        this.button1 = new System.Windows.Forms.Button();
         this.SuspendLayout();
         // 
         // btnUndoBaselineCorrection
         // 
-        this.btnUndoBaselineCorrection.Location = new System.Drawing.Point(7, 217);
+        this.btnUndoBaselineCorrection.Location = new System.Drawing.Point(7, 246);
         this.btnUndoBaselineCorrection.Name = "btnUndoBaselineCorrection";
         this.btnUndoBaselineCorrection.Size = new System.Drawing.Size(142, 23);
         this.btnUndoBaselineCorrection.TabIndex = 8;
@@ -97,7 +98,7 @@ partial class BaselineCorrectionForm
         // 
         // btnClose
         // 
-        this.btnClose.Location = new System.Drawing.Point(35, 266);
+        this.btnClose.Location = new System.Drawing.Point(35, 295);
         this.btnClose.Name = "btnClose";
         this.btnClose.Size = new System.Drawing.Size(75, 23);
         this.btnClose.TabIndex = 11;
@@ -105,11 +106,21 @@ partial class BaselineCorrectionForm
         this.btnClose.UseVisualStyleBackColor = true;
         this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
         // 
+        // button1
+        // 
+        this.button1.Location = new System.Drawing.Point(7, 217);
+        this.button1.Name = "button1";
+        this.button1.Size = new System.Drawing.Size(142, 23);
+        this.button1.TabIndex = 12;
+        this.button1.Text = "Export Corrected Charts";
+        this.button1.UseVisualStyleBackColor = true;
+        // 
         // BaselineCorrectionForm
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.ClientSize = new System.Drawing.Size(169, 450);
+        this.Controls.Add(this.button1);
         this.Controls.Add(this.btnClose);
         this.Controls.Add(this.label1);
         this.Controls.Add(this.btnReset);
@@ -123,6 +134,8 @@ partial class BaselineCorrectionForm
         this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BaselineCorrectionForm_FormClosing);
         this.ResumeLayout(false);
     }
+
+    private System.Windows.Forms.Button button1;
 
     private System.Windows.Forms.Button btnClose;
 
