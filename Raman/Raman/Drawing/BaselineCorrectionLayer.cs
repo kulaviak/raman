@@ -24,10 +24,12 @@ public class BaselineCorrectionLayer : LayerBase
         {
             var point = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
             _correctionPoints.Add(point);
+            Refresh();
         }
         else if (e.Button == MouseButtons.Middle)
         {
             RemoveClosestPoint(e.Location);
+            Refresh();
         }
         else if (e.Button == MouseButtons.Right)
         {
@@ -49,12 +51,12 @@ public class BaselineCorrectionLayer : LayerBase
 
     private void DrawBaselines(Graphics graphics)
     {
-        if (_canvasPanel.Charts.Any() && _correctionPoints.Count >= 2)
+        if (_canvasPanel.Charts.Any() && _correctionPoints.Count >= 4)
         {
             var chartPoints = _canvasPanel.Charts[0].Points;
             try
             {
-                var baselinePoints = new PerPartesBaselineCalculator().GetBaseline(chartPoints, _correctionPoints, 3);
+                var baselinePoints = new SplineBaselineCalculator().GetBaseline(chartPoints, _correctionPoints, 3);
                 new CanvasDrawer(_canvasPanel.CoordSystem, graphics).DrawLines(baselinePoints, Pens.Black);
             }
             catch (Exception e)

@@ -80,6 +80,7 @@
     <Compile Include="Core\Point.cs" />
     <Compile Include="Core\OnePointPerLineFileReader.cs" />
     <Compile Include="Core\PolynomialFitCalculator.cs" />
+    <Compile Include="Core\SplineBaselineCalculator.cs" />
     <Compile Include="Core\Util.cs" />
     <Compile Include="Drawing\BaselineCorrectionLayer.cs" />
     <Compile Include="Drawing\CanvasCoordSystem.cs" />
