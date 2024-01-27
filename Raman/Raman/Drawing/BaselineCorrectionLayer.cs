@@ -49,7 +49,7 @@ public class BaselineCorrectionLayer : LayerBase
 
     private void DrawBaselines(Graphics graphics)
     {
-        if (_canvasPanel.Charts.Any() && _correctionPoints.Any())
+        if (_canvasPanel.Charts.Any() && _correctionPoints.Count >= 2)
         {
             var chartPoints = _canvasPanel.Charts[0].Points;
             try
@@ -102,7 +102,6 @@ public class BaselineCorrectionLayer : LayerBase
         {
             new Mark(CoordSystem, graphics, COLOR, point).Draw();
         }
-        Refresh();
     }
 
     public void ImportPoint(List<Point> points)
