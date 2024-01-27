@@ -47,8 +47,11 @@ public class BaselineCorrectionLayer : LayerBase
         
     public override void Draw(Graphics graphics)
     {
-        DrawBaselines(graphics);
-        DrawMarks(graphics);
+        if (!IsBaselineCorrected)
+        {
+            DrawBaselines(graphics);
+            DrawMarks(graphics);
+        }
     }
 
     private void DrawBaselines(Graphics graphics)
