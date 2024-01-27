@@ -4,7 +4,7 @@ namespace Raman.Drawing;
 
 public class CanvasPanel : Panel
 {
-    private List<Chart> _charts = new List<Chart>(new List<Chart>());
+    private List<Chart> _charts = new List<Chart>();
 
     public List<Chart> Charts
     {
@@ -171,7 +171,6 @@ public class CanvasPanel : Panel
         {
             _zoomStart = e.Location;
         }
-
         BaselineCorrectionLayer?.HandleMouseDown(sender, e);
         Refresh();
     }
@@ -184,7 +183,6 @@ public class CanvasPanel : Panel
             var y = Math.Min(_zoomStart.Value.Y, e.Y);
             var width = Math.Abs(_zoomStart.Value.X - e.X);
             // calculate selection window height to have same aspect ratio as panel => after zoom chart will not change
-            // (aspect ratio of chart will not change)
             var height = (int) (width * (Height / (float) Width));
             if (width != 0 && height != 0)
             {
@@ -192,7 +190,6 @@ public class CanvasPanel : Panel
                 DoRefresh();
             }
         }
-
         BaselineCorrectionLayer?.HandleMouseMove(sender, e);
         StatusStripLayer?.HandleMouseMove(sender, e);
     }
@@ -207,7 +204,6 @@ public class CanvasPanel : Panel
             _zoomStart = null;
             _zoomRectangle = null;
         }
-
         BaselineCorrectionLayer?.HandleMouseUp(sender, e);
     }
 
