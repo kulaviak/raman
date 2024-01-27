@@ -13,12 +13,10 @@ public class SplineBaselineCalculator
         {
             throw new AppException("Calculation of baseline failed. There are less than 2 chart points.");
         }
-
         if (correctionPoints.Count < 4)
         {
             throw new AppException("Calculation of baseline failed. There are less than 4 correction points.");
         }
-
         var ret = new List<Point>();
         var spline = GetSplineFromCorrectionPoints(correctionPoints);
         foreach (var x in xPositions)
@@ -27,7 +25,6 @@ public class SplineBaselineCalculator
             var interpolatedPoint = new Point(x, (decimal) y);
             ret.Add(interpolatedPoint);
         }
-
         return ret;
     }
 
