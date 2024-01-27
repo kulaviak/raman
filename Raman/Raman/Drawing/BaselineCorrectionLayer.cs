@@ -45,8 +45,8 @@ public class BaselineCorrectionLayer : LayerBase
         
     public override void Draw(Graphics graphics)
     {
-        DrawMarks(graphics);
         DrawBaselines(graphics);
+        DrawMarks(graphics);
     }
 
     private void DrawBaselines(Graphics graphics)
@@ -57,7 +57,7 @@ public class BaselineCorrectionLayer : LayerBase
             try
             {
                 var baselinePoints = new SplineBaselineCalculator().GetBaseline(chartPoints, _correctionPoints);
-                new CanvasDrawer(_canvasPanel.CoordSystem, graphics).DrawLines(baselinePoints, Pens.Black);
+                new CanvasDrawer(_canvasPanel.CoordSystem, graphics).DrawLines(baselinePoints, Pens.Green);
             }
             catch (Exception e)
             {

@@ -1,3 +1,5 @@
+using Point = Raman.Core.Point;
+
 namespace Raman.Drawing;
 
 public class Mark
@@ -8,11 +10,13 @@ public class Mark
         
     private readonly Color _color;
         
-    private readonly Raman.Core.Point _point;
+    private readonly Point _point;
 
     private const int RADIUS = 5;
+    
+    private static int MARK_THICKNESS = 2;
 
-    public Mark(CanvasCoordSystem coordSystem, Graphics graphics, Color color, Raman.Core.Point point)
+    public Mark(CanvasCoordSystem coordSystem, Graphics graphics, Color color, Point point)
     {
         _coordSystem = coordSystem;
         _graphics = graphics;
@@ -30,13 +34,13 @@ public class Mark
 
     private void DrawVerticalLine(float pixelX, float pixelY)
     {
-        var pen = new Pen(_color, 1); 
+        var pen = new Pen(_color, MARK_THICKNESS); 
         _graphics.DrawLine(pen, pixelX, pixelY - RADIUS, pixelX, pixelY + RADIUS);
     }
 
     private void DrawHorizontalLine(float pixelX, float pixelY)
     {
-        var pen = new Pen(_color, 1); 
+        var pen = new Pen(_color, MARK_THICKNESS); 
         _graphics.DrawLine(pen, pixelX - RADIUS, pixelY, pixelX + RADIUS, pixelY);
     }
 }

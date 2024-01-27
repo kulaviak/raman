@@ -33,6 +33,7 @@ partial class BaselineCorrectionForm
         this.btnExportPoints = new System.Windows.Forms.Button();
         this.btnImportPoints = new System.Windows.Forms.Button();
         this.btnReset = new System.Windows.Forms.Button();
+        this.label1 = new System.Windows.Forms.Label();
         this.SuspendLayout();
         // 
         // btnUndoBaselineCorrection
@@ -85,11 +86,20 @@ partial class BaselineCorrectionForm
         this.btnReset.UseVisualStyleBackColor = true;
         this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
         // 
+        // label1
+        // 
+        this.label1.Location = new System.Drawing.Point(12, 215);
+        this.label1.Name = "label1";
+        this.label1.Size = new System.Drawing.Size(137, 104);
+        this.label1.TabIndex = 10;
+        this.label1.Text = "Click on chart where baseline points should be. Draw at least 4 points to see bas" + "eline.";
+        // 
         // BaselineCorrectionForm
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.ClientSize = new System.Drawing.Size(167, 450);
+        this.Controls.Add(this.label1);
         this.Controls.Add(this.btnReset);
         this.Controls.Add(this.btnUndoBaselineCorrection);
         this.Controls.Add(this.btnDoBaselineCorrection);
@@ -100,6 +110,8 @@ partial class BaselineCorrectionForm
         this.Text = "Baseline Correction";
         this.ResumeLayout(false);
     }
+
+    private System.Windows.Forms.Label label1;
 
     private System.Windows.Forms.Button btnReset;
 
