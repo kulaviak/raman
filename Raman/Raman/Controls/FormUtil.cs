@@ -24,4 +24,9 @@ public abstract class FormUtil
     {
         MessageBox.Show(text, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
+    
+    public static DialogResult ShowQuestion(string text, string caption)
+    {
+        return MessageBox.Show(text, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+    }
 }

@@ -120,6 +120,7 @@ partial class BaselineCorrectionForm
         this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
         this.Name = "BaselineCorrectionForm";
         this.Text = "Baseline Correction";
+        this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BaselineCorrectionForm_FormClosing);
         this.ResumeLayout(false);
     }
 

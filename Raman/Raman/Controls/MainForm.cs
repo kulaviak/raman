@@ -173,48 +173,20 @@ public partial class MainForm : Form
 
     private void BaselineCorrection()
     {
-        var form = new BaselineCorrectionForm();
-        form.PointsImported += BaselineForm_PointsImported;
-        form.PointsExported += BaselineForm_PointsExported;
-        form.BaselineCorrectionReseted += BaselineForm_BaselineCorrectionReseted;
-        form.DoBaselineCorrection += BaselineForm_DoBaselineCorrection;
-        form.UndoBaselineCorrection += BaselineForm_UndoBaselineCorrection;
+        canvasPanel.BaselineCorrectionLayer = new BaselineCorrectionLayer(canvasPanel.CoordSystem, canvasPanel);
+        var form = new BaselineCorrectionForm(canvasPanel.BaselineCorrectionLayer);
         form.Closed += BaselineForm_Closed;
         ShowSidePanel(form);
-        canvasPanel.BaselineCorrectionLayer = new BaselineCorrectionLayer(canvasPanel.CoordSystem, canvasPanel);
-        canvasPanel.StatusStripLayer = new StatusStripLayer(canvasPanel.CoordSystem, statusStrip);
+        // canvasPanel.StatusStripLayer = new StatusStripLayer(canvasPanel.CoordSystem, statusStrip);
     }
 
     private void BaselineForm_Closed(object sender, EventArgs e)
     {
         HideSidePanel();
+        canvasPanel.BaselineCorrectionLayer = null;
+        Refresh();
     }
-
-    private void BaselineForm_BaselineCorrectionReseted(object sender, EventArgs e)
-    {
-        canvasPanel.BaselineCorrectionLayer.Reset();
-    }
-        
-    private void BaselineForm_DoBaselineCorrection(object sender, EventArgs e)
-    {
-        canvasPanel.BaselineCorrectionLayer.CorrectBaseline();
-    }
-        
-    private void BaselineForm_UndoBaselineCorrection(object sender, EventArgs e)
-    {
-        canvasPanel.BaselineCorrectionLayer.UndoBaselineCorrection();
-    }
-        
-    private void BaselineForm_PointsExported(object sender, string filePath)
-    {
-        canvasPanel.BaselineCorrectionLayer.ExportPoints(filePath);
-    }
-        
-    private void BaselineForm_PointsImported(object sender, List<Point> points)
-    {
-        canvasPanel.BaselineCorrectionLayer.ImportPoint(points);
-    }
-
+    
     private void tsbRefresh_Click(object sender, EventArgs e)
     {
         Refresh();
