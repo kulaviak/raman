@@ -134,6 +134,7 @@ public class BaselineCorrectionLayer : LayerBase
     {
         _oldCharts = _canvasPanel.Charts;
         _canvasPanel.Charts = _canvasPanel.Charts.Select(x => CorrectBaseline(x)).ToList();
+        IsBaselineCorrected = true;
         _canvasPanel.Refresh();
     }
 
@@ -152,6 +153,7 @@ public class BaselineCorrectionLayer : LayerBase
     public void UndoBaselineCorrection()
     {
         _canvasPanel.Charts = _oldCharts;
+        IsBaselineCorrected = false;
         _canvasPanel.Refresh();
     }
 }
