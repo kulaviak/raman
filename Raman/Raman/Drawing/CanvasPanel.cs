@@ -6,6 +6,8 @@ public class CanvasPanel : Panel
 {
     private List<Chart> _charts = new List<Chart>();
 
+    private const int PIXEL_SPACE = 25;
+    
     public List<Chart> Charts
     {
         get { return _charts; }
@@ -92,7 +94,6 @@ public class CanvasPanel : Panel
             {
                 chart.Draw(CoordSystem, graphics);
             }
-
             graphics.ResetClip();
             DrawXAxis(graphics);
             DrawYAxis(graphics);
@@ -141,6 +142,16 @@ public class CanvasPanel : Panel
         var maxX = allPoints.Max(point => point.X);
         var minY = allPoints.Min(point => point.Y);
         var maxY = allPoints.Max(point => point.Y);
+        
+        // modify displayed range so the chart is not going to axes, but there is a distance to X or Y axis
+        // it is needed when baseline correction points are selected, I want to often select points that is beyond chart range
+        var spaceX = (maxX - minX) / Width * PIXEL_SPACE;
+        var spaceY = (maxY - minY) / Height * PIXEL_SPACE;
+        minX -= spaceX;
+        maxX += spaceX;
+        minY -= spaceY;
+        maxY += spaceY;
+        
         var coordSystem = new CanvasCoordSystem(Width, Height, minX, maxX, minY, maxY);
         return coordSystem;
     }
