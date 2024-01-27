@@ -34,31 +34,32 @@ partial class BaselineCorrectionForm
         this.btnImportPoints = new System.Windows.Forms.Button();
         this.btnReset = new System.Windows.Forms.Button();
         this.label1 = new System.Windows.Forms.Label();
+        this.btnClose = new System.Windows.Forms.Button();
         this.SuspendLayout();
         // 
         // btnUndoBaselineCorrection
         // 
-        this.btnUndoBaselineCorrection.Location = new System.Drawing.Point(12, 173);
+        this.btnUndoBaselineCorrection.Location = new System.Drawing.Point(7, 217);
         this.btnUndoBaselineCorrection.Name = "btnUndoBaselineCorrection";
         this.btnUndoBaselineCorrection.Size = new System.Drawing.Size(142, 23);
         this.btnUndoBaselineCorrection.TabIndex = 8;
-        this.btnUndoBaselineCorrection.Text = "Undo Baseline Correction";
+        this.btnUndoBaselineCorrection.Text = "Undo Correction";
         this.btnUndoBaselineCorrection.UseVisualStyleBackColor = true;
         this.btnUndoBaselineCorrection.Click += new System.EventHandler(this.btnUndoBaselineCorrection_Click);
         // 
         // btnDoBaselineCorrection
         // 
-        this.btnDoBaselineCorrection.Location = new System.Drawing.Point(12, 144);
+        this.btnDoBaselineCorrection.Location = new System.Drawing.Point(7, 188);
         this.btnDoBaselineCorrection.Name = "btnDoBaselineCorrection";
         this.btnDoBaselineCorrection.Size = new System.Drawing.Size(142, 23);
         this.btnDoBaselineCorrection.TabIndex = 7;
-        this.btnDoBaselineCorrection.Text = "Do Baseline Correction";
+        this.btnDoBaselineCorrection.Text = "Correct Baseline";
         this.btnDoBaselineCorrection.UseVisualStyleBackColor = true;
         this.btnDoBaselineCorrection.Click += new System.EventHandler(this.btnDoBaselineCorrection_Click);
         // 
         // btnExportPoints
         // 
-        this.btnExportPoints.Location = new System.Drawing.Point(12, 41);
+        this.btnExportPoints.Location = new System.Drawing.Point(7, 109);
         this.btnExportPoints.Name = "btnExportPoints";
         this.btnExportPoints.Size = new System.Drawing.Size(142, 23);
         this.btnExportPoints.TabIndex = 6;
@@ -68,7 +69,7 @@ partial class BaselineCorrectionForm
         // 
         // btnImportPoints
         // 
-        this.btnImportPoints.Location = new System.Drawing.Point(12, 12);
+        this.btnImportPoints.Location = new System.Drawing.Point(7, 80);
         this.btnImportPoints.Name = "btnImportPoints";
         this.btnImportPoints.Size = new System.Drawing.Size(142, 23);
         this.btnImportPoints.TabIndex = 5;
@@ -78,27 +79,38 @@ partial class BaselineCorrectionForm
         // 
         // btnReset
         // 
-        this.btnReset.Location = new System.Drawing.Point(12, 70);
+        this.btnReset.Location = new System.Drawing.Point(7, 138);
         this.btnReset.Name = "btnReset";
         this.btnReset.Size = new System.Drawing.Size(142, 23);
         this.btnReset.TabIndex = 9;
-        this.btnReset.Text = "Reset";
+        this.btnReset.Text = "Reset Points";
         this.btnReset.UseVisualStyleBackColor = true;
         this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
         // 
         // label1
         // 
-        this.label1.Location = new System.Drawing.Point(12, 215);
+        this.label1.Location = new System.Drawing.Point(7, 9);
         this.label1.Name = "label1";
-        this.label1.Size = new System.Drawing.Size(137, 104);
+        this.label1.Size = new System.Drawing.Size(137, 58);
         this.label1.TabIndex = 10;
         this.label1.Text = "Click on chart where baseline points should be. Draw at least 4 points to see bas" + "eline.";
+        // 
+        // btnClose
+        // 
+        this.btnClose.Location = new System.Drawing.Point(35, 266);
+        this.btnClose.Name = "btnClose";
+        this.btnClose.Size = new System.Drawing.Size(75, 23);
+        this.btnClose.TabIndex = 11;
+        this.btnClose.Text = "Close";
+        this.btnClose.UseVisualStyleBackColor = true;
+        this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
         // 
         // BaselineCorrectionForm
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.ClientSize = new System.Drawing.Size(167, 450);
+        this.ClientSize = new System.Drawing.Size(169, 450);
+        this.Controls.Add(this.btnClose);
         this.Controls.Add(this.label1);
         this.Controls.Add(this.btnReset);
         this.Controls.Add(this.btnUndoBaselineCorrection);
@@ -110,6 +122,8 @@ partial class BaselineCorrectionForm
         this.Text = "Baseline Correction";
         this.ResumeLayout(false);
     }
+
+    private System.Windows.Forms.Button btnClose;
 
     private System.Windows.Forms.Label label1;
 

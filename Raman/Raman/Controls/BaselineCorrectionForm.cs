@@ -76,6 +76,7 @@ public partial class BaselineCorrectionForm : Form
                 {
                     var filePath = filePaths.First();
                     PointsExported(this, filePath);
+                    FormUtil.ShowInfo("Points were exported successfully.", "Export finished");
                 }
                 catch (Exception ex)
                 {
@@ -98,5 +99,10 @@ public partial class BaselineCorrectionForm : Form
     private void btnReset_Click(object sender, EventArgs e)
     {
         BaselineCorrectionReseted?.Invoke(this, null);
+    }
+
+    private void btnClose_Click(object sender, EventArgs e)
+    {
+        Close();
     }
 }
