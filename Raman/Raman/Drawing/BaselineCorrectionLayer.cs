@@ -9,11 +9,11 @@ public class BaselineCorrectionLayer : LayerBase
         
     private static Color COLOR = Color.Red;
 
-    public List<Point> Points { get; set; } = new List<Point>();
+    public List<Point> CorrectionPoints { get; set; } = new List<Point>();
     
     public bool IsBaselineCorrected { get; set; }
 
-    private List<Chart> _oldCharts;
+    private List<Chart> _oldCharts = new List<Chart>();
 
     public BaselineCorrectionLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : base(coordSystem)
     {
@@ -25,7 +25,7 @@ public class BaselineCorrectionLayer : LayerBase
         if (e.Button == MouseButtons.Left)
         {
             var point = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
-            Points.Add(point);
+            CorrectionPoints.Add(point);
             Refresh();
         }
         else if (e.Button == MouseButtons.Middle)
@@ -41,7 +41,7 @@ public class BaselineCorrectionLayer : LayerBase
         
     public void Reset()
     {
-        Points.Clear();
+        CorrectionPoints.Clear();
         Refresh();
     }
         
@@ -53,12 +53,12 @@ public class BaselineCorrectionLayer : LayerBase
 
     private void DrawBaselines(Graphics graphics)
     {
-        if (_canvasPanel.Charts.Any() && Points.Count >= 4)
+        if (_canvasPanel.Charts.Any() && CorrectionPoints.Count >= 4)
         {
             var chartPoints = _canvasPanel.Charts[0].Points;
             try
             {
-                var baselinePoints = new SplineBaselineCalculator().GetBaseline(chartPoints, Points);
+                var baselinePoints = new SplineBaselineCalculator().GetBaseline(chartPoints, CorrectionPoints);
                 new CanvasDrawer(_canvasPanel.CoordSystem, graphics).DrawLines(baselinePoints, Pens.Green);
             }
             catch (Exception e)
@@ -73,7 +73,7 @@ public class BaselineCorrectionLayer : LayerBase
         var point = GetPointToRemove(location);
         if (point != null)
         {
-            Points = Points.Where(x => x != point).ToList();
+            CorrectionPoints = CorrectionPoints.Where(x => x != point).ToList();
         }
         Refresh();
     }
@@ -86,13 +86,13 @@ public class BaselineCorrectionLayer : LayerBase
     private void ShowContextMenu(System.Drawing.Point location)
     {
         var contextMenu = new ContextMenuStrip();
-        contextMenu.Items.Add("Remove Closest Point", null, (sender, e) => RemoveClosestPoint(location));
+        contextMenu.Items.Add("Remove Closest Point", null, (_, _) => RemoveClosestPoint(location));
         contextMenu.Show(_canvasPanel, location);
     }
         
     private Point GetPointToRemove(System.Drawing.Point pos)
     {
-        var closestPoint = Points.MinByOrDefault(x => Util.GetPixelDistance(CoordSystem.ToPixelPoint(x), pos));
+        var closestPoint = CorrectionPoints.MinByOrDefault(x => Util.GetPixelDistance(CoordSystem.ToPixelPoint(x), pos));
         if (closestPoint != null)
         {
             return closestPoint;
@@ -102,7 +102,7 @@ public class BaselineCorrectionLayer : LayerBase
         
     private void DrawMarks(Graphics graphics)
     {
-        foreach (var point in Points)
+        foreach (var point in CorrectionPoints)
         {
             new Mark(CoordSystem, graphics, COLOR, point).Draw();
         }
@@ -110,31 +110,33 @@ public class BaselineCorrectionLayer : LayerBase
 
     public void ImportPoints(List<Point> points)
     {
-        Points = points;
+        CorrectionPoints = points;
         Refresh();
     }
 
     public void ExportPoints(string filePath)
     {
-        new OnePointPerLineFileWriter().WritePoints(Points, filePath);
+        new OnePointPerLineFileWriter().WritePoints(CorrectionPoints, filePath);
     }
 
     public void CorrectBaseline()
     {
-        // _oldCharts = _canvasPanel.Charts;
-        // _canvasPanel.Charts = _canvasPanel.Charts.Select(x => CorrectBaseline(x)).ToList();
+        _oldCharts = _canvasPanel.Charts;
+        _canvasPanel.Charts = _canvasPanel.Charts.Select(x => CorrectBaseline(x)).ToList();
+        _canvasPanel.Refresh();
     }
 
     private Chart CorrectBaseline(Chart chart)
     {
-        return null;
-        // var correctedPoints = new PerPartesBaselineCalculator().GetBaseline(chart.Points, _correctionPoints, );
-        // var ret = new Chart(correctedPoints);
-        // return ret;
+        var baselinePoints = new SplineBaselineCalculator().GetBaseline(chart.Points, CorrectionPoints);
+        var newChartPoints = new BaselineCorrector().CorrectChartByBaseline(chart.Points, baselinePoints);
+        var ret = new Chart(newChartPoints);
+        return ret;
     }
 
     public void UndoBaselineCorrection()
     {
-            
+        _canvasPanel.Charts = _oldCharts;
+        _canvasPanel.Refresh();
     }
 }

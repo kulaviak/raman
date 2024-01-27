@@ -101,7 +101,7 @@ public partial class BaselineCorrectionForm : Form
 
     private void BaselineCorrectionForm_FormClosing(object sender, FormClosingEventArgs e)
     {
-        if (_baselineCorrectionLayer.Points.Any() && !_baselineCorrectionLayer.IsBaselineCorrected)
+        if (_baselineCorrectionLayer.CorrectionPoints.Any() && !_baselineCorrectionLayer.IsBaselineCorrected)
         {
             if (FormUtil.ShowQuestion("Do you really want to exit Baseline Correction and loose selected correction points?",
                     "Confirmation") == DialogResult.No)
