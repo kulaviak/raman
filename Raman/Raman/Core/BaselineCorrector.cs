@@ -1,6 +1,6 @@
 namespace Raman.Core;
 
-public class SimpleBaselineCorrector
+public class BaselineCorrector
 {
     /// <summary>
     /// Expects that baseline points are calculated exactly at same places as chart points and this is exactly what SplineBaselineCalculator does
