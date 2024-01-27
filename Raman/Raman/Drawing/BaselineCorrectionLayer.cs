@@ -1,3 +1,4 @@
+using System.IO;
 using Raman.Controls;
 using Point = Raman.Core.Point;
 
@@ -151,7 +152,8 @@ public class BaselineCorrectionLayer : LayerBase
         var xPositions = chart.Points.Where(point => correctionStart <= point.X && point.X <= correctionEnd).Select(point => point.X).ToList();
         var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, CorrectionPoints);
         var newChartPoints = new BaselineCorrector().CorrectChartByBaseline(chart.Points, baselinePoints);
-        var ret = new Chart(newChartPoints);
+        var ret = new Chart(newChartPoints, chart.Name);
+        ret.IsBaselineCorrected = true;
         return ret;
     }
 
@@ -160,5 +162,40 @@ public class BaselineCorrectionLayer : LayerBase
         _canvasPanel.Charts = _oldCharts;
         IsBaselineCorrected = false;
         _canvasPanel.Refresh();
+    }
+
+    public void ExportCorrectedCharts()
+    {
+        var exportedCharts = _canvasPanel.Charts.Where(x => x.IsBaselineCorrected).ToList();
+        if (!exportedCharts.Any())
+        {
+            FormUtil.ShowUserError("There are no corrected spectra.", "No spectra to export");
+            return;
+        }
+        try
+        {
+            using (var folderBrowserDialog = new FolderBrowserDialog())
+            {
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var selectedPath = folderBrowserDialog.SelectedPath;
+                    foreach (var chart in exportedCharts)
+                    {
+                        ExportCorrectedChart(chart, selectedPath);                                                
+                    }
+                    FormUtil.ShowInfo("Export finished successfully.", "Export finished");
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            FormUtil.ShowAppError($"Spectra export failed. Please check error and try again. Reason: {e.Message}", "Export failed", e);
+        }
+    }
+
+    private void ExportCorrectedChart(Chart chart, string folderPath)
+    {
+        var filePath = Path.Combine(folderPath, chart.Name + "_bc.txt");
+        new OnePointPerLineFileWriter().WritePoints(chart.Points, filePath);
     }
 }

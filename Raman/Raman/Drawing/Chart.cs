@@ -6,13 +6,18 @@ namespace Raman.Drawing;
 [Serializable]
 public class Chart : ISerializable
 {
+    public string Name { get; }
+    
     private readonly List<Point> _points;
 
     public List<Point> Points => _points;
+    
+    public bool IsBaselineCorrected { get; set; }
 
-    public Chart(List<Point> points)
+    public Chart(List<Point> points, string name)
     {
         _points = points;
+        Name = name;
     }
 
     public void Draw(CanvasCoordSystem coordSystem, Graphics graphics)

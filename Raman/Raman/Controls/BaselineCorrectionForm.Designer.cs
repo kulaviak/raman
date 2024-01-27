@@ -35,7 +35,7 @@ partial class BaselineCorrectionForm
         this.btnReset = new System.Windows.Forms.Button();
         this.label1 = new System.Windows.Forms.Label();
         this.btnClose = new System.Windows.Forms.Button();
-        this.button1 = new System.Windows.Forms.Button();
+        this.btnExportCorrectedCharts = new System.Windows.Forms.Button();
         this.SuspendLayout();
         // 
         // btnUndoBaselineCorrection
@@ -94,7 +94,7 @@ partial class BaselineCorrectionForm
         this.label1.Name = "label1";
         this.label1.Size = new System.Drawing.Size(137, 58);
         this.label1.TabIndex = 10;
-        this.label1.Text = "Click on chart where baseline points should be. Draw at least 4 points to see bas" + "eline.";
+        this.label1.Text = "Click on spectrum where baseline points should be. Draw at least 4 points to see " + "baseline.";
         // 
         // btnClose
         // 
@@ -106,21 +106,22 @@ partial class BaselineCorrectionForm
         this.btnClose.UseVisualStyleBackColor = true;
         this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
         // 
-        // button1
+        // btnExportCorrectedCharts
         // 
-        this.button1.Location = new System.Drawing.Point(7, 217);
-        this.button1.Name = "button1";
-        this.button1.Size = new System.Drawing.Size(142, 23);
-        this.button1.TabIndex = 12;
-        this.button1.Text = "Export Corrected Charts";
-        this.button1.UseVisualStyleBackColor = true;
+        this.btnExportCorrectedCharts.Location = new System.Drawing.Point(7, 217);
+        this.btnExportCorrectedCharts.Name = "btnExportCorrectedCharts";
+        this.btnExportCorrectedCharts.Size = new System.Drawing.Size(142, 23);
+        this.btnExportCorrectedCharts.TabIndex = 12;
+        this.btnExportCorrectedCharts.Text = "Export Corrected Charts";
+        this.btnExportCorrectedCharts.UseVisualStyleBackColor = true;
+        this.btnExportCorrectedCharts.Click += new System.EventHandler(this.btnExportCorrectedCharts_Click);
         // 
         // BaselineCorrectionForm
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.ClientSize = new System.Drawing.Size(169, 450);
-        this.Controls.Add(this.button1);
+        this.Controls.Add(this.btnExportCorrectedCharts);
         this.Controls.Add(this.btnClose);
         this.Controls.Add(this.label1);
         this.Controls.Add(this.btnReset);
@@ -135,7 +136,7 @@ partial class BaselineCorrectionForm
         this.ResumeLayout(false);
     }
 
-    private System.Windows.Forms.Button button1;
+    private System.Windows.Forms.Button btnExportCorrectedCharts;
 
     private System.Windows.Forms.Button btnClose;
 

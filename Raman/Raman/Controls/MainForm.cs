@@ -1,4 +1,5 @@
-﻿using Raman.Controls;
+﻿using System.IO;
+using Raman.Controls;
 using Raman.Drawing;
 using Point = Raman.Core.Point;
 
@@ -99,7 +100,8 @@ public partial class MainForm : Form
         {
             var fileReader = new OnePointPerLineFileReader(filePath);
             var points = fileReader.TryReadFile();
-            charts.Add(new Chart(points));
+            var name = Path.GetFileNameWithoutExtension(filePath);
+            charts.Add(new Chart(points, name));
             if (points.Count < 2)
             {
                 MessageBox.Show($"File {filePath} has less 2 points. File is ignored.", "Error", MessageBoxButtons.OK,

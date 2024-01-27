@@ -110,4 +110,9 @@ public partial class BaselineCorrectionForm : Form
             }
         }
     }
+
+    private void btnExportCorrectedCharts_Click(object sender, EventArgs e)
+    {
+        _baselineCorrectionLayer.ExportCorrectedCharts();
+    }
 }
