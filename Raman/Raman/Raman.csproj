@@ -90,6 +90,7 @@
     <Compile Include="Drawing\Chart.cs" />
     <Compile Include="Drawing\LayerBase.cs" />
     <Compile Include="Drawing\Mark.cs" />
+    <Compile Include="Drawing\PeakAnalysisLayer.cs" />
     <Compile Include="Drawing\StatusStripLayer.cs" />
     <Compile Include="Drawing\XAxis.cs" />
     <Compile Include="Drawing\YAxis.cs" />

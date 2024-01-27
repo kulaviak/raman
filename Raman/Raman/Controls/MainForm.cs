@@ -1,15 +1,12 @@
 ﻿using System.IO;
 using Raman.Controls;
 using Raman.Drawing;
-using Point = Raman.Core.Point;
 
 namespace Raman;
 
 // window zoom made according to Chat GTP query How to implement zoom to area in graphics in windows forms
 public partial class MainForm : Form
 {
-    private Form _sidePanel;
-
     private const int SIDE_PANEL_WIDTH = 175;
         
     public MainForm()
@@ -29,7 +26,6 @@ public partial class MainForm : Form
 
     private void HideSidePanel()
     {
-        _sidePanel = null;
         splitContainer.Panel2Collapsed = true;
     }
 
@@ -41,7 +37,6 @@ public partial class MainForm : Form
     private void ShowSidePanel(Form form)
     {
         form.TopLevel = false;
-        _sidePanel = form;
         splitContainer.Panel2Collapsed = false;
         form.Dock = DockStyle.Fill;
         splitContainer.Panel2.Controls.Clear();
@@ -216,5 +211,23 @@ public partial class MainForm : Form
     private void MainForm_Resize(object sender, EventArgs e)
     {
         UpdateSplitter();
+    }
+
+    private void miPeakAnalysis_Click(object sender, EventArgs e)
+    {
+        PeakAnalysis();
+    }
+
+    private void PeakAnalysis()
+    {
+        canvasPanel.PeakAnalysisLayer = new PeakAnalysisLayer(canvasPanel.CoordSystem, canvasPanel);
+        // var form = new PeForm(canvasPanel.BaselineCorrectionLayer);
+        // form.Closed += BaselineForm_Closed;
+        // ShowSidePanel(form);
+    }
+
+    private void tsbPeakAnalysis_Click(object sender, EventArgs e)
+    {
+        PeakAnalysis();
     }
 }

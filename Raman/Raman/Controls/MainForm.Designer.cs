@@ -41,6 +41,7 @@ partial class MainForm
     this.miRefresh = new System.Windows.Forms.ToolStripMenuItem();
     this.miTools = new System.Windows.Forms.ToolStripMenuItem();
     this.miBaselineCorrection = new System.Windows.Forms.ToolStripMenuItem();
+    this.miPeakAnalysis = new System.Windows.Forms.ToolStripMenuItem();
     this.toolStrip = new System.Windows.Forms.ToolStrip();
     this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
     this.tsbOpenFiles = new System.Windows.Forms.ToolStripButton();
@@ -48,21 +49,19 @@ partial class MainForm
     this.tsbZoomToOriginalSize = new System.Windows.Forms.ToolStripButton();
     this.tsbBaselineCorrection = new System.Windows.Forms.ToolStripButton();
     this.splitContainer = new System.Windows.Forms.SplitContainer();
-    this.canvasPanel = new Raman.Drawing.CanvasPanel();
     this.statusStrip = new Raman.Controls.AppStatusStrip();
+    this.canvasPanel = new Raman.Drawing.CanvasPanel();
+    this.tsbPeakAnalysis = new System.Windows.Forms.ToolStripButton();
     this.menuStrip.SuspendLayout();
     this.toolStrip.SuspendLayout();
-    ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
+    ((System.ComponentModel.ISupportInitialize) (this.splitContainer)).BeginInit();
     this.splitContainer.Panel1.SuspendLayout();
     this.splitContainer.SuspendLayout();
     this.SuspendLayout();
     // 
     // menuStrip
     // 
-    this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-      this.fileToolStripMenuItem,
-      this.viewToolStripMenuItem,
-      this.miTools});
+    this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.fileToolStripMenuItem, this.viewToolStripMenuItem, this.miTools});
     this.menuStrip.Location = new System.Drawing.Point(0, 0);
     this.menuStrip.Name = "menuStrip";
     this.menuStrip.Size = new System.Drawing.Size(800, 24);
@@ -71,9 +70,7 @@ partial class MainForm
     // 
     // fileToolStripMenuItem
     // 
-    this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-      this.miOpenFiles,
-      this.miExit});
+    this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miOpenFiles, this.miExit});
     this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
     this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
     this.fileToolStripMenuItem.Text = "File";
@@ -81,7 +78,7 @@ partial class MainForm
     // miOpenFiles
     // 
     this.miOpenFiles.Name = "miOpenFiles";
-    this.miOpenFiles.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+    this.miOpenFiles.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
     this.miOpenFiles.Size = new System.Drawing.Size(172, 22);
     this.miOpenFiles.Text = "Open Files";
     this.miOpenFiles.Click += new System.EventHandler(this.miOpenFiles_Click);
@@ -95,10 +92,7 @@ partial class MainForm
     // 
     // viewToolStripMenuItem
     // 
-    this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-      this.miZoomWindow,
-      this.miZoomToOriginalSize,
-      this.miRefresh});
+    this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miZoomWindow, this.miZoomToOriginalSize, this.miRefresh});
     this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
     this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
     this.viewToolStripMenuItem.Text = "View";
@@ -106,7 +100,7 @@ partial class MainForm
     // miZoomWindow
     // 
     this.miZoomWindow.Name = "miZoomWindow";
-    this.miZoomWindow.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+    this.miZoomWindow.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
     this.miZoomWindow.Size = new System.Drawing.Size(231, 22);
     this.miZoomWindow.Text = "Zoom Window";
     this.miZoomWindow.Click += new System.EventHandler(this.miZoomWindow_Click);
@@ -114,7 +108,7 @@ partial class MainForm
     // miZoomToOriginalSize
     // 
     this.miZoomToOriginalSize.Name = "miZoomToOriginalSize";
-    this.miZoomToOriginalSize.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+    this.miZoomToOriginalSize.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
     this.miZoomToOriginalSize.Size = new System.Drawing.Size(231, 22);
     this.miZoomToOriginalSize.Text = "Zoom To Original Size";
     this.miZoomToOriginalSize.Click += new System.EventHandler(this.miZoomToOriginalSize_Click);
@@ -122,36 +116,38 @@ partial class MainForm
     // miRefresh
     // 
     this.miRefresh.Name = "miRefresh";
-    this.miRefresh.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+    this.miRefresh.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
     this.miRefresh.Size = new System.Drawing.Size(231, 22);
     this.miRefresh.Text = "Refresh";
     this.miRefresh.Click += new System.EventHandler(this.miRefresh_Click);
     // 
     // miTools
     // 
-    this.miTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-      this.miBaselineCorrection});
+    this.miTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miBaselineCorrection, this.miPeakAnalysis});
     this.miTools.Name = "miTools";
-    this.miTools.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
+    this.miTools.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
     this.miTools.Size = new System.Drawing.Size(46, 20);
     this.miTools.Text = "Tools";
     // 
     // miBaselineCorrection
     // 
     this.miBaselineCorrection.Name = "miBaselineCorrection";
-    this.miBaselineCorrection.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
+    this.miBaselineCorrection.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
     this.miBaselineCorrection.Size = new System.Drawing.Size(217, 22);
     this.miBaselineCorrection.Text = "Baseline Correction";
     this.miBaselineCorrection.Click += new System.EventHandler(this.miBaselineCorrection_Click);
     // 
+    // miPeakAnalysis
+    // 
+    this.miPeakAnalysis.Name = "miPeakAnalysis";
+    this.miPeakAnalysis.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+    this.miPeakAnalysis.Size = new System.Drawing.Size(217, 22);
+    this.miPeakAnalysis.Text = "Peak Analysis";
+    this.miPeakAnalysis.Click += new System.EventHandler(this.miPeakAnalysis_Click);
+    // 
     // toolStrip
     // 
-    this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-      this.tsbRefresh,
-      this.tsbOpenFiles,
-      this.tsbZoomToWindow,
-      this.tsbZoomToOriginalSize,
-      this.tsbBaselineCorrection});
+    this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.tsbRefresh, this.tsbOpenFiles, this.tsbZoomToWindow, this.tsbZoomToOriginalSize, this.tsbBaselineCorrection, this.tsbPeakAnalysis});
     this.toolStrip.Location = new System.Drawing.Point(0, 24);
     this.toolStrip.Name = "toolStrip";
     this.toolStrip.Size = new System.Drawing.Size(800, 25);
@@ -161,7 +157,7 @@ partial class MainForm
     // tsbRefresh
     // 
     this.tsbRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-    this.tsbRefresh.Image = ((System.Drawing.Image)(resources.GetObject("tsbRefresh.Image")));
+    this.tsbRefresh.Image = ((System.Drawing.Image) (resources.GetObject("tsbRefresh.Image")));
     this.tsbRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
     this.tsbRefresh.Name = "tsbRefresh";
     this.tsbRefresh.Size = new System.Drawing.Size(23, 22);
@@ -171,7 +167,7 @@ partial class MainForm
     // tsbOpenFiles
     // 
     this.tsbOpenFiles.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-    this.tsbOpenFiles.Image = ((System.Drawing.Image)(resources.GetObject("tsbOpenFiles.Image")));
+    this.tsbOpenFiles.Image = ((System.Drawing.Image) (resources.GetObject("tsbOpenFiles.Image")));
     this.tsbOpenFiles.ImageTransparentColor = System.Drawing.Color.Magenta;
     this.tsbOpenFiles.Name = "tsbOpenFiles";
     this.tsbOpenFiles.Size = new System.Drawing.Size(23, 22);
@@ -181,7 +177,7 @@ partial class MainForm
     // tsbZoomToWindow
     // 
     this.tsbZoomToWindow.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-    this.tsbZoomToWindow.Image = ((System.Drawing.Image)(resources.GetObject("tsbZoomToWindow.Image")));
+    this.tsbZoomToWindow.Image = ((System.Drawing.Image) (resources.GetObject("tsbZoomToWindow.Image")));
     this.tsbZoomToWindow.ImageTransparentColor = System.Drawing.Color.Magenta;
     this.tsbZoomToWindow.Name = "tsbZoomToWindow";
     this.tsbZoomToWindow.Size = new System.Drawing.Size(23, 22);
@@ -191,7 +187,7 @@ partial class MainForm
     // tsbZoomToOriginalSize
     // 
     this.tsbZoomToOriginalSize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-    this.tsbZoomToOriginalSize.Image = ((System.Drawing.Image)(resources.GetObject("tsbZoomToOriginalSize.Image")));
+    this.tsbZoomToOriginalSize.Image = ((System.Drawing.Image) (resources.GetObject("tsbZoomToOriginalSize.Image")));
     this.tsbZoomToOriginalSize.ImageTransparentColor = System.Drawing.Color.Magenta;
     this.tsbZoomToOriginalSize.Name = "tsbZoomToOriginalSize";
     this.tsbZoomToOriginalSize.Size = new System.Drawing.Size(23, 22);
@@ -201,7 +197,7 @@ partial class MainForm
     // tsbBaselineCorrection
     // 
     this.tsbBaselineCorrection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-    this.tsbBaselineCorrection.Image = ((System.Drawing.Image)(resources.GetObject("tsbBaselineCorrection.Image")));
+    this.tsbBaselineCorrection.Image = ((System.Drawing.Image) (resources.GetObject("tsbBaselineCorrection.Image")));
     this.tsbBaselineCorrection.ImageTransparentColor = System.Drawing.Color.Magenta;
     this.tsbBaselineCorrection.Name = "tsbBaselineCorrection";
     this.tsbBaselineCorrection.Size = new System.Drawing.Size(23, 22);
@@ -223,9 +219,18 @@ partial class MainForm
     this.splitContainer.SplitterDistance = 590;
     this.splitContainer.TabIndex = 2;
     // 
+    // statusStrip
+    // 
+    this.statusStrip.Location = new System.Drawing.Point(0, 379);
+    this.statusStrip.Name = "statusStrip";
+    this.statusStrip.Size = new System.Drawing.Size(590, 22);
+    this.statusStrip.TabIndex = 1;
+    this.statusStrip.Text = "appStatusStrip1";
+    // 
     // canvasPanel
     // 
     this.canvasPanel.BaselineCorrectionLayer = null;
+    this.canvasPanel.Charts = ((System.Collections.Generic.List<Raman.Drawing.Chart>) (resources.GetObject("canvasPanel.Charts")));
     this.canvasPanel.CoordSystem = null;
     this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
     this.canvasPanel.IsZooming = false;
@@ -235,13 +240,16 @@ partial class MainForm
     this.canvasPanel.StatusStripLayer = null;
     this.canvasPanel.TabIndex = 0;
     // 
-    // statusStrip
+    // tsbPeakAnalysis
     // 
-    this.statusStrip.Location = new System.Drawing.Point(0, 379);
-    this.statusStrip.Name = "statusStrip";
-    this.statusStrip.Size = new System.Drawing.Size(590, 22);
-    this.statusStrip.TabIndex = 1;
-    this.statusStrip.Text = "appStatusStrip1";
+    this.tsbPeakAnalysis.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+    this.tsbPeakAnalysis.Image = ((System.Drawing.Image) (resources.GetObject("tsbPeakAnalysis.Image")));
+    this.tsbPeakAnalysis.ImageTransparentColor = System.Drawing.Color.Magenta;
+    this.tsbPeakAnalysis.Name = "tsbPeakAnalysis";
+    this.tsbPeakAnalysis.Size = new System.Drawing.Size(23, 22);
+    this.tsbPeakAnalysis.Text = "toolStripButton1";
+    this.tsbPeakAnalysis.ToolTipText = "Peak Analysis";
+    this.tsbPeakAnalysis.Click += new System.EventHandler(this.tsbPeakAnalysis_Click);
     // 
     // MainForm
     // 
@@ -252,7 +260,7 @@ partial class MainForm
     this.Controls.Add(this.splitContainer);
     this.Controls.Add(this.toolStrip);
     this.Controls.Add(this.menuStrip);
-    this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+    this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
     this.MainMenuStrip = this.menuStrip;
     this.Name = "MainForm";
     this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -266,12 +274,15 @@ partial class MainForm
     this.toolStrip.PerformLayout();
     this.splitContainer.Panel1.ResumeLayout(false);
     this.splitContainer.Panel1.PerformLayout();
-    ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
+    ((System.ComponentModel.ISupportInitialize) (this.splitContainer)).EndInit();
     this.splitContainer.ResumeLayout(false);
     this.ResumeLayout(false);
     this.PerformLayout();
-
   }
+
+  private System.Windows.Forms.ToolStripButton tsbPeakAnalysis;
+
+  private System.Windows.Forms.ToolStripMenuItem miPeakAnalysis;
 
   private System.Windows.Forms.MenuStrip menuStrip;
   private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;

@@ -46,6 +46,8 @@ public class CanvasPanel : Panel
     }
 
     public StatusStripLayer StatusStripLayer { get; set; }
+    
+    public PeakAnalysisLayer PeakAnalysisLayer { get; set; }
 
     public CanvasPanel()
     {
