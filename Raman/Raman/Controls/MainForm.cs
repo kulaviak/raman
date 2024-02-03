@@ -279,7 +279,7 @@ public partial class MainForm : Form
                 charts.Add(new Chart(spectrumPoints, name));
                 if (spectraPoints.Count < 2)
                 {
-                    MessageBox.Show($"File {filePath} has less 2 points. File is ignored.", "Error", MessageBoxButtons.OK,
+                    MessageBox.Show($"File {filePath} has less than two points. File is ignored.", "Error", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                     continue;
                 }
