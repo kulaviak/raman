@@ -14,15 +14,25 @@ public class MultiSpectrumFileReader
     {
         _filePath = filePath;
     }
-        
+
     /// <summary>
-    /// Reads multi spectrum file. If x value or y value of the point can not be evaluated (invalid number or it is just empty string), then the point is ignored. 
+    /// Reads multi spectrum file. If x value or y value of the point can not be evaluated (invalid number or it is just empty string)
+    /// then the point is ignored. 
     /// </summary>
     public List<List<Point>> TryReadFile()
     {
+        List<string> lines;
         try
         {
-            var lines = File.ReadLines(_filePath).ToList().ToList();
+            lines = File.ReadLines(_filePath).Where(x => !x.IsNullOrWhiteSpace()).ToList();
+        }
+        catch (Exception e)
+        {
+            throw new AppException($"Opening file {_filePath} failed: {e.Message}", e);
+        }
+
+        try
+        {
             var ret = new List<List<Point>>();
             if (lines.Count >= 2)
             {
@@ -46,7 +56,7 @@ public class MultiSpectrumFileReader
                                 _ignoredLines.Add(yLine);
                             }
                         }
-                    }   
+                    }
                 }
                 else
                 {
@@ -55,9 +65,9 @@ public class MultiSpectrumFileReader
             }
             return ret;
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            throw new Exception($"Loading file {_filePath} failed.", ex);
+            throw new AppException($"Parsing data from file {_filePath} failed.", e);
         }
     }
 
@@ -67,15 +77,16 @@ public class MultiSpectrumFileReader
         for (var i = 0; i < xValues.Count; i++)
         {
             if (xValues[i] != null && yValues[i] != null)
-            { 
+            {
                 var point = new Point(xValues[i].Value, yValues[i].Value);
                 ret.Add(point);
             }
             // else ignore the point
         }
+
         return ret;
     }
-    
+
     private static List<decimal?> TryParseLine(string line)
     {
         try

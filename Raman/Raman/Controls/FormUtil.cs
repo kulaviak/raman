@@ -11,13 +11,24 @@ public abstract class FormUtil
     {
         MessageBox.Show(text, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
-        
+    
+    [Obsolete]
     public static void ShowAppError(string text, string caption, Exception ex)
     {
         // text += " Note: Error information was copied to clipboard.";
         MessageBox.Show(text, caption + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
         _logger.Error(ex, caption);
         // var str = new ExceptionFormatter().ToString(ex);
+    }
+    
+    public static void ShowErrorOnUserAction(string msg, string caption, Exception ex)
+    {
+        if (ex is AppException)
+        {
+            msg += " " + ex.Message;
+        }
+        MessageBox.Show(msg, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        _logger.Error(ex, msg);
     }
         
     public static void ShowInfo(string text, string caption)

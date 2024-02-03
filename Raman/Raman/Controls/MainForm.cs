@@ -61,10 +61,10 @@ public partial class MainForm : Form
 
     private void miOpenSingleSpectrumFiles_Click(object sender, EventArgs e)
     {
-        OpenSingleSpektrumFiles();
+        OpenSingleSpectrumFiles();
     }
 
-    private void OpenSingleSpektrumFiles()
+    private void OpenSingleSpectrumFiles()
     {
         using (var openFileDialog = new OpenFileDialog())
         {
@@ -190,7 +190,7 @@ public partial class MainForm : Form
 
     private void tsbOpenFiles_Click(object sender, EventArgs e)
     {
-        OpenSingleSpektrumFiles();
+        OpenSingleSpectrumFiles();
     }
 
     private void tsbZoomToWindow_Click(object sender, EventArgs e)
@@ -238,24 +238,30 @@ public partial class MainForm : Form
 
     private void OpenMultiSpectrumFiles()
     {
-        using (var openFileDialog = new OpenFileDialog())
+        try
         {
-            // don't specify initial directory - it will remember the last one
-            // openFileDialog.InitialDirectory = "C:\\"; 
-            openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"; 
-            openFileDialog.FilterIndex = 1;
-            openFileDialog.Multiselect = true;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            using (var openFileDialog = new OpenFileDialog())
             {
-                var filePaths = openFileDialog.FileNames.ToList();
-                if (filePaths.Count == 0)
+                // don't specify initial directory - it will remember the last one
+                // openFileDialog.InitialDirectory = "C:\\"; 
+                openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"; 
+                openFileDialog.FilterIndex = 1;
+                openFileDialog.Multiselect = true;
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show("No files were selected.", "Error", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    return;
+                    var filePaths = openFileDialog.FileNames.ToList();
+                    if (filePaths.Count == 0)
+                    {
+                        MessageBox.Show("No files were selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    OpenMultiSpectrumFilesInternal(filePaths);
                 }
-                OpenMultiSpectrumFilesInternal(filePaths);
             }
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowErrorOnUserAction("Opening multi spectrum files failed.", "Opening files failed", ex);
         }
     }
 
@@ -283,7 +289,6 @@ public partial class MainForm : Form
                 }
             }
         }
-
         if (ignoredLines.Count != 0)
         {
             var maxCount = 10;
