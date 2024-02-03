@@ -59,12 +59,12 @@ public partial class MainForm : Form
         // }
     }
 
-    private void miOpenFiles_Click(object sender, EventArgs e)
+    private void miOpenSingleSpectrumFiles_Click(object sender, EventArgs e)
     {
-        OpenFiles();
+        OpenSingleSpektrumFiles();
     }
 
-    private void OpenFiles()
+    private void OpenSingleSpektrumFiles()
     {
         using (var openFileDialog = new OpenFileDialog())
         {
@@ -82,18 +82,18 @@ public partial class MainForm : Form
                         MessageBoxIcon.Error);
                     return;
                 }
-                OpenFilesInternal(filePaths);
+                OpenSingleSpectraFilesInternal(filePaths);
             }
         }
     }
 
-    private void OpenFilesInternal(List<string> filePaths)
+    private void OpenSingleSpectraFilesInternal(List<string> filePaths)
     {
         var charts = new List<Chart>();
         var ignoredLines = new List<string>();
         foreach (var filePath in filePaths)
         {
-            var fileReader = new OnePointPerLineFileReader(filePath);
+            var fileReader = new SingleSpectrumFileReader(filePath);
             var points = fileReader.TryReadFile();
             var name = Path.GetFileNameWithoutExtension(filePath);
             charts.Add(new Chart(points, name));
@@ -123,7 +123,7 @@ public partial class MainForm : Form
         
     private void LoadDemoSpectrum()
     {
-        OpenFilesInternal(new List<string>{"c:/github/kulaviak/raman/data/spectrum.txt"});
+        OpenSingleSpectraFilesInternal(new List<string>{"c:/github/kulaviak/raman/data/spectrum.txt"});
     }
         
     private void LoadDemoSpectra()
@@ -140,7 +140,7 @@ public partial class MainForm : Form
             "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X3.txt",
             "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X4.txt"
         };
-        OpenFilesInternal(filePaths);
+        OpenSingleSpectraFilesInternal(filePaths);
     }
         
     private void miZoomWindow_Click(object sender, EventArgs e)
@@ -190,7 +190,7 @@ public partial class MainForm : Form
 
     private void tsbOpenFiles_Click(object sender, EventArgs e)
     {
-        OpenFiles();
+        OpenSingleSpektrumFiles();
     }
 
     private void tsbZoomToWindow_Click(object sender, EventArgs e)
@@ -229,5 +229,70 @@ public partial class MainForm : Form
     private void tsbPeakAnalysis_Click(object sender, EventArgs e)
     {
         PeakAnalysis();
+    }
+
+    private void miOpenMultiSpectraFiles_Click(object sender, EventArgs e)
+    {
+        OpenMultiSpectraFiles();
+    }
+
+    private void OpenMultiSpectraFiles()
+    {
+        using (var openFileDialog = new OpenFileDialog())
+        {
+            // don't specify initial directory - it will remember the last one
+            // openFileDialog.InitialDirectory = "C:\\"; 
+            openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"; 
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.Multiselect = true;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                var filePaths = openFileDialog.FileNames.ToList();
+                if (filePaths.Count == 0)
+                {
+                    MessageBox.Show("No files were selected.", "Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return;
+                }
+                OpenMultiSpectraFilesInternal(filePaths);
+            }
+        }
+    }
+
+    private void OpenMultiSpectraFilesInternal(List<string> filePaths)
+    {
+        var charts = new List<Chart>();
+        var ignoredLines = new List<string>();
+        foreach (var filePath in filePaths)
+        {
+            var fileReader = new MultiSpectraFileReader(filePath);
+            var multipleSpectraPoints = fileReader.TryReadFile();
+            var name = Path.GetFileNameWithoutExtension(filePath);
+            foreach (var spectrumPoints in multipleSpectraPoints)
+            {
+                charts.Add(new Chart(spectrumPoints, name));
+                if (multipleSpectraPoints.Count < 2)
+                {
+                    MessageBox.Show($"File {filePath} has less 2 points. File is ignored.", "Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    continue;
+                }
+                if (fileReader.IgnoredLines.Count != 0)
+                {
+                    ignoredLines.AddRange(fileReader.IgnoredLines);
+                }
+            }
+        }
+
+        if (ignoredLines.Count != 0)
+        {
+            var maxCount = 10;
+            if (ignoredLines.Count > maxCount) ignoredLines = ignoredLines.Take(maxCount).ToList();
+            var str = string.Join("\n", ignoredLines);
+            MessageBox.Show($"Following lines were ignored (Showing max {maxCount} lines): {str}", "Error", MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+        }
+        canvasPanel.Charts = charts;
+        canvasPanel.Refresh();
     }
 }

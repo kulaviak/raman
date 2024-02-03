@@ -9,6 +9,7 @@ public class CanvasPanel : Panel
 
     private const int PIXEL_SPACE = 25;
     
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public List<Chart> Charts
     {
         get { return _charts; }
@@ -19,8 +20,10 @@ public class CanvasPanel : Panel
         }
     }
         
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public bool IsZooming { get; set; }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public BaselineCorrectionLayer BaselineCorrectionLayer { get; set; }
 
     private Point? _zoomStart;
@@ -33,6 +36,7 @@ public class CanvasPanel : Panel
 
     private CanvasCoordSystem _coordSystem;
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public CanvasCoordSystem CoordSystem
     {
         get => _coordSystem;
@@ -46,8 +50,10 @@ public class CanvasPanel : Panel
         }
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public StatusStripLayer StatusStripLayer { get; set; }
     
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public PeakAnalysisLayer PeakAnalysisLayer { get; set; }
 
     public CanvasPanel()

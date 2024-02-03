@@ -75,9 +75,10 @@
     <Compile Include="Core\AppException.cs" />
     <Compile Include="Core\ExceptionFormatter.cs" />
     <Compile Include="Core\Extensions.cs" />
+    <Compile Include="Core\MultiSpectraFileReader.cs" />
     <Compile Include="Core\OnePointPerLineFileWriter.cs" />
     <Compile Include="Core\Point.cs" />
-    <Compile Include="Core\OnePointPerLineFileReader.cs" />
+    <Compile Include="Core\SingleSpectrumFileReader.cs" />
     <Compile Include="Core\BaselineCorrector.cs" />
     <Compile Include="Core\SplineBaselineCalculator.cs" />
     <Compile Include="Core\Util.cs" />

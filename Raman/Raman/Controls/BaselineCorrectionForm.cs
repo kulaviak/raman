@@ -46,7 +46,7 @@ public partial class BaselineCorrectionForm : Form
 
     private void ImportPointsInternal(string filePath)
     {
-        var points = new OnePointPerLineFileReader(filePath).TryReadFile();
+        var points = new SingleSpectrumFileReader(filePath).TryReadFile();
         _baselineCorrectionLayer.ImportPoints(points);
     }
 

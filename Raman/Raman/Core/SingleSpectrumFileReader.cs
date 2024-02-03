@@ -2,7 +2,7 @@ using System.IO;
 
 namespace Raman.Core;
 
-public class OnePointPerLineFileReader
+public class SingleSpectrumFileReader
 {
     private readonly string _filePath;
 
@@ -10,7 +10,7 @@ public class OnePointPerLineFileReader
 
     public List<string> IgnoredLines => _ignoredLines;
 
-    public OnePointPerLineFileReader(string filePath)
+    public SingleSpectrumFileReader(string filePath)
     {
         _filePath = filePath;
     }
@@ -60,8 +60,7 @@ public class OnePointPerLineFileReader
     {
         try
         {
-            // split on white space or tab
-            var parts = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+            var parts = SplitOnWhitespaceOrTab(line);
             if (parts.Length >= 2)
             {
                 var x = Util.UniversalParseDecimal(parts[0]);
@@ -85,5 +84,9 @@ public class OnePointPerLineFileReader
             return null;
         }
     }
-
+    
+    public static string[] SplitOnWhitespaceOrTab(string line)
+    {
+        return line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+    }
 }

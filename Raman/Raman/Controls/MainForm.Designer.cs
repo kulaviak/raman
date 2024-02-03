@@ -33,8 +33,9 @@ partial class MainForm
     System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
     this.menuStrip = new System.Windows.Forms.MenuStrip();
     this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-    this.miOpenFiles = new System.Windows.Forms.ToolStripMenuItem();
+    this.miOpenSingleSpectrumFiles = new System.Windows.Forms.ToolStripMenuItem();
     this.miExit = new System.Windows.Forms.ToolStripMenuItem();
+    this.miOpenMultiSpectraFiles = new System.Windows.Forms.ToolStripMenuItem();
     this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
     this.miZoomWindow = new System.Windows.Forms.ToolStripMenuItem();
     this.miZoomToOriginalSize = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,10 +49,10 @@ partial class MainForm
     this.tsbZoomToWindow = new System.Windows.Forms.ToolStripButton();
     this.tsbZoomToOriginalSize = new System.Windows.Forms.ToolStripButton();
     this.tsbBaselineCorrection = new System.Windows.Forms.ToolStripButton();
+    this.tsbPeakAnalysis = new System.Windows.Forms.ToolStripButton();
     this.splitContainer = new System.Windows.Forms.SplitContainer();
     this.statusStrip = new Raman.Controls.AppStatusStrip();
     this.canvasPanel = new Raman.Drawing.CanvasPanel();
-    this.tsbPeakAnalysis = new System.Windows.Forms.ToolStripButton();
     this.menuStrip.SuspendLayout();
     this.toolStrip.SuspendLayout();
     ((System.ComponentModel.ISupportInitialize) (this.splitContainer)).BeginInit();
@@ -70,25 +71,32 @@ partial class MainForm
     // 
     // fileToolStripMenuItem
     // 
-    this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miOpenFiles, this.miExit});
+    this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miOpenSingleSpectrumFiles, this.miOpenMultiSpectraFiles, this.miExit});
     this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
     this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
     this.fileToolStripMenuItem.Text = "File";
     // 
-    // miOpenFiles
+    // miOpenSingleSpectrumFiles
     // 
-    this.miOpenFiles.Name = "miOpenFiles";
-    this.miOpenFiles.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-    this.miOpenFiles.Size = new System.Drawing.Size(172, 22);
-    this.miOpenFiles.Text = "Open Files";
-    this.miOpenFiles.Click += new System.EventHandler(this.miOpenFiles_Click);
+    this.miOpenSingleSpectrumFiles.Name = "miOpenSingleSpectrumFiles";
+    this.miOpenSingleSpectrumFiles.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+    this.miOpenSingleSpectrumFiles.Size = new System.Drawing.Size(261, 22);
+    this.miOpenSingleSpectrumFiles.Text = "Open Single Spectrum Files";
+    this.miOpenSingleSpectrumFiles.Click += new System.EventHandler(this.miOpenSingleSpectrumFiles_Click);
     // 
     // miExit
     // 
     this.miExit.Name = "miExit";
-    this.miExit.Size = new System.Drawing.Size(172, 22);
+    this.miExit.Size = new System.Drawing.Size(261, 22);
     this.miExit.Text = "Exit";
     this.miExit.Click += new System.EventHandler(this.miExit_Click);
+    // 
+    // miOpenMultiSpectraFiles
+    // 
+    this.miOpenMultiSpectraFiles.Name = "miOpenMultiSpectraFiles";
+    this.miOpenMultiSpectraFiles.Size = new System.Drawing.Size(261, 22);
+    this.miOpenMultiSpectraFiles.Text = "Open Multi Spectrum Files";
+    this.miOpenMultiSpectraFiles.Click += new System.EventHandler(this.miOpenMultiSpectraFiles_Click);
     // 
     // viewToolStripMenuItem
     // 
@@ -204,6 +212,16 @@ partial class MainForm
     this.tsbBaselineCorrection.Text = "Baseline Correction";
     this.tsbBaselineCorrection.Click += new System.EventHandler(this.tsbBaselineCorrection_Click);
     // 
+    // tsbPeakAnalysis
+    // 
+    this.tsbPeakAnalysis.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+    this.tsbPeakAnalysis.ImageTransparentColor = System.Drawing.Color.Magenta;
+    this.tsbPeakAnalysis.Name = "tsbPeakAnalysis";
+    this.tsbPeakAnalysis.Size = new System.Drawing.Size(23, 22);
+    this.tsbPeakAnalysis.Text = "toolStripButton1";
+    this.tsbPeakAnalysis.ToolTipText = "Peak Analysis";
+    this.tsbPeakAnalysis.Click += new System.EventHandler(this.tsbPeakAnalysis_Click);
+    // 
     // splitContainer
     // 
     this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -235,20 +253,10 @@ partial class MainForm
     this.canvasPanel.IsZooming = false;
     this.canvasPanel.Location = new System.Drawing.Point(0, 0);
     this.canvasPanel.Name = "canvasPanel";
+    this.canvasPanel.PeakAnalysisLayer = null;
     this.canvasPanel.Size = new System.Drawing.Size(590, 401);
     this.canvasPanel.StatusStripLayer = null;
     this.canvasPanel.TabIndex = 0;
-    // 
-    // tsbPeakAnalysis
-    // 
-    this.tsbPeakAnalysis.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-    this.tsbPeakAnalysis.Image = ((System.Drawing.Image) (resources.GetObject("tsbPeakAnalysis.Image")));
-    this.tsbPeakAnalysis.ImageTransparentColor = System.Drawing.Color.Magenta;
-    this.tsbPeakAnalysis.Name = "tsbPeakAnalysis";
-    this.tsbPeakAnalysis.Size = new System.Drawing.Size(23, 22);
-    this.tsbPeakAnalysis.Text = "toolStripButton1";
-    this.tsbPeakAnalysis.ToolTipText = "Peak Analysis";
-    this.tsbPeakAnalysis.Click += new System.EventHandler(this.tsbPeakAnalysis_Click);
     // 
     // MainForm
     // 
@@ -279,13 +287,15 @@ partial class MainForm
     this.PerformLayout();
   }
 
+  private System.Windows.Forms.ToolStripMenuItem miOpenMultiSpectraFiles;
+
   private System.Windows.Forms.ToolStripButton tsbPeakAnalysis;
 
   private System.Windows.Forms.ToolStripMenuItem miPeakAnalysis;
 
   private System.Windows.Forms.MenuStrip menuStrip;
   private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-  private System.Windows.Forms.ToolStripMenuItem miOpenFiles;
+  private System.Windows.Forms.ToolStripMenuItem miOpenSingleSpectrumFiles;
   private System.Windows.Forms.ToolStripMenuItem miExit;
 
   #endregion
