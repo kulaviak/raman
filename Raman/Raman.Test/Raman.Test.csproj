@@ -56,7 +56,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SingleSpectrumFileReaderTest.cs" />
+    <Compile Include="Core\MultiSpectrumFileReaderTest.cs" />
+    <Compile Include="Core\SingleSpectrumFileReaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +68,11 @@
       <Project>{30472d99-09b1-4c8a-83c6-5f3a9bf40a07}</Project>
       <Name>Raman</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="Core\MultiSpectrumFileReaderTest_TestTryReadFile.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AdditionalFiles>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

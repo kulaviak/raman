@@ -75,7 +75,7 @@
     <Compile Include="Core\AppException.cs" />
     <Compile Include="Core\ExceptionFormatter.cs" />
     <Compile Include="Core\Extensions.cs" />
-    <Compile Include="Core\MultiSpectraFileReader.cs" />
+    <Compile Include="Core\MultiSpectrumFileReader.cs" />
     <Compile Include="Core\OnePointPerLineFileWriter.cs" />
     <Compile Include="Core\Point.cs" />
     <Compile Include="Core\SingleSpectrumFileReader.cs" />

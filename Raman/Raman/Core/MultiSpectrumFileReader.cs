@@ -2,7 +2,7 @@ using System.IO;
 
 namespace Raman.Core;
 
-public class MultiSpectraFileReader
+public class MultiSpectrumFileReader
 {
     private readonly string _filePath;
 
@@ -10,7 +10,7 @@ public class MultiSpectraFileReader
 
     public List<string> IgnoredLines => _ignoredLines;
 
-    public MultiSpectraFileReader(string filePath)
+    public MultiSpectrumFileReader(string filePath)
     {
         _filePath = filePath;
     }

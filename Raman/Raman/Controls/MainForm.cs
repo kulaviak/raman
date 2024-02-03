@@ -231,12 +231,12 @@ public partial class MainForm : Form
         PeakAnalysis();
     }
 
-    private void miOpenMultiSpectraFiles_Click(object sender, EventArgs e)
+    private void miOpenMultiSpectrumFiles_Click(object sender, EventArgs e)
     {
-        OpenMultiSpectraFiles();
+        OpenMultiSpectrumFiles();
     }
 
-    private void OpenMultiSpectraFiles()
+    private void OpenMultiSpectrumFiles()
     {
         using (var openFileDialog = new OpenFileDialog())
         {
@@ -254,18 +254,18 @@ public partial class MainForm : Form
                         MessageBoxIcon.Error);
                     return;
                 }
-                OpenMultiSpectraFilesInternal(filePaths);
+                OpenMultiSpectrumFilesInternal(filePaths);
             }
         }
     }
 
-    private void OpenMultiSpectraFilesInternal(List<string> filePaths)
+    private void OpenMultiSpectrumFilesInternal(List<string> filePaths)
     {
         var charts = new List<Chart>();
         var ignoredLines = new List<string>();
         foreach (var filePath in filePaths)
         {
-            var fileReader = new MultiSpectraFileReader(filePath);
+            var fileReader = new MultiSpectrumFileReader(filePath);
             var multipleSpectraPoints = fileReader.TryReadFile();
             var name = Path.GetFileNameWithoutExtension(filePath);
             foreach (var spectrumPoints in multipleSpectraPoints)

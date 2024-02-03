@@ -35,7 +35,7 @@ partial class MainForm
     this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
     this.miOpenSingleSpectrumFiles = new System.Windows.Forms.ToolStripMenuItem();
     this.miExit = new System.Windows.Forms.ToolStripMenuItem();
-    this.miOpenMultiSpectraFiles = new System.Windows.Forms.ToolStripMenuItem();
+    this.miOpenMultiSpectrumFiles = new System.Windows.Forms.ToolStripMenuItem();
     this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
     this.miZoomWindow = new System.Windows.Forms.ToolStripMenuItem();
     this.miZoomToOriginalSize = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,7 +71,7 @@ partial class MainForm
     // 
     // fileToolStripMenuItem
     // 
-    this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miOpenSingleSpectrumFiles, this.miOpenMultiSpectraFiles, this.miExit});
+    this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miOpenSingleSpectrumFiles, this.miOpenMultiSpectrumFiles, this.miExit});
     this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
     this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
     this.fileToolStripMenuItem.Text = "File";
@@ -93,10 +93,10 @@ partial class MainForm
     // 
     // miOpenMultiSpectraFiles
     // 
-    this.miOpenMultiSpectraFiles.Name = "miOpenMultiSpectraFiles";
-    this.miOpenMultiSpectraFiles.Size = new System.Drawing.Size(261, 22);
-    this.miOpenMultiSpectraFiles.Text = "Open Multi Spectrum Files";
-    this.miOpenMultiSpectraFiles.Click += new System.EventHandler(this.miOpenMultiSpectraFiles_Click);
+    this.miOpenMultiSpectrumFiles.Name = "miOpenMultiSpectrumFiles";
+    this.miOpenMultiSpectrumFiles.Size = new System.Drawing.Size(261, 22);
+    this.miOpenMultiSpectrumFiles.Text = "Open Multi Spectrum Files";
+    this.miOpenMultiSpectrumFiles.Click += new System.EventHandler(this.miOpenMultiSpectrumFiles_Click);
     // 
     // viewToolStripMenuItem
     // 
@@ -287,7 +287,7 @@ partial class MainForm
     this.PerformLayout();
   }
 
-  private System.Windows.Forms.ToolStripMenuItem miOpenMultiSpectraFiles;
+  private System.Windows.Forms.ToolStripMenuItem miOpenMultiSpectrumFiles;
 
   private System.Windows.Forms.ToolStripButton tsbPeakAnalysis;
 
