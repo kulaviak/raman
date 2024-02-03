@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Point = System.Drawing.Point;
 
 namespace Raman.Drawing;

@@ -230,7 +230,6 @@ partial class MainForm
     // canvasPanel
     // 
     this.canvasPanel.BaselineCorrectionLayer = null;
-    this.canvasPanel.Charts = ((System.Collections.Generic.List<Raman.Drawing.Chart>) (resources.GetObject("canvasPanel.Charts")));
     this.canvasPanel.CoordSystem = null;
     this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
     this.canvasPanel.IsZooming = false;
