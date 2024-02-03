@@ -15,11 +15,14 @@ public class MultiSpectrumFileReader
         _filePath = filePath;
     }
         
+    /// <summary>
+    /// Reads multi spectrum file. If x value or y value of the point can not be evaluated (invalid number or it is just empty string), then the point is ignored. 
+    /// </summary>
     public List<List<Point>> TryReadFile()
     {
         try
         {
-            var lines = File.ReadLines(_filePath).ToList().Where(x => !string.IsNullOrWhiteSpace(x)).ToList();
+            var lines = File.ReadLines(_filePath).ToList().ToList();
             var ret = new List<List<Point>>();
             if (lines.Count >= 2)
             {
@@ -58,23 +61,27 @@ public class MultiSpectrumFileReader
         }
     }
 
-    private static List<Point> GetPoints(List<decimal> xValues, List<decimal> yValues)
+    private static List<Point> GetPoints(List<decimal?> xValues, List<decimal?> yValues)
     {
         var ret = new List<Point>();
         for (var i = 0; i < xValues.Count; i++)
         {
-            var point = new Point(xValues[i], yValues[i]);
-            ret.Add(point);
+            if (xValues[i] != null && yValues[i] != null)
+            { 
+                var point = new Point(xValues[i].Value, yValues[i].Value);
+                ret.Add(point);
+            }
+            // else ignore the point
         }
         return ret;
     }
     
-    private static List<decimal> TryParseLine(string line)
+    private static List<decimal?> TryParseLine(string line)
     {
         try
         {
-            var parts = SingleSpectrumFileReader.SplitOnWhitespaceOrTab(line);
-            var numbers = parts.Select(x => Util.UniversalParseDecimal(x)).Where(x => x != null).Select(x => (decimal) x).ToList();
+            var parts = line.Split(' ', '\t');
+            var numbers = parts.Select(x => !x.IsNullOrWhiteSpace() ? Util.UniversalParseDecimal(x) : null).ToList();
             var ret = numbers.Any() ? numbers : null;
             return ret;
         }
@@ -83,5 +90,4 @@ public class MultiSpectrumFileReader
             return null;
         }
     }
-
 }

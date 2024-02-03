@@ -91,7 +91,7 @@ partial class MainForm
     this.miExit.Text = "Exit";
     this.miExit.Click += new System.EventHandler(this.miExit_Click);
     // 
-    // miOpenMultiSpectraFiles
+    // miOpenMultiSpectrumFiles
     // 
     this.miOpenMultiSpectrumFiles.Name = "miOpenMultiSpectrumFiles";
     this.miOpenMultiSpectrumFiles.Size = new System.Drawing.Size(261, 22);

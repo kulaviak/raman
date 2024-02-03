@@ -266,12 +266,12 @@ public partial class MainForm : Form
         foreach (var filePath in filePaths)
         {
             var fileReader = new MultiSpectrumFileReader(filePath);
-            var multipleSpectraPoints = fileReader.TryReadFile();
+            var spectraPoints = fileReader.TryReadFile();
             var name = Path.GetFileNameWithoutExtension(filePath);
-            foreach (var spectrumPoints in multipleSpectraPoints)
+            foreach (var spectrumPoints in spectraPoints)
             {
                 charts.Add(new Chart(spectrumPoints, name));
-                if (multipleSpectraPoints.Count < 2)
+                if (spectraPoints.Count < 2)
                 {
                     MessageBox.Show($"File {filePath} has less 2 points. File is ignored.", "Error", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
