@@ -19,6 +19,6 @@ public class AppStatusStrip : StatusStrip
 
     public void ShowPosition(Point position)
     {
-        _lblPosition.Text = $"X: {Util.Round(position.X, 0)}  Y: {Util.Round(position.Y, 0)}";
+        _lblPosition.Text = $"X: {Util.Format(position.X, 0)}  Y: {Util.Format(position.Y, 0)}";
     }
 }

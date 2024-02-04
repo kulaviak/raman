@@ -1,10 +1,15 @@
-﻿using Raman.Drawing;
+﻿using System.IO;
+using Raman.Drawing;
 
 namespace Raman.Controls;
 
 public partial class PeakAnalysisForm : Form
 {
     private readonly PeakAnalysisLayer peakAnalysisLayer;
+    
+    private const string INITIAL_DIRECTORY_PATH = "C:\\tmp";
+        
+    private const string FILE_DIALOG_FILTER = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
     
     public PeakAnalysisForm(PeakAnalysisLayer peakAnalysisLayer)
     {
@@ -62,6 +67,30 @@ public partial class PeakAnalysisForm : Form
 
     private void ExportPeaks()
     {
-               
+        using (var saveFileDialog = new SaveFileDialog())
+        {
+            saveFileDialog.InitialDirectory = INITIAL_DIRECTORY_PATH;
+            saveFileDialog.Filter = FILE_DIALOG_FILTER; 
+            saveFileDialog.FilterIndex = 1;
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                var filePaths = saveFileDialog.FileNames.ToList();
+                if (filePaths.Count == 0)
+                {
+                    FormUtil.ShowUserError("No file was selected.", "No file selected");
+                    return;
+                }
+                try
+                {
+                    var filePath = filePaths.First();
+                    peakAnalysisLayer.ExportPeaks(filePath);
+                    FormUtil.ShowInfo("Peak were exported successfully.", "Export finished");
+                }
+                catch (Exception ex)
+                {
+                    FormUtil.ShowAppError("Exporting peaks failed.", "Export failed", ex);
+                }
+            }
+        }
     }
-}
+ }

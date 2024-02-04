@@ -11,6 +11,14 @@ public abstract class Util
         var ret = (float) Math.Sqrt(x*x + y*y);
         return ret;
     }
+    
+    public static decimal GetDistance(Point point1, Point point2)
+    {
+        var x = (double) Math.Abs(point1.X - point2.X);
+        var y = (double) Math.Abs(point1.Y - point2.Y);
+        var ret = (decimal) Math.Sqrt(x*x + y*y);
+        return ret;
+    }
         
     /// <summary>
     /// Universal decimal parser. Decimal delimiter can be both '.' and ','
@@ -36,7 +44,7 @@ public abstract class Util
         }
     }
 
-    public static string Round(decimal value, int decimalPlaces)
+    public static string Format(decimal value, int decimalPlaces)
     {
         return Math.Round(value, decimalPlaces).ToString();
     }

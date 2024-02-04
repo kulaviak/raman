@@ -86,11 +86,13 @@
     </Compile>
     <Compile Include="Core\AppException.cs" />
     <Compile Include="Core\ExceptionFormatter.cs" />
+    <Compile Include="Core\ExportedPeak.cs" />
     <Compile Include="Core\Extensions.cs" />
     <Compile Include="Core\Global.cs" />
     <Compile Include="Core\Line.cs" />
     <Compile Include="Core\MultiSpectrumFileReader.cs" />
     <Compile Include="Core\OnePointPerLineFileWriter.cs" />
+    <Compile Include="Core\PeakAnalysisExporter.cs" />
     <Compile Include="Core\Point.cs" />
     <Compile Include="Core\SingleSpectrumFileReader.cs" />
     <Compile Include="Core\BaselineCorrector.cs" />

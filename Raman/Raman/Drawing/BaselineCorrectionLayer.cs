@@ -172,24 +172,17 @@ public class BaselineCorrectionLayer : LayerBase
             FormUtil.ShowUserError("There are no corrected spectra.", "No spectra to export");
             return;
         }
-        try
+        using (var folderBrowserDialog = new FolderBrowserDialog())
         {
-            using (var folderBrowserDialog = new FolderBrowserDialog())
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
-                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                var selectedPath = folderBrowserDialog.SelectedPath;
+                foreach (var chart in exportedCharts)
                 {
-                    var selectedPath = folderBrowserDialog.SelectedPath;
-                    foreach (var chart in exportedCharts)
-                    {
-                        ExportCorrectedChart(chart, selectedPath);                                                
-                    }
-                    FormUtil.ShowInfo("Export finished successfully.", "Export finished");
+                    ExportCorrectedChart(chart, selectedPath);                                                
                 }
+                FormUtil.ShowInfo("Export finished successfully.", "Export finished");
             }
-        }
-        catch (Exception e)
-        {
-            FormUtil.ShowAppError($"Spectra export failed. Please check error and try again. Reason: {e.Message}", "Export failed", e);
         }
     }
 

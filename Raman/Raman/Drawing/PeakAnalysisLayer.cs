@@ -5,8 +5,6 @@ namespace Raman.Drawing;
 public class PeakAnalysisLayer : LayerBase
 {
     private readonly CanvasPanel canvasPanel;
-        
-    private static Color COLOR = Color.Orange;
 
     private static Pen PEN = Pens.Orange;
 
@@ -83,7 +81,7 @@ public class PeakAnalysisLayer : LayerBase
             canvasDrawer.DrawLine(line.Start, line.End, PEN);
             foreach (var chart in canvasPanel.VisibleCharts)
             {
-                var peak = GetPeakBetweenPoints(line.Start, line.End, chart);
+                var peak = GetPeakPoint(line, chart);
                 if (peak != null)
                 {
                     var intersection = GetIntersectionOfLineAndVertical(line, peak);
@@ -115,9 +113,9 @@ public class PeakAnalysisLayer : LayerBase
         return ret;
     }
 
-    private Point GetPeakBetweenPoints(Point start, Point end, Chart chart)
+    private Point GetPeakPoint(Line line, Chart chart)
     {
-        var ret = chart.Points.Where(point => start.X < point.X && point.X <= end.X).MaxByOrDefault(point => point.Y);
+        var ret = chart.Points.Where(point => line.Start.X < point.X && point.X <= line.End.X).MaxByOrDefault(point => point.Y);
         return ret;
     }
 
@@ -155,5 +153,37 @@ public class PeakAnalysisLayer : LayerBase
         var contextMenu = new ContextMenuStrip();
         contextMenu.Items.Add("Remove Closest Line", null, (_, _) => RemoveClosestLine(location));
         contextMenu.Show(canvasPanel, location);
+    }
+
+    public void ExportPeaks(string filePath)
+    {
+        var peaks = GetPeaksForExport();
+        new PeakAnalysisExporter().ExportPeaks(filePath, peaks);
+    }
+
+    private List<ExportedPeak> GetPeaksForExport()
+    {
+        var ret = new List<ExportedPeak>();
+        foreach (var chart in canvasPanel.VisibleCharts)
+        {
+            foreach (var line in Lines)
+            {
+                var peak = GetExportedPeak(line, chart);
+                ret.Add(peak);
+            }            
+        }
+        return ret;
+    }
+
+    private ExportedPeak GetExportedPeak(Line line, Chart chart)
+    {
+        var peakPoint = GetPeakPoint(line, chart);
+        var intersection = GetIntersectionOfLineAndVertical(line, peakPoint);
+        var height = Util.GetDistance(peakPoint, intersection);
+        var leftX = line.Start.X;
+        var rightX = line.End.X;
+        var peakX = peakPoint.X;
+        var ret = new ExportedPeak(height, leftX, rightX, peakX);
+        return ret;
     }
 }
