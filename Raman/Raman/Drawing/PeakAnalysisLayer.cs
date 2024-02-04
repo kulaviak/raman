@@ -8,7 +8,13 @@ public class PeakAnalysisLayer : LayerBase
         
     private static Color COLOR = Color.Orange;
 
-    public List<Point> Points { get; set; } = new List<Point>();
+    private static Pen PEN = Pens.Orange;
+
+    private Point start;
+    
+    private Point currentPoint;
+
+    public List<Line> Lines { get; set; } = new List<Line>();
     
     public PeakAnalysisLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : base(coordSystem)
     {
@@ -19,8 +25,17 @@ public class PeakAnalysisLayer : LayerBase
     {
         if (e.Button == MouseButtons.Left)
         {
-            var point = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
-            Points.Add(point);
+            if (start == null)
+            {
+                start = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
+            }
+            else
+            {
+                var end = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
+                var line = new Line(start, end);
+                Lines.Add(line);
+                start = null;
+            }
             Refresh();
         }
         else if (e.Button == MouseButtons.Middle)
@@ -33,48 +48,62 @@ public class PeakAnalysisLayer : LayerBase
             ShowContextMenu(e.Location);
         }
     }
-        
+
+    public override void HandleMouseMove(object sender, MouseEventArgs e)
+    {
+        currentPoint = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
+        canvasPanel.Refresh();
+    }
+
     public void Reset()
     {
-        Points.Clear();
+        Lines.Clear();
         Refresh();
     }
         
     public override void Draw(Graphics graphics)
     {
         DrawLines(graphics);
-        DrawMarks(graphics);
+        DrawCurrentLine(graphics);
+    }
+
+    private void DrawCurrentLine(Graphics graphics)
+    {
+        if (start != null && currentPoint != null)
+        {
+            new CanvasDrawer(CoordSystem, graphics).DrawLine(start, currentPoint, PEN);
+        }
     }
 
     private void DrawLines(Graphics graphics)
     {
-        // if (_canvasPanel.Charts.Any() && Points.Count >= 4)
-        // {
-        //     try
-        //     {
-        //         var start = Points.Min(point => point.X);
-        //         var end = Points.Max(point => point.X);
-        //         var xPositions = GetXPositions(start, end);
-        //         var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, Points);
-        //         new CanvasDrawer(_canvasPanel.CoordSystem, graphics).DrawLines(baselinePoints, Pens.Green);
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         FormUtil.ShowAppError("Drawing baseline failed.", "Error", e);
-        //     }
-        // }
+        new CanvasDrawer(CoordSystem, graphics).DrawLines(Lines, PEN);
     }
     
     private void RemoveClosestLine(System.Drawing.Point location)
     {
-        // var point = GetPointToRemove(location);
-        // if (point != null)
-        // {
-        //     Points = Points.Where(x => x != point).ToList();
-        // }
-        // Refresh();
+        var line = GetLineToRemove(location);
+        if (line != null)
+        {
+            Lines = Lines.Where(x => x != line).ToList();
+        }
+        Refresh();
     }
 
+    private Line GetLineToRemove(System.Drawing.Point pos)
+    {
+        var ret = Lines.MinByOrDefault(line => GetDistanceToLine(line, pos));
+        return ret;
+    }
+
+    private float GetDistanceToLine(Line line, System.Drawing.Point pos)
+    {
+        var start = CoordSystem.ToPixelPoint(line.Start);
+        var end = CoordSystem.ToPixelPoint(line.End);
+        var ret = Math.Min(Util.GetPixelDistance(pos, start), Util.GetPixelDistance(pos, end));
+        return ret;
+    }
+    
     private void Refresh()
     {
         canvasPanel.Refresh();
@@ -85,23 +114,5 @@ public class PeakAnalysisLayer : LayerBase
         var contextMenu = new ContextMenuStrip();
         contextMenu.Items.Add("Remove Closest Line", null, (_, _) => RemoveClosestLine(location));
         contextMenu.Show(canvasPanel, location);
-    }
-        
-    // private Point GetPointToRemove(System.Drawing.Point pos)
-    // {
-    //     var closestPoint = Points.MinByOrDefault(x => Util.GetPixelDistance(CoordSystem.ToPixelPoint(x), pos));
-    //     if (closestPoint != null)
-    //     {
-    //         return closestPoint;
-    //     }
-    //     return null;
-    // }
-        
-    private void DrawMarks(Graphics graphics)
-    {
-        foreach (var point in Points)
-        {
-            new Mark(CoordSystem, graphics, COLOR, point).Draw();
-        }
     }
 }

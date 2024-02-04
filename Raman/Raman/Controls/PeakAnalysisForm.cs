@@ -14,14 +14,14 @@ public partial class PeakAnalysisForm : Form
     
     private void btnReset_Click(object sender, EventArgs e)
     {
-        // try
-        // {
-        //     _peakAnalysisLayer.Reset();
-        // }
-        // catch (Exception ex)
-        // {
-        //     FormUtil.ShowErrorOnUserAction("Reset failed.", "Error", ex);
-        // }
+        try
+        {
+            peakAnalysisLayer.Reset();
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowErrorOnUserAction("Reset failed.", "Error", ex);
+        }
     }
 
     private void btnClose_Click(object sender, EventArgs e)

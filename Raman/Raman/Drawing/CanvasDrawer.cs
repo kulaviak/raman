@@ -36,4 +36,12 @@ public class CanvasDrawer
             DrawLine(point1, point2, pen);
         }
     }
+
+    public void DrawLines(List<Line> lines, Pen pen)
+    {
+        foreach (var line in lines)
+        {
+            DrawLine(line.Start, line.End, pen);
+        }
+    }
 }

@@ -120,6 +120,7 @@ public class CanvasPanel : Panel
         }
         ZoomToWindowLayer?.Draw(graphics);
         BaselineCorrectionLayer?.Draw(graphics);
+        PeakAnalysisLayer?.Draw(graphics);
     }
 
     /// <summary>

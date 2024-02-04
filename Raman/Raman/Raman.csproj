@@ -88,6 +88,7 @@
     <Compile Include="Core\ExceptionFormatter.cs" />
     <Compile Include="Core\Extensions.cs" />
     <Compile Include="Core\Global.cs" />
+    <Compile Include="Core\Line.cs" />
     <Compile Include="Core\MultiSpectrumFileReader.cs" />
     <Compile Include="Core\OnePointPerLineFileWriter.cs" />
     <Compile Include="Core\Point.cs" />
