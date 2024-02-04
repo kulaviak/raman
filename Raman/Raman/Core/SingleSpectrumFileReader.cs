@@ -5,16 +5,15 @@ namespace Raman.Core;
 public class SingleSpectrumFileReader
 {
     private readonly string _filePath;
-
-    private readonly List<string> _ignoredLines = new List<string>();
-
-    public List<string> IgnoredLines => _ignoredLines;
-
+    
     public SingleSpectrumFileReader(string filePath)
     {
         _filePath = filePath;
     }
         
+    /// <summary>
+    /// Reads single spectrum files. If x value or y value is missing then the point is ignored.
+    /// </summary>
     public List<Point> TryReadFile()
     {
         try
@@ -22,6 +21,10 @@ public class SingleSpectrumFileReader
             var lines = File.ReadLines(_filePath).ToList().Where(x => !string.IsNullOrWhiteSpace(x)).ToList();
             var points = TryParseLines(lines);
             points = points.OrderBy(x => x.X).ToList();
+            if (points.Count < 2)
+            {
+                throw new AppException($"File {_filePath} has less than two points.");
+            }
             return points;
         }
         catch (Exception ex)
@@ -44,7 +47,7 @@ public class SingleSpectrumFileReader
                 }
                 else
                 {
-                    _ignoredLines.Add(line);
+                    // ignore
                 }
             }
             return ret;
@@ -81,7 +84,7 @@ public class SingleSpectrumFileReader
         }
         catch (Exception e)
         {
-            return null;
+            throw new AppException($"Parsing line {line} failed.", e);
         }
     }
     

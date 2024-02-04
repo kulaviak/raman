@@ -91,32 +91,12 @@ public partial class MainForm : Form
     private void OpenSingleSpectraFilesInternal(List<string> filePaths)
     {
         var charts = new List<Chart>();
-        var ignoredLines = new List<string>();
         foreach (var filePath in filePaths)
         {
             var fileReader = new SingleSpectrumFileReader(filePath);
             var points = fileReader.TryReadFile();
             var name = Path.GetFileNameWithoutExtension(filePath);
             charts.Add(new Chart(points, name));
-            if (points.Count < 2)
-            {
-                MessageBox.Show($"File {filePath} has less 2 points. File is ignored.", "Error", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                continue;
-            }
-            if (fileReader.IgnoredLines.Count != 0)
-            {
-                ignoredLines.AddRange(fileReader.IgnoredLines);
-            }
-        }
-
-        if (ignoredLines.Count != 0)
-        {
-            var maxCount = 10;
-            if (ignoredLines.Count > maxCount) ignoredLines = ignoredLines.Take(maxCount).ToList();
-            var str = string.Join("\n", ignoredLines);
-            MessageBox.Show($"Following lines were ignored (Showing max {maxCount} lines): {str}", "Error", MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
         }
         canvasPanel.Charts = charts;
         canvasPanel.Refresh();
