@@ -147,7 +147,7 @@ public partial class MainForm : Form
 
     private void ZoomToWindow()
     {
-        canvasPanel.IsZooming = true;
+        canvasPanel.SetZoomToWindowMode();
     }
 
     private void miZoomToOriginalSize_Click(object sender, EventArgs e)

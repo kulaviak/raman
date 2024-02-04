@@ -101,6 +101,7 @@
     <Compile Include="Drawing\StatusStripLayer.cs" />
     <Compile Include="Drawing\XAxis.cs" />
     <Compile Include="Drawing\YAxis.cs" />
+    <Compile Include="Drawing\ZoomToWindowLayer.cs" />
     <Compile Include="GlobalUsings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

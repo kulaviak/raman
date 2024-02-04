@@ -1,8 +1,12 @@
 using System.ComponentModel;
-using Point = System.Drawing.Point;
 
 namespace Raman.Drawing;
 
+/// <summary>
+/// Canvas panel is responsible for drawing charts and handling mouse events.
+/// It is composed from layers and each layer is responsible for particular functionality. For example BaselineCorrectionLayer is
+/// responsible for drawing baseline points and handling mouse events when user is in baseline correction mode.
+/// </summary>
 public class CanvasPanel : Panel
 {
     private List<Chart> charts = new List<Chart>();
@@ -19,16 +23,6 @@ public class CanvasPanel : Panel
             CoordSystem = GetCoordSystemFromCharts(charts);
         }
     }
-        
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public bool IsZooming { get; set; }
-
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public BaselineCorrectionLayer BaselineCorrectionLayer { get; set; }
-
-    private Point? _zoomStart;
-
-    private Rectangle? _zoomRectangle;
 
     private Bitmap _buffer;
 
@@ -56,6 +50,12 @@ public class CanvasPanel : Panel
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public PeakAnalysisLayer PeakAnalysisLayer { get; set; }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public BaselineCorrectionLayer BaselineCorrectionLayer { get; set; }
+    
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public ZoomToWindowLayer ZoomToWindowLayer { get; set; }
+    
     public CanvasPanel()
     {
         InitializeComponent();
@@ -107,12 +107,7 @@ public class CanvasPanel : Panel
             DrawXAxis(graphics);
             DrawYAxis(graphics);
         }
-
-        if (IsZooming && _zoomRectangle != null)
-        {
-            graphics.DrawRectangle(Pens.Gray, _zoomRectangle.Value);
-        }
-
+        ZoomToWindowLayer?.Draw(graphics);
         BaselineCorrectionLayer?.Draw(graphics);
     }
 
@@ -187,49 +182,25 @@ public class CanvasPanel : Panel
 
     private void HandleMouseDown(object sender, MouseEventArgs e)
     {
-        if (IsZooming && e.Button == MouseButtons.Left)
-        {
-            _zoomStart = e.Location;
-            Refresh();
-            return;
-        }
+        ZoomToWindowLayer?.HandleMouseDown(sender, e);
         BaselineCorrectionLayer?.HandleMouseDown(sender, e);
         Refresh();
     }
 
     private void HandleMouseMove(object sender, MouseEventArgs e)
     {
-        if (IsZooming && _zoomStart != null)
-        {
-            var x = Math.Min(_zoomStart.Value.X, e.X);
-            var y = Math.Min(_zoomStart.Value.Y, e.Y);
-            var width = Math.Abs(_zoomStart.Value.X - e.X);
-            // calculate selection window height to have same aspect ratio as panel => after zoom chart will not change
-            var height = (int) (width * (Height / (float) Width));
-            if (width != 0 && height != 0)
-            {
-                _zoomRectangle = new Rectangle(x, y, width, height);
-                DoRefresh();
-            }
-        }
+        ZoomToWindowLayer?.HandleMouseMove(sender, e);
         BaselineCorrectionLayer?.HandleMouseMove(sender, e);
         StatusStripLayer?.HandleMouseMove(sender, e);
     }
 
     private void HandleMouseUp(object sender, MouseEventArgs e)
     {
-        if (e.Button == MouseButtons.Left && IsZooming && _zoomRectangle != null)
-        {
-            CoordSystem = GetCoordSystemForZoom(CoordSystem, _zoomRectangle.Value);
-            DoRefresh();
-            IsZooming = false;
-            _zoomStart = null;
-            _zoomRectangle = null;
-        }
+        ZoomToWindowLayer?.HandleMouseUp(sender, e);
         BaselineCorrectionLayer?.HandleMouseUp(sender, e);
     }
 
-    private CanvasCoordSystem GetCoordSystemForZoom(CanvasCoordSystem oldCoordSystem, Rectangle zoomRectangle)
+    public CanvasCoordSystem GetCoordSystemForZoom(CanvasCoordSystem oldCoordSystem, Rectangle zoomRectangle)
     {
         var minX = oldCoordSystem.ToValueX(zoomRectangle.X);
         var maxX = oldCoordSystem.ToValueX(zoomRectangle.X + zoomRectangle.Width);
@@ -237,5 +208,16 @@ public class CanvasPanel : Panel
         var maxY = oldCoordSystem.ToValueY(zoomRectangle.Y);
         var ret = new CanvasCoordSystem(Width, Height, minX, maxX, minY, maxY);
         return ret;
+    }
+
+    public void SetZoomToWindowMode()
+    {
+        ZoomToWindowLayer = new ZoomToWindowLayer(_coordSystem, this);
+    }
+    
+    public void UnsetZoomToWindowMode()
+    {
+        ZoomToWindowLayer = null;
+        Refresh();
     }
 }
