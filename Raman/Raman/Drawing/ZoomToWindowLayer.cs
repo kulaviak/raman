@@ -54,7 +54,6 @@ public class ZoomToWindowLayer : LayerBase
         if (e.Button == MouseButtons.Left)
         {
             start = e.Location;
-            // canvasPanel.Refresh();
         }
     }
 }

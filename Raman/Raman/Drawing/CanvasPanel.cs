@@ -175,7 +175,6 @@ public class CanvasPanel : Panel
         {
             bufferGraphics.Dispose();
         }
-
         InitializeBuffer();
         DoRefresh();
     }
