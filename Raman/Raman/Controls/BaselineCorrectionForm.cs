@@ -18,6 +18,18 @@ public partial class BaselineCorrectionForm : Form
 
     private void btnImportPoints_Click(object sender, EventArgs e)
     {
+        try
+        {
+            ImportPoints();
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowErrorOnUserAction("Importing baseline points failed.", "Error", ex);
+        }
+    }
+
+    private void ImportPoints()
+    {
         using (var openFileDialog = new OpenFileDialog())
         {
             openFileDialog.InitialDirectory = INITIAL_DIRECTORY_PATH;
@@ -52,6 +64,18 @@ public partial class BaselineCorrectionForm : Form
 
     private void btnExportPoints_Click(object sender, EventArgs e)
     {
+        try
+        {
+            ExportPoints();
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowErrorOnUserAction("Exporting points failed.", "Error", ex);
+        }
+    }
+
+    private void ExportPoints()
+    {
         using (var saveFileDialog = new SaveFileDialog())
         {
             saveFileDialog.InitialDirectory = INITIAL_DIRECTORY_PATH;
@@ -78,10 +102,17 @@ public partial class BaselineCorrectionForm : Form
             }
         }
     }
-        
+
     private void btnDoBaselineCorrection_Click(object sender, EventArgs e)
     {
-        _baselineCorrectionLayer.CorrectBaseline();
+        try
+        {
+            _baselineCorrectionLayer.CorrectBaseline();
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowErrorOnUserAction("Baseline correction failed.", "Error", ex);
+        }
     }
 
     private void btnUndoBaselineCorrection_Click(object sender, EventArgs e)
@@ -91,12 +122,26 @@ public partial class BaselineCorrectionForm : Form
 
     private void btnReset_Click(object sender, EventArgs e)
     {
-        _baselineCorrectionLayer.Reset();
+        try
+        {
+            _baselineCorrectionLayer.Reset();
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowErrorOnUserAction("Reset failed.", "Error", ex);
+        }
     }
 
     private void btnClose_Click(object sender, EventArgs e)
     {
-        Close();
+        try
+        {
+            Close();
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowErrorOnUserAction("Closing form failed.", "Error", ex);
+        }
     }
 
     private void BaselineCorrectionForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -113,6 +158,13 @@ public partial class BaselineCorrectionForm : Form
 
     private void btnExportCorrectedCharts_Click(object sender, EventArgs e)
     {
-        _baselineCorrectionLayer.ExportCorrectedCharts();
+        try
+        {
+            _baselineCorrectionLayer.ExportCorrectedCharts();
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowErrorOnUserAction("Export corrected spectra failed.", "Error", ex);
+        }
     }
 }

@@ -361,14 +361,12 @@ public partial class MainForm : Form
             {
                 throw new AppException($"Opening file {filePath} failed.", e);
             }
-
             var name = Path.GetFileNameWithoutExtension(filePath);
             foreach (var spectrumPoints in spectraPoints)
             {
                 charts.Add(new Chart(spectrumPoints, name));
             }
         }
-
         canvasPanel.Charts = charts;
         canvasPanel.Refresh();
     }
