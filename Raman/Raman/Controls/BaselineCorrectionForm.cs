@@ -4,7 +4,7 @@ namespace Raman.Controls;
 
 public partial class BaselineCorrectionForm : Form
 {
-    private readonly BaselineCorrectionLayer _baselineCorrectionLayer;
+    private readonly BaselineCorrectionLayer baselineCorrectionLayer;
     
     private const string INITIAL_DIRECTORY_PATH = "C:\\tmp";
         
@@ -12,7 +12,7 @@ public partial class BaselineCorrectionForm : Form
         
     public BaselineCorrectionForm(BaselineCorrectionLayer baselineCorrectionLayer)
     {
-        _baselineCorrectionLayer = baselineCorrectionLayer;
+        this.baselineCorrectionLayer = baselineCorrectionLayer;
         InitializeComponent();
     }
 
@@ -59,7 +59,7 @@ public partial class BaselineCorrectionForm : Form
     private void ImportPointsInternal(string filePath)
     {
         var points = new SingleSpectrumFileReader(filePath).TryReadFile();
-        _baselineCorrectionLayer.ImportPoints(points);
+        baselineCorrectionLayer.ImportPoints(points);
     }
 
     private void btnExportPoints_Click(object sender, EventArgs e)
@@ -92,7 +92,7 @@ public partial class BaselineCorrectionForm : Form
                 try
                 {
                     var filePath = filePaths.First();
-                    _baselineCorrectionLayer.ExportPoints(filePath);
+                    baselineCorrectionLayer.ExportPoints(filePath);
                     FormUtil.ShowInfo("Points were exported successfully.", "Export finished");
                 }
                 catch (Exception ex)
@@ -107,7 +107,7 @@ public partial class BaselineCorrectionForm : Form
     {
         try
         {
-            _baselineCorrectionLayer.CorrectBaseline();
+            baselineCorrectionLayer.CorrectBaseline();
         }
         catch (Exception ex)
         {
@@ -117,14 +117,14 @@ public partial class BaselineCorrectionForm : Form
 
     private void btnUndoBaselineCorrection_Click(object sender, EventArgs e)
     {
-        _baselineCorrectionLayer.UndoBaselineCorrection();
+        baselineCorrectionLayer.UndoBaselineCorrection();
     }
 
     private void btnReset_Click(object sender, EventArgs e)
     {
         try
         {
-            _baselineCorrectionLayer.Reset();
+            baselineCorrectionLayer.Reset();
         }
         catch (Exception ex)
         {
@@ -146,7 +146,7 @@ public partial class BaselineCorrectionForm : Form
 
     private void BaselineCorrectionForm_FormClosing(object sender, FormClosingEventArgs e)
     {
-        if (_baselineCorrectionLayer.CorrectionPoints.Any() && !_baselineCorrectionLayer.IsBaselineCorrected)
+        if (baselineCorrectionLayer.CorrectionPoints.Any() && !baselineCorrectionLayer.IsBaselineCorrected)
         {
             if (FormUtil.ShowQuestion("Do you really want to exit Baseline Correction and loose selected correction points?",
                     "Confirmation") == DialogResult.No)
@@ -160,7 +160,7 @@ public partial class BaselineCorrectionForm : Form
     {
         try
         {
-            _baselineCorrectionLayer.ExportCorrectedCharts();
+            baselineCorrectionLayer.ExportCorrectedCharts();
         }
         catch (Exception ex)
         {

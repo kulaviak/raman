@@ -6,7 +6,7 @@ namespace Raman.Drawing;
 
 public class BaselineCorrectionLayer : LayerBase
 {
-    private readonly CanvasPanel _canvasPanel;
+    private readonly CanvasPanel canvasPanel;
         
     private static Color COLOR = Color.Red;
 
@@ -18,7 +18,7 @@ public class BaselineCorrectionLayer : LayerBase
 
     public BaselineCorrectionLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : base(coordSystem)
     {
-        _canvasPanel = canvasPanel;
+        this.canvasPanel = canvasPanel;
     }
         
     public override void HandleMouseDown(object sender, MouseEventArgs e)
@@ -57,7 +57,7 @@ public class BaselineCorrectionLayer : LayerBase
 
     private void DrawBaselines(Graphics graphics)
     {
-        if (_canvasPanel.Charts.Any() && CorrectionPoints.Count >= 4)
+        if (canvasPanel.Charts.Any() && CorrectionPoints.Count >= 4)
         {
             try
             {
@@ -65,7 +65,7 @@ public class BaselineCorrectionLayer : LayerBase
                 var end = CorrectionPoints.Max(point => point.X);
                 var xPositions = GetXPositions(start, end);
                 var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, CorrectionPoints);
-                new CanvasDrawer(_canvasPanel.CoordSystem, graphics).DrawLines(baselinePoints, Pens.Green);
+                new CanvasDrawer(canvasPanel.CoordSystem, graphics).DrawLines(baselinePoints, Pens.Green);
             }
             catch (Exception e)
             {
@@ -97,14 +97,14 @@ public class BaselineCorrectionLayer : LayerBase
 
     private void Refresh()
     {
-        _canvasPanel.Refresh();
+        canvasPanel.Refresh();
     }
 
     private void ShowContextMenu(System.Drawing.Point location)
     {
         var contextMenu = new ContextMenuStrip();
         contextMenu.Items.Add("Remove Closest Point", null, (_, _) => RemoveClosestPoint(location));
-        contextMenu.Show(_canvasPanel, location);
+        contextMenu.Show(canvasPanel, location);
     }
         
     private Point GetPointToRemove(System.Drawing.Point pos)
@@ -138,10 +138,10 @@ public class BaselineCorrectionLayer : LayerBase
 
     public void CorrectBaseline()
     {
-        oldCharts = _canvasPanel.Charts;
-        _canvasPanel.Charts = _canvasPanel.Charts.Select(x => CorrectBaseline(x)).ToList();
+        oldCharts = canvasPanel.Charts;
+        canvasPanel.Charts = canvasPanel.Charts.Select(x => CorrectBaseline(x)).ToList();
         IsBaselineCorrected = true;
-        _canvasPanel.Refresh();
+        canvasPanel.Refresh();
     }
 
     private Chart CorrectBaseline(Chart chart)
@@ -159,14 +159,14 @@ public class BaselineCorrectionLayer : LayerBase
 
     public void UndoBaselineCorrection()
     {
-        _canvasPanel.Charts = oldCharts;
+        canvasPanel.Charts = oldCharts;
         IsBaselineCorrected = false;
-        _canvasPanel.Refresh();
+        canvasPanel.Refresh();
     }
 
     public void ExportCorrectedCharts()
     {
-        var exportedCharts = _canvasPanel.Charts.Where(x => x.IsBaselineCorrected).ToList();
+        var exportedCharts = canvasPanel.Charts.Where(x => x.IsBaselineCorrected).ToList();
         if (!exportedCharts.Any())
         {
             FormUtil.ShowUserError("There are no corrected spectra.", "No spectra to export");

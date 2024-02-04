@@ -4,7 +4,7 @@ namespace Raman.Controls;
 
 public partial class PeakAnalysisForm : Form
 {
-    private readonly PeakAnalysisLayer _peakAnalysisLayer;
+    private readonly PeakAnalysisLayer peakAnalysisLayer;
     
     private const string INITIAL_DIRECTORY_PATH = "C:\\tmp";
         
@@ -12,7 +12,7 @@ public partial class PeakAnalysisForm : Form
         
     public PeakAnalysisForm(PeakAnalysisLayer peakAnalysisLayer)
     {
-        _peakAnalysisLayer = peakAnalysisLayer;
+        this.peakAnalysisLayer = peakAnalysisLayer;
         InitializeComponent();
     }
 
