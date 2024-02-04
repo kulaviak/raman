@@ -35,9 +35,22 @@ public class CanvasPanel : Panel
         set
         {
             coordSystem = value;
+            // !!! This must be done for each layer
             if (BaselineCorrectionLayer != null)
             {
                 BaselineCorrectionLayer.CoordSystem = value;
+            }
+            if (ZoomToWindowLayer != null)
+            {
+                ZoomToWindowLayer.CoordSystem = value;
+            }
+            if (StatusStripLayer != null)
+            {
+                StatusStripLayer.CoordSystem = value;
+            }
+            if (PeakAnalysisLayer != null)
+            {
+                PeakAnalysisLayer.CoordSystem = value;
             }
         }
     }
