@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using Raman.Controls;
 using Raman.Drawing;
 using Point = Raman.Core.Point;
@@ -400,5 +401,23 @@ public partial class MainForm : Form
         {
             canvasPanel.UnsetZoomToWindowMode();
         }
+    }
+
+    private void miHelp_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            var path = Path.Combine(Environment.CurrentDirectory, "doc/Raman.pdf");
+            // Use the default PDF viewer on the system to open the file
+            Process.Start(path);
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowErrorOnUserAction($"Error opening PDF: {ex.Message}", "Error", ex);
+        }    
+    }
+
+    private void miAbout_Click(object sender, EventArgs e)
+    {
     }
 }

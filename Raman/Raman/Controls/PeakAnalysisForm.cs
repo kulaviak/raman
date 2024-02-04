@@ -50,5 +50,18 @@ public partial class PeakAnalysisForm : Form
 
     private void btnExportPeaks_Click(object sender, EventArgs e)
     {
+        try
+        {
+            ExportPeaks();
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowErrorOnUserAction("Peaks export failed.", "Error", ex);
+        }
+    }
+
+    private void ExportPeaks()
+    {
+               
     }
 }
