@@ -70,8 +70,10 @@ public class CanvasPanel : Panel
     public CanvasPanel()
     {
         InitializeComponent();
+        // use double buffering to avoid flickering 
+        DoubleBuffered = true;
     }
-
+    
     public void ZoomToOriginalSize()
     {
         CoordSystem = CoordSystemCalculator.GetCoordSystemToShowAllCharts(charts, Width, Height);
@@ -94,14 +96,7 @@ public class CanvasPanel : Panel
 
     private void HandlePaint(object sender, PaintEventArgs e)
     {
-        if (buffer == null)
-        {
-            InitializeBuffer();
-        }
-
-        Draw(bufferGraphics);
-        // copy the content of the off-screen buffer to the form's graphics
-        e.Graphics.DrawImage(buffer, 0, 0);
+        Draw(e.Graphics);
     }
 
     private void Draw(Graphics graphics)
