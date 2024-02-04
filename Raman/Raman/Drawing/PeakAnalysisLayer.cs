@@ -77,9 +77,50 @@ public class PeakAnalysisLayer : LayerBase
 
     private void DrawLines(Graphics graphics)
     {
-        new CanvasDrawer(CoordSystem, graphics).DrawLines(Lines, PEN);
+        var canvasDrawer = new CanvasDrawer(CoordSystem, graphics);
+        foreach (var line in Lines)
+        {
+            canvasDrawer.DrawLine(line.Start, line.End, PEN);
+            foreach (var chart in canvasPanel.VisibleCharts)
+            {
+                var peak = GetPeakBetweenPoints(line.Start, line.End, chart);
+                if (peak != null)
+                {
+                    var intersection = GetIntersectionOfLineAndVertical(line, peak);
+                    if (intersection != null)
+                    {
+                        canvasDrawer.DrawLine(peak, intersection, PEN);
+                    }
+                }
+            }
+        }
     }
-    
+
+    // from Chat GPT
+    private Point GetIntersectionOfLineAndVertical(Line line, Point peak)
+    {
+        var x1 = line.Start.X;
+        var y1 = line.Start.Y;
+        
+        var x2 = line.End.X;
+        var y2 = line.End.Y;
+        
+        var m1 = (y2 - y1) / (x2 - x1);
+        var b1 = y1 - m1 * x1;
+        
+        var intersectionX = peak.X;
+        var intersectionY = m1 * intersectionX + b1;
+
+        var ret = new Point(intersectionX, intersectionY);
+        return ret;
+    }
+
+    private Point GetPeakBetweenPoints(Point start, Point end, Chart chart)
+    {
+        var ret = chart.Points.Where(point => start.X < point.X && point.X <= end.X).MaxByOrDefault(point => point.Y);
+        return ret;
+    }
+
     private void RemoveClosestLine(System.Drawing.Point location)
     {
         var line = GetLineToRemove(location);

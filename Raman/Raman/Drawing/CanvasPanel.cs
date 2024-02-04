@@ -22,6 +22,8 @@ public class CanvasPanel : Panel
         }
     }
 
+    public List<Chart> VisibleCharts => Charts.Where(x => x.IsVisible).ToList();
+
     private Bitmap buffer;
 
     private Graphics bufferGraphics;

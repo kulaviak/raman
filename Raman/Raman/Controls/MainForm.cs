@@ -379,9 +379,11 @@ public partial class MainForm : Form
                 throw new AppException($"Opening file {filePath} failed.", e);
             }
             var name = Path.GetFileNameWithoutExtension(filePath);
-            foreach (var spectrumPoints in spectraPoints)
+            for (var i = 0; i < spectraPoints.Count; i++)
             {
-                charts.Add(new Chart(spectrumPoints, name));
+                var spectrumPoints = spectraPoints[i];
+                var chart = new Chart(spectrumPoints, name + $"_{i+1}");
+                charts.Add(chart);
             }
         }
         canvasPanel.Charts = charts;

@@ -12,6 +12,8 @@ public class Chart
 
     public bool IsBaselineCorrected { get; set; }
 
+    public bool IsVisible { get; set; } = true;
+
     public Chart(List<Point> points, string name)
     {
         this.points = points;
