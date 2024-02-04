@@ -188,8 +188,9 @@ public partial class MainForm : Form
 
     private void BaselineCorrection()
     {
-        canvasPanel.BaselineCorrectionLayer = new BaselineCorrectionLayer(canvasPanel.CoordSystem, canvasPanel);
-        var form = new BaselineCorrectionForm(canvasPanel.BaselineCorrectionLayer);
+        var baselineCorrectionLayer = new BaselineCorrectionLayer(canvasPanel.CoordSystem, canvasPanel);
+        canvasPanel.BaselineCorrectionLayer = baselineCorrectionLayer;
+        var form = new BaselineCorrectionForm(baselineCorrectionLayer);
         form.Closed += BaselineForm_Closed;
         ShowSidePanel(form);
     }
@@ -204,7 +205,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowErrorOnUserAction("Closing baseline form failed.", "Error", ex);
+            FormUtil.ShowErrorOnUserAction("Closing Baseline Correction form failed.", "Error", ex);
         }
     }
 
@@ -294,10 +295,25 @@ public partial class MainForm : Form
 
     private void PeakAnalysis()
     {
-        canvasPanel.PeakAnalysisLayer = new PeakAnalysisLayer(canvasPanel.CoordSystem, canvasPanel);
-        // var form = new PeForm(canvasPanel.BaselineCorrectionLayer);
-        // form.Closed += BaselineForm_Closed;
-        // ShowSidePanel(form);
+        var peakAnalysisLayer = new PeakAnalysisLayer(canvasPanel.CoordSystem, canvasPanel);
+        canvasPanel.PeakAnalysisLayer = peakAnalysisLayer;
+        var form = new PeakAnalysisForm(peakAnalysisLayer);
+        form.Closed += PeakAnalysisForm_Closed;
+        ShowSidePanel(form);
+    }
+
+    private void PeakAnalysisForm_Closed(object sender, EventArgs e)
+    {
+        try
+        {
+            HideSidePanel();
+            canvasPanel.PeakAnalysisLayer = null;
+            Refresh();
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowErrorOnUserAction("Closing Peak Analysis form failed.", "Error", ex);
+        }
     }
 
     private void tsbPeakAnalysis_Click(object sender, EventArgs e)
