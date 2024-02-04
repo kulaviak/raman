@@ -5,12 +5,12 @@ namespace Raman.Core;
 public class SingleSpectrumFileReader
 {
     private readonly string filePath;
-    
+
     public SingleSpectrumFileReader(string filePath)
     {
         this.filePath = filePath;
     }
-        
+
     /// <summary>
     /// Reads single spectrum files. If x value or y value is missing then the point is ignored.
     /// </summary>
@@ -25,38 +25,31 @@ public class SingleSpectrumFileReader
             {
                 throw new AppException($"File {filePath} has less than two points.");
             }
+
             return points;
         }
         catch (Exception ex)
         {
-            throw new Exception($"Loading file {filePath} failed.", ex);
+            throw new AppException($"Loading file {filePath} failed.", ex);
         }
     }
 
     private List<Point> TryParseLines(List<string> lines)
     {
         var ret = new List<Point>();
-        try
+        foreach (var line in lines)
         {
-            foreach (var line in lines)
+            var point = TryParseLine(line);
+            if (point != null)
             {
-                var point = TryParseLine(line);
-                if (point != null)
-                {
-                    ret.Add(point);
-                }
-                else
-                {
-                    // ignore
-                }
+                ret.Add(point);
             }
-            return ret;
+            else
+            {
+                // ignore
+            }
         }
-        catch (Exception e)
-        {
-            // ignore
-            return null;
-        }      
+        return ret;
     }
 
     public static Point TryParseLine(string line)
@@ -87,9 +80,9 @@ public class SingleSpectrumFileReader
             throw new AppException($"Parsing line {line} failed.", e);
         }
     }
-    
+
     public static string[] SplitOnWhitespaceOrTab(string line)
     {
-        return line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+        return line.Split(new[] {' ', '\t'}, StringSplitOptions.RemoveEmptyEntries);
     }
 }

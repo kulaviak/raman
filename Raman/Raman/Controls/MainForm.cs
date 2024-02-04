@@ -67,24 +67,31 @@ public partial class MainForm : Form
 
     private void OpenSingleSpectrumFiles()
     {
-        using (var openFileDialog = new OpenFileDialog())
+        try
         {
-            // don't specify initial directory - it will remember the last one
-            // openFileDialog.InitialDirectory = "C:\\"; 
-            openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"; 
-            openFileDialog.FilterIndex = 1;
-            openFileDialog.Multiselect = true;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            using (var openFileDialog = new OpenFileDialog())
             {
-                var filePaths = openFileDialog.FileNames.ToList();
-                if (filePaths.Count == 0)
+                // don't specify initial directory - it will remember the last one
+                // openFileDialog.InitialDirectory = "C:\\"; 
+                openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"; 
+                openFileDialog.FilterIndex = 1;
+                openFileDialog.Multiselect = true;
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show("No files were selected.", "Error", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    return;
+                    var filePaths = openFileDialog.FileNames.ToList();
+                    if (filePaths.Count == 0)
+                    {
+                        MessageBox.Show("No files were selected.", "Error", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        return;
+                    }
+                    OpenSingleSpectraFilesInternal(filePaths);
                 }
-                OpenSingleSpectraFilesInternal(filePaths);
             }
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowErrorOnUserAction("Opening single spectrum files failed.", "Opening files failed", ex);
         }
     }
 

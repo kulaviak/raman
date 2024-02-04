@@ -31,7 +31,7 @@ public abstract class FormUtil
         var str = "";
         while (ex is AppException)
         {
-            str += " " + ex.Message;
+            str += " Reason: " + ex.Message;
             ex = ex.InnerException;
         }
         var ret = msg + str;
