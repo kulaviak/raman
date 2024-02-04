@@ -5,26 +5,21 @@ namespace Raman.Core;
 public class MultiSpectrumFileReader
 {
     private readonly string _filePath;
-
-    private readonly List<string> _ignoredLines = new List<string>();
-
-    public List<string> IgnoredLines => _ignoredLines;
-
+    
     public MultiSpectrumFileReader(string filePath)
     {
         _filePath = filePath;
     }
 
     /// <summary>
-    /// Reads multi spectrum file. If x value or y value of the point can not be evaluated (invalid number or it is just empty string)
-    /// then the point is ignored. 
+    /// Reads multi spectrum file. If x value or y value of the point is empty then the point is ignored.
     /// </summary>
     public List<List<Point>> TryReadFile()
     {
         List<string> lines;
         try
         {
-            lines = File.ReadLines(_filePath).Where(x => !x.IsNullOrWhiteSpace()).ToList();
+            lines = File.ReadLines(_filePath).ToList().Where(x => !x.IsNullOrWhiteSpace()).ToList();
         }
         catch (Exception e)
         {
@@ -38,6 +33,10 @@ public class MultiSpectrumFileReader
             {
                 var xLine = lines.First();
                 var xValues = TryParseLine(xLine);
+                if (xValues.Count < 2)
+                {
+                    throw new AppException($"There are less than two points. Line: {xLine}");
+                }
                 if (xValues != null)
                 {
                     for (var i = 1; i < lines.Count; i++)
@@ -46,6 +45,10 @@ public class MultiSpectrumFileReader
                         var yValues = TryParseLine(yLine);
                         if (yValues != null)
                         {
+                            if (yValues.Count < 2)
+                            {
+                                throw new AppException($"There are less than two points. Line: {yLine}");
+                            }
                             if (xValues.Count == yValues.Count)
                             {
                                 var points = GetPoints(xValues, yValues);
@@ -53,15 +56,24 @@ public class MultiSpectrumFileReader
                             }
                             else
                             {
-                                _ignoredLines.Add(yLine);
+                                throw new AppException(
+                                    $"Line with y coordinates doesn't have same count of numbers as line with x coordinates. Line: {yLine}");
                             }
+                        }
+                        else
+                        {
+                            throw new AppException($"Parsing line with y coordinates failed. Line: {yLine}");
                         }
                     }
                 }
                 else
                 {
-                    _ignoredLines.Add(xLine);
+                    throw new AppException($"Parsing line with x coordinates failed. Line: {xLine}");
                 }
+            }
+            else
+            {
+                throw new AppException($"File has less than 2 lines.");
             }
             return ret;
         }
@@ -83,7 +95,6 @@ public class MultiSpectrumFileReader
             }
             // else ignore the point
         }
-
         return ret;
     }
 
@@ -98,7 +109,7 @@ public class MultiSpectrumFileReader
         }
         catch (Exception e)
         {
-            return null;
+            throw new AppException($"Parsing line {line} failed.", e);
         }
     }
 }

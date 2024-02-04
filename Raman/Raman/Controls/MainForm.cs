@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Raman.Controls;
 using Raman.Drawing;
+using Point = Raman.Core.Point;
 
 namespace Raman;
 
@@ -242,7 +243,7 @@ public partial class MainForm : Form
         {
             using (var openFileDialog = new OpenFileDialog())
             {
-                // don't specify initial directory - it will remember the last one
+                // don't specify initial directory - it will remember the last oneI
                 // openFileDialog.InitialDirectory = "C:\\"; 
                 openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"; 
                 openFileDialog.FilterIndex = 1;
@@ -268,34 +269,23 @@ public partial class MainForm : Form
     private void OpenMultiSpectrumFilesInternal(List<string> filePaths)
     {
         var charts = new List<Chart>();
-        var ignoredLines = new List<string>();
         foreach (var filePath in filePaths)
         {
-            var fileReader = new MultiSpectrumFileReader(filePath);
-            var spectraPoints = fileReader.TryReadFile();
+            List<List<Point>> spectraPoints;
+            try
+            {
+                var fileReader = new MultiSpectrumFileReader(filePath);
+                spectraPoints = fileReader.TryReadFile();
+            }
+            catch (Exception e)
+            {
+                throw new AppException($"Opening file {filePath} failed.", e);
+            }
             var name = Path.GetFileNameWithoutExtension(filePath);
             foreach (var spectrumPoints in spectraPoints)
             {
                 charts.Add(new Chart(spectrumPoints, name));
-                if (spectraPoints.Count < 2)
-                {
-                    MessageBox.Show($"File {filePath} has less than two points. File is ignored.", "Error", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    continue;
-                }
-                if (fileReader.IgnoredLines.Count != 0)
-                {
-                    ignoredLines.AddRange(fileReader.IgnoredLines);
-                }
             }
-        }
-        if (ignoredLines.Count != 0)
-        {
-            var maxCount = 10;
-            if (ignoredLines.Count > maxCount) ignoredLines = ignoredLines.Take(maxCount).ToList();
-            var str = string.Join("\n", ignoredLines);
-            MessageBox.Show($"Following lines were ignored (Showing max {maxCount} lines): {str}", "Error", MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
         }
         canvasPanel.Charts = charts;
         canvasPanel.Refresh();

@@ -19,6 +19,10 @@ public abstract class Util
     /// <returns></returns>
     public static Decimal? UniversalParseDecimal(string str)
     {
+        if (str.IsNullOrWhiteSpace())
+        {
+            return null;
+        }
         str = str.Replace(",", ".");
         var style = NumberStyles.Number;
         var culture = CultureInfo.CreateSpecificCulture("en-US");
@@ -28,7 +32,7 @@ public abstract class Util
         }
         else
         {
-            return null;
+            throw new AppException($"Parsing string {str} as number failed.");
         }
     }
 
