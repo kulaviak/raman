@@ -22,7 +22,8 @@ public abstract class FormUtil
     public static void ShowErrorOnUserAction(string msg, string caption, Exception ex)
     {
         msg = GetMessage(msg, ex);
-        MessageBox.Show(msg, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        new ErrorForm(msg, caption, ex).ShowDialog();
+        // MessageBox.Show(msg, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
         _logger.Error(ex, msg);
     }
 

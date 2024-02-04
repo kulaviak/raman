@@ -65,6 +65,12 @@
     <Compile Include="Controls\BaselineCorrectionForm.Designer.cs">
       <DependentUpon>BaselineCorrectionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ErrorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ErrorForm.Designer.cs">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FormUtil.cs" />
     <Compile Include="Controls\MainForm.cs">
       <SubType>Form</SubType>
@@ -100,6 +106,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\BaselineCorrectionForm.resx">
       <DependentUpon>BaselineCorrectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ErrorForm.resx">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
