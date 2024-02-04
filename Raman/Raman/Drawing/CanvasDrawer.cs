@@ -4,23 +4,23 @@ namespace Raman.Drawing;
 
 public class CanvasDrawer
 {
-    private readonly CanvasCoordSystem _coordSystem;
+    private readonly CanvasCoordSystem coordSystem;
         
-    private readonly Graphics _graphics;
+    private readonly Graphics graphics;
 
     public CanvasDrawer(CanvasCoordSystem coordSystem, Graphics graphics)
     {
-        _coordSystem = coordSystem;
-        _graphics = graphics;
+        this.coordSystem = coordSystem;
+        this.graphics = graphics;
     }
 
     public void DrawLine(Point point1, Point point2, Pen pen)
     {
-        var point1X = _coordSystem.ToPixelX(point1.X);
-        var point1Y = _coordSystem.ToPixelY(point1.Y);
-        var point2X = _coordSystem.ToPixelX(point2.X);
-        var point2Y = _coordSystem.ToPixelY(point2.Y);
-        _graphics.DrawLine(pen, point1X, point1Y, point2X, point2Y);
+        var point1X = coordSystem.ToPixelX(point1.X);
+        var point1Y = coordSystem.ToPixelY(point1.Y);
+        var point2X = coordSystem.ToPixelX(point2.X);
+        var point2Y = coordSystem.ToPixelY(point2.Y);
+        graphics.DrawLine(pen, point1X, point1Y, point2X, point2Y);
     }
         
     public void DrawLines(List<Point> points, Pen pen)

@@ -1,12 +1,10 @@
-using System.IO;
-using Raman.Controls;
 using Point = Raman.Core.Point;
 
 namespace Raman.Drawing;
 
 public class PeakAnalysisLayer : LayerBase
 {
-    private readonly CanvasPanel _canvasPanel;
+    private readonly CanvasPanel canvasPanel;
         
     private static Color COLOR = Color.Orange;
 
@@ -14,7 +12,7 @@ public class PeakAnalysisLayer : LayerBase
     
     public PeakAnalysisLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : base(coordSystem)
     {
-        _canvasPanel = canvasPanel;
+        this.canvasPanel = canvasPanel;
     }
         
     public override void HandleMouseDown(object sender, MouseEventArgs e)
@@ -79,14 +77,14 @@ public class PeakAnalysisLayer : LayerBase
 
     private void Refresh()
     {
-        _canvasPanel.Refresh();
+        canvasPanel.Refresh();
     }
 
     private void ShowContextMenu(System.Drawing.Point location)
     {
         var contextMenu = new ContextMenuStrip();
         contextMenu.Items.Add("Remove Closest Line", null, (_, _) => RemoveClosestLine(location));
-        contextMenu.Show(_canvasPanel, location);
+        contextMenu.Show(canvasPanel, location);
     }
         
     // private Point GetPointToRemove(System.Drawing.Point pos)

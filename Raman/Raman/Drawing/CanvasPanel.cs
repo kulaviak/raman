@@ -5,18 +5,18 @@ namespace Raman.Drawing;
 
 public class CanvasPanel : Panel
 {
-    private List<Chart> _charts = new List<Chart>();
+    private List<Chart> charts = new List<Chart>();
 
     private const int PIXEL_SPACE = 25;
     
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public List<Chart> Charts
     {
-        get { return _charts; }
+        get { return charts; }
         set
         {
-            _charts = value;
-            CoordSystem = GetCoordSystemFromCharts(_charts);
+            charts = value;
+            CoordSystem = GetCoordSystemFromCharts(charts);
         }
     }
         
@@ -63,7 +63,7 @@ public class CanvasPanel : Panel
 
     public void ZoomToOriginalSize()
     {
-        CoordSystem = GetCoordSystemFromCharts(_charts);
+        CoordSystem = GetCoordSystemFromCharts(charts);
         DoRefresh();
     }
 
@@ -99,7 +99,7 @@ public class CanvasPanel : Panel
         if (CoordSystem != null)
         {
             ClipGraphicsToOnlyChartArea(graphics);
-            foreach (var chart in (IList<Chart>) _charts)
+            foreach (var chart in (IList<Chart>) charts)
             {
                 chart.Draw(CoordSystem, graphics);
             }
@@ -173,7 +173,7 @@ public class CanvasPanel : Panel
 
     private void HandleResize(object sender, EventArgs e)
     {
-        CoordSystem = GetCoordSystemFromCharts(_charts);
+        CoordSystem = GetCoordSystemFromCharts(charts);
         // recreate the buffer when the form is resized
         _buffer?.Dispose();
         if (_bufferGraphics != null)

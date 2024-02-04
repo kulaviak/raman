@@ -6,25 +6,25 @@ public class Chart
 {
     public string Name { get; }
 
-    private readonly List<Point> _points;
+    private readonly List<Point> points;
 
-    public List<Point> Points => _points;
+    public List<Point> Points => points;
 
     public bool IsBaselineCorrected { get; set; }
 
     public Chart(List<Point> points, string name)
     {
-        _points = points;
+        this.points = points;
         Name = name;
     }
 
     public void Draw(CanvasCoordSystem coordSystem, Graphics graphics)
     {
-        new CanvasDrawer(coordSystem, graphics).DrawLines(_points, Pens.Blue);
+        new CanvasDrawer(coordSystem, graphics).DrawLines(points, Pens.Blue);
     }
 
     public override string ToString()
     {
-        return $"Points.Count: {_points.Count}";
+        return $"Points.Count: {points.Count}";
     }
 }

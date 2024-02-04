@@ -4,11 +4,11 @@ namespace Raman.Core;
 
 public class SingleSpectrumFileReader
 {
-    private readonly string _filePath;
+    private readonly string filePath;
     
     public SingleSpectrumFileReader(string filePath)
     {
-        _filePath = filePath;
+        this.filePath = filePath;
     }
         
     /// <summary>
@@ -18,18 +18,18 @@ public class SingleSpectrumFileReader
     {
         try
         {
-            var lines = File.ReadLines(_filePath).ToList().Where(x => !string.IsNullOrWhiteSpace(x)).ToList();
+            var lines = File.ReadLines(filePath).ToList().Where(x => !string.IsNullOrWhiteSpace(x)).ToList();
             var points = TryParseLines(lines);
             points = points.OrderBy(x => x.X).ToList();
             if (points.Count < 2)
             {
-                throw new AppException($"File {_filePath} has less than two points.");
+                throw new AppException($"File {filePath} has less than two points.");
             }
             return points;
         }
         catch (Exception ex)
         {
-            throw new Exception($"Loading file {_filePath} failed.", ex);
+            throw new Exception($"Loading file {filePath} failed.", ex);
         }
     }
 

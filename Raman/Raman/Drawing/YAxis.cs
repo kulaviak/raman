@@ -2,9 +2,9 @@ namespace Raman.Drawing;
 
 public class YAxis
 {
-    private readonly CanvasCoordSystem _coordSystem;
+    private readonly CanvasCoordSystem coordSystem;
         
-    private readonly Graphics _graphics;
+    private readonly Graphics graphics;
 
     private const int TICK_LINE_LENGTH = 5;
         
@@ -14,30 +14,30 @@ public class YAxis
 
     public YAxis(CanvasCoordSystem coordSystem, Graphics graphics)
     {
-        _coordSystem = coordSystem;
-        _graphics = graphics;
+        this.coordSystem = coordSystem;
+        this.graphics = graphics;
     }
 
     public void Draw()
     {
-        var x1 = _coordSystem.LeftBorder;
-        var y1 = _coordSystem.TopBorder + _coordSystem.PixelHeight;
-        var x2 = _coordSystem.LeftBorder;
-        var y2 = _coordSystem.TopBorder;
-        _graphics.DrawLine(Pens.Black, x1, y1, x2, y2);
+        var x1 = coordSystem.LeftBorder;
+        var y1 = coordSystem.TopBorder + coordSystem.PixelHeight;
+        var x2 = coordSystem.LeftBorder;
+        var y2 = coordSystem.TopBorder;
+        graphics.DrawLine(Pens.Black, x1, y1, x2, y2);
         DrawNumbers();
     }
 
     private void DrawNumbers()
     {
-        var gap = GetValueGap(_coordSystem.ValueHeight, _coordSystem.PixelHeight);
-        var numbers = GetNumbers(_coordSystem.MinY, _coordSystem.MaxY, gap);
+        var gap = GetValueGap(coordSystem.ValueHeight, coordSystem.PixelHeight);
+        var numbers = GetNumbers(coordSystem.MinY, coordSystem.MaxY, gap);
         numbers.ForEach(x => DrawNumberWithTick(x));
     }
         
     private void DrawNumberWithTick(decimal number)
     {
-        var pos = _coordSystem.ToPixelY(number);
+        var pos = coordSystem.ToPixelY(number);
         DrawTick(pos);
         DrawNumber(number, pos);
     }
@@ -46,9 +46,9 @@ public class YAxis
     {
         var numberStr = number + "";
         var font = SystemFonts.DefaultFont;
-        var numberX = _coordSystem.ToPixelX(_coordSystem.MinX) - TICK_LINE_LENGTH - DISTANCE_FROM_TICK_TO_NUMBER - GetDrawnStringLength(numberStr, font);
+        var numberX = coordSystem.ToPixelX(coordSystem.MinX) - TICK_LINE_LENGTH - DISTANCE_FROM_TICK_TO_NUMBER - GetDrawnStringLength(numberStr, font);
         var numberY = pos - GetDrawnStringHeight(font);
-        _graphics.DrawString(numberStr, font, Brushes.Black, numberX, numberY);
+        graphics.DrawString(numberStr, font, Brushes.Black, numberX, numberY);
     }
 
     private static float GetDrawnStringHeight(Font font)
@@ -59,13 +59,13 @@ public class YAxis
 
     private void DrawTick(float pos)
     {
-        var x = _coordSystem.ToPixelX(_coordSystem.MinX);
-        _graphics.DrawLine(Pens.Black, x, pos, x - TICK_LINE_LENGTH, pos);
+        var x = coordSystem.ToPixelX(coordSystem.MinX);
+        graphics.DrawLine(Pens.Black, x, pos, x - TICK_LINE_LENGTH, pos);
     }
         
     private float GetDrawnStringLength(string str, Font font)
     {
-        var ret = _graphics.MeasureString(str, font).Width;
+        var ret = graphics.MeasureString(str, font).Width;
         return ret;
     }
 

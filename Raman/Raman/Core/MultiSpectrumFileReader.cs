@@ -4,11 +4,11 @@ namespace Raman.Core;
 
 public class MultiSpectrumFileReader
 {
-    private readonly string _filePath;
+    private readonly string filePath;
     
     public MultiSpectrumFileReader(string filePath)
     {
-        _filePath = filePath;
+        this.filePath = filePath;
     }
 
     /// <summary>
@@ -19,11 +19,11 @@ public class MultiSpectrumFileReader
         List<string> lines;
         try
         {
-            lines = File.ReadLines(_filePath).ToList().Where(x => !x.IsNullOrWhiteSpace()).ToList();
+            lines = File.ReadLines(filePath).ToList().Where(x => !x.IsNullOrWhiteSpace()).ToList();
         }
         catch (Exception e)
         {
-            throw new AppException($"Opening file {_filePath} failed: {e.Message}", e);
+            throw new AppException($"Opening file {filePath} failed: {e.Message}", e);
         }
 
         try
@@ -79,7 +79,7 @@ public class MultiSpectrumFileReader
         }
         catch (Exception e)
         {
-            throw new AppException($"Parsing data from file {_filePath} failed.", e);
+            throw new AppException($"Parsing data from file {filePath} failed.", e);
         }
     }
 

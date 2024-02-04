@@ -4,13 +4,13 @@ namespace Raman.Drawing;
 
 public class Mark
 {
-    private readonly CanvasCoordSystem _coordSystem;
+    private readonly CanvasCoordSystem coordSystem;
         
-    private readonly Graphics _graphics;
+    private readonly Graphics graphics;
         
-    private readonly Color _color;
+    private readonly Color color;
         
-    private readonly Point _point;
+    private readonly Point point;
 
     private const int RADIUS = 8;
     
@@ -18,29 +18,29 @@ public class Mark
 
     public Mark(CanvasCoordSystem coordSystem, Graphics graphics, Color color, Point point)
     {
-        _coordSystem = coordSystem;
-        _graphics = graphics;
-        _color = color;
-        _point = point;
+        this.coordSystem = coordSystem;
+        this.graphics = graphics;
+        this.color = color;
+        this.point = point;
     }
 
     public void Draw()
     {
-        var pixelX = _coordSystem.ToPixelX(_point.X);
-        var pixelY = _coordSystem.ToPixelY(_point.Y);
+        var pixelX = coordSystem.ToPixelX(point.X);
+        var pixelY = coordSystem.ToPixelY(point.Y);
         DrawHorizontalLine(pixelX, pixelY);
         DrawVerticalLine(pixelX, pixelY);
     }
 
     private void DrawVerticalLine(float pixelX, float pixelY)
     {
-        var pen = new Pen(_color, THICKNESS); 
-        _graphics.DrawLine(pen, pixelX, pixelY - RADIUS, pixelX, pixelY + RADIUS);
+        var pen = new Pen(color, THICKNESS); 
+        graphics.DrawLine(pen, pixelX, pixelY - RADIUS, pixelX, pixelY + RADIUS);
     }
 
     private void DrawHorizontalLine(float pixelX, float pixelY)
     {
-        var pen = new Pen(_color, THICKNESS); 
-        _graphics.DrawLine(pen, pixelX - RADIUS, pixelY, pixelX + RADIUS, pixelY);
+        var pen = new Pen(color, THICKNESS); 
+        graphics.DrawLine(pen, pixelX - RADIUS, pixelY, pixelX + RADIUS, pixelY);
     }
 }
