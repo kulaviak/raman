@@ -31,7 +31,7 @@ partial class PeakAnalysisForm
         this.btnReset = new System.Windows.Forms.Button();
         this.label1 = new System.Windows.Forms.Label();
         this.btnClose = new System.Windows.Forms.Button();
-        this.btnExportCorrectedCharts = new System.Windows.Forms.Button();
+        this.btnExportPeaks = new System.Windows.Forms.Button();
         this.SuspendLayout();
         // 
         // btnReset
@@ -62,33 +62,33 @@ partial class PeakAnalysisForm
         this.btnClose.UseVisualStyleBackColor = true;
         this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
         // 
-        // btnExportCorrectedCharts
+        // btnExportPeaks
         // 
-        this.btnExportCorrectedCharts.Location = new System.Drawing.Point(7, 99);
-        this.btnExportCorrectedCharts.Name = "btnExportCorrectedCharts";
-        this.btnExportCorrectedCharts.Size = new System.Drawing.Size(142, 23);
-        this.btnExportCorrectedCharts.TabIndex = 12;
-        this.btnExportCorrectedCharts.Text = "Export Peaks";
-        this.btnExportCorrectedCharts.UseVisualStyleBackColor = true;
-        this.btnExportCorrectedCharts.Click += new System.EventHandler(this.btnExportCorrectedCharts_Click);
+        this.btnExportPeaks.Location = new System.Drawing.Point(7, 99);
+        this.btnExportPeaks.Name = "btnExportPeaks";
+        this.btnExportPeaks.Size = new System.Drawing.Size(142, 23);
+        this.btnExportPeaks.TabIndex = 12;
+        this.btnExportPeaks.Text = "Export Peaks";
+        this.btnExportPeaks.UseVisualStyleBackColor = true;
+        this.btnExportPeaks.Click += new System.EventHandler(this.btnExportPeaks_Click);
         // 
         // PeakAnalysisForm
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.ClientSize = new System.Drawing.Size(169, 450);
-        this.Controls.Add(this.btnExportCorrectedCharts);
+        this.Controls.Add(this.btnExportPeaks);
         this.Controls.Add(this.btnClose);
         this.Controls.Add(this.label1);
         this.Controls.Add(this.btnReset);
         this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
         this.Name = "PeakAnalysisForm";
         this.Text = "Peak Analysis";
-        this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BaselineCorrectionForm_FormClosing);
+        this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PeakAnalysisForm_FormClosing);
         this.ResumeLayout(false);
     }
 
-    private System.Windows.Forms.Button btnExportCorrectedCharts;
+    private System.Windows.Forms.Button btnExportPeaks;
 
     private System.Windows.Forms.Button btnClose;
 

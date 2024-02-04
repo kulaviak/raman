@@ -168,6 +168,7 @@ public class CanvasPanel : Panel
     {
         ZoomToWindowLayer?.HandleMouseDown(sender, e);
         BaselineCorrectionLayer?.HandleMouseDown(sender, e);
+        PeakAnalysisLayer?.HandleMouseDown(sender, e);
         Refresh();
     }
 
@@ -176,12 +177,14 @@ public class CanvasPanel : Panel
         ZoomToWindowLayer?.HandleMouseMove(sender, e);
         BaselineCorrectionLayer?.HandleMouseMove(sender, e);
         StatusStripLayer?.HandleMouseMove(sender, e);
+        PeakAnalysisLayer?.HandleMouseMove(sender, e);
     }
 
     private void HandleMouseUp(object sender, MouseEventArgs e)
     {
         ZoomToWindowLayer?.HandleMouseUp(sender, e);
         BaselineCorrectionLayer?.HandleMouseUp(sender, e);
+        PeakAnalysisLayer?.HandleMouseUp(sender, e);
     }
 
     public void SetZoomToWindowMode()
