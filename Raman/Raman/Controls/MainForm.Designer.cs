@@ -34,8 +34,8 @@ partial class MainForm
     this.menuStrip = new System.Windows.Forms.MenuStrip();
     this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
     this.miOpenSingleSpectrumFiles = new System.Windows.Forms.ToolStripMenuItem();
-    this.miExit = new System.Windows.Forms.ToolStripMenuItem();
     this.miOpenMultiSpectrumFiles = new System.Windows.Forms.ToolStripMenuItem();
+    this.miExit = new System.Windows.Forms.ToolStripMenuItem();
     this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
     this.miZoomWindow = new System.Windows.Forms.ToolStripMenuItem();
     this.miZoomToOriginalSize = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,6 +53,7 @@ partial class MainForm
     this.splitContainer = new System.Windows.Forms.SplitContainer();
     this.statusStrip = new Raman.Controls.AppStatusStrip();
     this.canvasPanel = new Raman.Drawing.CanvasPanel();
+    this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
     this.menuStrip.SuspendLayout();
     this.toolStrip.SuspendLayout();
     ((System.ComponentModel.ISupportInitialize) (this.splitContainer)).BeginInit();
@@ -84,19 +85,19 @@ partial class MainForm
     this.miOpenSingleSpectrumFiles.Text = "Open Single Spectrum Files";
     this.miOpenSingleSpectrumFiles.Click += new System.EventHandler(this.miOpenSingleSpectrumFiles_Click);
     // 
-    // miExit
-    // 
-    this.miExit.Name = "miExit";
-    this.miExit.Size = new System.Drawing.Size(261, 22);
-    this.miExit.Text = "Exit";
-    this.miExit.Click += new System.EventHandler(this.miExit_Click);
-    // 
     // miOpenMultiSpectrumFiles
     // 
     this.miOpenMultiSpectrumFiles.Name = "miOpenMultiSpectrumFiles";
     this.miOpenMultiSpectrumFiles.Size = new System.Drawing.Size(261, 22);
     this.miOpenMultiSpectrumFiles.Text = "Open Multi Spectrum Files";
     this.miOpenMultiSpectrumFiles.Click += new System.EventHandler(this.miOpenMultiSpectrumFiles_Click);
+    // 
+    // miExit
+    // 
+    this.miExit.Name = "miExit";
+    this.miExit.Size = new System.Drawing.Size(261, 22);
+    this.miExit.Text = "Exit";
+    this.miExit.Click += new System.EventHandler(this.miExit_Click);
     // 
     // viewToolStripMenuItem
     // 
@@ -131,7 +132,7 @@ partial class MainForm
     // 
     // miTools
     // 
-    this.miTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miBaselineCorrection, this.miPeakAnalysis});
+    this.miTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miBaselineCorrection, this.miPeakAnalysis, this.testToolStripMenuItem});
     this.miTools.Name = "miTools";
     this.miTools.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
     this.miTools.Size = new System.Drawing.Size(46, 20);
@@ -247,16 +248,18 @@ partial class MainForm
     // 
     // canvasPanel
     // 
-    this.canvasPanel.BaselineCorrectionLayer = null;
-    this.canvasPanel.CoordSystem = null;
     this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-    this.canvasPanel.IsZooming = false;
     this.canvasPanel.Location = new System.Drawing.Point(0, 0);
     this.canvasPanel.Name = "canvasPanel";
-    this.canvasPanel.PeakAnalysisLayer = null;
     this.canvasPanel.Size = new System.Drawing.Size(590, 401);
-    this.canvasPanel.StatusStripLayer = null;
     this.canvasPanel.TabIndex = 0;
+    // 
+    // testToolStripMenuItem
+    // 
+    this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+    this.testToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+    this.testToolStripMenuItem.Text = "Test";
+    this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
     // 
     // MainForm
     // 
@@ -286,6 +289,8 @@ partial class MainForm
     this.ResumeLayout(false);
     this.PerformLayout();
   }
+
+  private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
 
   private System.Windows.Forms.ToolStripMenuItem miOpenMultiSpectrumFiles;
 

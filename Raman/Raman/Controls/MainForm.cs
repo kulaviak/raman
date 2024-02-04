@@ -370,4 +370,11 @@ public partial class MainForm : Form
         canvasPanel.Charts = charts;
         canvasPanel.Refresh();
     }
+
+    private void testToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        FormUtil.ShowErrorOnUserAction("Remember that ICO files can contain multiple image sizes for different display contexts " +
+            "(e.g., small vs. large icons). If you have a specific requirement for different sizes, you may need to create an ICO " +
+            "file with the necessary sizes from your PNG image. There are online tools and", "Error", new Exception("Demo"));
+    }
 }
