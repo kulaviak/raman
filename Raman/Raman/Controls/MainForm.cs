@@ -23,6 +23,7 @@ public partial class MainForm : Form
         // LoadDemoSpectra();
         HideSidePanel();
         canvasPanel.StatusStripLayer = new StatusStripLayer(canvasPanel.CoordSystem, statusStrip);
+        KeyDown += OnKeyDown;
     }
 
     private void HideSidePanel()
@@ -389,5 +390,13 @@ public partial class MainForm : Form
 
     private void testToolStripMenuItem_Click(object sender, EventArgs e)
     {
+    }
+    
+    private void OnKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Escape)
+        {
+            canvasPanel.UnsetZoomToWindowMode();
+        }
     }
 }
