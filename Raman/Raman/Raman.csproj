@@ -78,6 +78,12 @@
     <Compile Include="Controls\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PeakAnalysisForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\PeakAnalysisForm.Designer.cs">
+      <DependentUpon>PeakAnalysisForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\AppException.cs" />
     <Compile Include="Core\ExceptionFormatter.cs" />
     <Compile Include="Core\Extensions.cs" />
@@ -116,6 +122,9 @@
     <EmbeddedResource Include="Controls\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PeakAnalysisForm.resx">
+      <DependentUpon>PeakAnalysisForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
