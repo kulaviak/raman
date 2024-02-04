@@ -43,7 +43,9 @@ partial class MainForm
     this.miTools = new System.Windows.Forms.ToolStripMenuItem();
     this.miBaselineCorrection = new System.Windows.Forms.ToolStripMenuItem();
     this.miPeakAnalysis = new System.Windows.Forms.ToolStripMenuItem();
-    this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+    this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+    this.miHelp = new System.Windows.Forms.ToolStripMenuItem();
+    this.miAbout = new System.Windows.Forms.ToolStripMenuItem();
     this.toolStrip = new System.Windows.Forms.ToolStrip();
     this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
     this.tsbOpenFiles = new System.Windows.Forms.ToolStripButton();
@@ -54,9 +56,6 @@ partial class MainForm
     this.splitContainer = new System.Windows.Forms.SplitContainer();
     this.statusStrip = new Raman.Controls.AppStatusStrip();
     this.canvasPanel = new Raman.Drawing.CanvasPanel();
-    this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-    this.miHelp = new System.Windows.Forms.ToolStripMenuItem();
-    this.miAbout = new System.Windows.Forms.ToolStripMenuItem();
     this.menuStrip.SuspendLayout();
     this.toolStrip.SuspendLayout();
     ((System.ComponentModel.ISupportInitialize) (this.splitContainer)).BeginInit();
@@ -135,7 +134,7 @@ partial class MainForm
     // 
     // miTools
     // 
-    this.miTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miBaselineCorrection, this.miPeakAnalysis, this.testToolStripMenuItem});
+    this.miTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miBaselineCorrection, this.miPeakAnalysis});
     this.miTools.Name = "miTools";
     this.miTools.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
     this.miTools.Size = new System.Drawing.Size(46, 20);
@@ -157,12 +156,26 @@ partial class MainForm
     this.miPeakAnalysis.Text = "Peak Analysis";
     this.miPeakAnalysis.Click += new System.EventHandler(this.miPeakAnalysis_Click);
     // 
-    // testToolStripMenuItem
+    // helpToolStripMenuItem
     // 
-    this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-    this.testToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-    this.testToolStripMenuItem.Text = "Test";
-    this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
+    this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miHelp, this.miAbout});
+    this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+    this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+    this.helpToolStripMenuItem.Text = "Help";
+    // 
+    // miHelp
+    // 
+    this.miHelp.Name = "miHelp";
+    this.miHelp.Size = new System.Drawing.Size(107, 22);
+    this.miHelp.Text = "Help";
+    this.miHelp.Click += new System.EventHandler(this.miHelp_Click);
+    // 
+    // miAbout
+    // 
+    this.miAbout.Name = "miAbout";
+    this.miAbout.Size = new System.Drawing.Size(107, 22);
+    this.miAbout.Text = "About";
+    this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
     // 
     // toolStrip
     // 
@@ -264,27 +277,6 @@ partial class MainForm
     this.canvasPanel.Size = new System.Drawing.Size(590, 401);
     this.canvasPanel.TabIndex = 0;
     // 
-    // helpToolStripMenuItem
-    // 
-    this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miHelp, this.miAbout});
-    this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-    this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-    this.helpToolStripMenuItem.Text = "Help";
-    // 
-    // miHelp
-    // 
-    this.miHelp.Name = "miHelp";
-    this.miHelp.Size = new System.Drawing.Size(152, 22);
-    this.miHelp.Text = "Help";
-    this.miHelp.Click += new System.EventHandler(this.miHelp_Click);
-    // 
-    // miAbout
-    // 
-    this.miAbout.Name = "miAbout";
-    this.miAbout.Size = new System.Drawing.Size(152, 22);
-    this.miAbout.Text = "About";
-    this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
-    // 
     // MainForm
     // 
     this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -317,8 +309,6 @@ partial class MainForm
   private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
   private System.Windows.Forms.ToolStripMenuItem miHelp;
   private System.Windows.Forms.ToolStripMenuItem miAbout;
-
-  private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
 
   private System.Windows.Forms.ToolStripMenuItem miOpenMultiSpectrumFiles;
 
