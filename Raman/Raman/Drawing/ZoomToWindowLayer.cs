@@ -6,9 +6,9 @@ public class ZoomToWindowLayer : LayerBase
 {
     private readonly CanvasPanel canvasPanel;
     
-    private Point? _zoomStart;
+    private Point? zoomStart;
     
-    private Rectangle? _zoomRectangle;
+    private Rectangle? zoomRectangle;
 
     public ZoomToWindowLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : base(coordSystem)
     {
@@ -17,16 +17,16 @@ public class ZoomToWindowLayer : LayerBase
 
     public override void HandleMouseMove(object sender, MouseEventArgs e)
     {
-        if (_zoomStart != null)
+        if (zoomStart != null)
         {
-            var x = Math.Min(_zoomStart.Value.X, e.X);
-            var y = Math.Min(_zoomStart.Value.Y, e.Y);
-            var width = Math.Abs(_zoomStart.Value.X - e.X);
+            var x = Math.Min(zoomStart.Value.X, e.X);
+            var y = Math.Min(zoomStart.Value.Y, e.Y);
+            var width = Math.Abs(zoomStart.Value.X - e.X);
             // calculate selection window height to have same aspect ratio as panel => after zoom chart will not change
             var height = (int) (width * (canvasPanel.Height / (float) canvasPanel.Width));
             if (width != 0 && height != 0)
             {
-                _zoomRectangle = new Rectangle(x, y, width, height);
+                zoomRectangle = new Rectangle(x, y, width, height);
                 canvasPanel.Refresh();
             }
         }
@@ -34,17 +34,17 @@ public class ZoomToWindowLayer : LayerBase
 
     public override void Draw(Graphics graphics)
     {
-        if (_zoomRectangle != null)
+        if (zoomRectangle != null)
         {
-            graphics.DrawRectangle(Pens.Gray, _zoomRectangle.Value);
+            graphics.DrawRectangle(Pens.Gray, zoomRectangle.Value);
         }
     }
     
     public override void HandleMouseUp(object sender, MouseEventArgs e)
     {
-        if (e.Button == MouseButtons.Left && _zoomRectangle != null)
+        if (e.Button == MouseButtons.Left && zoomRectangle != null)
         {
-            canvasPanel.CoordSystem = canvasPanel.GetCoordSystemForZoom(CoordSystem, _zoomRectangle.Value);
+            canvasPanel.CoordSystem = canvasPanel.GetCoordSystemForZoom(CoordSystem, zoomRectangle.Value);
             canvasPanel.UnsetZoomToWindowMode();
         }
     }
@@ -53,7 +53,7 @@ public class ZoomToWindowLayer : LayerBase
     {
         if (e.Button == MouseButtons.Left)
         {
-            _zoomStart = e.Location;
+            zoomStart = e.Location;
             // canvasPanel.Refresh();
         }
     }

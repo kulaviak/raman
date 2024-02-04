@@ -24,19 +24,19 @@ public class CanvasPanel : Panel
         }
     }
 
-    private Bitmap _buffer;
+    private Bitmap buffer;
 
-    private Graphics _bufferGraphics;
+    private Graphics bufferGraphics;
 
-    private CanvasCoordSystem _coordSystem;
+    private CanvasCoordSystem coordSystem;
 
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public CanvasCoordSystem CoordSystem
     {
-        get => _coordSystem;
+        get => coordSystem;
         set
         {
-            _coordSystem = value;
+            coordSystem = value;
             if (BaselineCorrectionLayer != null)
             {
                 BaselineCorrectionLayer.CoordSystem = value;
@@ -83,14 +83,14 @@ public class CanvasPanel : Panel
 
     private void HandlePaint(object sender, PaintEventArgs e)
     {
-        if (_buffer == null)
+        if (buffer == null)
         {
             InitializeBuffer();
         }
 
-        Draw(_bufferGraphics);
+        Draw(bufferGraphics);
         // copy the content of the off-screen buffer to the form's graphics
-        e.Graphics.DrawImage(_buffer, 0, 0);
+        e.Graphics.DrawImage(buffer, 0, 0);
     }
 
     private void Draw(Graphics graphics)
@@ -162,18 +162,18 @@ public class CanvasPanel : Panel
 
     private void InitializeBuffer()
     {
-        _buffer = new Bitmap(Width, Height);
-        _bufferGraphics = Graphics.FromImage(_buffer);
+        buffer = new Bitmap(Width, Height);
+        bufferGraphics = Graphics.FromImage(buffer);
     }
 
     private void HandleResize(object sender, EventArgs e)
     {
         CoordSystem = GetCoordSystemFromCharts(charts);
         // recreate the buffer when the form is resized
-        _buffer?.Dispose();
-        if (_bufferGraphics != null)
+        buffer?.Dispose();
+        if (bufferGraphics != null)
         {
-            _bufferGraphics.Dispose();
+            bufferGraphics.Dispose();
         }
 
         InitializeBuffer();
@@ -212,7 +212,7 @@ public class CanvasPanel : Panel
 
     public void SetZoomToWindowMode()
     {
-        ZoomToWindowLayer = new ZoomToWindowLayer(_coordSystem, this);
+        ZoomToWindowLayer = new ZoomToWindowLayer(coordSystem, this);
     }
     
     public void UnsetZoomToWindowMode()
