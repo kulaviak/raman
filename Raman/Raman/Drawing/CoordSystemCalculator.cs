@@ -29,4 +29,14 @@ public class CoordSystemCalculator
         var coordSystem = new CanvasCoordSystem(canvasWidth, canvasHeight, minX, maxX, minY, maxY);
         return coordSystem;
     }
+
+    public static CanvasCoordSystem GetCoordSystemForZoom(CanvasCoordSystem oldCoordSystem, Rectangle zoomRectangle, int canvasWidth, int canvasHeight)
+    {
+        var minX = oldCoordSystem.ToValueX(zoomRectangle.X);
+        var maxX = oldCoordSystem.ToValueX(zoomRectangle.X + zoomRectangle.Width);
+        var minY = oldCoordSystem.ToValueY(zoomRectangle.Y + zoomRectangle.Height);
+        var maxY = oldCoordSystem.ToValueY(zoomRectangle.Y);
+        var ret = new CanvasCoordSystem(canvasWidth, canvasHeight, minX, maxX, minY, maxY);
+        return ret;
+    }
 }

@@ -171,16 +171,6 @@ public class CanvasPanel : Panel
         BaselineCorrectionLayer?.HandleMouseUp(sender, e);
     }
 
-    public CanvasCoordSystem GetCoordSystemForZoom(CanvasCoordSystem oldCoordSystem, Rectangle zoomRectangle)
-    {
-        var minX = oldCoordSystem.ToValueX(zoomRectangle.X);
-        var maxX = oldCoordSystem.ToValueX(zoomRectangle.X + zoomRectangle.Width);
-        var minY = oldCoordSystem.ToValueY(zoomRectangle.Y + zoomRectangle.Height);
-        var maxY = oldCoordSystem.ToValueY(zoomRectangle.Y);
-        var ret = new CanvasCoordSystem(Width, Height, minX, maxX, minY, maxY);
-        return ret;
-    }
-
     public void SetZoomToWindowMode()
     {
         ZoomToWindowLayer = new ZoomToWindowLayer(coordSystem, this);

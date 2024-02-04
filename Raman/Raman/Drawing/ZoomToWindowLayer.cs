@@ -44,7 +44,7 @@ public class ZoomToWindowLayer : LayerBase
     {
         if (e.Button == MouseButtons.Left && rectangle != null)
         {
-            canvasPanel.CoordSystem = canvasPanel.GetCoordSystemForZoom(CoordSystem, rectangle.Value);
+            canvasPanel.CoordSystem = CoordSystemCalculator.GetCoordSystemForZoom(CoordSystem, rectangle.Value, canvasPanel.Width, canvasPanel.Height);
             canvasPanel.UnsetZoomToWindowMode();
         }
     }
