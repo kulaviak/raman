@@ -95,6 +95,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Drawing\Chart.cs" />
+    <Compile Include="Drawing\CoordSystemCalculator.cs" />
     <Compile Include="Drawing\LayerBase.cs" />
     <Compile Include="Drawing\Mark.cs" />
     <Compile Include="Drawing\PeakAnalysisLayer.cs" />
