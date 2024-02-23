@@ -22,7 +22,7 @@ public partial class PeakAnalysisForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowErrorOnUserAction("Reset failed.", "Error", ex);
+            FormUtil.ShowAppError("Reset failed.", "Error", ex);
         }
     }
 
@@ -34,7 +34,7 @@ public partial class PeakAnalysisForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowErrorOnUserAction("Closing form failed.", "Error", ex);
+            FormUtil.ShowAppError("Closing form failed.", "Error", ex);
         }
     }
 
@@ -58,7 +58,7 @@ public partial class PeakAnalysisForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowErrorOnUserAction("Peaks export failed.", "Error", ex);
+            FormUtil.ShowAppError("Peaks export failed.", "Error", ex);
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using NLog;
+using Raman.Controls;
 
 namespace Raman
 {
@@ -20,8 +21,16 @@ namespace Raman
         {
             var e = (Exception) args.ExceptionObject;
             LogManager.GetCurrentClassLogger().Error(e, "Unexpected error happened");
-            MessageBox.Show("Unexpected error happened. Please close application.", "Unexpected error", MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
+            try
+            {
+                FormUtil.ShowAppError("Unexpected error happened. Please close application.", "Error", e);
+            }
+            catch (Exception)
+            {
+                // fallback when for some reason showing previous error failed 
+                MessageBox.Show("Unexpected error happened. Please close application.", "Unexpected error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
     }
 }

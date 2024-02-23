@@ -22,7 +22,7 @@ public partial class BaselineCorrectionForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowErrorOnUserAction("Importing baseline points failed.", "Error", ex);
+            FormUtil.ShowAppError("Importing baseline points failed.", "Error", ex);
         }
     }
 
@@ -67,7 +67,7 @@ public partial class BaselineCorrectionForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowErrorOnUserAction("Exporting points failed.", "Error", ex);
+            FormUtil.ShowAppError("Exporting points failed.", "Error", ex);
         }
     }
 
@@ -107,7 +107,7 @@ public partial class BaselineCorrectionForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowErrorOnUserAction("Baseline correction failed.", "Error", ex);
+            FormUtil.ShowAppError("Baseline correction failed.", "Error", ex);
         }
     }
 
@@ -124,7 +124,7 @@ public partial class BaselineCorrectionForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowErrorOnUserAction("Reset failed.", "Error", ex);
+            FormUtil.ShowAppError("Reset failed.", "Error", ex);
         }
     }
 
@@ -136,7 +136,7 @@ public partial class BaselineCorrectionForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowErrorOnUserAction("Closing form failed.", "Error", ex);
+            FormUtil.ShowAppError("Closing form failed.", "Error", ex);
         }
     }
 
@@ -160,7 +160,7 @@ public partial class BaselineCorrectionForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowErrorOnUserAction("Export corrected spectra failed.", "Error", ex);
+            FormUtil.ShowAppError("Export corrected spectra failed.", "Error", ex);
         }
     }
 }
