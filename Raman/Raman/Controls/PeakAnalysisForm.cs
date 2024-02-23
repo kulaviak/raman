@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Raman.Drawing;
+﻿using Raman.Drawing;
 
 namespace Raman.Controls;
 
@@ -7,8 +6,6 @@ public partial class PeakAnalysisForm : Form
 {
     private readonly PeakAnalysisLayer peakAnalysisLayer;
     
-    private const string INITIAL_DIRECTORY_PATH = "C:\\tmp";
-        
     private const string FILE_DIALOG_FILTER = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
     
     public PeakAnalysisForm(PeakAnalysisLayer peakAnalysisLayer)
@@ -69,7 +66,6 @@ public partial class PeakAnalysisForm : Form
     {
         using (var saveFileDialog = new SaveFileDialog())
         {
-            saveFileDialog.InitialDirectory = INITIAL_DIRECTORY_PATH;
             saveFileDialog.Filter = FILE_DIALOG_FILTER; 
             saveFileDialog.FilterIndex = 1;
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
