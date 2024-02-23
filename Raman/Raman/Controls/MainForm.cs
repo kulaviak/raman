@@ -24,7 +24,7 @@ public partial class MainForm : Form
         // LoadDemoSpectrum();
         // LoadDemoSpectra();
         HideSidePanel();
-        canvasPanel.StatusStripLayer = new StatusStripLayer(canvasPanel.CoordSystem, statusStrip);
+        SetFormToDefaultState();
         KeyPreview = true;
         KeyDown += OnKeyDown;
     }
@@ -102,6 +102,7 @@ public partial class MainForm : Form
 
     private void OpenSingleSpectraFilesInternal(List<string> filePaths)
     {
+        SetFormToDefaultState();
         var charts = new List<Chart>();
         foreach (var filePath in filePaths)
         {
@@ -180,7 +181,7 @@ public partial class MainForm : Form
 
     private void BaselineCorrection()
     {
-        canvasPanel.NullAllLayers();
+        SetFormToDefaultState();
         var baselineCorrectionLayer = new BaselineCorrectionLayer(canvasPanel.CoordSystem, canvasPanel);
         canvasPanel.BaselineCorrectionLayer = baselineCorrectionLayer;
         var form = new BaselineCorrectionForm(baselineCorrectionLayer);
@@ -276,7 +277,7 @@ public partial class MainForm : Form
 
     private void PeakAnalysis()
     {
-        canvasPanel.NullAllLayers();
+        SetFormToDefaultState();
         var peakAnalysisLayer = new PeakAnalysisLayer(canvasPanel.CoordSystem, canvasPanel);
         canvasPanel.PeakAnalysisLayer = peakAnalysisLayer;
         var form = new PeakAnalysisForm(peakAnalysisLayer);
@@ -343,9 +344,15 @@ public partial class MainForm : Form
             }
         }
     }
+    
+    private void SetFormToDefaultState()
+    {
+        canvasPanel.SetLayersToDefaultState(statusStrip);
+    }
 
     private void OpenMultiSpectrumFilesInternal(List<string> filePaths)
     {
+        SetFormToDefaultState();
         var charts = new List<Chart>();
         foreach (var filePath in filePaths)
         {

@@ -1,4 +1,3 @@
-using System.IO;
 using Point = System.Drawing.Point;
 
 namespace Raman.Controls;

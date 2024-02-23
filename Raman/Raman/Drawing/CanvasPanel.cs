@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using Raman.Controls;
 
 namespace Raman.Drawing;
 
@@ -101,11 +102,12 @@ public class CanvasPanel : Panel
         PeakAnalysisLayer?.HandleKeyPress(sender, e);
     }
     
-    public void NullAllLayers()
+    public void SetLayersToDefaultState(AppStatusStrip statusStrip)
     {
         BaselineCorrectionLayer = null;
         PeakAnalysisLayer = null;
         ZoomToWindowLayer = null;
+        StatusStripLayer = new StatusStripLayer(CoordSystem, statusStrip);
     }
     
     private void DoRefresh()
