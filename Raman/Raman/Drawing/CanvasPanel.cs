@@ -195,4 +195,16 @@ public class CanvasPanel : Panel
         ZoomToWindowLayer = null;
         Refresh();
     }
+
+    public void HandleKeyPress(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Escape && ZoomToWindowLayer != null)
+        {
+            UnsetZoomToWindowMode();
+        }
+        ZoomToWindowLayer?.HandleKeyPress(sender, e);
+        BaselineCorrectionLayer?.HandleKeyPress(sender, e);
+        StatusStripLayer?.HandleKeyPress(sender, e);
+        PeakAnalysisLayer?.HandleKeyPress(sender, e);
+    }
 }

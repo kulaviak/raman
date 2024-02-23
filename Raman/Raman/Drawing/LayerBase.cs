@@ -15,5 +15,7 @@ public class LayerBase
 
     public virtual void HandleMouseUp(object sender, MouseEventArgs e) {}
 
+    public virtual void HandleKeyPress(object sender, KeyEventArgs e) {}
+    
     public virtual void Draw(Graphics graphics) {}
 }

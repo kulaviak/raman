@@ -65,6 +65,15 @@ public class PeakAnalysisLayer : LayerBase
         DrawCurrentLine(graphics);
     }
 
+    public override void HandleKeyPress(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Escape && currentPoint != null)
+        {
+            start = null;
+            Refresh();
+        }
+    }
+
     private void DrawCurrentLine(Graphics graphics)
     {
         if (start != null && currentPoint != null)
