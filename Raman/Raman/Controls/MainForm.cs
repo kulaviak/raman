@@ -163,19 +163,7 @@ public partial class MainForm : Form
             FormUtil.ShowErrorOnUserAction("Zoom failed.", "Zoom failed", ex);
         }
     }
-
-    private void miRefresh_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            Refresh();
-        }
-        catch (Exception ex)
-        {
-            FormUtil.ShowErrorOnUserAction("Refresh failed.", "Refresh failed", ex);
-        }
-    }
-
+    
     private void miBaselineCorrection_Click(object sender, EventArgs e)
     {
         try
@@ -210,19 +198,7 @@ public partial class MainForm : Form
             FormUtil.ShowErrorOnUserAction("Closing Baseline Correction form failed.", "Error", ex);
         }
     }
-
-    private void tsbRefresh_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            Refresh();
-        }
-        catch (Exception ex)
-        {
-            FormUtil.ShowErrorOnUserAction("Refresh failed.", "Error", ex);
-        }
-    }
-
+    
     private void tsbOpenFiles_Click(object sender, EventArgs e)
     {
         try

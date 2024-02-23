@@ -39,7 +39,6 @@ partial class MainForm
     this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
     this.miZoomWindow = new System.Windows.Forms.ToolStripMenuItem();
     this.miZoomToOriginalSize = new System.Windows.Forms.ToolStripMenuItem();
-    this.miRefresh = new System.Windows.Forms.ToolStripMenuItem();
     this.miTools = new System.Windows.Forms.ToolStripMenuItem();
     this.miBaselineCorrection = new System.Windows.Forms.ToolStripMenuItem();
     this.miPeakAnalysis = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,7 +46,6 @@ partial class MainForm
     this.miHelp = new System.Windows.Forms.ToolStripMenuItem();
     this.miAbout = new System.Windows.Forms.ToolStripMenuItem();
     this.toolStrip = new System.Windows.Forms.ToolStrip();
-    this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
     this.tsbOpenFiles = new System.Windows.Forms.ToolStripButton();
     this.tsbZoomToWindow = new System.Windows.Forms.ToolStripButton();
     this.tsbZoomToOriginalSize = new System.Windows.Forms.ToolStripButton();
@@ -103,7 +101,7 @@ partial class MainForm
     // 
     // viewToolStripMenuItem
     // 
-    this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miZoomWindow, this.miZoomToOriginalSize, this.miRefresh});
+    this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miZoomWindow, this.miZoomToOriginalSize});
     this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
     this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
     this.viewToolStripMenuItem.Text = "View";
@@ -123,14 +121,6 @@ partial class MainForm
     this.miZoomToOriginalSize.Size = new System.Drawing.Size(231, 22);
     this.miZoomToOriginalSize.Text = "Zoom To Original Size";
     this.miZoomToOriginalSize.Click += new System.EventHandler(this.miZoomToOriginalSize_Click);
-    // 
-    // miRefresh
-    // 
-    this.miRefresh.Name = "miRefresh";
-    this.miRefresh.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-    this.miRefresh.Size = new System.Drawing.Size(231, 22);
-    this.miRefresh.Text = "Refresh";
-    this.miRefresh.Click += new System.EventHandler(this.miRefresh_Click);
     // 
     // miTools
     // 
@@ -179,22 +169,12 @@ partial class MainForm
     // 
     // toolStrip
     // 
-    this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.tsbRefresh, this.tsbOpenFiles, this.tsbZoomToWindow, this.tsbZoomToOriginalSize, this.tsbBaselineCorrection, this.tsbPeakAnalysis});
+    this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.tsbOpenFiles, this.tsbZoomToWindow, this.tsbZoomToOriginalSize, this.tsbBaselineCorrection, this.tsbPeakAnalysis});
     this.toolStrip.Location = new System.Drawing.Point(0, 24);
     this.toolStrip.Name = "toolStrip";
     this.toolStrip.Size = new System.Drawing.Size(800, 25);
     this.toolStrip.TabIndex = 1;
     this.toolStrip.Text = "toolStrip2";
-    // 
-    // tsbRefresh
-    // 
-    this.tsbRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-    this.tsbRefresh.Image = ((System.Drawing.Image) (resources.GetObject("tsbRefresh.Image")));
-    this.tsbRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-    this.tsbRefresh.Name = "tsbRefresh";
-    this.tsbRefresh.Size = new System.Drawing.Size(23, 22);
-    this.tsbRefresh.Text = "Refresh";
-    this.tsbRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
     // 
     // tsbOpenFiles
     // 
@@ -239,6 +219,7 @@ partial class MainForm
     // tsbPeakAnalysis
     // 
     this.tsbPeakAnalysis.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+    this.tsbPeakAnalysis.Image = ((System.Drawing.Image) (resources.GetObject("tsbPeakAnalysis.Image")));
     this.tsbPeakAnalysis.ImageTransparentColor = System.Drawing.Color.Magenta;
     this.tsbPeakAnalysis.Name = "tsbPeakAnalysis";
     this.tsbPeakAnalysis.Size = new System.Drawing.Size(23, 22);
@@ -327,13 +308,11 @@ partial class MainForm
   private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
   private System.Windows.Forms.ToolStripMenuItem miZoomWindow;
   private System.Windows.Forms.ToolStripMenuItem miZoomToOriginalSize;
-  private System.Windows.Forms.ToolStripMenuItem miRefresh;
   private System.Windows.Forms.ToolStripMenuItem miTools;
   private System.Windows.Forms.ToolStripMenuItem miBaselineCorrection;
   private System.Windows.Forms.ToolStrip toolStrip;
   private System.Windows.Forms.SplitContainer splitContainer;
   private Raman.Drawing.CanvasPanel canvasPanel;
-  private System.Windows.Forms.ToolStripButton tsbRefresh;
   private System.Windows.Forms.ToolStripButton tsbOpenFiles;
   private System.Windows.Forms.ToolStripButton tsbZoomToWindow;
   private System.Windows.Forms.ToolStripButton tsbZoomToOriginalSize;
