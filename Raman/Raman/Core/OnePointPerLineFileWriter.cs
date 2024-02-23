@@ -4,8 +4,6 @@ namespace Raman.Core;
 
 public class OnePointPerLineFileWriter
 {
-    private const int DECIMAL_PLACES = 3;
-        
     public void WritePoints(List<Point> points, string filePath)
     {
         var lines = PointsToLines(points);
@@ -20,6 +18,6 @@ public class OnePointPerLineFileWriter
 
     private string PointToLine(Point point)
     {
-        return $"{Math.Round(point.X, DECIMAL_PLACES)}\t{Math.Round(point.Y, DECIMAL_PLACES)}";
+        return $"{Math.Round(point.X, AppConstants.EXPORT_DECIMAL_PLACES)}\t{Math.Round(point.Y, AppConstants.EXPORT_DECIMAL_PLACES)}";
     }
 }

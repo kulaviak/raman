@@ -155,7 +155,7 @@ partial class MainForm
     // miHelp
     // 
     this.miHelp.Name = "miHelp";
-    this.miHelp.Size = new System.Drawing.Size(152, 22);
+    this.miHelp.Size = new System.Drawing.Size(99, 22);
     this.miHelp.Text = "Help";
     this.miHelp.Click += new System.EventHandler(this.miHelp_Click);
     // 

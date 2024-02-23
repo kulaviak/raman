@@ -115,7 +115,7 @@ public partial class MainForm : Form
 
     private void LoadDemoSpectrum()
     {
-        OpenSingleSpectraFilesInternal(new List<string> {"c:/github/kulaviak/raman/data/spectrum.txt"});
+        OpenSingleSpectraFilesInternal(new List<string> {"c:/github/kulaviak/raman/data/spektra/spectrum.txt"});
     }
 
     private void LoadDemoSpectra()

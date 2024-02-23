@@ -4,9 +4,6 @@ namespace Raman.Core;
 
 public class PeakAnalysisExporter
 {
-
-    private const int DECIMAL_PLACES = 3;
-    
     public void ExportPeaks(string filePath, List<ExportedPeak> peaks)
     {
         try
@@ -34,6 +31,6 @@ public class PeakAnalysisExporter
 
     private string Format(decimal number)
     {
-        return Util.Format(number, DECIMAL_PLACES);
+        return Util.Format(number, AppConstants.EXPORT_DECIMAL_PLACES);
     }
 }
