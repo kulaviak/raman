@@ -180,21 +180,14 @@ public partial class MainForm : Form
 
     private void BaselineCorrection()
     {
-        NullAllLayers();
+        canvasPanel.NullAllLayers();
         var baselineCorrectionLayer = new BaselineCorrectionLayer(canvasPanel.CoordSystem, canvasPanel);
         canvasPanel.BaselineCorrectionLayer = baselineCorrectionLayer;
         var form = new BaselineCorrectionForm(baselineCorrectionLayer);
         form.Closed += BaselineForm_Closed;
         ShowSidePanel(form);
     }
-
-    private void NullAllLayers()
-    {
-        canvasPanel.BaselineCorrectionLayer = null;
-        canvasPanel.PeakAnalysisLayer = null;
-        canvasPanel.ZoomToWindowLayer = null;
-    }
-
+    
     private void BaselineForm_Closed(object sender, EventArgs e)
     {
         try
@@ -283,7 +276,7 @@ public partial class MainForm : Form
 
     private void PeakAnalysis()
     {
-        NullAllLayers();
+        canvasPanel.NullAllLayers();
         var peakAnalysisLayer = new PeakAnalysisLayer(canvasPanel.CoordSystem, canvasPanel);
         canvasPanel.PeakAnalysisLayer = peakAnalysisLayer;
         var form = new PeakAnalysisForm(peakAnalysisLayer);

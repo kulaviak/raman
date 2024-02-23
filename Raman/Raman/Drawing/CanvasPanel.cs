@@ -202,4 +202,11 @@ public class CanvasPanel : Panel
         StatusStripLayer?.HandleKeyPress(sender, e);
         PeakAnalysisLayer?.HandleKeyPress(sender, e);
     }
+    
+    public void NullAllLayers()
+    {
+        BaselineCorrectionLayer = null;
+        PeakAnalysisLayer = null;
+        ZoomToWindowLayer = null;
+    }
 }
