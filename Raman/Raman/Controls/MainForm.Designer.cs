@@ -44,7 +44,6 @@ partial class MainForm
     this.miPeakAnalysis = new System.Windows.Forms.ToolStripMenuItem();
     this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
     this.miHelp = new System.Windows.Forms.ToolStripMenuItem();
-    this.miAbout = new System.Windows.Forms.ToolStripMenuItem();
     this.toolStrip = new System.Windows.Forms.ToolStrip();
     this.tsbOpenFiles = new System.Windows.Forms.ToolStripButton();
     this.tsbZoomToWindow = new System.Windows.Forms.ToolStripButton();
@@ -148,7 +147,7 @@ partial class MainForm
     // 
     // helpToolStripMenuItem
     // 
-    this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miHelp, this.miAbout});
+    this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miHelp});
     this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
     this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
     this.helpToolStripMenuItem.Text = "Help";
@@ -156,16 +155,9 @@ partial class MainForm
     // miHelp
     // 
     this.miHelp.Name = "miHelp";
-    this.miHelp.Size = new System.Drawing.Size(107, 22);
+    this.miHelp.Size = new System.Drawing.Size(152, 22);
     this.miHelp.Text = "Help";
     this.miHelp.Click += new System.EventHandler(this.miHelp_Click);
-    // 
-    // miAbout
-    // 
-    this.miAbout.Name = "miAbout";
-    this.miAbout.Size = new System.Drawing.Size(107, 22);
-    this.miAbout.Text = "About";
-    this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
     // 
     // toolStrip
     // 
@@ -289,7 +281,6 @@ partial class MainForm
 
   private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
   private System.Windows.Forms.ToolStripMenuItem miHelp;
-  private System.Windows.Forms.ToolStripMenuItem miAbout;
 
   private System.Windows.Forms.ToolStripMenuItem miOpenMultiSpectrumFiles;
 
