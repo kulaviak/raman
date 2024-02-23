@@ -24,10 +24,6 @@ public class CanvasPanel : Panel
 
     public List<Chart> VisibleCharts => Charts.Where(x => x.IsVisible).ToList();
 
-    private Bitmap buffer;
-
-    private Graphics bufferGraphics;
-
     private CanvasCoordSystem coordSystem;
 
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -143,22 +139,9 @@ public class CanvasPanel : Panel
         new XAxis(CoordSystem, graphics).Draw();
     }
     
-    private void InitializeBuffer()
-    {
-        buffer = new Bitmap(Width, Height);
-        bufferGraphics = Graphics.FromImage(buffer);
-    }
-
     private void HandleResize(object sender, EventArgs e)
     {
         CoordSystem = CoordSystemCalculator.GetCoordSystemToShowAllCharts(charts, Width, Height);
-        // recreate the buffer when the form is resized
-        buffer?.Dispose();
-        if (bufferGraphics != null)
-        {
-            bufferGraphics.Dispose();
-        }
-        InitializeBuffer();
         DoRefresh();
     }
 
