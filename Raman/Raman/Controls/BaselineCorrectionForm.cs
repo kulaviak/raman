@@ -6,8 +6,6 @@ public partial class BaselineCorrectionForm : Form
 {
     private readonly BaselineCorrectionLayer baselineCorrectionLayer;
     
-    private const string INITIAL_DIRECTORY_PATH = "C:\\tmp";
-        
     private const string FILE_DIALOG_FILTER = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
         
     public BaselineCorrectionForm(BaselineCorrectionLayer baselineCorrectionLayer)
@@ -32,7 +30,6 @@ public partial class BaselineCorrectionForm : Form
     {
         using (var openFileDialog = new OpenFileDialog())
         {
-            openFileDialog.InitialDirectory = INITIAL_DIRECTORY_PATH;
             openFileDialog.Filter = FILE_DIALOG_FILTER; 
             openFileDialog.FilterIndex = 1;
             openFileDialog.Multiselect = false;
@@ -78,7 +75,6 @@ public partial class BaselineCorrectionForm : Form
     {
         using (var saveFileDialog = new SaveFileDialog())
         {
-            saveFileDialog.InitialDirectory = INITIAL_DIRECTORY_PATH;
             saveFileDialog.Filter = FILE_DIALOG_FILTER; 
             saveFileDialog.FilterIndex = 1;
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
