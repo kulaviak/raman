@@ -1,3 +1,3 @@
 # Raman
-Windows application for evaluating Raman spectra. Fully compatible with Windows 10 and onwards.
+Windows application for evaluation of Raman spectra. Fully compatible with Windows 10 and onwards.
 

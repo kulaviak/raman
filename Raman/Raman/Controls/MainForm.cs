@@ -20,7 +20,7 @@ public partial class MainForm : Form
     private void AdditionalInitialization()
     {
         MinimumSize = new Size(800, 600);
-        LoadDemoSpectrum();
+        // LoadDemoSpectrum();
         // LoadDemoSpectra();
         HideSidePanel();
         canvasPanel.StatusStripLayer = new StatusStripLayer(canvasPanel.CoordSystem, statusStrip);
@@ -394,9 +394,5 @@ public partial class MainForm : Form
         {
             FormUtil.ShowErrorOnUserAction($"Error opening PDF: {ex.Message}", "Error", ex);
         }    
-    }
-
-    private void miAbout_Click(object sender, EventArgs e)
-    {
     }
 }
