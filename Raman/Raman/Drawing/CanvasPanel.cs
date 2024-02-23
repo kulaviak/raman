@@ -165,24 +165,36 @@ public class CanvasPanel : Panel
     private void HandleMouseDown(object sender, MouseEventArgs e)
     {
         ZoomToWindowLayer?.HandleMouseDown(sender, e);
-        BaselineCorrectionLayer?.HandleMouseDown(sender, e);
-        PeakAnalysisLayer?.HandleMouseDown(sender, e);
+        var isInZoomMode = ZoomToWindowLayer != null;
+        if (!isInZoomMode)
+        {
+            BaselineCorrectionLayer?.HandleMouseDown(sender, e);
+            PeakAnalysisLayer?.HandleMouseDown(sender, e);
+        }
         Refresh();
     }
 
     private void HandleMouseMove(object sender, MouseEventArgs e)
     {
         ZoomToWindowLayer?.HandleMouseMove(sender, e);
-        BaselineCorrectionLayer?.HandleMouseMove(sender, e);
+        var isInZoomMode = ZoomToWindowLayer != null;
+        if (!isInZoomMode)
+        {
+            BaselineCorrectionLayer?.HandleMouseMove(sender, e);
+            PeakAnalysisLayer?.HandleMouseMove(sender, e);
+        }
         StatusStripLayer?.HandleMouseMove(sender, e);
-        PeakAnalysisLayer?.HandleMouseMove(sender, e);
     }
 
     private void HandleMouseUp(object sender, MouseEventArgs e)
     {
         ZoomToWindowLayer?.HandleMouseUp(sender, e);
-        BaselineCorrectionLayer?.HandleMouseUp(sender, e);
-        PeakAnalysisLayer?.HandleMouseUp(sender, e);
+        var isInZoomMode = ZoomToWindowLayer != null;
+        if (!isInZoomMode)
+        {
+            BaselineCorrectionLayer?.HandleMouseUp(sender, e);
+            PeakAnalysisLayer?.HandleMouseUp(sender, e);
+        }
     }
 
     public void SetZoomToWindowMode()
