@@ -77,7 +77,37 @@ public class CanvasPanel : Panel
         CoordSystem = CoordSystemCalculator.GetCoordSystemToShowAllCharts(charts, Width, Height);
         DoRefresh();
     }
+    
+    public void SetZoomToWindowMode()
+    {
+        ZoomToWindowLayer = new ZoomToWindowLayer(coordSystem, this);
+    }
+    
+    public void UnsetZoomToWindowMode()
+    {
+        ZoomToWindowLayer = null;
+        Refresh();
+    }
 
+    public void HandleKeyPress(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Escape && ZoomToWindowLayer != null)
+        {
+            UnsetZoomToWindowMode();
+        }
+        ZoomToWindowLayer?.HandleKeyPress(sender, e);
+        BaselineCorrectionLayer?.HandleKeyPress(sender, e);
+        StatusStripLayer?.HandleKeyPress(sender, e);
+        PeakAnalysisLayer?.HandleKeyPress(sender, e);
+    }
+    
+    public void NullAllLayers()
+    {
+        BaselineCorrectionLayer = null;
+        PeakAnalysisLayer = null;
+        ZoomToWindowLayer = null;
+    }
+    
     private void DoRefresh()
     {
         Invalidate();
@@ -178,35 +208,5 @@ public class CanvasPanel : Panel
             BaselineCorrectionLayer?.HandleMouseUp(sender, e);
             PeakAnalysisLayer?.HandleMouseUp(sender, e);
         }
-    }
-
-    public void SetZoomToWindowMode()
-    {
-        ZoomToWindowLayer = new ZoomToWindowLayer(coordSystem, this);
-    }
-    
-    public void UnsetZoomToWindowMode()
-    {
-        ZoomToWindowLayer = null;
-        Refresh();
-    }
-
-    public void HandleKeyPress(object sender, KeyEventArgs e)
-    {
-        if (e.KeyCode == Keys.Escape && ZoomToWindowLayer != null)
-        {
-            UnsetZoomToWindowMode();
-        }
-        ZoomToWindowLayer?.HandleKeyPress(sender, e);
-        BaselineCorrectionLayer?.HandleKeyPress(sender, e);
-        StatusStripLayer?.HandleKeyPress(sender, e);
-        PeakAnalysisLayer?.HandleKeyPress(sender, e);
-    }
-    
-    public void NullAllLayers()
-    {
-        BaselineCorrectionLayer = null;
-        PeakAnalysisLayer = null;
-        ZoomToWindowLayer = null;
     }
 }
