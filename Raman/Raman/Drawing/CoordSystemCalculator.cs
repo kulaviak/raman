@@ -4,11 +4,19 @@ public class CoordSystemCalculator
 {
     private const int PIXEL_SPACE = 25;
     
+    private const decimal MIN_Y = 0;
+    
+    private const decimal MAX_Y = 1000;
+
+    private const decimal MIN_X = 0;
+    
+    private const decimal MAX_X = 1000;
+    
     public static CanvasCoordSystem GetCoordSystemToShowAllCharts(IList<Chart> charts, int canvasWidth, int canvasHeight)
     {
         if (charts.Count == 0)
         {
-            return null;
+            return GetDefaultCoordSystem(canvasWidth, canvasHeight);
         }
 
         var allPoints = charts.SelectMany(x => x.Points).ToList();
@@ -38,5 +46,10 @@ public class CoordSystemCalculator
         var maxY = oldCoordSystem.ToValueY(zoomRectangle.Y);
         var ret = new CanvasCoordSystem(canvasWidth, canvasHeight, minX, maxX, minY, maxY);
         return ret;
+    }
+
+    public static CanvasCoordSystem GetDefaultCoordSystem(int canvasWidth, int canvasHeight)
+    {
+        return new CanvasCoordSystem(canvasWidth, canvasHeight, MIN_X, MAX_X, MIN_Y, MAX_Y);
     }
 }

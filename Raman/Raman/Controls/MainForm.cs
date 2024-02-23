@@ -20,6 +20,7 @@ public partial class MainForm : Form
     private void AdditionalInitialization()
     {
         MinimumSize = new Size(800, 600);
+        canvasPanel.CoordSystem = CoordSystemCalculator.GetDefaultCoordSystem(canvasPanel.Width, canvasPanel.Height);
         // LoadDemoSpectrum();
         // LoadDemoSpectra();
         HideSidePanel();
