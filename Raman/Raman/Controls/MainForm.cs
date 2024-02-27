@@ -21,7 +21,7 @@ public partial class MainForm : Form
     {
         MinimumSize = new Size(800, 600);
         canvasPanel.CoordSystem = CoordSystemCalculator.GetDefaultCoordSystem(canvasPanel.Width, canvasPanel.Height);
-        // LoadDemoSpectrum();
+        LoadDemoSpectrum();
         // LoadDemoSpectra();
         HideSidePanel();
         SetFormToDefaultState();
