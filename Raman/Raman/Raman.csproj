@@ -65,6 +65,12 @@
     <Compile Include="Controls\BaselineCorrectionForm.Designer.cs">
       <DependentUpon>BaselineCorrectionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CutOffForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\CutOffForm.Designer.cs">
+      <DependentUpon>CutOffForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ErrorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,7 @@
     </Compile>
     <Compile Include="Drawing\Chart.cs" />
     <Compile Include="Drawing\CoordSystemCalculator.cs" />
+    <Compile Include="Drawing\CutOffLayer.cs" />
     <Compile Include="Drawing\LayerBase.cs" />
     <Compile Include="Drawing\Mark.cs" />
     <Compile Include="Drawing\PeakAnalysisLayer.cs" />
@@ -119,6 +126,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\BaselineCorrectionForm.resx">
       <DependentUpon>BaselineCorrectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CutOffForm.resx">
+      <DependentUpon>CutOffForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ErrorForm.resx">
       <DependentUpon>ErrorForm.cs</DependentUpon>

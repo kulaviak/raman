@@ -42,6 +42,7 @@ partial class MainForm
     this.miTools = new System.Windows.Forms.ToolStripMenuItem();
     this.miBaselineCorrection = new System.Windows.Forms.ToolStripMenuItem();
     this.miPeakAnalysis = new System.Windows.Forms.ToolStripMenuItem();
+    this.miCutOff = new System.Windows.Forms.ToolStripMenuItem();
     this.miHelp = new System.Windows.Forms.ToolStripMenuItem();
     this.miShowHelp = new System.Windows.Forms.ToolStripMenuItem();
     this.toolStrip = new System.Windows.Forms.ToolStrip();
@@ -53,6 +54,7 @@ partial class MainForm
     this.splitContainer = new System.Windows.Forms.SplitContainer();
     this.statusStrip = new Raman.Controls.AppStatusStrip();
     this.canvasPanel = new Raman.Drawing.CanvasPanel();
+    this.tsbCutOff = new System.Windows.Forms.ToolStripButton();
     this.menuStrip.SuspendLayout();
     this.toolStrip.SuspendLayout();
     ((System.ComponentModel.ISupportInitialize) (this.splitContainer)).BeginInit();
@@ -123,7 +125,7 @@ partial class MainForm
     // 
     // miTools
     // 
-    this.miTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miBaselineCorrection, this.miPeakAnalysis});
+    this.miTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miBaselineCorrection, this.miPeakAnalysis, this.miCutOff});
     this.miTools.Name = "miTools";
     this.miTools.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
     this.miTools.Size = new System.Drawing.Size(46, 20);
@@ -145,6 +147,14 @@ partial class MainForm
     this.miPeakAnalysis.Text = "Peak Analysis";
     this.miPeakAnalysis.Click += new System.EventHandler(this.miPeakAnalysis_Click);
     // 
+    // miCutOff
+    // 
+    this.miCutOff.Name = "miCutOff";
+    this.miCutOff.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+    this.miCutOff.Size = new System.Drawing.Size(217, 22);
+    this.miCutOff.Text = "Cut Off";
+    this.miCutOff.Click += new System.EventHandler(this.miCutOff_Click);
+    // 
     // miHelp
     // 
     this.miHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miShowHelp});
@@ -161,7 +171,7 @@ partial class MainForm
     // 
     // toolStrip
     // 
-    this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.tsbOpenFiles, this.tsbZoomToWindow, this.tsbZoomToOriginalSize, this.tsbBaselineCorrection, this.tsbPeakAnalysis});
+    this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.tsbOpenFiles, this.tsbZoomToWindow, this.tsbZoomToOriginalSize, this.tsbBaselineCorrection, this.tsbPeakAnalysis, this.tsbCutOff});
     this.toolStrip.Location = new System.Drawing.Point(0, 24);
     this.toolStrip.Name = "toolStrip";
     this.toolStrip.Size = new System.Drawing.Size(800, 25);
@@ -250,6 +260,15 @@ partial class MainForm
     this.canvasPanel.Size = new System.Drawing.Size(590, 401);
     this.canvasPanel.TabIndex = 0;
     // 
+    // tsbCutOff
+    // 
+    this.tsbCutOff.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+    this.tsbCutOff.Image = ((System.Drawing.Image) (resources.GetObject("tsbCutOff.Image")));
+    this.tsbCutOff.ImageTransparentColor = System.Drawing.Color.Magenta;
+    this.tsbCutOff.Name = "tsbCutOff";
+    this.tsbCutOff.Size = new System.Drawing.Size(23, 22);
+    this.tsbCutOff.Text = "Cut Off";
+    // 
     // MainForm
     // 
     this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,6 +297,10 @@ partial class MainForm
     this.ResumeLayout(false);
     this.PerformLayout();
   }
+
+  private System.Windows.Forms.ToolStripButton tsbCutOff;
+
+  private System.Windows.Forms.ToolStripMenuItem miCutOff;
 
   private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
   private System.Windows.Forms.ToolStripMenuItem miHelp;

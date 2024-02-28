@@ -37,6 +37,9 @@ public partial class MainForm : Form
 
         miPeakAnalysis.Enabled = areAnyCharts;
         tsbPeakAnalysis.Enabled = areAnyCharts;
+
+        miCutOff.Enabled = areAnyCharts;
+        tsbCutOff.Enabled = areAnyCharts;
     }
 
     public MainForm()
@@ -59,7 +62,7 @@ public partial class MainForm : Form
     
     private void OnShown(object sender, EventArgs e)
     {
-        // LoadDemoSpectrum();
+        LoadDemoSpectrum();
         // LoadDemoSpectra();
     }
 
@@ -424,5 +427,41 @@ public partial class MainForm : Form
         {
             FormUtil.ShowAppError($"Error opening PDF: {ex.Message}", "Error", ex);
         }    
+    }
+
+    private void miCutOff_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            CutOff();
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowAppError("Cut Off failed.", "Error", ex);
+        }
+    }
+
+    private void CutOff()
+    {
+        SetFormToDefaultState();
+        var cutOffLayer = new CutOffLayer(canvasPanel.CoordSystem, canvasPanel);
+        canvasPanel.CutOffLayer = cutOffLayer;
+        var form = new CutOffForm(cutOffLayer);
+        form.Closed += CutOffForm_Closed;
+        ShowSidePanel(form);
+    }
+    
+    private void CutOffForm_Closed(object sender, EventArgs e)
+    {
+        try
+        {
+            HideSidePanel();
+            canvasPanel.CutOffLayer = null;
+            Refresh();
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowAppError("Closing Cut Off form failed.", "Error", ex);
+        }
     }
 }

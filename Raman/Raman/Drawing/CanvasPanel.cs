@@ -51,6 +51,10 @@ public class CanvasPanel : Panel
             {
                 PeakAnalysisLayer.CoordSystem = value;
             }
+            if (CutOffLayer != null)
+            {
+                CutOffLayer.CoordSystem = value;
+            }
         }
     }
 
@@ -65,6 +69,9 @@ public class CanvasPanel : Panel
     
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public ZoomToWindowLayer ZoomToWindowLayer { get; set; }
+    
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public CutOffLayer CutOffLayer { get; set; }
     
     public CanvasPanel()
     {
@@ -193,6 +200,7 @@ public class CanvasPanel : Panel
         {
             BaselineCorrectionLayer?.HandleMouseDown(sender, e);
             PeakAnalysisLayer?.HandleMouseDown(sender, e);
+            CutOffLayer?.HandleMouseDown(sender, e);
         }
         Refresh();
     }
