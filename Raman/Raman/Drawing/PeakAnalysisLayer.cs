@@ -14,6 +14,8 @@ public class PeakAnalysisLayer : LayerBase
 
     public List<Line> Lines { get; set; } = new List<Line>();
     
+    public bool IsExported { get; set; }
+    
     public PeakAnalysisLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : base(coordSystem)
     {
         this.canvasPanel = canvasPanel;
@@ -32,6 +34,7 @@ public class PeakAnalysisLayer : LayerBase
                 var end = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
                 var line = new Line(start, end);
                 Lines.Add(line);
+                IsExported = false;
                 start = null;
             }
             Refresh();
@@ -46,6 +49,7 @@ public class PeakAnalysisLayer : LayerBase
             ShowContextMenu(e.Location);
         }
     }
+
 
     public override void HandleMouseMove(object sender, MouseEventArgs e)
     {

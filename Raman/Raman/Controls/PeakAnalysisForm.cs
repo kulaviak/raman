@@ -40,14 +40,14 @@ public partial class PeakAnalysisForm : Form
 
     private void PeakAnalysisForm_FormClosing(object sender, FormClosingEventArgs e)
     {
-        // if (_peakAnalysisLayer.CorrectionPoints.Any() && !_peakAnalysisLayer.IsBaselineCorrected)
-        // {
-        //     if (FormUtil.ShowQuestion("Do you really want to exit Baseline Correction and loose selected correction points?",
-        //             "Confirmation") == DialogResult.No)
-        //     {
-        //         e.Cancel = true;
-        //     }
-        // }
+        if (peakAnalysisLayer.Lines.Any() && !peakAnalysisLayer.IsExported)
+        {
+            if (FormUtil.ShowQuestion("Do you really want to exit Peak Analysis and loose selected peaks?",
+                    "Confirmation") == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 
     private void btnExportPeaks_Click(object sender, EventArgs e)
