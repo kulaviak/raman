@@ -23,17 +23,7 @@ public partial class CutOffForm : Form
             FormUtil.ShowAppError("Closing form failed.", "Error", ex);
         }
     }
-
-    private void btnSetStartPoint_Click(object sender, EventArgs e)
-    {
-        cutOffLayer.Mode = CutOffMode.StartPoint;
-    }
-
-    private void btnSetEndPoint_Click(object sender, EventArgs e)
-    {
-        cutOffLayer.Mode = CutOffMode.EndPoint;
-    }
-
+    
     private void btnCutOff_Click(object sender, EventArgs e)
     {
         try

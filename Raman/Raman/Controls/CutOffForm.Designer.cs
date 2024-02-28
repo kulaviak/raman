@@ -28,24 +28,12 @@ partial class CutOffForm
     /// </summary>
     private void InitializeComponent()
     {
-        this.btnSetStartPoint = new System.Windows.Forms.Button();
         this.label1 = new System.Windows.Forms.Label();
         this.btnClose = new System.Windows.Forms.Button();
-        this.btnSetEndPoint = new System.Windows.Forms.Button();
         this.btnUndoCutOff = new System.Windows.Forms.Button();
         this.btnCutOff = new System.Windows.Forms.Button();
         this.btnResetPoints = new System.Windows.Forms.Button();
         this.SuspendLayout();
-        // 
-        // btnSetStartPoint
-        // 
-        this.btnSetStartPoint.Location = new System.Drawing.Point(7, 54);
-        this.btnSetStartPoint.Name = "btnSetStartPoint";
-        this.btnSetStartPoint.Size = new System.Drawing.Size(142, 23);
-        this.btnSetStartPoint.TabIndex = 9;
-        this.btnSetStartPoint.Text = "Set Start Point";
-        this.btnSetStartPoint.UseVisualStyleBackColor = true;
-        this.btnSetStartPoint.Click += new System.EventHandler(this.btnSetStartPoint_Click);
         // 
         // label1
         // 
@@ -57,7 +45,7 @@ partial class CutOffForm
         // 
         // btnClose
         // 
-        this.btnClose.Location = new System.Drawing.Point(38, 207);
+        this.btnClose.Location = new System.Drawing.Point(38, 140);
         this.btnClose.Name = "btnClose";
         this.btnClose.Size = new System.Drawing.Size(75, 23);
         this.btnClose.TabIndex = 11;
@@ -65,19 +53,9 @@ partial class CutOffForm
         this.btnClose.UseVisualStyleBackColor = true;
         this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
         // 
-        // btnSetEndPoint
-        // 
-        this.btnSetEndPoint.Location = new System.Drawing.Point(7, 83);
-        this.btnSetEndPoint.Name = "btnSetEndPoint";
-        this.btnSetEndPoint.Size = new System.Drawing.Size(142, 23);
-        this.btnSetEndPoint.TabIndex = 12;
-        this.btnSetEndPoint.Text = "Set End Point";
-        this.btnSetEndPoint.UseVisualStyleBackColor = true;
-        this.btnSetEndPoint.Click += new System.EventHandler(this.btnSetEndPoint_Click);
-        // 
         // btnUndoCutOff
         // 
-        this.btnUndoCutOff.Location = new System.Drawing.Point(7, 169);
+        this.btnUndoCutOff.Location = new System.Drawing.Point(7, 102);
         this.btnUndoCutOff.Name = "btnUndoCutOff";
         this.btnUndoCutOff.Size = new System.Drawing.Size(142, 23);
         this.btnUndoCutOff.TabIndex = 13;
@@ -87,7 +65,7 @@ partial class CutOffForm
         // 
         // btnCutOff
         // 
-        this.btnCutOff.Location = new System.Drawing.Point(7, 140);
+        this.btnCutOff.Location = new System.Drawing.Point(7, 73);
         this.btnCutOff.Name = "btnCutOff";
         this.btnCutOff.Size = new System.Drawing.Size(142, 23);
         this.btnCutOff.TabIndex = 14;
@@ -97,7 +75,7 @@ partial class CutOffForm
         // 
         // btnResetPoints
         // 
-        this.btnResetPoints.Location = new System.Drawing.Point(7, 112);
+        this.btnResetPoints.Location = new System.Drawing.Point(7, 45);
         this.btnResetPoints.Name = "btnResetPoints";
         this.btnResetPoints.Size = new System.Drawing.Size(142, 23);
         this.btnResetPoints.TabIndex = 15;
@@ -113,10 +91,8 @@ partial class CutOffForm
         this.Controls.Add(this.btnResetPoints);
         this.Controls.Add(this.btnCutOff);
         this.Controls.Add(this.btnUndoCutOff);
-        this.Controls.Add(this.btnSetEndPoint);
         this.Controls.Add(this.btnClose);
         this.Controls.Add(this.label1);
-        this.Controls.Add(this.btnSetStartPoint);
         this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
         this.Name = "CutOffForm";
         this.Text = "Cut Off";
@@ -129,13 +105,9 @@ partial class CutOffForm
 
     private System.Windows.Forms.Button btnCutOff;
 
-    private System.Windows.Forms.Button btnSetEndPoint;
-
     private System.Windows.Forms.Button btnClose;
 
     private System.Windows.Forms.Label label1;
-
-    private System.Windows.Forms.Button btnSetStartPoint;
 
     #endregion
 }

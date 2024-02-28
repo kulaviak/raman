@@ -3,13 +3,6 @@ using Point = Raman.Core.Point;
 
 namespace Raman.Drawing;
 
-public enum CutOffMode
-{
-    None,
-    StartPoint,
-    EndPoint
-}
-
 public class CutOffLayer : LayerBase
 {
     private readonly CanvasPanel canvasPanel;
@@ -18,8 +11,6 @@ public class CutOffLayer : LayerBase
     
     private Point end;
 
-    public CutOffMode Mode { get; set; } = CutOffMode.None;
-    
     private static Color COLOR = Color.Red;
 
     private List<Chart> oldCharts = null;
@@ -80,18 +71,47 @@ public class CutOffLayer : LayerBase
     {
         if (e.Button == MouseButtons.Left)
         {
-            if (Mode == CutOffMode.StartPoint)
+            if (start == null)
             {
                 start = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
             }
-            else if (Mode == CutOffMode.EndPoint)
+            else if (end == null)
             {
                 end = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
             }
-            Refresh();
+        }
+        else if (e.Button == MouseButtons.Middle)
+        {
+            RemoveClosestPoint(e.Location);
+        }
+        Refresh();
+    }
+
+    private void RemoveClosestPoint(System.Drawing.Point pos)
+    {
+        var points = new List<Point>();
+        if (start != null)
+        {
+            points.Add(start);
+        }
+        if (end != null)
+        {
+            points.Add(end);
+        }
+        var closestPoint = points.MinByOrDefault(x => Util.GetPixelDistance(CoordSystem.ToPixelPoint(x), pos));
+        if (closestPoint != null)
+        {
+            if (closestPoint == start)
+            {
+                start = null;
+            }
+            else if (closestPoint == end)
+            {
+                end = null;
+            }
         }
     }
-    
+
     private void Refresh()
     {
         canvasPanel.Refresh();
