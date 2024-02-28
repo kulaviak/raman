@@ -32,18 +32,18 @@ partial class MainForm
   {
     System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
     this.menuStrip = new System.Windows.Forms.MenuStrip();
-    this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+    this.miFile = new System.Windows.Forms.ToolStripMenuItem();
     this.miOpenSingleSpectrumFiles = new System.Windows.Forms.ToolStripMenuItem();
     this.miOpenMultiSpectrumFiles = new System.Windows.Forms.ToolStripMenuItem();
     this.miExit = new System.Windows.Forms.ToolStripMenuItem();
-    this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+    this.miView = new System.Windows.Forms.ToolStripMenuItem();
     this.miZoomWindow = new System.Windows.Forms.ToolStripMenuItem();
     this.miZoomToOriginalSize = new System.Windows.Forms.ToolStripMenuItem();
     this.miTools = new System.Windows.Forms.ToolStripMenuItem();
     this.miBaselineCorrection = new System.Windows.Forms.ToolStripMenuItem();
     this.miPeakAnalysis = new System.Windows.Forms.ToolStripMenuItem();
-    this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
     this.miHelp = new System.Windows.Forms.ToolStripMenuItem();
+    this.miShowHelp = new System.Windows.Forms.ToolStripMenuItem();
     this.toolStrip = new System.Windows.Forms.ToolStrip();
     this.tsbOpenFiles = new System.Windows.Forms.ToolStripButton();
     this.tsbZoomToWindow = new System.Windows.Forms.ToolStripButton();
@@ -62,19 +62,19 @@ partial class MainForm
     // 
     // menuStrip
     // 
-    this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.fileToolStripMenuItem, this.viewToolStripMenuItem, this.miTools, this.helpToolStripMenuItem});
+    this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miFile, this.miView, this.miTools, this.miHelp});
     this.menuStrip.Location = new System.Drawing.Point(0, 0);
     this.menuStrip.Name = "menuStrip";
     this.menuStrip.Size = new System.Drawing.Size(800, 24);
     this.menuStrip.TabIndex = 0;
     this.menuStrip.Text = "menuStrip1";
     // 
-    // fileToolStripMenuItem
+    // miFile
     // 
-    this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miOpenSingleSpectrumFiles, this.miOpenMultiSpectrumFiles, this.miExit});
-    this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-    this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-    this.fileToolStripMenuItem.Text = "File";
+    this.miFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miOpenSingleSpectrumFiles, this.miOpenMultiSpectrumFiles, this.miExit});
+    this.miFile.Name = "miFile";
+    this.miFile.Size = new System.Drawing.Size(37, 20);
+    this.miFile.Text = "File";
     // 
     // miOpenSingleSpectrumFiles
     // 
@@ -98,12 +98,12 @@ partial class MainForm
     this.miExit.Text = "Exit";
     this.miExit.Click += new System.EventHandler(this.miExit_Click);
     // 
-    // viewToolStripMenuItem
+    // miView
     // 
-    this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miZoomWindow, this.miZoomToOriginalSize});
-    this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-    this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-    this.viewToolStripMenuItem.Text = "View";
+    this.miView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miZoomWindow, this.miZoomToOriginalSize});
+    this.miView.Name = "miView";
+    this.miView.Size = new System.Drawing.Size(44, 20);
+    this.miView.Text = "View";
     // 
     // miZoomWindow
     // 
@@ -145,19 +145,19 @@ partial class MainForm
     this.miPeakAnalysis.Text = "Peak Analysis";
     this.miPeakAnalysis.Click += new System.EventHandler(this.miPeakAnalysis_Click);
     // 
-    // helpToolStripMenuItem
-    // 
-    this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miHelp});
-    this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-    this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-    this.helpToolStripMenuItem.Text = "Help";
-    // 
     // miHelp
     // 
+    this.miHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miShowHelp});
     this.miHelp.Name = "miHelp";
-    this.miHelp.Size = new System.Drawing.Size(99, 22);
+    this.miHelp.Size = new System.Drawing.Size(44, 20);
     this.miHelp.Text = "Help";
-    this.miHelp.Click += new System.EventHandler(this.miHelp_Click);
+    // 
+    // miShowHelp
+    // 
+    this.miShowHelp.Name = "miShowHelp";
+    this.miShowHelp.Size = new System.Drawing.Size(99, 22);
+    this.miShowHelp.Text = "Help";
+    this.miShowHelp.Click += new System.EventHandler(this.miHelp_Click);
     // 
     // toolStrip
     // 
@@ -281,6 +281,7 @@ partial class MainForm
 
   private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
   private System.Windows.Forms.ToolStripMenuItem miHelp;
+  private System.Windows.Forms.ToolStripMenuItem miShowHelp;
 
   private System.Windows.Forms.ToolStripMenuItem miOpenMultiSpectrumFiles;
 
@@ -289,14 +290,14 @@ partial class MainForm
   private System.Windows.Forms.ToolStripMenuItem miPeakAnalysis;
 
   private System.Windows.Forms.MenuStrip menuStrip;
-  private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+  private System.Windows.Forms.ToolStripMenuItem miFile;
   private System.Windows.Forms.ToolStripMenuItem miOpenSingleSpectrumFiles;
   private System.Windows.Forms.ToolStripMenuItem miExit;
 
   #endregion
   private System.Windows.Forms.ToolStrip toolStrip1;
   private System.Windows.Forms.ToolStripButton tsbBaselineCorrection;
-  private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+  private System.Windows.Forms.ToolStripMenuItem miView;
   private System.Windows.Forms.ToolStripMenuItem miZoomWindow;
   private System.Windows.Forms.ToolStripMenuItem miZoomToOriginalSize;
   private System.Windows.Forms.ToolStripMenuItem miTools;

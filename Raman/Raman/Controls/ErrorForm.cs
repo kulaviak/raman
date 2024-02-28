@@ -88,7 +88,7 @@ public partial class ErrorForm : Form
             var str = new ExceptionFormatter().ToString(ex);
             Clipboard.SetText(str);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             MessageBox.Show("Saving error details to clipboard failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }

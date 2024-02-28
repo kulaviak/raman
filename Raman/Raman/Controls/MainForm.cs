@@ -11,6 +11,34 @@ public partial class MainForm : Form
 {
     private const int SIDE_PANEL_WIDTH = 175;
 
+    private List<Chart> Charts
+    {
+        get { return canvasPanel.Charts; }
+        set
+        {
+            canvasPanel.Charts = value;
+            canvasPanel.Refresh();
+            EnableOrDisableItems();
+        }
+    }
+
+    private void EnableOrDisableItems()
+    {
+        var areAnyCharts = canvasPanel.Charts.Count != 0;
+        
+        miZoomWindow.Enabled = areAnyCharts;
+        tsbZoomToWindow.Enabled = areAnyCharts;
+        
+        miZoomToOriginalSize.Enabled = areAnyCharts;
+        tsbZoomToOriginalSize.Enabled = areAnyCharts;
+        
+        miBaselineCorrection.Enabled = areAnyCharts;
+        tsbBaselineCorrection.Enabled = areAnyCharts;
+
+        miPeakAnalysis.Enabled = areAnyCharts;
+        tsbPeakAnalysis.Enabled = areAnyCharts;
+    }
+
     public MainForm()
     {
         InitializeComponent();
@@ -26,11 +54,12 @@ public partial class MainForm : Form
         KeyPreview = true;
         KeyDown += OnKeyDown;
         Shown += OnShown;
+        EnableOrDisableItems();
     }
-
+    
     private void OnShown(object sender, EventArgs e)
     {
-        LoadDemoSpectrum();
+        // LoadDemoSpectrum();
         // LoadDemoSpectra();
     }
 
@@ -114,8 +143,7 @@ public partial class MainForm : Form
             var name = Path.GetFileNameWithoutExtension(filePath);
             charts.Add(new Chart(points, name));
         }
-        canvasPanel.Charts = charts;
-        canvasPanel.Refresh();
+        Charts = charts;
     }
 
     private void LoadDemoSpectrum()
@@ -376,8 +404,7 @@ public partial class MainForm : Form
                 charts.Add(chart);
             }
         }
-        canvasPanel.Charts = charts;
-        canvasPanel.Refresh();
+        Charts = charts;
     }
     
     private void OnKeyDown(object sender, KeyEventArgs e)
