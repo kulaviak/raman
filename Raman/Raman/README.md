@@ -10,3 +10,7 @@ Possible Docking libraries
 ------------------------
 https://github.com/ComponentFactory/Krypton
 https://github.com/dockpanelsuite/dockpanelsuite/tree/Release_3.1.0?tab=readme-ov-file
+
+Nice to have things
+---------------------------
+Mouse middle scroll button can zoom and drag.

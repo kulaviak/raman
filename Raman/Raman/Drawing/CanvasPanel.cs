@@ -173,8 +173,16 @@ public class CanvasPanel : Panel
     
     private void HandleResize(object sender, EventArgs e)
     {
-        CoordSystem = CoordSystemCalculator.GetCoordSystemToShowAllCharts(charts, Width, Height);
+        UpdateCoordSystemToNewSize();
         DoRefresh();
+    }
+
+    private void UpdateCoordSystemToNewSize()
+    {
+        if (CoordSystem != null)
+        {
+            CoordSystem = new CanvasCoordSystem(Width, Height, CoordSystem.MinX, CoordSystem.MaxX, CoordSystem.MinY, coordSystem.MaxY);
+        }
     }
 
     private void HandleMouseDown(object sender, MouseEventArgs e)

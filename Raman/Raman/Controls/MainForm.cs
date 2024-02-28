@@ -21,12 +21,17 @@ public partial class MainForm : Form
     {
         MinimumSize = new Size(800, 600);
         canvasPanel.CoordSystem = CoordSystemCalculator.GetDefaultCoordSystem(canvasPanel.Width, canvasPanel.Height);
-        LoadDemoSpectrum();
-        // LoadDemoSpectra();
         HideSidePanel();
         SetFormToDefaultState();
         KeyPreview = true;
         KeyDown += OnKeyDown;
+        Shown += OnShown;
+    }
+
+    private void OnShown(object sender, EventArgs e)
+    {
+        LoadDemoSpectrum();
+        // LoadDemoSpectra();
     }
 
     private void HideSidePanel()
@@ -80,8 +85,6 @@ public partial class MainForm : Form
     {
         using (var openFileDialog = new OpenFileDialog())
         {
-            // don't specify initial directory - it will remember the last one
-            // openFileDialog.InitialDirectory = "C:\\"; 
             openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
             openFileDialog.FilterIndex = 1;
             openFileDialog.Multiselect = true;
@@ -111,7 +114,6 @@ public partial class MainForm : Form
             var name = Path.GetFileNameWithoutExtension(filePath);
             charts.Add(new Chart(points, name));
         }
-
         canvasPanel.Charts = charts;
         canvasPanel.Refresh();
     }
