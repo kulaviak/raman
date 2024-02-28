@@ -103,5 +103,16 @@ public class CutOffLayer : LayerBase
         {
             new Mark(CoordSystem, graphics, COLOR, start).Draw();
         }
+        if (end != null)
+        {
+            new Mark(CoordSystem, graphics, COLOR, end).Draw();
+        }
+    }
+
+    public void ResetPoints()
+    {
+        start = null;
+        end = null;
+        Refresh();
     }
 }

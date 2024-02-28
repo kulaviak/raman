@@ -17,6 +17,7 @@ public partial class MainForm : Form
         set
         {
             canvasPanel.Charts = value;
+            canvasPanel.SetCoordSystemToShowAllCharts();
             canvasPanel.Refresh();
             EnableOrDisableItems();
         }
@@ -462,6 +463,18 @@ public partial class MainForm : Form
         catch (Exception ex)
         {
             FormUtil.ShowAppError("Closing Cut Off form failed.", "Error", ex);
+        }
+    }
+
+    private void tsbCutOff_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            CutOff();
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowAppError("Cut Off failed.", "Error", ex);
         }
     }
 }

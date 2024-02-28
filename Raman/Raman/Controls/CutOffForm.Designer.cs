@@ -34,6 +34,7 @@ partial class CutOffForm
         this.btnSetEndPoint = new System.Windows.Forms.Button();
         this.btnUndoCutOff = new System.Windows.Forms.Button();
         this.btnCutOff = new System.Windows.Forms.Button();
+        this.btnResetPoints = new System.Windows.Forms.Button();
         this.SuspendLayout();
         // 
         // btnSetStartPoint
@@ -56,7 +57,7 @@ partial class CutOffForm
         // 
         // btnClose
         // 
-        this.btnClose.Location = new System.Drawing.Point(38, 179);
+        this.btnClose.Location = new System.Drawing.Point(38, 207);
         this.btnClose.Name = "btnClose";
         this.btnClose.Size = new System.Drawing.Size(75, 23);
         this.btnClose.TabIndex = 11;
@@ -76,7 +77,7 @@ partial class CutOffForm
         // 
         // btnUndoCutOff
         // 
-        this.btnUndoCutOff.Location = new System.Drawing.Point(7, 141);
+        this.btnUndoCutOff.Location = new System.Drawing.Point(7, 169);
         this.btnUndoCutOff.Name = "btnUndoCutOff";
         this.btnUndoCutOff.Size = new System.Drawing.Size(142, 23);
         this.btnUndoCutOff.TabIndex = 13;
@@ -86,7 +87,7 @@ partial class CutOffForm
         // 
         // btnCutOff
         // 
-        this.btnCutOff.Location = new System.Drawing.Point(7, 112);
+        this.btnCutOff.Location = new System.Drawing.Point(7, 140);
         this.btnCutOff.Name = "btnCutOff";
         this.btnCutOff.Size = new System.Drawing.Size(142, 23);
         this.btnCutOff.TabIndex = 14;
@@ -94,11 +95,22 @@ partial class CutOffForm
         this.btnCutOff.UseVisualStyleBackColor = true;
         this.btnCutOff.Click += new System.EventHandler(this.btnCutOff_Click);
         // 
+        // btnResetPoints
+        // 
+        this.btnResetPoints.Location = new System.Drawing.Point(7, 112);
+        this.btnResetPoints.Name = "btnResetPoints";
+        this.btnResetPoints.Size = new System.Drawing.Size(142, 23);
+        this.btnResetPoints.TabIndex = 15;
+        this.btnResetPoints.Text = "Reset Points";
+        this.btnResetPoints.UseVisualStyleBackColor = true;
+        this.btnResetPoints.Click += new System.EventHandler(this.btnResetPoints_Click);
+        // 
         // CutOffForm
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.ClientSize = new System.Drawing.Size(169, 450);
+        this.Controls.Add(this.btnResetPoints);
         this.Controls.Add(this.btnCutOff);
         this.Controls.Add(this.btnUndoCutOff);
         this.Controls.Add(this.btnSetEndPoint);
@@ -110,6 +122,8 @@ partial class CutOffForm
         this.Text = "Cut Off";
         this.ResumeLayout(false);
     }
+
+    private System.Windows.Forms.Button btnResetPoints;
 
     private System.Windows.Forms.Button btnUndoCutOff;
 

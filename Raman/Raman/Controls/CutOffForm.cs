@@ -57,4 +57,16 @@ public partial class CutOffForm : Form
             FormUtil.ShowAppError("Undo Cut Off failed.", "Error", ex);
         }
     }
+
+    private void btnResetPoints_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            cutOffLayer.ResetPoints();
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowAppError("Reset points failed.", "Error", ex);
+        }
+    }
 }

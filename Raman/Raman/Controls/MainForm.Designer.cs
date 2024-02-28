@@ -51,10 +51,10 @@ partial class MainForm
     this.tsbZoomToOriginalSize = new System.Windows.Forms.ToolStripButton();
     this.tsbBaselineCorrection = new System.Windows.Forms.ToolStripButton();
     this.tsbPeakAnalysis = new System.Windows.Forms.ToolStripButton();
+    this.tsbCutOff = new System.Windows.Forms.ToolStripButton();
     this.splitContainer = new System.Windows.Forms.SplitContainer();
     this.statusStrip = new Raman.Controls.AppStatusStrip();
     this.canvasPanel = new Raman.Drawing.CanvasPanel();
-    this.tsbCutOff = new System.Windows.Forms.ToolStripButton();
     this.menuStrip.SuspendLayout();
     this.toolStrip.SuspendLayout();
     ((System.ComponentModel.ISupportInitialize) (this.splitContainer)).BeginInit();
@@ -229,6 +229,16 @@ partial class MainForm
     this.tsbPeakAnalysis.ToolTipText = "Peak Analysis";
     this.tsbPeakAnalysis.Click += new System.EventHandler(this.tsbPeakAnalysis_Click);
     // 
+    // tsbCutOff
+    // 
+    this.tsbCutOff.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+    this.tsbCutOff.Image = ((System.Drawing.Image) (resources.GetObject("tsbCutOff.Image")));
+    this.tsbCutOff.ImageTransparentColor = System.Drawing.Color.Magenta;
+    this.tsbCutOff.Name = "tsbCutOff";
+    this.tsbCutOff.Size = new System.Drawing.Size(23, 22);
+    this.tsbCutOff.Text = "Cut Off";
+    this.tsbCutOff.Click += new System.EventHandler(this.tsbCutOff_Click);
+    // 
     // splitContainer
     // 
     this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -259,15 +269,6 @@ partial class MainForm
     this.canvasPanel.Name = "canvasPanel";
     this.canvasPanel.Size = new System.Drawing.Size(590, 401);
     this.canvasPanel.TabIndex = 0;
-    // 
-    // tsbCutOff
-    // 
-    this.tsbCutOff.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-    this.tsbCutOff.Image = ((System.Drawing.Image) (resources.GetObject("tsbCutOff.Image")));
-    this.tsbCutOff.ImageTransparentColor = System.Drawing.Color.Magenta;
-    this.tsbCutOff.Name = "tsbCutOff";
-    this.tsbCutOff.Size = new System.Drawing.Size(23, 22);
-    this.tsbCutOff.Text = "Cut Off";
     // 
     // MainForm
     // 

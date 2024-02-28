@@ -19,10 +19,9 @@ public class CanvasPanel : Panel
         set
         {
             charts = value;
-            CoordSystem = CoordSystemCalculator.GetCoordSystemToShowAllCharts(charts, Width, Height);
         }
     }
-
+    
     public List<Chart> VisibleCharts => Charts.Where(x => x.IsVisible).ToList();
 
     private CanvasCoordSystem coordSystem;
@@ -78,6 +77,11 @@ public class CanvasPanel : Panel
         InitializeComponent();
         // use double buffering to avoid flickering 
         DoubleBuffered = true;
+    }
+    
+    public void SetCoordSystemToShowAllCharts()
+    {
+        CoordSystem = CoordSystemCalculator.GetCoordSystemToShowAllCharts(charts, Width, Height);
     }
     
     public void ZoomToOriginalSize()
@@ -153,6 +157,7 @@ public class CanvasPanel : Panel
         ZoomToWindowLayer?.Draw(graphics);
         BaselineCorrectionLayer?.Draw(graphics);
         PeakAnalysisLayer?.Draw(graphics);
+        CutOffLayer?.Draw(graphics);
     }
 
     /// <summary>
