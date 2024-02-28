@@ -138,6 +138,11 @@ public class BaselineCorrectionLayer : LayerBase
 
     public void CorrectBaseline()
     {
+        if (!CorrectionPoints.Any())
+        {
+            FormUtil.ShowUserError("There are no points defined.", "Error");
+            return;
+        }
         oldCharts = canvasPanel.Charts;
         canvasPanel.Charts = canvasPanel.Charts.Select(x => CorrectBaseline(x)).ToList();
         IsBaselineCorrected = true;
