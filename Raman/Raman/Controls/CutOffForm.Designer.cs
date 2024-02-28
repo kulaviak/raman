@@ -96,6 +96,7 @@ partial class CutOffForm
         this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
         this.Name = "CutOffForm";
         this.Text = "Cut Off";
+        this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CutOffForm_FormClosing);
         this.ResumeLayout(false);
     }
 

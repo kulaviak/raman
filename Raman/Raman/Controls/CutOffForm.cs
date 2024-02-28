@@ -59,4 +59,16 @@ public partial class CutOffForm : Form
             FormUtil.ShowAppError("Reset points failed.", "Error", ex);
         }
     }
+
+    private void CutOffForm_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        if (cutOffLayer.Start != null || cutOffLayer.End != null)
+        {
+            if (FormUtil.ShowQuestion("You selected some cut off points. Do you really want to exit Cut Off without cutting of spectra?",
+                    "Confirmation") == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
+    }
 }
