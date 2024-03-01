@@ -54,7 +54,58 @@ public class BaselineCorrectionLayer : LayerBase
         DrawBaselines(graphics);
         DrawMarks(graphics);
     }
+    
+    public void ImportPoints(List<Point> points)
+    {
+        BaselinePoints = points;
+        Refresh();
+    }
 
+    public void ExportPoints(string filePath)
+    {
+        if (!BaselinePoints.Any())
+        {
+            FormUtil.ShowInfo("There are no baseline points to export.", "Information");
+            return;
+        }
+        new OnePointPerLineFileWriter().WritePoints(BaselinePoints, filePath);
+    }
+
+    public void CorrectBaseline()
+    {
+        if (!BaselinePoints.Any())
+        {
+            FormUtil.ShowInfo("There are no baseline points defined.", "Information");
+            return;
+        }
+        undoStack.Push(canvasPanel.Charts);
+        canvasPanel.Charts = canvasPanel.Charts.Select(x => CorrectBaseline(x, BaselinePoints)).ToList();
+        BaselinePoints = new List<Point>();
+        canvasPanel.Refresh();
+    }
+    
+    public void ExportCorrectedCharts()
+    {
+        var exportedCharts = canvasPanel.Charts.Where(x => x.IsBaselineCorrected).ToList();
+        if (!exportedCharts.Any())
+        {
+            FormUtil.ShowUserError("There are no corrected spectra.", "No spectra to export");
+            return;
+        }
+        using (var folderBrowserDialog = new FolderBrowserDialog())
+        {
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                var selectedPath = folderBrowserDialog.SelectedPath;
+                foreach (var chart in exportedCharts)
+                {
+                    ExportCorrectedChart(chart, selectedPath);                                                
+                }
+                FormUtil.ShowInfo("Export finished successfully.", "Export finished");
+            }
+        }
+    }
+    
     private void DrawBaselines(Graphics graphics)
     {
         if (canvasPanel.Charts.Any() && BaselinePoints.Count >= 4)
@@ -124,42 +175,13 @@ public class BaselineCorrectionLayer : LayerBase
             new Mark(CoordSystem, graphics, COLOR, point).Draw();
         }
     }
-
-    public void ImportPoints(List<Point> points)
-    {
-        BaselinePoints = points;
-        Refresh();
-    }
-
-    public void ExportPoints(string filePath)
-    {
-        if (!BaselinePoints.Any())
-        {
-            FormUtil.ShowInfo("There are no baseline points to export.", "Information");
-            return;
-        }
-        new OnePointPerLineFileWriter().WritePoints(BaselinePoints, filePath);
-    }
-
-    public void CorrectBaseline()
-    {
-        if (!BaselinePoints.Any())
-        {
-            FormUtil.ShowInfo("There are no baseline points defined.", "Information");
-            return;
-        }
-        undoStack.Push(canvasPanel.Charts);
-        canvasPanel.Charts = canvasPanel.Charts.Select(x => CorrectBaseline(x, BaselinePoints)).ToList();
-        BaselinePoints = new List<Point>();
-        canvasPanel.Refresh();
-    }
-
+    
     private static Chart CorrectBaseline(Chart chart, List<Point> correctionPoints)
     {
-        var correctionStart = correctionPoints.Min(x => x.X);
-        var correctionEnd = correctionPoints.Max(x => x.X);
-        // get baseline only between correction points
-        var xPositions = chart.Points.Where(point => correctionStart <= point.X && point.X <= correctionEnd).Select(point => point.X).ToList();
+        var baselineStart = correctionPoints.Min(x => x.X);
+        var baselineEnd = correctionPoints.Max(x => x.X);
+        // get baseline only between user selected points
+        var xPositions = chart.Points.Where(point => baselineStart <= point.X && point.X <= baselineEnd).Select(point => point.X).ToList();
         var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, correctionPoints);
         var newChartPoints = new BaselineCorrector().CorrectChartByBaseline(chart.Points, baselinePoints);
         var ret = new Chart(newChartPoints, chart.Name);
@@ -177,29 +199,7 @@ public class BaselineCorrectionLayer : LayerBase
         canvasPanel.Charts = undoStack.Pop();
         canvasPanel.Refresh();
     }
-
-    public void ExportCorrectedCharts()
-    {
-        var exportedCharts = canvasPanel.Charts.Where(x => x.IsBaselineCorrected).ToList();
-        if (!exportedCharts.Any())
-        {
-            FormUtil.ShowUserError("There are no corrected spectra.", "No spectra to export");
-            return;
-        }
-        using (var folderBrowserDialog = new FolderBrowserDialog())
-        {
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-            {
-                var selectedPath = folderBrowserDialog.SelectedPath;
-                foreach (var chart in exportedCharts)
-                {
-                    ExportCorrectedChart(chart, selectedPath);                                                
-                }
-                FormUtil.ShowInfo("Export finished successfully.", "Export finished");
-            }
-        }
-    }
-
+    
     private void ExportCorrectedChart(Chart chart, string folderPath)
     {
         var filePath = Path.Combine(folderPath, chart.Name + "_bc.txt");
