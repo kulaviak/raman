@@ -193,7 +193,7 @@ public partial class MainForm : Form
     {
         try
         {
-            canvasPanel.ZoomToOriginalSize();
+            canvasPanel.ZoomToSeeAllCharts();
         }
         catch (Exception ex)
         {
@@ -265,7 +265,7 @@ public partial class MainForm : Form
     {
         try
         {
-            canvasPanel.ZoomToOriginalSize();
+            canvasPanel.ZoomToSeeAllCharts();
         }
         catch (Exception ex)
         {

@@ -84,7 +84,7 @@ public class CanvasPanel : Panel
         CoordSystem = CoordSystemCalculator.GetCoordSystemToShowAllCharts(charts, Width, Height);
     }
     
-    public void ZoomToOriginalSize()
+    public void ZoomToSeeAllCharts()
     {
         CoordSystem = CoordSystemCalculator.GetCoordSystemToShowAllCharts(charts, Width, Height);
         DoRefresh();
