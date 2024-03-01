@@ -41,7 +41,8 @@ public class CutOffLayer : LayerBase
         Refresh();
     }
     
-    public void UndoCutOff()
+    public void 
+        UndoCutOff()
     {
         if (oldCharts == null)
         {

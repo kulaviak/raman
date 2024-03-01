@@ -11,10 +11,8 @@ public class BaselineCorrectionLayer : LayerBase
     private static Color COLOR = Color.Red;
 
     public List<Point> CorrectionPoints { get; set; } = new List<Point>();
-    
-    public bool IsBaselineCorrected { get; set; }
 
-    private List<Chart> oldCharts = null;
+    private Stack<List<Chart>> undoStack = new Stack<List<Chart>>();
 
     public BaselineCorrectionLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : base(coordSystem)
     {
@@ -53,11 +51,8 @@ public class BaselineCorrectionLayer : LayerBase
         
     public override void Draw(Graphics graphics)
     {
-        if (!IsBaselineCorrected)
-        {
-            DrawBaselines(graphics);
-            DrawMarks(graphics);
-        }
+        DrawBaselines(graphics);
+        DrawMarks(graphics);
     }
 
     private void DrawBaselines(Graphics graphics)
@@ -140,7 +135,7 @@ public class BaselineCorrectionLayer : LayerBase
     {
         if (!CorrectionPoints.Any())
         {
-            FormUtil.ShowInfo("There are no correction points to export.", "Information");
+            FormUtil.ShowInfo("There are no baseline points to export.", "Information");
             return;
         }
         new OnePointPerLineFileWriter().WritePoints(CorrectionPoints, filePath);
@@ -150,22 +145,22 @@ public class BaselineCorrectionLayer : LayerBase
     {
         if (!CorrectionPoints.Any())
         {
-            FormUtil.ShowInfo("There are no points defined.", "Information");
+            FormUtil.ShowInfo("There are no baseline points defined.", "Information");
             return;
         }
-        oldCharts = canvasPanel.Charts;
-        canvasPanel.Charts = canvasPanel.Charts.Select(x => CorrectBaseline(x)).ToList();
-        IsBaselineCorrected = true;
+        undoStack.Push(canvasPanel.Charts);
+        canvasPanel.Charts = canvasPanel.Charts.Select(x => CorrectBaseline(x, CorrectionPoints)).ToList();
+        CorrectionPoints = new List<Point>();
         canvasPanel.Refresh();
     }
 
-    private Chart CorrectBaseline(Chart chart)
+    private static Chart CorrectBaseline(Chart chart, List<Point> correctionPoints)
     {
-        var correctionStart = CorrectionPoints.Min(x => x.X);
-        var correctionEnd = CorrectionPoints.Max(x => x.X);
+        var correctionStart = correctionPoints.Min(x => x.X);
+        var correctionEnd = correctionPoints.Max(x => x.X);
         // get baseline only between correction points
         var xPositions = chart.Points.Where(point => correctionStart <= point.X && point.X <= correctionEnd).Select(point => point.X).ToList();
-        var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, CorrectionPoints);
+        var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, correctionPoints);
         var newChartPoints = new BaselineCorrector().CorrectChartByBaseline(chart.Points, baselinePoints);
         var ret = new Chart(newChartPoints, chart.Name);
         ret.IsBaselineCorrected = true;
@@ -174,13 +169,12 @@ public class BaselineCorrectionLayer : LayerBase
 
     public void UndoBaselineCorrection()
     {
-        if (oldCharts == null)
+        if (undoStack.Count == 0)
         {
             FormUtil.ShowInfo("There is no undo to do.", "Information");
             return;
         }
-        canvasPanel.Charts = oldCharts;
-        IsBaselineCorrected = false;
+        canvasPanel.Charts = undoStack.Pop();
         canvasPanel.Refresh();
     }
 
