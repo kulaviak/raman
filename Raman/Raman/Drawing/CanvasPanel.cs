@@ -118,6 +118,7 @@ public class CanvasPanel : Panel
         BaselineCorrectionLayer = null;
         PeakAnalysisLayer = null;
         ZoomToWindowLayer = null;
+        CutOffLayer = null;
         StatusStripLayer = new StatusStripLayer(CoordSystem, statusStrip);
     }
     

@@ -14,7 +14,7 @@ public class BaselineCorrectionLayer : LayerBase
     
     public bool IsBaselineCorrected { get; set; }
 
-    private List<Chart> oldCharts = new List<Chart>();
+    private List<Chart> oldCharts = null;
 
     public BaselineCorrectionLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : base(coordSystem)
     {
@@ -42,6 +42,11 @@ public class BaselineCorrectionLayer : LayerBase
         
     public void Reset()
     {
+        if (!CorrectionPoints.Any())
+        {
+            FormUtil.ShowInfo("There are no points to reset.", "Information");
+            return;
+        }
         CorrectionPoints.Clear();
         Refresh();
     }
@@ -133,6 +138,11 @@ public class BaselineCorrectionLayer : LayerBase
 
     public void ExportPoints(string filePath)
     {
+        if (!CorrectionPoints.Any())
+        {
+            FormUtil.ShowInfo("There are no correction points to export.", "Information");
+            return;
+        }
         new OnePointPerLineFileWriter().WritePoints(CorrectionPoints, filePath);
     }
 
@@ -140,7 +150,7 @@ public class BaselineCorrectionLayer : LayerBase
     {
         if (!CorrectionPoints.Any())
         {
-            FormUtil.ShowUserError("There are no points defined.", "Error");
+            FormUtil.ShowInfo("There are no points defined.", "Information");
             return;
         }
         oldCharts = canvasPanel.Charts;
@@ -164,6 +174,11 @@ public class BaselineCorrectionLayer : LayerBase
 
     public void UndoBaselineCorrection()
     {
+        if (oldCharts == null)
+        {
+            FormUtil.ShowInfo("There is no undo to do.", "Information");
+            return;
+        }
         canvasPanel.Charts = oldCharts;
         IsBaselineCorrected = false;
         canvasPanel.Refresh();

@@ -45,7 +45,7 @@ public class CutOffLayer : LayerBase
     {
         if (oldCharts == null)
         {
-            FormUtil.ShowUserError("There is no undo to do.", "Error");
+            FormUtil.ShowInfo("There is no undo to do.", "Information");
             return;
         }
         canvasPanel.Charts = oldCharts;
@@ -87,6 +87,11 @@ public class CutOffLayer : LayerBase
 
     public void ResetPoints()
     {
+        if (start == null && end == null)
+        {
+            FormUtil.ShowInfo("There are no points to reset.", "Information");
+            return;
+        }
         start = null;
         end = null;
         Refresh();

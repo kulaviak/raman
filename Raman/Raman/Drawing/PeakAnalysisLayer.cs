@@ -1,3 +1,4 @@
+using Raman.Controls;
 using Point = Raman.Core.Point;
 
 namespace Raman.Drawing;
@@ -59,6 +60,11 @@ public class PeakAnalysisLayer : LayerBase
 
     public void Reset()
     {
+        if (!Lines.Any())
+        {
+            FormUtil.ShowInfo("There are no correction points to reset.", "Information");
+            return;
+        }
         Lines.Clear();
         Refresh();
     }
@@ -171,6 +177,11 @@ public class PeakAnalysisLayer : LayerBase
     public void ExportPeaks(string filePath)
     {
         var peaks = GetPeaksForExport();
+        if (!peaks.Any())
+        {
+            FormUtil.ShowInfo("There are no peaks to export.", "Information");
+            return;
+        }
         new PeakAnalysisExporter().ExportPeaks(filePath, peaks);
     }
 
