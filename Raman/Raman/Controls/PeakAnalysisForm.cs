@@ -88,7 +88,7 @@ public partial class PeakAnalysisForm : Form
                 {
                     var filePath = filePaths.First();
                     peakAnalysisLayer.ExportPeaks(filePath);
-                    FormUtil.ShowInfo("Peak were exported successfully.", "Export finished");
+                    FormUtil.ShowInfo("Peaks were exported successfully.", "Export finished");
                 }
                 catch (Exception ex)
                 {

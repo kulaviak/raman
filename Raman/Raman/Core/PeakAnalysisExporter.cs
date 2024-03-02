@@ -8,8 +8,7 @@ public class PeakAnalysisExporter
     {
         try
         {
-            peaks = peaks.OrderBy(peak => peak.TopRoot).ThenBy(peak => peak.Chart.Name).ToList();
-            var peaksGroupedByX = peaks.GroupBy(peak => peak.TopRoot).ToDictionary(x => x.Key, y => y.ToList());
+            var peaksGroupedByX = peaks.GroupBy(peak => peak.TopRoot.X).ToDictionary(x => x.Key, y => y.ToList());
             var counter = 1;
             var lines = new List<string>();
             foreach (var key in peaksGroupedByX.Keys.OrderBy(x => x))
