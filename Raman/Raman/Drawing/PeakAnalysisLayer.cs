@@ -158,8 +158,8 @@ public class PeakAnalysisLayer : LayerBase
     private void DrawPeak(Peak peak, Graphics graphics)
     {
         var canvasDrawer = new CanvasDrawer(CoordSystem, graphics);
-        canvasDrawer.DrawLine(peak.Start, peak.End, PEN);
-        canvasDrawer.DrawLine(peak.Top, peak.TopRoot, PEN);
+        canvasDrawer.DrawLine(peak.Base, PEN);
+        canvasDrawer.DrawLine(peak.Vertical, PEN);
     }
     
     private Point GetTopPoint(Point start, Point end, Chart chart)

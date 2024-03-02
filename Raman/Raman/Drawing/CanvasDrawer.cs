@@ -22,6 +22,11 @@ public class CanvasDrawer
         var point2Y = coordSystem.ToPixelY(point2.Y);
         graphics.DrawLine(pen, point1X, point1Y, point2X, point2Y);
     }
+
+    public void DrawLine(Line line, Pen pen)
+    {
+        DrawLine(line.Start, line.End, pen);
+    }
         
     public void DrawLines(List<Point> points, Pen pen)
     {

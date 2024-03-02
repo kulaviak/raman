@@ -24,6 +24,10 @@ public class Peak(Point start, Point end, Point top, Chart chart)
         }
     }
     
+    public Line Base => new Line(Start, End);
+
+    public Line Vertical => new Line(TopRoot, Top);
+    
     public decimal Height => Util.GetDistance(Top, TopRoot);
 
     public override string ToString()
