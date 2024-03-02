@@ -22,13 +22,9 @@ public class ZoomToWindowLayer : LayerBase
             var x = Math.Min(start.Value.X, e.X);
             var y = Math.Min(start.Value.Y, e.Y);
             var width = Math.Abs(start.Value.X - e.X);
-            // calculate selection window height to have same aspect ratio as panel => after zoom chart will not change
-            var height = (int) (width * (canvasPanel.Height / (float) canvasPanel.Width));
-            if (width != 0 && height != 0)
-            {
-                rectangle = new Rectangle(x, y, width, height);
-                canvasPanel.Refresh();
-            }
+            var height = Math.Abs(start.Value.Y - e.Y);
+            rectangle = new Rectangle(x, y, width, height);
+            canvasPanel.Refresh();
         }
     }
 

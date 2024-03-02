@@ -200,7 +200,7 @@ public class BaselineCorrectionLayer : LayerBase
         }
         canvasPanel.Charts = chartsHistory.Pop();
         BaselinePoints = baselinePointsHistory.Pop();
-        canvasPanel.Refresh();
+        canvasPanel.ZoomToSeeAllCharts();
     }
     
     private void ExportCorrectedChart(Chart chart, string folderPath)

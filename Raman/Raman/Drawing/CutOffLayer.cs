@@ -37,6 +37,8 @@ public class CutOffLayer : LayerBase
         }
         oldCharts = canvasPanel.Charts;
         canvasPanel.Charts = GetCutOffCharts(canvasPanel.Charts, start.X, end.X);
+        start = null;
+        end = null;
         Refresh();
     }
     

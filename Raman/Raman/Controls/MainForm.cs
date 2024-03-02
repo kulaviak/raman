@@ -62,8 +62,8 @@ public partial class MainForm : Form
     
     private void OnShown(object sender, EventArgs e)
     {
-        LoadDemoSpectrum();
-        // LoadDemoSpectra();
+        // LoadDemoSpectrum();
+        LoadDemoSpectra();
     }
 
     private void HideSidePanel()
