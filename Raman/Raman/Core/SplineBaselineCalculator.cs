@@ -7,7 +7,7 @@ namespace Raman.Core;
 /// </summary>
 public class SplineBaselineCalculator
 {
-    public List<Point> GetBaseline(List<decimal> xPositions, List<Point> correctionPoints)
+    public List<ValuePoint> GetBaseline(List<decimal> xPositions, List<ValuePoint> correctionPoints)
     {
         if (xPositions.Count < 2)
         {
@@ -17,18 +17,18 @@ public class SplineBaselineCalculator
         {
             throw new AppException("Calculation of baseline failed. There are less than 4 correction points.");
         }
-        var ret = new List<Point>();
+        var ret = new List<ValuePoint>();
         var spline = GetSplineFromCorrectionPoints(correctionPoints);
         foreach (var x in xPositions)
         {
             var y = spline.Interpolate((double) x);
-            var interpolatedPoint = new Point(x, (decimal) y);
+            var interpolatedPoint = new ValuePoint(x, (decimal) y);
             ret.Add(interpolatedPoint);
         }
         return ret;
     }
 
-    private static CubicSpline GetSplineFromCorrectionPoints(List<Point> correctionPoints)
+    private static CubicSpline GetSplineFromCorrectionPoints(List<ValuePoint> correctionPoints)
     {
         var xValues = correctionPoints.Select(point => (double) point.X).ToArray();
         var yValues = correctionPoints.Select(point => (double) point.Y).ToArray();

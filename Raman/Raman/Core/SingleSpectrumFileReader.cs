@@ -14,7 +14,7 @@ public class SingleSpectrumFileReader
     /// <summary>
     /// Reads single spectrum files. If x value or y value is missing then the point is ignored.
     /// </summary>
-    public List<Point> TryReadFile()
+    public List<ValuePoint> TryReadFile()
     {
         try
         {
@@ -34,9 +34,9 @@ public class SingleSpectrumFileReader
         }
     }
 
-    private List<Point> TryParseLines(List<string> lines)
+    private List<ValuePoint> TryParseLines(List<string> lines)
     {
-        var ret = new List<Point>();
+        var ret = new List<ValuePoint>();
         foreach (var line in lines)
         {
             var point = TryParseLine(line);
@@ -52,7 +52,7 @@ public class SingleSpectrumFileReader
         return ret;
     }
 
-    public static Point TryParseLine(string line)
+    public static ValuePoint TryParseLine(string line)
     {
         try
         {
@@ -63,7 +63,7 @@ public class SingleSpectrumFileReader
                 var y = Util.UniversalParseDecimal(parts[1]);
                 if (x != null && y != null)
                 {
-                    return new Point(x.Value, y.Value);
+                    return new ValuePoint(x.Value, y.Value);
                 }
                 else
                 {

@@ -1,6 +1,5 @@
 using System.IO;
 using Raman.Controls;
-using Point = Raman.Core.Point;
 
 namespace Raman.Drawing;
 
@@ -10,11 +9,11 @@ public class BaselineCorrectionLayer : LayerBase
         
     private static Color COLOR = Color.Red;
 
-    public List<Point> BaselinePoints { get; set; } = new List<Point>();
+    public List<ValuePoint> BaselinePoints { get; set; } = new List<ValuePoint>();
 
     private Stack<List<Chart>> chartsHistory = new Stack<List<Chart>>();
     
-    private Stack<List<Point>> baselinePointsHistory = new Stack<List<Point>>();
+    private Stack<List<ValuePoint>> baselinePointsHistory = new Stack<List<ValuePoint>>();
 
     public BaselineCorrectionLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : base(coordSystem)
     {
@@ -57,7 +56,7 @@ public class BaselineCorrectionLayer : LayerBase
         DrawMarks(graphics);
     }
     
-    public void ImportPoints(List<Point> points)
+    public void ImportPoints(List<ValuePoint> points)
     {
         BaselinePoints = points;
         Refresh();
@@ -83,7 +82,7 @@ public class BaselineCorrectionLayer : LayerBase
         chartsHistory.Push(canvasPanel.Charts);
         baselinePointsHistory.Push(BaselinePoints);
         canvasPanel.Charts = canvasPanel.Charts.Select(x => CorrectBaseline(x, BaselinePoints)).ToList();
-        BaselinePoints = new List<Point>();
+        BaselinePoints = new List<ValuePoint>();
         canvasPanel.ZoomToSeeAllCharts();
     }
     
@@ -161,7 +160,7 @@ public class BaselineCorrectionLayer : LayerBase
         contextMenu.Show(canvasPanel, location);
     }
         
-    private Point GetPointToRemove(System.Drawing.Point pos)
+    private ValuePoint GetPointToRemove(System.Drawing.Point pos)
     {
         var closestPoint = BaselinePoints.MinByOrDefault(x => Util.GetPixelDistance(CoordSystem.ToPixelPoint(x), pos));
         if (closestPoint != null)
@@ -179,7 +178,7 @@ public class BaselineCorrectionLayer : LayerBase
         }
     }
     
-    private static Chart CorrectBaseline(Chart chart, List<Point> correctionPoints)
+    private static Chart CorrectBaseline(Chart chart, List<ValuePoint> correctionPoints)
     {
         var baselineStart = correctionPoints.Min(x => x.X);
         var baselineEnd = correctionPoints.Max(x => x.X);

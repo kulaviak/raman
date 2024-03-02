@@ -14,7 +14,7 @@ public class MultiSpectrumFileReader
     /// <summary>
     /// Reads multi spectrum file. If x value or y value of the point is empty then the point is ignored.
     /// </summary>
-    public List<List<Point>> TryReadFile()
+    public List<List<ValuePoint>> TryReadFile()
     {
         List<string> lines;
         try
@@ -28,7 +28,7 @@ public class MultiSpectrumFileReader
 
         try
         {
-            var ret = new List<List<Point>>();
+            var ret = new List<List<ValuePoint>>();
             if (lines.Count >= 2)
             {
                 var xLine = lines.First();
@@ -83,14 +83,14 @@ public class MultiSpectrumFileReader
         }
     }
 
-    private static List<Point> GetPoints(List<decimal?> xValues, List<decimal?> yValues)
+    private static List<ValuePoint> GetPoints(List<decimal?> xValues, List<decimal?> yValues)
     {
-        var ret = new List<Point>();
+        var ret = new List<ValuePoint>();
         for (var i = 0; i < xValues.Count; i++)
         {
             if (xValues[i] != null && yValues[i] != null)
             {
-                var point = new Point(xValues[i].Value, yValues[i].Value);
+                var point = new ValuePoint(xValues[i].Value, yValues[i].Value);
                 ret.Add(point);
             }
             // else ignore the point

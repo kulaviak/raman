@@ -1,12 +1,12 @@
 namespace Raman.Core;
 
-public class Point
+public class ValuePoint
 {
     public decimal X { get; }
         
     public decimal Y { get; }
 
-    public Point(decimal x, decimal y)
+    public ValuePoint(decimal x, decimal y)
     {
         X = x;
         Y = y;
@@ -17,7 +17,7 @@ public class Point
         return $"X: {X}, Y: {Y}";   
     }
 
-    protected bool Equals(Point other)
+    protected bool Equals(ValuePoint other)
     {
         return X == other.X && Y == other.Y;
     }
@@ -27,7 +27,7 @@ public class Point
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
         if (obj.GetType() != this.GetType()) return false;
-        return Equals((Point) obj);
+        return Equals((ValuePoint) obj);
     }
 
     public override int GetHashCode()
@@ -38,12 +38,12 @@ public class Point
         }
     }
 
-    public static bool operator ==(Point left, Point right)
+    public static bool operator ==(ValuePoint left, ValuePoint right)
     {
         return Equals(left, right);
     }
 
-    public static bool operator !=(Point left, Point right)
+    public static bool operator !=(ValuePoint left, ValuePoint right)
     {
         return !Equals(left, right);
     }

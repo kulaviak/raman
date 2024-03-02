@@ -1,10 +1,10 @@
 namespace Raman.Core;
 
-public class Line(Point start, Point end)
+public class Line(ValuePoint start, ValuePoint end)
 {
-    public Point Start { get; } = start;
+    public ValuePoint Start { get; } = start;
     
-    public Point End { get; } = end;
+    public ValuePoint End { get; } = end;
     
     public override string ToString()
     {

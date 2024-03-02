@@ -1,19 +1,18 @@
 using Raman.Controls;
-using Point = Raman.Core.Point;
 
 namespace Raman.Drawing;
 
 public class CutOffLayer : LayerBase
 {
-    public Point Start => start;
+    public ValuePoint Start => start;
     
-    public Point End => end;
+    public ValuePoint End => end;
     
     private readonly CanvasPanel canvasPanel;
     
-    private Point start;
+    private ValuePoint start;
     
-    private Point end;
+    private ValuePoint end;
 
     private static Color COLOR = Color.Red;
 
@@ -118,7 +117,7 @@ public class CutOffLayer : LayerBase
 
     private void RemoveClosestPoint(System.Drawing.Point pos)
     {
-        var points = new List<Point>();
+        var points = new List<ValuePoint>();
         if (start != null)
         {
             points.Add(start);

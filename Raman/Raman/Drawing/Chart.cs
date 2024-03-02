@@ -1,20 +1,18 @@
-using Point = Raman.Core.Point;
-
 namespace Raman.Drawing;
 
 public class Chart
 {
     public string Name { get; }
 
-    private readonly List<Point> points;
+    private readonly List<ValuePoint> points;
 
-    public List<Point> Points => points;
+    public List<ValuePoint> Points => points;
 
     public bool IsBaselineCorrected { get; set; }
 
     public bool IsVisible { get; set; } = true;
 
-    public Chart(List<Point> points, string name)
+    public Chart(List<ValuePoint> points, string name)
     {
         this.points = points;
         Name = name;
@@ -39,7 +37,7 @@ public class Chart
         return null;
     }
 
-    private static decimal? GetInterpolatedValue(Point first, Point second, decimal x)
+    private static decimal? GetInterpolatedValue(ValuePoint first, ValuePoint second, decimal x)
     {
         var diffX = second.X - first.X;
         var diffY = second.Y - first.Y;

@@ -100,7 +100,7 @@
     <Compile Include="Core\OnePointPerLineFileWriter.cs" />
     <Compile Include="Core\Peak.cs" />
     <Compile Include="Core\PeakAnalysisExporter.cs" />
-    <Compile Include="Core\Point.cs" />
+    <Compile Include="Core\ValuePoint.cs" />
     <Compile Include="Core\SingleSpectrumFileReader.cs" />
     <Compile Include="Core\BaselineCorrector.cs" />
     <Compile Include="Core\SplineBaselineCalculator.cs" />

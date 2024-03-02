@@ -1,5 +1,4 @@
 using Raman.Controls;
-using Point = Raman.Core.Point;
 
 namespace Raman.Drawing;
 
@@ -9,9 +8,9 @@ public class PeakAnalysisLayer : LayerBase
 
     private static Pen PEN = Pens.Orange;
 
-    private Point start;
+    private ValuePoint start;
     
-    private Point currentPoint;
+    private ValuePoint currentPoint;
 
     public List<Peak> Peaks { get; set; } = new List<Peak>();
 
@@ -64,7 +63,7 @@ public class PeakAnalysisLayer : LayerBase
         }
     }
 
-    private List<Peak> GetPeaksForAllCharts(Point start, Point end)
+    private List<Peak> GetPeaksForAllCharts(ValuePoint start, ValuePoint end)
     {
         var ret = new List<Peak>();
         foreach (var chart in canvasPanel.VisibleCharts)
@@ -75,7 +74,7 @@ public class PeakAnalysisLayer : LayerBase
         return ret;
     }
 
-    private Peak GetPeakForChart(Chart chart, Point userDefinedStart, Point userDefinedEnd)
+    private Peak GetPeakForChart(Chart chart, ValuePoint userDefinedStart, ValuePoint userDefinedEnd)
     {
         var startPointAtChart = GetPointAtChart(userDefinedStart, chart);
         var endPointAtChart = GetPointAtChart(userDefinedEnd, chart);
@@ -89,12 +88,12 @@ public class PeakAnalysisLayer : LayerBase
         return peak;
     }
 
-    private Point GetPointAtChart(Point point, Chart chart)
+    private ValuePoint GetPointAtChart(ValuePoint point, Chart chart)
     {
         var y = chart.GetValue(point.X);
         if (y != null)
         {
-            var ret = new Point(point.X, y.Value);
+            var ret = new ValuePoint(point.X, y.Value);
             return ret;
         }
         // if the x value of the point is out of range the chart, then return first or last point of chart
@@ -167,7 +166,7 @@ public class PeakAnalysisLayer : LayerBase
         canvasDrawer.DrawLine(peak.Vertical, PEN);
     }
     
-    private Point GetTopPoint(Point start, Point end, Chart chart)
+    private ValuePoint GetTopPoint(ValuePoint start, ValuePoint end, Chart chart)
     {
         var ret = chart.Points.Where(point => start.X < point.X && point.X <= end.X).MaxByOrDefault(point => point.Y);
         return ret;

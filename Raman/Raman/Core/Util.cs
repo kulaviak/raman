@@ -13,7 +13,7 @@ public abstract class Util
         return ret;
     }
     
-    public static decimal GetDistance(Point point1, Point point2)
+    public static decimal GetDistance(ValuePoint point1, ValuePoint point2)
     {
         var x = (double) Math.Abs(point1.X - point2.X);
         var y = (double) Math.Abs(point1.Y - point2.Y);
@@ -50,13 +50,13 @@ public abstract class Util
         return Math.Round(value, decimalPlaces).ToString();
     }
 
-    public static Chart GetClosestChart(List<Chart> charts, Point point)
+    public static Chart GetClosestChart(List<Chart> charts, ValuePoint point)
     {
         var ret = charts.MinByOrDefault(chart => GetClosestDistance(chart, point));
         return ret;
     }
 
-    private static decimal GetClosestDistance(Chart chart, Point point)
+    private static decimal GetClosestDistance(Chart chart, ValuePoint point)
     {
         var ret = chart.Points.Min(chartPoint => GetDistance(chartPoint, point));
         return ret;

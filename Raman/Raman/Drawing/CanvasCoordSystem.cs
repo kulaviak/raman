@@ -1,5 +1,3 @@
-using Point = Raman.Core.Point;
-
 namespace Raman.Drawing;
 
 public class CanvasCoordSystem
@@ -71,9 +69,9 @@ public class CanvasCoordSystem
         return ret;
     }
         
-    public Point ToValuePoint(float pixelX, float pixelY)
+    public ValuePoint ToValuePoint(float pixelX, float pixelY)
     {
-        var ret = new Point(ToValueX(pixelX), ToValueY(pixelY));
+        var ret = new ValuePoint(ToValueX(pixelX), ToValueY(pixelY));
         return ret;
     }
 
@@ -83,7 +81,7 @@ public class CanvasCoordSystem
                $"ValueWidth: {ValueWidth}, ValueHeight: {ValueHeight}";
     }
 
-    public System.Drawing.Point ToPixelPoint(Point point)
+    public System.Drawing.Point ToPixelPoint(ValuePoint point)
     {
         var ret = new System.Drawing.Point((int) ToPixelX(point.X), (int) ToPixelY(point.Y));
         return ret;

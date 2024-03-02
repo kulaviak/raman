@@ -1,5 +1,3 @@
-using Point = Raman.Core.Point;
-
 namespace Raman.Controls;
 
 public class AppStatusStrip : StatusStrip
@@ -17,7 +15,7 @@ public class AppStatusStrip : StatusStrip
         Items.AddRange(new ToolStripItem[] {_lblPosition});   
     }
 
-    public void ShowPosition(Point position)
+    public void ShowPosition(ValuePoint position)
     {
         _lblPosition.Text = $"X: {Util.Format(position.X, 0)}  Y: {Util.Format(position.Y, 0)}";
     }

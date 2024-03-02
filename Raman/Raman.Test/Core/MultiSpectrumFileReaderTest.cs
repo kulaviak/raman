@@ -14,13 +14,13 @@ public class MultiSpectrumFileReaderTest
         spectraPoints.Should().HaveCount(2);
 
         var firstSpectrum = spectraPoints[0];
-        firstSpectrum[0].Should().BeEquivalentTo(new Point(701.138m, 100));
-        firstSpectrum[1].Should().BeEquivalentTo(new Point(702.299m, -85.4052m));
-        firstSpectrum[2].Should().BeEquivalentTo(new Point(703.458m, -66.6577m));
+        firstSpectrum[0].Should().BeEquivalentTo(new ValuePoint(701.138m, 100));
+        firstSpectrum[1].Should().BeEquivalentTo(new ValuePoint(702.299m, -85.4052m));
+        firstSpectrum[2].Should().BeEquivalentTo(new ValuePoint(703.458m, -66.6577m));
         
         var secondSpectrum = spectraPoints[1];
-        secondSpectrum[0].Should().BeEquivalentTo(new Point(701.138m, 100));
-        secondSpectrum[1].Should().BeEquivalentTo(new Point(702.299m, -85.4052m));
-        secondSpectrum[2].Should().BeEquivalentTo(new Point(703.458m, -53.8618m));
+        secondSpectrum[0].Should().BeEquivalentTo(new ValuePoint(701.138m, 100));
+        secondSpectrum[1].Should().BeEquivalentTo(new ValuePoint(702.299m, -85.4052m));
+        secondSpectrum[2].Should().BeEquivalentTo(new ValuePoint(703.458m, -53.8618m));
     }
 }

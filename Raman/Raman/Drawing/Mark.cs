@@ -1,5 +1,3 @@
-using Point = Raman.Core.Point;
-
 namespace Raman.Drawing;
 
 public class Mark
@@ -10,13 +8,13 @@ public class Mark
         
     private readonly Color color;
         
-    private readonly Point point;
+    private readonly ValuePoint point;
 
     private const int RADIUS = 8;
     
     private const int THICKNESS = 1;
 
-    public Mark(CanvasCoordSystem coordSystem, Graphics graphics, Color color, Point point)
+    public Mark(CanvasCoordSystem coordSystem, Graphics graphics, Color color, ValuePoint point)
     {
         this.coordSystem = coordSystem;
         this.graphics = graphics;

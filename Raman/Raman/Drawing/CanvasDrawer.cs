@@ -1,5 +1,3 @@
-using Point = Raman.Core.Point;
-
 namespace Raman.Drawing;
 
 public class CanvasDrawer
@@ -14,7 +12,7 @@ public class CanvasDrawer
         this.graphics = graphics;
     }
 
-    public void DrawLine(Point point1, Point point2, Pen pen)
+    public void DrawLine(ValuePoint point1, ValuePoint point2, Pen pen)
     {
         var point1X = coordSystem.ToPixelX(point1.X);
         var point1Y = coordSystem.ToPixelY(point1.Y);
@@ -28,7 +26,7 @@ public class CanvasDrawer
         DrawLine(line.Start, line.End, pen);
     }
         
-    public void DrawLines(List<Point> points, Pen pen)
+    public void DrawLines(List<ValuePoint> points, Pen pen)
     {
         if (points.Count < 2)
         {

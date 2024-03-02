@@ -2,20 +2,20 @@ using Raman.Drawing;
 
 namespace Raman.Core;
 
-public class Peak(Point start, Point end, Point top, Chart chart)
+public class Peak(ValuePoint start, ValuePoint end, ValuePoint top, Chart chart)
 {
-    public Point Start { get; } = start;
+    public ValuePoint Start { get; } = start;
     
-    public Point End { get; } = end;
+    public ValuePoint End { get; } = end;
 
-    public Point Top { get; } = top;
+    public ValuePoint Top { get; } = top;
     
     public Chart Chart { get; } = chart;
 
     /// <summary>
     /// TopRoot is the intersection of line drawn from Start to End and vertical line drawn from Top.
     /// </summary>
-    public Point TopRoot
+    public ValuePoint TopRoot
     {
         get
         {
@@ -70,7 +70,7 @@ public class Peak(Point start, Point end, Point top, Chart chart)
     }
     
     // from Chat GPT
-    private Point GetIntersectionOfBaseAndVertical(Point start, Point end, Point top)
+    private ValuePoint GetIntersectionOfBaseAndVertical(ValuePoint start, ValuePoint end, ValuePoint top)
     {
         var x1 = start.X;
         var y1 = start.Y;
@@ -84,7 +84,7 @@ public class Peak(Point start, Point end, Point top, Chart chart)
         var intersectionX = top.X;
         var intersectionY = m1 * intersectionX + b1;
 
-        var ret = new Point(intersectionX, intersectionY);
+        var ret = new ValuePoint(intersectionX, intersectionY);
         return ret;
     }
     

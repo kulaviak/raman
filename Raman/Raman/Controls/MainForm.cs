@@ -2,7 +2,6 @@
 using System.IO;
 using Raman.Controls;
 using Raman.Drawing;
-using Point = Raman.Core.Point;
 
 namespace Raman;
 
@@ -390,7 +389,7 @@ public partial class MainForm : Form
         var charts = new List<Chart>();
         foreach (var filePath in filePaths)
         {
-            List<List<Point>> spectraPoints;
+            List<List<ValuePoint>> spectraPoints;
             try
             {
                 var fileReader = new MultiSpectrumFileReader(filePath);
