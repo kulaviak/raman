@@ -12,8 +12,16 @@ public partial class PeakAnalysisForm : Form
     {
         this.peakAnalysisLayer = peakAnalysisLayer;
         InitializeComponent();
+        AdditionalInitialization();
     }
-    
+
+    private void AdditionalInitialization()
+    {
+        var isPeakAddedToAllCharts = true;
+        cbAddToAllCharts.Checked = isPeakAddedToAllCharts;
+        peakAnalysisLayer.IsPeakAddedToAllCharts = isPeakAddedToAllCharts;
+    }
+
     private void btnReset_Click(object sender, EventArgs e)
     {
         try
@@ -40,7 +48,7 @@ public partial class PeakAnalysisForm : Form
 
     private void PeakAnalysisForm_FormClosing(object sender, FormClosingEventArgs e)
     {
-        if (peakAnalysisLayer.Lines.Any() && !peakAnalysisLayer.IsExported)
+        if (peakAnalysisLayer.Peaks.Any() && !peakAnalysisLayer.IsExported)
         {
             if (FormUtil.ShowQuestion("Do you really want to exit Peak Analysis and loose selected peaks?",
                     "Confirmation") == DialogResult.No)
@@ -89,4 +97,16 @@ public partial class PeakAnalysisForm : Form
             }
         }
     }
- }
+
+    private void cbAddToAllCharts_CheckedChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            peakAnalysisLayer.IsPeakAddedToAllCharts = ((CheckBox) sender).Checked;
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowAppError("Changing checkbox value failed.", "Error", ex);
+        }
+    }
+}

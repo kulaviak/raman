@@ -1,4 +1,5 @@
 using System.Globalization;
+using Raman.Drawing;
 
 namespace Raman.Core;
 
@@ -47,5 +48,17 @@ public abstract class Util
     public static string Format(decimal value, int decimalPlaces)
     {
         return Math.Round(value, decimalPlaces).ToString();
+    }
+
+    public static Chart GetClosestChart(List<Chart> charts, Point point)
+    {
+        var ret = charts.MinByOrDefault(chart => GetClosestDistance(chart, point));
+        return ret;
+    }
+
+    private static decimal GetClosestDistance(Chart chart, Point point)
+    {
+        var ret = chart.Points.Min(chartPoint => GetDistance(chartPoint, point));
+        return ret;
     }
 }

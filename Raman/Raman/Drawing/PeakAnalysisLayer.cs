@@ -13,10 +13,12 @@ public class PeakAnalysisLayer : LayerBase
     
     private Point currentPoint;
 
-    public List<Line> Lines { get; set; } = new List<Line>();
+    public List<Peak> Peaks { get; set; } = new List<Peak>();
     
     public bool IsExported { get; set; }
     
+    public bool IsPeakAddedToAllCharts { get; set; }
+
     public PeakAnalysisLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : base(coordSystem)
     {
         this.canvasPanel = canvasPanel;
@@ -33,8 +35,17 @@ public class PeakAnalysisLayer : LayerBase
             else
             {
                 var end = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
-                var newLines = GetLinesForAllCharts(start, end);
-                Lines.AddRange(newLines);
+                if (IsPeakAddedToAllCharts)
+                {
+                    var peaks = GetPeaksForAllCharts(start, end);
+                    Peaks.AddRange(peaks);
+                }
+                else
+                {
+                    var chart = Util.GetClosestChart(canvasPanel.VisibleCharts, end);
+                    var peak = GetPeakForChart(chart, start, end);
+                    Peaks.Add(peak);
+                }
                 IsExported = false;
                 start = null;
             }
@@ -42,7 +53,7 @@ public class PeakAnalysisLayer : LayerBase
         }
         else if (e.Button == MouseButtons.Middle)
         {
-            RemoveClosestLine(e.Location);
+            RemoveClosestPeak(e.Location);
             Refresh();
         }
         else if (e.Button == MouseButtons.Right)
@@ -51,23 +62,24 @@ public class PeakAnalysisLayer : LayerBase
         }
     }
 
-    private List<Line> GetLinesForAllCharts(Point start, Point end)
+    private List<Peak> GetPeaksForAllCharts(Point start, Point end)
     {
-        var ret = new List<Line>();
+        var ret = new List<Peak>();
         foreach (var chart in canvasPanel.VisibleCharts)
         {
-            var line = GetLineForChart(chart, start, end);
-            ret.Add(line);
+            var peak = GetPeakForChart(chart, start, end);
+            ret.Add(peak);
         }
         return ret;
     }
 
-    private Line GetLineForChart(Chart chart, Point userDefinedStart, Point userDefinedEnd)
+    private Peak GetPeakForChart(Chart chart, Point userDefinedStart, Point userDefinedEnd)
     {
         var startPointAtChart = GetPointAtChart(userDefinedStart, chart);
         var endPointAtChart = GetPointAtChart(userDefinedEnd, chart);
-        var line = new Line(startPointAtChart, endPointAtChart);
-        return line;
+        var top = GetTopPoint(startPointAtChart, endPointAtChart, chart);
+        var peak = new Peak(startPointAtChart, endPointAtChart, top, chart);
+        return peak;
     }
 
     private Point GetPointAtChart(Point point, Chart chart)
@@ -100,18 +112,18 @@ public class PeakAnalysisLayer : LayerBase
 
     public void Reset()
     {
-        if (!Lines.Any())
+        if (!Peaks.Any())
         {
-            FormUtil.ShowInfo("There are no correction points to reset.", "Information");
+            FormUtil.ShowInfo("There are no peak to reset.", "Information");
             return;
         }
-        Lines.Clear();
+        Peaks.Clear();
         Refresh();
     }
         
     public override void Draw(Graphics graphics)
     {
-        DrawLines(graphics);
+        DrawPeaks(graphics);
         DrawCurrentLine(graphics);
     }
 
@@ -132,72 +144,71 @@ public class PeakAnalysisLayer : LayerBase
         }
     }
 
-    private void DrawLines(Graphics graphics)
+    private void DrawPeaks(Graphics graphics)
+    {
+        var visiblePeaks = Peaks.Where(x => x.Chart.IsVisible).ToList();
+        foreach (var peak in visiblePeaks)
+        {
+            DrawPeak(peak, graphics);
+        }
+    }
+
+    private void DrawPeak(Peak peak, Graphics graphics)
     {
         var canvasDrawer = new CanvasDrawer(CoordSystem, graphics);
-        foreach (var line in Lines)
+        canvasDrawer.DrawLine(peak.Start, peak.End, PEN);
+        var intersection = GetIntersectionOfLineAndVertical(peak.Start, peak.End, peak.Top);
+        if (intersection != null)
         {
-            canvasDrawer.DrawLine(line.Start, line.End, PEN);
-            foreach (var chart in canvasPanel.VisibleCharts)
-            {
-                var peak = GetPeakPoint(line, chart);
-                if (peak != null)
-                {
-                    var intersection = GetIntersectionOfLineAndVertical(line, peak);
-                    if (intersection != null)
-                    {
-                        canvasDrawer.DrawLine(peak, intersection, PEN);
-                    }
-                }
-            }
+            canvasDrawer.DrawLine(peak.Top, intersection, PEN);
         }
     }
 
     // from Chat GPT
-    private Point GetIntersectionOfLineAndVertical(Line line, Point peak)
+    private Point GetIntersectionOfLineAndVertical(Point start, Point end, Point top)
     {
-        var x1 = line.Start.X;
-        var y1 = line.Start.Y;
+        var x1 = start.X;
+        var y1 = start.Y;
         
-        var x2 = line.End.X;
-        var y2 = line.End.Y;
+        var x2 = end.X;
+        var y2 = end.Y;
         
         var m1 = (y2 - y1) / (x2 - x1);
         var b1 = y1 - m1 * x1;
         
-        var intersectionX = peak.X;
+        var intersectionX = top.X;
         var intersectionY = m1 * intersectionX + b1;
 
         var ret = new Point(intersectionX, intersectionY);
         return ret;
     }
-
-    private Point GetPeakPoint(Line line, Chart chart)
+    
+    private Point GetTopPoint(Point start, Point end, Chart chart)
     {
-        var ret = chart.Points.Where(point => line.Start.X < point.X && point.X <= line.End.X).MaxByOrDefault(point => point.Y);
+        var ret = chart.Points.Where(point => start.X < point.X && point.X <= end.X).MaxByOrDefault(point => point.Y);
         return ret;
     }
 
-    private void RemoveClosestLine(System.Drawing.Point location)
+    private void RemoveClosestPeak(System.Drawing.Point location)
     {
-        var line = GetLineToRemove(location);
-        if (line != null)
+        var peak = GetPeakToRemove(location);
+        if (peak != null)
         {
-            Lines = Lines.Where(x => x != line).ToList();
+            Peaks = Peaks.Where(x => x != peak).ToList();
         }
         Refresh();
     }
 
-    private Line GetLineToRemove(System.Drawing.Point pos)
+    private Peak GetPeakToRemove(System.Drawing.Point pos)
     {
-        var ret = Lines.MinByOrDefault(line => GetDistanceToLine(line, pos));
+        var ret = Peaks.MinByOrDefault(peak => GetDistanceToPeak(peak, pos));
         return ret;
     }
 
-    private float GetDistanceToLine(Line line, System.Drawing.Point pos)
+    private float GetDistanceToPeak(Peak peak, System.Drawing.Point pos)
     {
-        var start = CoordSystem.ToPixelPoint(line.Start);
-        var end = CoordSystem.ToPixelPoint(line.End);
+        var start = CoordSystem.ToPixelPoint(peak.Start);
+        var end = CoordSystem.ToPixelPoint(peak.End);
         var ret = Math.Min(Util.GetPixelDistance(pos, start), Util.GetPixelDistance(pos, end));
         return ret;
     }
@@ -210,7 +221,7 @@ public class PeakAnalysisLayer : LayerBase
     private void ShowContextMenu(System.Drawing.Point location)
     {
         var contextMenu = new ContextMenuStrip();
-        contextMenu.Items.Add("Remove Closest Line", null, (_, _) => RemoveClosestLine(location));
+        contextMenu.Items.Add("Remove Closest Line", null, (_, _) => RemoveClosestPeak(location));
         contextMenu.Show(canvasPanel, location);
     }
 
@@ -228,25 +239,21 @@ public class PeakAnalysisLayer : LayerBase
     private List<ExportedPeak> GetPeaksForExport()
     {
         var ret = new List<ExportedPeak>();
-        foreach (var chart in canvasPanel.VisibleCharts)
+        foreach (var peak in Peaks)
         {
-            foreach (var line in Lines)
-            {
-                var peak = GetExportedPeak(line, chart);
-                ret.Add(peak);
-            }            
-        }
+            var exportedPeak = GetExportedPeak(peak);
+            ret.Add(exportedPeak);
+        }            
         return ret;
     }
 
-    private ExportedPeak GetExportedPeak(Line line, Chart chart)
+    private ExportedPeak GetExportedPeak(Peak peak)
     {
-        var peakPoint = GetPeakPoint(line, chart);
-        var intersection = GetIntersectionOfLineAndVertical(line, peakPoint);
-        var height = Util.GetDistance(peakPoint, intersection);
-        var leftX = line.Start.X;
-        var rightX = line.End.X;
-        var peakX = peakPoint.X;
+        var intersection = GetIntersectionOfLineAndVertical(peak.Start, peak.End, peak.Top);
+        var height = Util.GetDistance(peak.Top, intersection);
+        var leftX = peak.Start.X;
+        var rightX = peak.End.X;
+        var peakX = peak.Top.X;
         var ret = new ExportedPeak(height, leftX, rightX, peakX);
         return ret;
     }

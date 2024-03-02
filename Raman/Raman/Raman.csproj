@@ -99,6 +99,7 @@
     <Compile Include="Core\Line.cs" />
     <Compile Include="Core\MultiSpectrumFileReader.cs" />
     <Compile Include="Core\OnePointPerLineFileWriter.cs" />
+    <Compile Include="Core\Peak.cs" />
     <Compile Include="Core\PeakAnalysisExporter.cs" />
     <Compile Include="Core\Point.cs" />
     <Compile Include="Core\SingleSpectrumFileReader.cs" />
