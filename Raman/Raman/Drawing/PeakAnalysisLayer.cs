@@ -168,9 +168,13 @@ public class PeakAnalysisLayer : LayerBase
         return ret;
     }
 
+    /// <summary>
+    /// Expects, that user clicks on vertical or bottom line of the peak. So it finds the closest peak according to it.
+    /// </summary>
     private void RemoveClosestPeak(System.Drawing.Point location)
     {
-        var peak = GetPeakToRemove(location);
+        var point = CoordSystem.ToValuePoint(location.X, location.Y);
+        var peak = GetPeakToRemove(point);
         if (peak != null)
         {
             Peaks = Peaks.Where(x => x != peak).ToList();
@@ -178,17 +182,15 @@ public class PeakAnalysisLayer : LayerBase
         Refresh();
     }
 
-    private Peak GetPeakToRemove(System.Drawing.Point pos)
+    private Peak GetPeakToRemove(Point point)
     {
-        var ret = Peaks.MinByOrDefault(peak => GetDistanceToPeak(peak, pos));
+        var ret = Peaks.MinByOrDefault(peak => GetDistanceToPeak(peak, point));
         return ret;
     }
 
-    private float GetDistanceToPeak(Peak peak, System.Drawing.Point pos)
+    private decimal GetDistanceToPeak(Peak peak, Point point)
     {
-        var start = CoordSystem.ToPixelPoint(peak.Start);
-        var end = CoordSystem.ToPixelPoint(peak.End);
-        var ret = Math.Min(Util.GetPixelDistance(pos, start), Util.GetPixelDistance(pos, end));
+        var ret = Math.Min(peak.Base.GetDistanceToPoint(point), peak.Vertical.GetDistanceToPoint(point));
         return ret;
     }
     
