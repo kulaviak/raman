@@ -90,6 +90,12 @@
     <Compile Include="Controls\PeakAnalysisForm.Designer.cs">
       <DependentUpon>PeakAnalysisForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SpectrumSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\SpectrumSelectionForm.Designer.cs">
+      <DependentUpon>SpectrumSelectionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\AppConstants.cs" />
     <Compile Include="Core\AppException.cs" />
     <Compile Include="Core\ExceptionFormatter.cs" />
@@ -141,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\PeakAnalysisForm.resx">
       <DependentUpon>PeakAnalysisForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SpectrumSelectionForm.resx">
+      <DependentUpon>SpectrumSelectionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
