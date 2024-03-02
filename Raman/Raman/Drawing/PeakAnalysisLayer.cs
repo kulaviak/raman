@@ -14,6 +14,8 @@ public class PeakAnalysisLayer : LayerBase
     private Point currentPoint;
 
     public List<Peak> Peaks { get; set; } = new List<Peak>();
+
+    private List<Peak> VisiblePeaks => Peaks.Where(peak => peak.Chart.IsVisible).ToList();
     
     public bool IsExported { get; set; }
     
@@ -157,30 +159,7 @@ public class PeakAnalysisLayer : LayerBase
     {
         var canvasDrawer = new CanvasDrawer(CoordSystem, graphics);
         canvasDrawer.DrawLine(peak.Start, peak.End, PEN);
-        var intersection = GetIntersectionOfLineAndVertical(peak.Start, peak.End, peak.Top);
-        if (intersection != null)
-        {
-            canvasDrawer.DrawLine(peak.Top, intersection, PEN);
-        }
-    }
-
-    // from Chat GPT
-    private Point GetIntersectionOfLineAndVertical(Point start, Point end, Point top)
-    {
-        var x1 = start.X;
-        var y1 = start.Y;
-        
-        var x2 = end.X;
-        var y2 = end.Y;
-        
-        var m1 = (y2 - y1) / (x2 - x1);
-        var b1 = y1 - m1 * x1;
-        
-        var intersectionX = top.X;
-        var intersectionY = m1 * intersectionX + b1;
-
-        var ret = new Point(intersectionX, intersectionY);
-        return ret;
+        canvasDrawer.DrawLine(peak.Top, peak.TopRoot, PEN);
     }
     
     private Point GetTopPoint(Point start, Point end, Chart chart)
@@ -227,34 +206,11 @@ public class PeakAnalysisLayer : LayerBase
 
     public void ExportPeaks(string filePath)
     {
-        var peaks = GetPeaksForExport();
-        if (!peaks.Any())
+        if (!VisiblePeaks.Any())
         {
             FormUtil.ShowInfo("There are no peaks to export.", "Information");
             return;
         }
-        new PeakAnalysisExporter().ExportPeaks(filePath, peaks);
-    }
-
-    private List<ExportedPeak> GetPeaksForExport()
-    {
-        var ret = new List<ExportedPeak>();
-        foreach (var peak in Peaks)
-        {
-            var exportedPeak = GetExportedPeak(peak);
-            ret.Add(exportedPeak);
-        }            
-        return ret;
-    }
-
-    private ExportedPeak GetExportedPeak(Peak peak)
-    {
-        var intersection = GetIntersectionOfLineAndVertical(peak.Start, peak.End, peak.Top);
-        var height = Util.GetDistance(peak.Top, intersection);
-        var leftX = peak.Start.X;
-        var rightX = peak.End.X;
-        var peakX = peak.Top.X;
-        var ret = new ExportedPeak(height, leftX, rightX, peakX);
-        return ret;
+        new PeakAnalysisExporter().ExportPeaks(filePath, VisiblePeaks);
     }
 }

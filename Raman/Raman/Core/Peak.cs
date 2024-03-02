@@ -12,6 +12,20 @@ public class Peak(Point start, Point end, Point top, Chart chart)
     
     public Chart Chart { get; } = chart;
 
+    /// <summary>
+    /// TopRoot is the intersection of line drawn from Start to End and vertical line drawn from Top.
+    /// </summary>
+    public Point TopRoot
+    {
+        get
+        {
+            var ret = GetIntersectionOfBaseAndVertical(Start, End, Top);
+            return ret;
+        }
+    }
+    
+    public decimal Height => Util.GetDistance(Top, TopRoot);
+
     public override string ToString()
     {
         return $"Start: {Start}, End: {End}, Top: {Top}, Chart: {Chart}";
@@ -50,4 +64,25 @@ public class Peak(Point start, Point end, Point top, Chart chart)
     {
         return !Equals(left, right);
     }
+    
+    // from Chat GPT
+    private Point GetIntersectionOfBaseAndVertical(Point start, Point end, Point top)
+    {
+        var x1 = start.X;
+        var y1 = start.Y;
+        
+        var x2 = end.X;
+        var y2 = end.Y;
+        
+        var m1 = (y2 - y1) / (x2 - x1);
+        var b1 = y1 - m1 * x1;
+        
+        var intersectionX = top.X;
+        var intersectionY = m1 * intersectionX + b1;
+
+        var ret = new Point(intersectionX, intersectionY);
+        return ret;
+    }
+    
+    
 }

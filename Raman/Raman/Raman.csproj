@@ -93,7 +93,6 @@
     <Compile Include="Core\AppConstants.cs" />
     <Compile Include="Core\AppException.cs" />
     <Compile Include="Core\ExceptionFormatter.cs" />
-    <Compile Include="Core\ExportedPeak.cs" />
     <Compile Include="Core\Extensions.cs" />
     <Compile Include="Core\Global.cs" />
     <Compile Include="Core\Line.cs" />
