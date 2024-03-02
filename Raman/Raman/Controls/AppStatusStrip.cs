@@ -2,7 +2,7 @@ namespace Raman.Controls;
 
 public class AppStatusStrip : StatusStrip
 {
-    private ToolStripStatusLabel _lblPosition;
+    private ToolStripStatusLabel lblPosition;
 
     public AppStatusStrip()
     {
@@ -11,12 +11,13 @@ public class AppStatusStrip : StatusStrip
 
     private void InitializeComponent()
     {
-        _lblPosition = new ToolStripStatusLabel();
-        Items.AddRange(new ToolStripItem[] {_lblPosition});   
+        lblPosition = new ToolStripStatusLabel();
+        Items.AddRange(new ToolStripItem[] {lblPosition});   
     }
 
     public void ShowPosition(ValuePoint position)
     {
-        _lblPosition.Text = $"X: {Util.Format(position.X, 0)}  Y: {Util.Format(position.Y, 0)}";
+        // Showing superscripts on label https://stackoverflow.com/questions/19682459/superscript-label-or-form-name
+        lblPosition.Text = $"X Axis - Wavenumber (cm\u207B\u00B9): {Util.Format(position.X, 0)}  Y Axis - Intensity (cnts): {Util.Format(position.Y, 0)}";
     }
 }

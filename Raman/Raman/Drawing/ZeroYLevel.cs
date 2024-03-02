@@ -10,7 +10,7 @@ public class ZeroYLevel(CanvasCoordSystem coordSystem, Graphics graphics)
             var x1 = coordSystem.LeftBorder;
             var y = coordSystem.ToPixelY(0);
             var x2 = coordSystem.LeftBorder + coordSystem.PixelWidth;
-            graphics.DrawLine(Pens.DarkGray, x1, y, x2, y);
+            graphics.DrawLine(Pens.DimGray, x1, y, x2, y);
         }
     }
 }
