@@ -8,7 +8,18 @@ public class PeakAnalysisExporter
     {
         try
         {
-            var lines = GetLines(peaks);
+            peaks = peaks.OrderBy(peak => peak.TopRoot).ThenBy(peak => peak.Chart.Name).ToList();
+            var peaksGroupedByX = peaks.GroupBy(peak => peak.TopRoot).ToDictionary(x => x.Key, y => y.ToList());
+            var counter = 1;
+            var lines = new List<string>();
+            foreach (var key in peaksGroupedByX.Keys.OrderBy(x => x))
+            {
+                var group = peaksGroupedByX.Get(key);
+                var peaksWithSameTopRoot = group.OrderBy(x => x.Chart.Name).ToList();
+                var peakLines = GetLines(peaksWithSameTopRoot, counter);
+                lines.AddRange(peakLines);
+                counter++;
+            }
             File.WriteAllLines(filePath, lines);
         }
         catch (Exception ex)
@@ -17,20 +28,15 @@ public class PeakAnalysisExporter
         }
     }
 
-    private List<string> GetLines(List<Peak> peaks)
+    private List<string> GetLines(List<Peak> peaks, int peakNumber)
     {
-        var ret = peaks.Select(x => ToLine(x)).ToList();
+        var ret = peaks.Select(x => ToLine(x, peakNumber)).ToList();
         return ret;
     }
 
-    private string ToLine(Peak peak)
+    private string ToLine(Peak peak, int peakNumber)
     {
-        var ret = $"{Format(peak.Height)}\t{Format(peak.Start.X)}\t{Format(peak.End.X)}\t{Format(peak.TopRoot.X)}";
+        var ret = $"{peakNumber}\t{peak.Chart.Name}\t{Util.Format(peak.Height)}\t{Util.Format(peak.Start.X)}\t{Util.Format(peak.End.X)}\t{Util.Format(peak.TopRoot.X)}";
         return ret;
-    }
-
-    private string Format(decimal number)
-    {
-        return Util.Format(number, AppConstants.EXPORT_DECIMAL_PLACES);
     }
 }

@@ -5,6 +5,8 @@ namespace Raman.Drawing;
 
 /// <summary>
 /// Calculates which peak should be removed. It is the peak, which base is the closest to the location where user clicked.
+/// Verticals of peaks often overlap, so if user clicks close to overlapped verticals, it is not clear, which peak to remove =>
+/// it is better to consider only the base of peak.
 /// </summary>
 public class PeakToRemoveCalculator
 {

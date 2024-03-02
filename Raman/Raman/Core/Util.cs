@@ -61,4 +61,9 @@ public abstract class Util
         var ret = chart.Points.Min(chartPoint => GetDistance(chartPoint, point));
         return ret;
     }
+    
+    public static string Format(decimal number)
+    {
+        return Format(number, AppConstants.EXPORT_DECIMAL_PLACES);
+    }
 }

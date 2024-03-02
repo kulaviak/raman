@@ -14,7 +14,7 @@ public class ValuePoint
 
     public override string ToString()
     {
-        return $"X: {X}, Y: {Y}";   
+        return $"({Util.Format(X)}, {Util.Format(Y)})";   
     }
 
     protected bool Equals(ValuePoint other)

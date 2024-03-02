@@ -2,37 +2,42 @@ using Raman.Drawing;
 
 namespace Raman.Core;
 
-public class Peak(ValuePoint start, ValuePoint end, ValuePoint top, Chart chart)
+public class Peak
 {
-    public ValuePoint Start { get; } = start;
-    
-    public ValuePoint End { get; } = end;
+    public Peak(ValuePoint start, ValuePoint end, ValuePoint top, Chart chart)
+    {
+        Start = start;
+        End = end;
+        Top = top;
+        Chart = chart;
+        TopRoot = GetIntersectionOfBaseAndVertical(start, end, top);
+        Base = new Line(start, end);
+        Vertical = new Line(TopRoot, top);
+        Height = Util.GetDistance(Top, TopRoot);
+    }
 
-    public ValuePoint Top { get; } = top;
+    public ValuePoint Start { get; }
     
-    public Chart Chart { get; } = chart;
+    public ValuePoint End { get; }
+
+    public ValuePoint Top { get; }
+    
+    public Chart Chart { get; }
 
     /// <summary>
     /// TopRoot is the intersection of line drawn from Start to End and vertical line drawn from Top.
     /// </summary>
-    public ValuePoint TopRoot
-    {
-        get
-        {
-            var ret = GetIntersectionOfBaseAndVertical(Start, End, Top);
-            return ret;
-        }
-    }
+    public ValuePoint TopRoot { get; }
     
-    public Line Base => new Line(Start, End);
+    public Line Base { get; }
 
-    public Line Vertical => new Line(TopRoot, Top);
+    public Line Vertical { get; } 
     
-    public decimal Height => Util.GetDistance(Top, TopRoot);
+    public decimal Height { get; } 
 
     public override string ToString()
     {
-        return $"Start: {Start}, End: {End}, Top: {Top}, Chart: {Chart}";
+        return $"Start: {Start}, End: {End}, Top: {Top}, Height: {Height}, TopRoot: {TopRoot}, Base: {Base}, Vertical: {Vertical}, Chart: {Chart}";
     }
 
     protected bool Equals(Peak other)

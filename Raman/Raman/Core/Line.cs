@@ -8,7 +8,7 @@ public class Line(ValuePoint start, ValuePoint end)
     
     public override string ToString()
     {
-        return $"Start: {Start}, End: {End}";
+        return $"[{Start}, {End}]";
     }
 
     protected bool Equals(Line other)
