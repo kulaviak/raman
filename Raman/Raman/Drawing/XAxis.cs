@@ -1,28 +1,17 @@
 namespace Raman.Drawing;
 
-public class XAxis
+public class XAxis(CanvasCoordSystem coordSystem, Graphics graphics)
 {
-    private readonly CanvasCoordSystem coordSystem;
-        
-    private readonly Graphics graphics;
-
     private const int TICK_LINE_LENGTH = 5;
         
     private const int DISTANCE_FROM_TICK_TO_NUMBER = 8;
 
-    public XAxis(CanvasCoordSystem coordSystem, Graphics graphics)
-    {
-        this.coordSystem = coordSystem;
-        this.graphics = graphics;
-    }
-
     public void Draw()
     {
         var x1 = coordSystem.LeftBorder;
-        var y1 = coordSystem.TopBorder + coordSystem.PixelHeight;
+        var y = coordSystem.TopBorder + coordSystem.PixelHeight;
         var x2 = coordSystem.LeftBorder + coordSystem.PixelWidth;
-        var y2 = coordSystem.TopBorder + coordSystem.PixelHeight;
-        graphics.DrawLine(Pens.Black, x1, y1, x2, y2);
+        graphics.DrawLine(AppConstants.COORD_SYSTEM_PEN, x1, y, x2, y);
         DrawNumbers();
     }
 
@@ -52,7 +41,7 @@ public class XAxis
     private void DrawTick(float pos)
     {
         var y = coordSystem.ToPixelY(coordSystem.MinY);
-        graphics.DrawLine(Pens.Black, pos, y, pos, y + TICK_LINE_LENGTH);
+        graphics.DrawLine(AppConstants.COORD_SYSTEM_PEN, pos, y, pos, y + TICK_LINE_LENGTH);
     }
         
     private float GetDrawnStringLength(string str, Font font)

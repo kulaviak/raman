@@ -1,30 +1,19 @@
 namespace Raman.Drawing;
 
-public class YAxis
+public class YAxis(CanvasCoordSystem coordSystem, Graphics graphics)
 {
-    private readonly CanvasCoordSystem coordSystem;
-        
-    private readonly Graphics graphics;
-
     private const int TICK_LINE_LENGTH = 5;
         
     private const int DISTANCE_FROM_TICK_TO_NUMBER = 2;
         
     private const double GAP_BETWEEN_TICKS = 50;
 
-    public YAxis(CanvasCoordSystem coordSystem, Graphics graphics)
-    {
-        this.coordSystem = coordSystem;
-        this.graphics = graphics;
-    }
-
     public void Draw()
     {
-        var x1 = coordSystem.LeftBorder;
+        var x = coordSystem.LeftBorder;
         var y1 = coordSystem.TopBorder + coordSystem.PixelHeight;
-        var x2 = coordSystem.LeftBorder;
         var y2 = coordSystem.TopBorder;
-        graphics.DrawLine(Pens.Black, x1, y1, x2, y2);
+        graphics.DrawLine(AppConstants.COORD_SYSTEM_PEN, x, y1, x, y2);
         DrawNumbers();
     }
 
@@ -60,7 +49,7 @@ public class YAxis
     private void DrawTick(float pos)
     {
         var x = coordSystem.ToPixelX(coordSystem.MinX);
-        graphics.DrawLine(Pens.Black, x, pos, x - TICK_LINE_LENGTH, pos);
+        graphics.DrawLine(AppConstants.COORD_SYSTEM_PEN, x, pos, x - TICK_LINE_LENGTH, pos);
     }
         
     private float GetDrawnStringLength(string str, Font font)
@@ -72,12 +61,18 @@ public class YAxis
     private static List<decimal> GetNumbers(decimal min, decimal max, int gap)
     {
         var firstNumber = ((int) min / gap + 1) * gap;
-        var lastNumber = (int) max / gap * gap;
+        var lastNumber = ((int) max / gap) * gap;
         var ret = new List<decimal>();
         for (var number = firstNumber; number <= lastNumber; number += gap)
         {
             ret.Add(number);    
         }
+        var isZeroVisible = min < 0 && 0 < max;
+        if (isZeroVisible)
+        {
+            ret.Add(0);    
+        }
+        ret = ret.OrderBy(x => x).ToList();
         return ret;
     }
 

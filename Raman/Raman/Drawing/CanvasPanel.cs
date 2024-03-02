@@ -154,11 +154,17 @@ public class CanvasPanel : Panel
             graphics.ResetClip();
             DrawXAxis(graphics);
             DrawYAxis(graphics);
+            DrawZeroYLevel(graphics);
         }
         ZoomToWindowLayer?.Draw(graphics);
         BaselineCorrectionLayer?.Draw(graphics);
         PeakAnalysisLayer?.Draw(graphics);
         CutOffLayer?.Draw(graphics);
+    }
+
+    private void DrawZeroYLevel(Graphics graphics)
+    {
+        new ZeroYLevel(CoordSystem, graphics).Draw();
     }
 
     /// <summary>
