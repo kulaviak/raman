@@ -33,8 +33,8 @@ public class PeakAnalysisLayer : LayerBase
             else
             {
                 var end = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
-                var line = new Line(start, end);
-                Lines.Add(line);
+                var newLines = GetLinesForAllCharts(start, end);
+                Lines.AddRange(newLines);
                 IsExported = false;
                 start = null;
             }
@@ -51,6 +51,46 @@ public class PeakAnalysisLayer : LayerBase
         }
     }
 
+    private List<Line> GetLinesForAllCharts(Point start, Point end)
+    {
+        var ret = new List<Line>();
+        foreach (var chart in canvasPanel.VisibleCharts)
+        {
+            var line = GetLineForChart(chart, start, end);
+            ret.Add(line);
+        }
+        return ret;
+    }
+
+    private Line GetLineForChart(Chart chart, Point userDefinedStart, Point userDefinedEnd)
+    {
+        var startPointAtChart = GetPointAtChart(userDefinedStart, chart);
+        var endPointAtChart = GetPointAtChart(userDefinedEnd, chart);
+        var line = new Line(startPointAtChart, endPointAtChart);
+        return line;
+    }
+
+    private Point GetPointAtChart(Point point, Chart chart)
+    {
+        var y = chart.GetValue(point.X);
+        if (y != null)
+        {
+            var ret = new Point(point.X, y.Value);
+            return ret;
+        }
+        // if the x value of the point is out of range the chart, then return first or last point of chart
+        else
+        {
+            if (point.X < chart.Points.First().X)
+            {
+                return chart.Points.First();
+            }
+            else
+            {
+                return chart.Points.Last();
+            }
+        }
+    }
 
     public override void HandleMouseMove(object sender, MouseEventArgs e)
     {
