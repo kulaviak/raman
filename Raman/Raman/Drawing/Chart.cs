@@ -54,6 +54,6 @@ public class Chart
 
     public override string ToString()
     {
-        return $"Points.Count: {points.Count}";
+        return $"Name: {Name}, Points.Count: {points.Count}, IsVisible: {IsVisible}, IsBaselineCorrected: {IsBaselineCorrected}";
     }
 }

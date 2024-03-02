@@ -5,13 +5,7 @@ public class Line(Point start, Point end)
     public Point Start { get; } = start;
     
     public Point End { get; } = end;
-
-    // from chat GPT
-    public decimal GetDistanceToPoint(Point point)
-    {
-        return 0;
-    }
-
+    
     public override string ToString()
     {
         return $"Start: {Start}, End: {End}";

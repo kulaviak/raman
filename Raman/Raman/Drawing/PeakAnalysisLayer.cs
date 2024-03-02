@@ -80,6 +80,11 @@ public class PeakAnalysisLayer : LayerBase
         var startPointAtChart = GetPointAtChart(userDefinedStart, chart);
         var endPointAtChart = GetPointAtChart(userDefinedEnd, chart);
         var top = GetTopPoint(startPointAtChart, endPointAtChart, chart);
+        // if end is before start, then swap it
+        if (endPointAtChart.X < startPointAtChart.X)
+        {
+            (startPointAtChart, endPointAtChart) = (endPointAtChart, startPointAtChart);
+        }
         var peak = new Peak(startPointAtChart, endPointAtChart, top, chart);
         return peak;
     }
@@ -173,25 +178,12 @@ public class PeakAnalysisLayer : LayerBase
     /// </summary>
     private void RemoveClosestPeak(System.Drawing.Point location)
     {
-        var point = CoordSystem.ToValuePoint(location.X, location.Y);
-        var peak = GetPeakToRemove(point);
+        var peak = new PeakToRemoveCalculator().GetPeakToRemove(VisiblePeaks, CoordSystem, location);
         if (peak != null)
         {
             Peaks = Peaks.Where(x => x != peak).ToList();
         }
         Refresh();
-    }
-
-    private Peak GetPeakToRemove(Point point)
-    {
-        var ret = Peaks.MinByOrDefault(peak => GetDistanceToPeak(peak, point));
-        return ret;
-    }
-
-    private decimal GetDistanceToPeak(Peak peak, Point point)
-    {
-        var ret = Math.Min(peak.Base.GetDistanceToPoint(point), peak.Vertical.GetDistanceToPoint(point));
-        return ret;
     }
     
     private void Refresh()
