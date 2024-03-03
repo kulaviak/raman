@@ -74,6 +74,12 @@ public class CanvasCoordSystem
         var ret = new ValuePoint(ToValueX(pixelX), ToValueY(pixelY));
         return ret;
     }
+    
+    public ValuePoint ToValuePoint(Point point)
+    {
+        var ret = new ValuePoint(ToValueX(point.X), ToValueY(point.Y));
+        return ret;
+    }
 
     public override string ToString()
     {

@@ -1,5 +1,8 @@
 namespace Raman.Core;
 
+/// <summary>
+/// Point that represent point in chart coordinates, not in pixel coordinates like System.Drawing.Point.
+/// </summary>
 public class ValuePoint
 {
     public decimal X { get; }
