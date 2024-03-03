@@ -133,7 +133,20 @@ public class CanvasPanel : Panel
         MouseDown += HandleMouseDown;
         MouseMove += HandleMouseMove;
         MouseUp += HandleMouseUp;
+        MouseWheel += OnMouseWheel;
         Resize += HandleResize;
+    }
+    
+    private void OnMouseWheel(object sender, MouseEventArgs e)
+    {
+        ZoomOnMouseWheel(e);
+    }
+
+    private void ZoomOnMouseWheel(MouseEventArgs e)
+    {
+        var zoomIn = e.Delta > 0;
+        CoordSystem = CoordSystemCalculator.ZoomOnPoint(CoordSystem, e.Location, zoomIn);
+        Refresh();
     }
 
     private void HandlePaint(object sender, PaintEventArgs e)

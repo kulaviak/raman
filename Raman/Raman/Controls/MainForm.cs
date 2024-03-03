@@ -57,22 +57,9 @@ public partial class MainForm : Form
         KeyPreview = true;
         KeyDown += OnKeyDown;
         Shown += OnShown;
-        MouseWheel += OnMouseWheel;
         EnableOrDisableItems();
     }
-
-    private void OnMouseWheel(object sender, MouseEventArgs e)
-    {
-        ZoomOnMouseWheel(e);
-    }
-
-    private void ZoomOnMouseWheel(MouseEventArgs e)
-    {
-        var zoomIn = e.Delta > 0;
-        canvasPanel.CoordSystem = CoordSystemCalculator.ZoomOnPoint(canvasPanel.CoordSystem, e.Location, zoomIn);
-        Refresh();
-    }
-
+    
     private void OnShown(object sender, EventArgs e)
     {
         // LoadDemoSpectrum();
