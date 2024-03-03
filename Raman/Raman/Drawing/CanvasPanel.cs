@@ -149,7 +149,10 @@ public class CanvasPanel : Panel
             ClipGraphicsToOnlyChartArea(graphics);
             foreach (var chart in (IList<Chart>) charts)
             {
-                chart.Draw(CoordSystem, graphics);
+                if (chart.IsVisible)
+                {
+                    chart.Draw(CoordSystem, graphics);
+                }
             }
             graphics.ResetClip();
             DrawXAxis(graphics);

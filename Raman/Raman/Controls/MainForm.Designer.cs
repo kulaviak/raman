@@ -39,6 +39,7 @@ partial class MainForm
     this.miView = new System.Windows.Forms.ToolStripMenuItem();
     this.miZoomWindow = new System.Windows.Forms.ToolStripMenuItem();
     this.miZoomToOriginalSize = new System.Windows.Forms.ToolStripMenuItem();
+    this.miSelectSpectra = new System.Windows.Forms.ToolStripMenuItem();
     this.miTools = new System.Windows.Forms.ToolStripMenuItem();
     this.miBaselineCorrection = new System.Windows.Forms.ToolStripMenuItem();
     this.miPeakAnalysis = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +57,6 @@ partial class MainForm
     this.splitContainer = new System.Windows.Forms.SplitContainer();
     this.statusStrip = new Raman.Controls.AppStatusStrip();
     this.canvasPanel = new Raman.Drawing.CanvasPanel();
-    this.miSelectSpectra = new System.Windows.Forms.ToolStripMenuItem();
     this.menuStrip.SuspendLayout();
     this.toolStrip.SuspendLayout();
     ((System.ComponentModel.ISupportInitialize) (this.splitContainer)).BeginInit();
@@ -124,6 +124,14 @@ partial class MainForm
     this.miZoomToOriginalSize.Size = new System.Drawing.Size(231, 22);
     this.miZoomToOriginalSize.Text = "Zoom To Original Size";
     this.miZoomToOriginalSize.Click += new System.EventHandler(this.miZoomToOriginalSize_Click);
+    // 
+    // miSelectSpectra
+    // 
+    this.miSelectSpectra.Name = "miSelectSpectra";
+    this.miSelectSpectra.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.J)));
+    this.miSelectSpectra.Size = new System.Drawing.Size(231, 22);
+    this.miSelectSpectra.Text = "Select Spectra";
+    this.miSelectSpectra.Click += new System.EventHandler(this.miSelectSpectra_Click);
     // 
     // miTools
     // 
@@ -281,13 +289,6 @@ partial class MainForm
     this.canvasPanel.Name = "canvasPanel";
     this.canvasPanel.Size = new System.Drawing.Size(590, 401);
     this.canvasPanel.TabIndex = 0;
-    // 
-    // miSelectSpectra
-    // 
-    this.miSelectSpectra.Name = "miSelectSpectra";
-    this.miSelectSpectra.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.J)));
-    this.miSelectSpectra.Size = new System.Drawing.Size(231, 22);
-    this.miSelectSpectra.Text = "Select Spectra";
     // 
     // MainForm
     // 

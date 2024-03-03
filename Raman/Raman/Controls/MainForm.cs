@@ -491,5 +491,26 @@ public partial class MainForm : Form
 
     private void ShowSpectrumSelectionForm()
     {
+        var form = new SpectrumSelectionForm(canvasPanel.Charts);
+        if (form.ShowDialog() == DialogResult.OK)
+        {
+            foreach (var chart in canvasPanel.Charts)
+            {
+                chart.IsVisible = form.SelectedSpectrumNames.Contains(chart.Name);
+            }
+        }
+        canvasPanel.Refresh();
+    }
+
+    private void miSelectSpectra_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            ShowSpectrumSelectionForm();
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowAppError("Selecting spectra failed.", "Error", ex);
+        }
     }
 }
