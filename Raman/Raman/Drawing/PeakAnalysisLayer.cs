@@ -45,7 +45,10 @@ public class PeakAnalysisLayer : LayerBase
                 {
                     var chart = new ClosestChartCalculator().GetClosestChart(canvasPanel.VisibleCharts, e.Location, canvasPanel.CoordSystem);                    
                     var peak = GetPeakForChart(chart, start, end);
-                    Peaks.Add(peak);
+                    if (peak != null)
+                    {
+                        Peaks.Add(peak);
+                    }
                 }
                 IsExported = false;
                 start = null;
@@ -69,7 +72,10 @@ public class PeakAnalysisLayer : LayerBase
         foreach (var chart in canvasPanel.VisibleCharts)
         {
             var peak = GetPeakForChart(chart, start, end);
-            ret.Add(peak);
+            if (peak != null)
+            {
+                ret.Add(peak);
+            }
         }
         return ret;
     }
@@ -79,6 +85,11 @@ public class PeakAnalysisLayer : LayerBase
         var startPointAtChart = GetPointAtChart(userDefinedStart, chart);
         var endPointAtChart = GetPointAtChart(userDefinedEnd, chart);
         var top = GetTopPoint(startPointAtChart, endPointAtChart, chart);
+        // it can happen if user selects the point wrong way, like double click, so there is no point between start and end point
+        if (top == null)
+        {
+            return null;
+        }
         // if end is before start, then swap it
         if (endPointAtChart.X < startPointAtChart.X)
         {
