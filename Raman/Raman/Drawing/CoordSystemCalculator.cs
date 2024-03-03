@@ -53,14 +53,29 @@ public class CoordSystemCalculator
         return new CanvasCoordSystem(canvasWidth, canvasHeight, MIN_X, MAX_X, MIN_Y, MAX_Y);
     }
 
-    public static CanvasCoordSystem ZoomOnPoint(CanvasCoordSystem oldCoordSystem, Point point, bool zoomIn)
+    public static CanvasCoordSystem GetCoordSystemForZoomMouseWheel(CanvasCoordSystem oldCoordSystem, Point point, decimal zoomRatio)
     {
-        var zoomRatio = zoomIn ? 0.9m : 1.1m;
         var valuePoint = oldCoordSystem.ToValuePoint(point);
         var minX = valuePoint.X - (valuePoint.X - oldCoordSystem.MinX) * zoomRatio;
         var maxX = valuePoint.X + (oldCoordSystem.MaxX - valuePoint.X) * zoomRatio;
         var minY = valuePoint.Y - (valuePoint.Y - oldCoordSystem.MinY) * zoomRatio;
         var maxY = valuePoint.Y + (oldCoordSystem.MaxY - valuePoint.Y) * zoomRatio;
+        var ret = new CanvasCoordSystem(oldCoordSystem.GraphicsWidth, oldCoordSystem.GraphicsHeight, minX, maxX, minY, maxY);
+        return ret;
+    }
+    
+    public static CanvasCoordSystem GetCoordSystemForMouseDragging(CanvasCoordSystem oldCoordSystem, Point startPoint, Point endPoint)
+    {
+        var startValuePoint = oldCoordSystem.ToValuePoint(startPoint);
+        var endValuePoint = oldCoordSystem.ToValuePoint(endPoint);
+        var incrementX = endValuePoint.X - startValuePoint.X;
+        var incrementY = endValuePoint.Y - startValuePoint.Y;
+        // Increment is subtracted because, when user moves with mouse to the right it means, that he wants to see the left part of the chart => 
+        // decrease minX, maxX. The same is for Y direction.
+        var minX = oldCoordSystem.MinX - incrementX;
+        var maxX = oldCoordSystem.MaxX - incrementX;
+        var minY = oldCoordSystem.MinY - incrementY;
+        var maxY = oldCoordSystem.MaxY - incrementY;
         var ret = new CanvasCoordSystem(oldCoordSystem.GraphicsWidth, oldCoordSystem.GraphicsHeight, minX, maxX, minY, maxY);
         return ret;
     }

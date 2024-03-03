@@ -256,5 +256,6 @@ public class CanvasPanel : Panel
             BaselineCorrectionLayer?.HandleMouseUp(sender, e);
             PeakAnalysisLayer?.HandleMouseUp(sender, e);
         }
+        MouseZoomLayer?.HandleMouseUp(sender, e);
     }
 }
