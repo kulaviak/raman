@@ -63,6 +63,11 @@ public partial class MainForm : Form
 
     private void OnMouseWheel(object sender, MouseEventArgs e)
     {
+        ZoomOnMouseWheel(e);
+    }
+
+    private void ZoomOnMouseWheel(MouseEventArgs e)
+    {
         var zoomIn = e.Delta > 0;
         canvasPanel.CoordSystem = CoordSystemCalculator.ZoomOnPoint(canvasPanel.CoordSystem, e.Location, zoomIn);
         Refresh();
