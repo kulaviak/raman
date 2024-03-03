@@ -42,8 +42,7 @@ public class CutOffLayer : LayerBase
         Refresh();
     }
     
-    public void 
-        UndoCutOff()
+    public void UndoCutOff()
     {
         if (oldCharts == null)
         {
@@ -72,6 +71,10 @@ public class CutOffLayer : LayerBase
         // {
         //     RemoveClosestPoint(e.Location);
         // }
+        else if (e.Button == MouseButtons.Right)
+        {
+            ShowContextMenu(e.Location);
+        }
         Refresh();
     }
     
@@ -117,7 +120,7 @@ public class CutOffLayer : LayerBase
         return ret;
     }
 
-    private void RemoveClosestPoint(System.Drawing.Point pos)
+    private void RemoveClosestPoint(Point pos)
     {
         var points = new List<ValuePoint>();
         if (start != null)
@@ -145,5 +148,12 @@ public class CutOffLayer : LayerBase
     private void Refresh()
     {
         canvasPanel.Refresh();
+    }
+    
+    private void ShowContextMenu(Point point)
+    {
+        var contextMenu = new ContextMenuStrip();
+        contextMenu.Items.Add("Remove Closest Point", null, (_, _) => RemoveClosestPoint(point));
+        contextMenu.Show(canvasPanel, point);
     }
 }

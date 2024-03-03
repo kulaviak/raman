@@ -186,7 +186,7 @@ public class PeakAnalysisLayer : LayerBase
     /// <summary>
     /// Expects, that user clicks on vertical or bottom line of the peak. So it finds the closest peak according to it.
     /// </summary>
-    private void RemoveClosestPeak(System.Drawing.Point location)
+    private void RemoveClosestPeak(Point location)
     {
         var peak = new PeakToRemoveCalculator().GetPeakToRemove(VisiblePeaks, CoordSystem, location);
         if (peak != null)
@@ -201,11 +201,11 @@ public class PeakAnalysisLayer : LayerBase
         canvasPanel.Refresh();
     }
 
-    private void ShowContextMenu(System.Drawing.Point location)
+    private void ShowContextMenu(Point point)
     {
         var contextMenu = new ContextMenuStrip();
-        contextMenu.Items.Add("Remove Closest Line", null, (_, _) => RemoveClosestPeak(location));
-        contextMenu.Show(canvasPanel, location);
+        contextMenu.Items.Add("Remove Closest Line", null, (_, _) => RemoveClosestPeak(point));
+        contextMenu.Show(canvasPanel, point);
     }
 
     public void ExportPeaks(string filePath)
