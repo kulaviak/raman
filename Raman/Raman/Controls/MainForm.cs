@@ -380,6 +380,7 @@ public partial class MainForm : Form
     
     private void SetFormToDefaultState()
     {
+        HideSidePanel();
         canvasPanel.SetLayersToDefaultState(statusStrip);
     }
 
