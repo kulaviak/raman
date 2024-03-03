@@ -476,4 +476,20 @@ public partial class MainForm : Form
             FormUtil.ShowAppError("Cut Off failed.", "Error", ex);
         }
     }
+
+    private void tsbSpectrumSelection_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            ShowSpectrumSelectionForm();
+        }
+        catch (Exception ex)
+        {
+            FormUtil.ShowAppError("Selecting spectra failed.", "Error", ex);
+        }
+    }
+
+    private void ShowSpectrumSelectionForm()
+    {
+    }
 }

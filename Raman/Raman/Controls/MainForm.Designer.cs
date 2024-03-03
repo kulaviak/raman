@@ -52,9 +52,11 @@ partial class MainForm
     this.tsbBaselineCorrection = new System.Windows.Forms.ToolStripButton();
     this.tsbPeakAnalysis = new System.Windows.Forms.ToolStripButton();
     this.tsbCutOff = new System.Windows.Forms.ToolStripButton();
+    this.tsbSelectSpectra = new System.Windows.Forms.ToolStripButton();
     this.splitContainer = new System.Windows.Forms.SplitContainer();
     this.statusStrip = new Raman.Controls.AppStatusStrip();
     this.canvasPanel = new Raman.Drawing.CanvasPanel();
+    this.miSelectSpectra = new System.Windows.Forms.ToolStripMenuItem();
     this.menuStrip.SuspendLayout();
     this.toolStrip.SuspendLayout();
     ((System.ComponentModel.ISupportInitialize) (this.splitContainer)).BeginInit();
@@ -102,7 +104,7 @@ partial class MainForm
     // 
     // miView
     // 
-    this.miView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miZoomWindow, this.miZoomToOriginalSize});
+    this.miView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miZoomWindow, this.miZoomToOriginalSize, this.miSelectSpectra});
     this.miView.Name = "miView";
     this.miView.Size = new System.Drawing.Size(44, 20);
     this.miView.Text = "View";
@@ -171,7 +173,7 @@ partial class MainForm
     // 
     // toolStrip
     // 
-    this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.tsbOpenFiles, this.tsbZoomToWindow, this.tsbZoomToOriginalSize, this.tsbBaselineCorrection, this.tsbPeakAnalysis, this.tsbCutOff});
+    this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.tsbOpenFiles, this.tsbZoomToWindow, this.tsbZoomToOriginalSize, this.tsbBaselineCorrection, this.tsbPeakAnalysis, this.tsbCutOff, this.tsbSelectSpectra});
     this.toolStrip.Location = new System.Drawing.Point(0, 24);
     this.toolStrip.Name = "toolStrip";
     this.toolStrip.Size = new System.Drawing.Size(800, 25);
@@ -239,6 +241,16 @@ partial class MainForm
     this.tsbCutOff.Text = "Cut Off";
     this.tsbCutOff.Click += new System.EventHandler(this.tsbCutOff_Click);
     // 
+    // tsbSelectSpectra
+    // 
+    this.tsbSelectSpectra.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+    this.tsbSelectSpectra.Image = ((System.Drawing.Image) (resources.GetObject("tsbSelectSpectra.Image")));
+    this.tsbSelectSpectra.ImageTransparentColor = System.Drawing.Color.Magenta;
+    this.tsbSelectSpectra.Name = "tsbSelectSpectra";
+    this.tsbSelectSpectra.Size = new System.Drawing.Size(23, 22);
+    this.tsbSelectSpectra.Text = "Select Spectra";
+    this.tsbSelectSpectra.Click += new System.EventHandler(this.tsbSpectrumSelection_Click);
+    // 
     // splitContainer
     // 
     this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -270,6 +282,13 @@ partial class MainForm
     this.canvasPanel.Size = new System.Drawing.Size(590, 401);
     this.canvasPanel.TabIndex = 0;
     // 
+    // miSelectSpectra
+    // 
+    this.miSelectSpectra.Name = "miSelectSpectra";
+    this.miSelectSpectra.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.J)));
+    this.miSelectSpectra.Size = new System.Drawing.Size(231, 22);
+    this.miSelectSpectra.Text = "Select Spectra";
+    // 
     // MainForm
     // 
     this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -298,6 +317,10 @@ partial class MainForm
     this.ResumeLayout(false);
     this.PerformLayout();
   }
+
+  private System.Windows.Forms.ToolStripMenuItem miSelectSpectra;
+
+  private System.Windows.Forms.ToolStripButton tsbSelectSpectra;
 
   private System.Windows.Forms.ToolStripButton tsbCutOff;
 
