@@ -498,12 +498,19 @@ public partial class MainForm : Form
         var form = new SpectrumSelectionForm(canvasPanel.Charts);
         if (form.ShowDialog() == DialogResult.OK)
         {
-            foreach (var chart in canvasPanel.Charts)
+            var orderedCharts = canvasPanel.Charts.OrderByDescending(chart => GetAverageY(chart));
+            foreach (var chart in orderedCharts)
             {
                 chart.IsVisible = form.SelectedSpectrumNames.Contains(chart.Name);
             }
         }
         canvasPanel.Refresh();
+    }
+
+    private decimal GetAverageY(Chart chart)
+    {
+        var ret = chart.Points.Average(point => point.Y);
+        return ret;
     }
 
     private void miSelectSpectra_Click(object sender, EventArgs e)
