@@ -54,6 +54,10 @@ public class CanvasPanel : Panel
             {
                 CutOffLayer.CoordSystem = value;
             }
+            if (MouseZoomLayer != null)
+            {
+                MouseZoomLayer.CoordSystem = value;
+            }
         }
     }
 
@@ -71,6 +75,9 @@ public class CanvasPanel : Panel
     
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public CutOffLayer CutOffLayer { get; set; }
+    
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public MouseZoomLayer MouseZoomLayer { get; set; }
     
     public CanvasPanel()
     {
@@ -120,6 +127,7 @@ public class CanvasPanel : Panel
         ZoomToWindowLayer = null;
         CutOffLayer = null;
         StatusStripLayer = new StatusStripLayer(CoordSystem, statusStrip, this);
+        MouseZoomLayer = new MouseZoomLayer(this);
     }
     
     private void DoRefresh()
@@ -139,16 +147,9 @@ public class CanvasPanel : Panel
     
     private void OnMouseWheel(object sender, MouseEventArgs e)
     {
-        ZoomOnMouseWheel(e);
+        MouseZoomLayer?.HandleMouseWheel(sender, e);
     }
-
-    private void ZoomOnMouseWheel(MouseEventArgs e)
-    {
-        var zoomIn = e.Delta > 0;
-        CoordSystem = CoordSystemCalculator.ZoomOnPoint(CoordSystem, e.Location, zoomIn);
-        Refresh();
-    }
-
+    
     private void HandlePaint(object sender, PaintEventArgs e)
     {
         Draw(e.Graphics);
@@ -243,6 +244,7 @@ public class CanvasPanel : Panel
             PeakAnalysisLayer?.HandleMouseMove(sender, e);
         }
         StatusStripLayer?.HandleMouseMove(sender, e);
+        MouseZoomLayer?.HandleMouseMove(sender, e);
     }
 
     private void HandleMouseUp(object sender, MouseEventArgs e)

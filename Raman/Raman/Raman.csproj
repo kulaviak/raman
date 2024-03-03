@@ -123,6 +123,7 @@
     <Compile Include="Drawing\CutOffLayer.cs" />
     <Compile Include="Drawing\LayerBase.cs" />
     <Compile Include="Drawing\Mark.cs" />
+    <Compile Include="Drawing\MouseZoomLayer.cs" />
     <Compile Include="Drawing\PeakAnalysisLayer.cs" />
     <Compile Include="Drawing\PeakToRemoveCalculator.cs" />
     <Compile Include="Drawing\StatusStripLayer.cs" />
