@@ -50,9 +50,9 @@ public abstract class Util
         return Math.Round(value, decimalPlaces).ToString();
     }
 
-    public static Chart GetClosestChart(List<Chart> charts, ValuePoint point)
+    public static Chart GetClosestChart(List<Chart> charts, ValuePoint point, decimal maximumDistance = decimal.MaxValue)
     {
-        var ret = charts.MinByOrDefault(chart => GetClosestDistance(chart, point));
+        var ret = charts.Where(chart => GetClosestDistance(chart, point) <= maximumDistance).MinByOrDefault(chart => GetClosestDistance(chart, point));
         return ret;
     }
 

@@ -15,9 +15,8 @@ public class AppStatusStrip : StatusStrip
         Items.AddRange(new ToolStripItem[] {lblPosition});   
     }
 
-    public void ShowPosition(ValuePoint position)
+    public void ShowText(string text)
     {
-        // Showing superscripts on label https://stackoverflow.com/questions/19682459/superscript-label-or-form-name
-        lblPosition.Text = $"X Axis - Wavenumber (cm\u207B\u00B9): {Util.Format(position.X, 0)}  Y Axis - Intensity (cnts): {Util.Format(position.Y, 0)}";
+        lblPosition.Text = text;
     }
 }

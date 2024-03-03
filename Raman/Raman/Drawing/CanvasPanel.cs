@@ -119,7 +119,7 @@ public class CanvasPanel : Panel
         PeakAnalysisLayer = null;
         ZoomToWindowLayer = null;
         CutOffLayer = null;
-        StatusStripLayer = new StatusStripLayer(CoordSystem, statusStrip);
+        StatusStripLayer = new StatusStripLayer(CoordSystem, statusStrip, this);
     }
     
     private void DoRefresh()
