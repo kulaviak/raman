@@ -1,11 +1,10 @@
 using System.Globalization;
-using Raman.Drawing;
 
 namespace Raman.Core;
 
 public abstract class Util
 {
-    public static float GetPixelDistance(System.Drawing.Point point1, System.Drawing.Point point2)
+    public static float GetPixelDistance(Point point1, Point point2)
     {
         var x = Math.Abs(point1.X - point2.X);
         var y = Math.Abs(point1.Y - point2.Y);
@@ -48,18 +47,6 @@ public abstract class Util
     public static string Format(decimal value, int decimalPlaces)
     {
         return Math.Round(value, decimalPlaces).ToString();
-    }
-
-    public static Chart GetClosestChart(List<Chart> charts, ValuePoint point, decimal maximumDistance = decimal.MaxValue)
-    {
-        var ret = charts.Where(chart => GetClosestDistance(chart, point) <= maximumDistance).MinByOrDefault(chart => GetClosestDistance(chart, point));
-        return ret;
-    }
-
-    private static decimal GetClosestDistance(Chart chart, ValuePoint point)
-    {
-        var ret = chart.Points.Min(chartPoint => GetDistance(chartPoint, point));
-        return ret;
     }
     
     public static string Format(decimal number)

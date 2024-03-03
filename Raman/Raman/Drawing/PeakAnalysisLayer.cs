@@ -43,7 +43,7 @@ public class PeakAnalysisLayer : LayerBase
                 }
                 else
                 {
-                    var chart = Util.GetClosestChart(canvasPanel.VisibleCharts, end);
+                    var chart = new ClosestChartCalculator().GetClosestChart(canvasPanel.VisibleCharts, e.Location, canvasPanel.CoordSystem);                    
                     var peak = GetPeakForChart(chart, start, end);
                     Peaks.Add(peak);
                 }

@@ -118,6 +118,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Drawing\Chart.cs" />
+    <Compile Include="Drawing\ClosestChartCalculator.cs" />
     <Compile Include="Drawing\CoordSystemCalculator.cs" />
     <Compile Include="Drawing\CutOffLayer.cs" />
     <Compile Include="Drawing\LayerBase.cs" />
