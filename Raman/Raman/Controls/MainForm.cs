@@ -40,6 +40,9 @@ public partial class MainForm : Form
 
         miCutOff.Enabled = areAnyCharts;
         tsbCutOff.Enabled = areAnyCharts;
+
+        miSelectSpectra.Enabled = areAnyCharts;
+        tsbSelectSpectra.Enabled = areAnyCharts;
     }
 
     public MainForm()

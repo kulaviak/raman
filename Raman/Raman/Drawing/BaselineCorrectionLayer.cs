@@ -110,7 +110,7 @@ public class BaselineCorrectionLayer : LayerBase
     
     private void DrawBaselines(Graphics graphics)
     {
-        if (canvasPanel.Charts.Any() && BaselinePoints.Count >= 4)
+        if (canvasPanel.VisibleCharts.Any() && BaselinePoints.Count >= 4)
         {
             try
             {
