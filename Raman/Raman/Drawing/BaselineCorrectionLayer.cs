@@ -28,11 +28,11 @@ public class BaselineCorrectionLayer : LayerBase
             BaselinePoints.Add(point);
             Refresh();
         }
-        else if (e.Button == MouseButtons.Middle)
-        {
-            RemoveClosestPoint(e.Location);
-            Refresh();
-        }
+        // else if (e.Button == MouseButtons.Middle)
+        // {
+        //     RemoveClosestPoint(e.Location);
+        //     Refresh();
+        // }
         else if (e.Button == MouseButtons.Right)
         {
             ShowContextMenu(e.Location);

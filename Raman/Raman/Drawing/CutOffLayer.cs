@@ -68,10 +68,10 @@ public class CutOffLayer : LayerBase
                 end = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
             }
         }
-        else if (e.Button == MouseButtons.Middle)
-        {
-            RemoveClosestPoint(e.Location);
-        }
+        // else if (e.Button == MouseButtons.Middle)
+        // {
+        //     RemoveClosestPoint(e.Location);
+        // }
         Refresh();
     }
     
