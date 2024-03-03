@@ -11,9 +11,9 @@ public class BaselineCorrectionLayer : LayerBase
 
     public List<ValuePoint> BaselinePoints { get; set; } = new List<ValuePoint>();
 
-    private Stack<List<Chart>> chartsHistory = new Stack<List<Chart>>();
+    private Stack<List<Chart>> chartHistory = new Stack<List<Chart>>();
     
-    private Stack<List<ValuePoint>> baselinePointsHistory = new Stack<List<ValuePoint>>();
+    private Stack<List<ValuePoint>> baselinePointHistory = new Stack<List<ValuePoint>>();
 
     public BaselineCorrectionLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : base(coordSystem)
     {
@@ -79,8 +79,8 @@ public class BaselineCorrectionLayer : LayerBase
             FormUtil.ShowInfo("There are no baseline points defined.", "Information");
             return;
         }
-        chartsHistory.Push(canvasPanel.Charts);
-        baselinePointsHistory.Push(BaselinePoints);
+        chartHistory.Push(canvasPanel.Charts);
+        baselinePointHistory.Push(BaselinePoints);
         canvasPanel.Charts = canvasPanel.Charts.Select(x => CorrectBaseline(x, BaselinePoints)).ToList();
         BaselinePoints = new List<ValuePoint>();
         canvasPanel.ZoomToSeeAllCharts();
@@ -193,13 +193,13 @@ public class BaselineCorrectionLayer : LayerBase
 
     public void UndoBaselineCorrection()
     {
-        if (chartsHistory.Count == 0)
+        if (chartHistory.Count == 0)
         {
             FormUtil.ShowInfo("There is no undo to do.", "Information");
             return;
         }
-        canvasPanel.Charts = chartsHistory.Pop();
-        BaselinePoints = baselinePointsHistory.Pop();
+        canvasPanel.Charts = chartHistory.Pop();
+        BaselinePoints = baselinePointHistory.Pop();
         canvasPanel.ZoomToSeeAllCharts();
     }
     

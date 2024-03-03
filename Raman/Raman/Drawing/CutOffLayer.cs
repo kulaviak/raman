@@ -2,40 +2,39 @@ using Raman.Controls;
 
 namespace Raman.Drawing;
 
-public class CutOffLayer : LayerBase
+public class CutOffLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : LayerBase(coordSystem)
 {
     public ValuePoint Start => start;
     
     public ValuePoint End => end;
-    
-    private readonly CanvasPanel canvasPanel;
-    
+
     private ValuePoint start;
     
     private ValuePoint end;
 
     private static Color COLOR = Color.Red;
 
-    private List<Chart> oldCharts = null;
+    private Stack<List<Chart>> chartHistory = new Stack<List<Chart>>();
     
-    public CutOffLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : base(coordSystem)
-    {
-        this.canvasPanel = canvasPanel;
-    }
+    private Stack<ValuePoint> startHistory = new Stack<ValuePoint>();
+    
+    private Stack<ValuePoint> endHistory = new Stack<ValuePoint>();
 
     public void CutOff()
     {
         if (start == null)
         {
-            FormUtil.ShowUserError("Start point is not set.", "Error");
+            FormUtil.ShowInfo("Start point is not set.", "Information");
             return;
         }
         if (end == null)
         {
-            FormUtil.ShowUserError("End point is not set.", "Error");
+            FormUtil.ShowInfo("End point is not set.", "Information");
             return;
         }
-        oldCharts = canvasPanel.Charts;
+        startHistory.Push(start);
+        endHistory.Push(end);
+        chartHistory.Push(canvasPanel.Charts);
         canvasPanel.Charts = GetCutOffCharts(canvasPanel.Charts, start.X, end.X);
         start = null;
         end = null;
@@ -44,13 +43,14 @@ public class CutOffLayer : LayerBase
     
     public void UndoCutOff()
     {
-        if (oldCharts == null)
+        if (chartHistory.Count == 0)
         {
             FormUtil.ShowInfo("There is no undo to do.", "Information");
             return;
         }
-        canvasPanel.Charts = oldCharts;
-        oldCharts = null;
+        start = startHistory.Pop();
+        end = endHistory.Pop();
+        canvasPanel.Charts = chartHistory.Pop();
         Refresh();
     }
     
@@ -143,6 +143,7 @@ public class CutOffLayer : LayerBase
                 end = null;
             }
         }
+        Refresh();
     }
 
     private void Refresh()
