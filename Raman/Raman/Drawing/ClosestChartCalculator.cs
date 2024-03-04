@@ -6,14 +6,14 @@
 public class ClosestChartCalculator
 {
 
-    public Chart GetClosestChart(List<Chart> charts, Point point, CanvasCoordSystem coordSystem, decimal maxAllowedDistance = Decimal.MaxValue)
+    public Chart GetClosestChart(List<Chart> charts, Point point, CanvasCoordSystem coordSystem, decimal maxAllowedDistance = decimal.MaxValue)
     {
-        var minimumDistance = Decimal.MaxValue;
+        var minimumDistance = double.MaxValue;
         Chart ret = null;
         foreach (var chart in charts)
         {
             var distance = GetDistance(chart, point, coordSystem);
-            if (distance < minimumDistance && distance < maxAllowedDistance)
+            if (distance < minimumDistance && distance < (double) maxAllowedDistance)
             {
                 minimumDistance = distance;
                 ret = chart;
@@ -22,9 +22,9 @@ public class ClosestChartCalculator
         return ret;
     }
 
-    private decimal GetDistance(Chart chart, Point point, CanvasCoordSystem coordSystem)
+    private double GetDistance(Chart chart, Point point, CanvasCoordSystem coordSystem)
     {
         var ret = chart.Points.Min(chartPoint => Util.GetPixelDistance(coordSystem.ToPixelPoint(chartPoint), point));
-        return (decimal) ret;
+        return ret;
     }
 }
