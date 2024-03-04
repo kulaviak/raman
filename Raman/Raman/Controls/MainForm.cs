@@ -76,7 +76,11 @@ public partial class MainForm : Form
 
     private void UpdateSplitter()
     {
-        splitContainer.SplitterDistance = Width - SIDE_PANEL_WIDTH - 20;
+        if (WindowState != FormWindowState.Minimized)
+        {
+            var splitterDistance = Width - SIDE_PANEL_WIDTH - 20;
+            splitContainer.SplitterDistance = splitterDistance;
+        }
     }
 
     private void ShowSidePanel(Form form)

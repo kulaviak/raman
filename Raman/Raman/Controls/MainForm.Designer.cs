@@ -301,6 +301,7 @@ partial class MainForm
     this.Controls.Add(this.menuStrip);
     this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
     this.MainMenuStrip = this.menuStrip;
+    this.MinimumSize = new System.Drawing.Size(400, 400);
     this.Name = "MainForm";
     this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
     this.Text = "Raman";
