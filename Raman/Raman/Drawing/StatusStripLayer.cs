@@ -5,8 +5,6 @@ namespace Raman.Drawing;
 public class StatusStripLayer(CanvasCoordSystem coordSystem, AppStatusStrip statusStrip, CanvasPanel canvasPanel) : LayerBase(coordSystem)
 {
 
-    private DateTime lastCalculated = new DateTime();
-
     private const decimal MAX_ALLOWED_DISTANCE_FOR_CLOSEST_CHART = 100;
     
     public override void HandleMouseMove(object sender, MouseEventArgs e)

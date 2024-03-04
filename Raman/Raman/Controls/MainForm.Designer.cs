@@ -327,7 +327,6 @@ partial class MainForm
 
   private System.Windows.Forms.ToolStripMenuItem miCutOff;
 
-  private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
   private System.Windows.Forms.ToolStripMenuItem miHelp;
   private System.Windows.Forms.ToolStripMenuItem miShowHelp;
 
@@ -343,7 +342,6 @@ partial class MainForm
   private System.Windows.Forms.ToolStripMenuItem miExit;
 
   #endregion
-  private System.Windows.Forms.ToolStrip toolStrip1;
   private System.Windows.Forms.ToolStripButton tsbBaselineCorrection;
   private System.Windows.Forms.ToolStripMenuItem miView;
   private System.Windows.Forms.ToolStripMenuItem miZoomWindow;

@@ -6,8 +6,6 @@ public partial class ErrorForm : Form
 {
     private readonly Exception ex;
 
-    private Label lblMessage;
-    
     private const int MaxFormWidth = 800;
 
     public ErrorForm(string text, string caption, Exception ex)
