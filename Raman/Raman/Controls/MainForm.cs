@@ -66,7 +66,7 @@ public partial class MainForm : Form
     private void OnShown(object sender, EventArgs e)
     {
         // LoadDemoSpectrum();
-        LoadDemoSpectra();
+        // LoadDemoSpectra();
     }
 
     private void HideSidePanel()
@@ -495,10 +495,10 @@ public partial class MainForm : Form
 
     private void ShowSpectrumSelectionForm()
     {
-        var form = new SpectrumSelectionForm(canvasPanel.Charts);
+        var orderedCharts = canvasPanel.Charts.OrderByDescending(chart => GetAverageY(chart)).ToList();
+        var form = new SpectrumSelectionForm(orderedCharts);
         if (form.ShowDialog() == DialogResult.OK)
         {
-            var orderedCharts = canvasPanel.Charts.OrderByDescending(chart => GetAverageY(chart));
             foreach (var chart in orderedCharts)
             {
                 chart.IsVisible = form.SelectedSpectrumNames.Contains(chart.Name);

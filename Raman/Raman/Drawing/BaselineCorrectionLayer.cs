@@ -81,7 +81,7 @@ public class BaselineCorrectionLayer : LayerBase
         }
         chartHistory.Push(canvasPanel.Charts);
         baselinePointHistory.Push(BaselinePoints);
-        canvasPanel.Charts = canvasPanel.Charts.Select(x => CorrectBaseline(x, BaselinePoints)).ToList();
+        canvasPanel.Charts = canvasPanel.VisibleCharts.Select(x => CorrectBaseline(x, BaselinePoints)).ToList();
         BaselinePoints = new List<ValuePoint>();
         canvasPanel.ZoomToSeeAllCharts();
     }
