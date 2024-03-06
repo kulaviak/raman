@@ -66,7 +66,7 @@ public partial class MainForm : Form
     private void OnShown(object sender, EventArgs e)
     {
         // LoadDemoSpectrum();
-        // LoadDemoSpectra();
+        LoadDemoSpectra();
     }
 
     private void HideSidePanel()
@@ -124,9 +124,14 @@ public partial class MainForm : Form
     {
         using (var openFileDialog = new OpenFileDialog())
         {
+            openFileDialog.Title = "Open Single Spectrum Files";
             openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
             openFileDialog.FilterIndex = 1;
             openFileDialog.Multiselect = true;
+            if (AppSettings.SingleSpectrumOpenFileDirectory != null)
+            {
+                openFileDialog.InitialDirectory = AppSettings.SingleSpectrumOpenFileDirectory;
+            }
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 var filePaths = openFileDialog.FileNames.ToList();
@@ -136,7 +141,7 @@ public partial class MainForm : Form
                         MessageBoxIcon.Error);
                     return;
                 }
-
+                AppSettings.SingleSpectrumOpenFileDirectory = Path.GetDirectoryName(filePaths[0]);
                 OpenSingleSpectraFilesInternal(filePaths);
             }
         }
@@ -367,11 +372,15 @@ public partial class MainForm : Form
     {
         using (var openFileDialog = new OpenFileDialog())
         {
-            // don't specify initial directory - it will remember the last oneI
-            // openFileDialog.InitialDirectory = "C:\\"; 
+            openFileDialog.Title = "Open Multiple Spectrum Files";
             openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
             openFileDialog.FilterIndex = 1;
             openFileDialog.Multiselect = true;
+            if (AppSettings.MultipleSpectrumOpenFileDirectory != null)
+            {
+                openFileDialog.InitialDirectory = AppSettings.MultipleSpectrumOpenFileDirectory;
+            }
+
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 var filePaths = openFileDialog.FileNames.ToList();
@@ -380,6 +389,7 @@ public partial class MainForm : Form
                     MessageBox.Show("No files were selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+                AppSettings.MultipleSpectrumOpenFileDirectory = Path.GetDirectoryName(filePaths[0]);
                 OpenMultiSpectrumFilesInternal(filePaths);
             }
         }

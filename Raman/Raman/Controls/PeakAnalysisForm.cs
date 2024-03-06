@@ -1,4 +1,5 @@
-﻿using Raman.Drawing;
+﻿using System.IO;
+using Raman.Drawing;
 
 namespace Raman.Controls;
 
@@ -74,8 +75,13 @@ public partial class PeakAnalysisForm : Form
     {
         using (var saveFileDialog = new SaveFileDialog())
         {
+            saveFileDialog.Title = "Export Peaks";
             saveFileDialog.Filter = FILE_DIALOG_FILTER; 
             saveFileDialog.FilterIndex = 1;
+            if (AppSettings.PeakAnalysisSaveFileDirectory != null)
+            {
+                saveFileDialog.InitialDirectory = AppSettings.PeakAnalysisSaveFileDirectory;
+            }
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 var filePaths = saveFileDialog.FileNames.ToList();
@@ -87,6 +93,7 @@ public partial class PeakAnalysisForm : Form
                 try
                 {
                     var filePath = filePaths.First();
+                    AppSettings.PeakAnalysisSaveFileDirectory = Path.GetDirectoryName(filePath);
                     peakAnalysisLayer.ExportPeaks(filePath);
                     FormUtil.ShowInfo("Peaks were exported successfully.", "Export finished");
                 }
