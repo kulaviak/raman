@@ -22,7 +22,6 @@ namespace Raman.Controls
                 return ret;
             }
         }
-        // public HashSet<string> SelectedSpectrumNames => new HashSet<string>();
 
         private void AdditionalInitialization(List<Chart> charts)
         {
