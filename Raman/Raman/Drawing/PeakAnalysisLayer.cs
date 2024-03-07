@@ -55,11 +55,6 @@ public class PeakAnalysisLayer : LayerBase
             }
             Refresh();
         }
-        // else if (e.Button == MouseButtons.Middle)
-        // {
-        //     RemoveClosestPeak(e.Location);
-        //     Refresh();
-        // }
         else if (e.Button == MouseButtons.Right)
         {
             ShowContextMenu(e.Location);

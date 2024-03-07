@@ -36,11 +36,13 @@ partial class BaselineCorrectionForm
         this.label1 = new System.Windows.Forms.Label();
         this.btnClose = new System.Windows.Forms.Button();
         this.btnExportCorrectedCharts = new System.Windows.Forms.Button();
+        this.cbAreBaselineEndsExtended = new System.Windows.Forms.CheckBox();
+        this.cbAreCorrectionPointsAdjusted = new System.Windows.Forms.CheckBox();
         this.SuspendLayout();
         // 
         // btnUndoBaselineCorrection
         // 
-        this.btnUndoBaselineCorrection.Location = new System.Drawing.Point(7, 217);
+        this.btnUndoBaselineCorrection.Location = new System.Drawing.Point(7, 271);
         this.btnUndoBaselineCorrection.Name = "btnUndoBaselineCorrection";
         this.btnUndoBaselineCorrection.Size = new System.Drawing.Size(142, 23);
         this.btnUndoBaselineCorrection.TabIndex = 8;
@@ -50,7 +52,7 @@ partial class BaselineCorrectionForm
         // 
         // btnDoBaselineCorrection
         // 
-        this.btnDoBaselineCorrection.Location = new System.Drawing.Point(7, 188);
+        this.btnDoBaselineCorrection.Location = new System.Drawing.Point(7, 242);
         this.btnDoBaselineCorrection.Name = "btnDoBaselineCorrection";
         this.btnDoBaselineCorrection.Size = new System.Drawing.Size(142, 23);
         this.btnDoBaselineCorrection.TabIndex = 7;
@@ -98,7 +100,7 @@ partial class BaselineCorrectionForm
         // 
         // btnClose
         // 
-        this.btnClose.Location = new System.Drawing.Point(35, 295);
+        this.btnClose.Location = new System.Drawing.Point(35, 349);
         this.btnClose.Name = "btnClose";
         this.btnClose.Size = new System.Drawing.Size(75, 23);
         this.btnClose.TabIndex = 11;
@@ -108,7 +110,7 @@ partial class BaselineCorrectionForm
         // 
         // btnExportCorrectedCharts
         // 
-        this.btnExportCorrectedCharts.Location = new System.Drawing.Point(7, 246);
+        this.btnExportCorrectedCharts.Location = new System.Drawing.Point(7, 300);
         this.btnExportCorrectedCharts.Name = "btnExportCorrectedCharts";
         this.btnExportCorrectedCharts.Size = new System.Drawing.Size(142, 23);
         this.btnExportCorrectedCharts.TabIndex = 12;
@@ -116,11 +118,33 @@ partial class BaselineCorrectionForm
         this.btnExportCorrectedCharts.UseVisualStyleBackColor = true;
         this.btnExportCorrectedCharts.Click += new System.EventHandler(this.btnExportCorrectedCharts_Click);
         // 
+        // cbAreBaselineEndsExtended
+        // 
+        this.cbAreBaselineEndsExtended.Location = new System.Drawing.Point(12, 191);
+        this.cbAreBaselineEndsExtended.Name = "cbAreBaselineEndsExtended";
+        this.cbAreBaselineEndsExtended.Size = new System.Drawing.Size(153, 24);
+        this.cbAreBaselineEndsExtended.TabIndex = 13;
+        this.cbAreBaselineEndsExtended.Text = "Extend Baseline To Ends";
+        this.cbAreBaselineEndsExtended.UseVisualStyleBackColor = true;
+        this.cbAreBaselineEndsExtended.CheckedChanged += new System.EventHandler(this.cbAreBaselineEndExtended_CheckedChanged);
+        // 
+        // cbAreCorrectionPointsAdjusted
+        // 
+        this.cbAreCorrectionPointsAdjusted.Location = new System.Drawing.Point(12, 212);
+        this.cbAreCorrectionPointsAdjusted.Name = "cbAreCorrectionPointsAdjusted";
+        this.cbAreCorrectionPointsAdjusted.Size = new System.Drawing.Size(153, 24);
+        this.cbAreCorrectionPointsAdjusted.TabIndex = 14;
+        this.cbAreCorrectionPointsAdjusted.Text = "Adjust Correction Points";
+        this.cbAreCorrectionPointsAdjusted.UseVisualStyleBackColor = true;
+        this.cbAreCorrectionPointsAdjusted.CheckedChanged += new System.EventHandler(this.cbAreCorrectionPointsAdjusted_CheckedChanged);
+        // 
         // BaselineCorrectionForm
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.ClientSize = new System.Drawing.Size(169, 450);
+        this.Controls.Add(this.cbAreCorrectionPointsAdjusted);
+        this.Controls.Add(this.cbAreBaselineEndsExtended);
         this.Controls.Add(this.btnExportCorrectedCharts);
         this.Controls.Add(this.btnClose);
         this.Controls.Add(this.label1);
@@ -135,6 +159,9 @@ partial class BaselineCorrectionForm
         this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BaselineCorrectionForm_FormClosing);
         this.ResumeLayout(false);
     }
+
+    private System.Windows.Forms.CheckBox cbAreBaselineEndsExtended;
+    private System.Windows.Forms.CheckBox cbAreCorrectionPointsAdjusted;
 
     private System.Windows.Forms.Button btnExportCorrectedCharts;
 

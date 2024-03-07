@@ -25,6 +25,18 @@ public static class AppSettings
         set => Set("PeakAnalysisSaveFileDirectory", value);
     }
 
+    public static bool AreBaselineEndsExtended
+    {
+        get => GetBool("AreBaselineEndsExtended") ?? false;
+        set => SetBool("AreBaselineEndsExtended", value);
+    }
+    
+    public static bool AreCorrectionPointsAdjusted
+    {
+        get => GetBool("AreCorrectionPointsAdjusted") ?? false;
+        set => SetBool("AreCorrectionPointsAdjusted", value);
+    }
+
     private static IConfiguration Configuration
     {
         get
@@ -50,17 +62,21 @@ public static class AppSettings
         Configuration[key] = value;
     }
 
-
-    // public static bool? GetBool(string key)
-    // {
-    //     var str = Configuration[key];
-    //     if (Boolean.TryParse(str, out var ret))
-    //     {
-    //         return ret;
-    //     }
-    //     return null;
-    // }
-    //     
+    public static bool? GetBool(string key)
+    {
+        var str = Configuration[key];
+        if (Boolean.TryParse(str, out var ret))
+        {
+            return ret;
+        }
+        return null;
+    }
+    
+    public static void SetBool(string key, bool value)
+    {
+        Configuration[key] = value.ToString();
+    }
+        
     // public static int? GetInt(string key)
     // {
     //     var str = Configuration[key];

@@ -8,10 +8,13 @@ public partial class BaselineCorrectionForm : Form
     
     private const string FILE_DIALOG_FILTER = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
         
-    public BaselineCorrectionForm(BaselineCorrectionLayer baselineCorrectionLayer)
+    public BaselineCorrectionForm(BaselineCorrectionLayer baselineCorrectionLayer, bool areBaselineEndsExtended,
+        bool areCorrectionPointsAdjusted)
     {
         this.baselineCorrectionLayer = baselineCorrectionLayer;
         InitializeComponent();
+        cbAreBaselineEndsExtended.Checked = areBaselineEndsExtended;
+        cbAreCorrectionPointsAdjusted.Checked = areCorrectionPointsAdjusted;
     }
 
     private void btnImportPoints_Click(object sender, EventArgs e)
@@ -142,7 +145,7 @@ public partial class BaselineCorrectionForm : Form
 
     private void BaselineCorrectionForm_FormClosing(object sender, FormClosingEventArgs e)
     {
-        if (baselineCorrectionLayer.BaselinePoints.Any())
+        if (baselineCorrectionLayer.CorrectionPoints.Any())
         {
             if (FormUtil.ShowQuestion("Do you really want to exit Baseline Correction and loose selected correction points?",
                     "Confirmation") == DialogResult.No)
@@ -162,5 +165,19 @@ public partial class BaselineCorrectionForm : Form
         {
             FormUtil.ShowAppError("Export corrected spectra failed.", "Error", ex);
         }
+    }
+
+    private void cbAreBaselineEndExtended_CheckedChanged(object sender, EventArgs e)
+    {
+        var isChecked = ((CheckBox) sender).Checked;
+        baselineCorrectionLayer.AreBaselineEndsExtended = isChecked;
+        AppSettings.AreBaselineEndsExtended = isChecked;
+    }
+
+    private void cbAreCorrectionPointsAdjusted_CheckedChanged(object sender, EventArgs e)
+    {
+        var isChecked = ((CheckBox) sender).Checked;
+        baselineCorrectionLayer.AreCorrectionPointsAdjusted = isChecked;
+        AppSettings.AreCorrectionPointsAdjusted = isChecked;
     }
 }
