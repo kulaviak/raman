@@ -25,7 +25,7 @@ public partial class BaselineCorrectionForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Importing baseline points failed.", "Error", ex);
+            MessageUtil.ShowAppError("Importing baseline points failed.", "Error", ex);
         }
     }
 
@@ -41,7 +41,7 @@ public partial class BaselineCorrectionForm : Form
                 var filePaths = openFileDialog.FileNames.ToList();
                 if (filePaths.Count == 0)
                 {
-                    FormUtil.ShowUserError("No file was selected.", "No file selected");
+                    MessageUtil.ShowUserError("No file was selected.", "No file selected");
                     return;
                 }
                 try
@@ -50,7 +50,7 @@ public partial class BaselineCorrectionForm : Form
                 }
                 catch (Exception ex)
                 {
-                    FormUtil.ShowAppError($"Importing baseline correction points failed. Error: {ex.Message}", "Import failed", ex);
+                    MessageUtil.ShowAppError($"Importing baseline correction points failed. Error: {ex.Message}", "Import failed", ex);
                 }
             }
         }
@@ -70,7 +70,7 @@ public partial class BaselineCorrectionForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Exporting points failed.", "Error", ex);
+            MessageUtil.ShowAppError("Exporting points failed.", "Error", ex);
         }
     }
 
@@ -85,18 +85,18 @@ public partial class BaselineCorrectionForm : Form
                 var filePaths = saveFileDialog.FileNames.ToList();
                 if (filePaths.Count == 0)
                 {
-                    FormUtil.ShowUserError("No file was selected.", "No file selected");
+                    MessageUtil.ShowUserError("No file was selected.", "No file selected");
                     return;
                 }
                 try
                 {
                     var filePath = filePaths.First();
                     baselineCorrectionLayer.ExportPoints(filePath);
-                    FormUtil.ShowInfo("Points were exported successfully.", "Export finished");
+                    MessageUtil.ShowInfo("Points were exported successfully.", "Export finished");
                 }
                 catch (Exception ex)
                 {
-                    FormUtil.ShowAppError($"Exporting baseline correction points failed. Error: {ex.Message}", "Export failed", ex);
+                    MessageUtil.ShowAppError($"Exporting baseline correction points failed. Error: {ex.Message}", "Export failed", ex);
                 }
             }
         }
@@ -110,7 +110,7 @@ public partial class BaselineCorrectionForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Baseline correction failed.", "Error", ex);
+            MessageUtil.ShowAppError("Baseline correction failed.", "Error", ex);
         }
     }
 
@@ -127,7 +127,7 @@ public partial class BaselineCorrectionForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Reset failed.", "Error", ex);
+            MessageUtil.ShowAppError("Reset failed.", "Error", ex);
         }
     }
 
@@ -139,7 +139,7 @@ public partial class BaselineCorrectionForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Closing form failed.", "Error", ex);
+            MessageUtil.ShowAppError("Closing form failed.", "Error", ex);
         }
     }
 
@@ -147,7 +147,7 @@ public partial class BaselineCorrectionForm : Form
     {
         if (baselineCorrectionLayer.CorrectionPoints.Any())
         {
-            if (FormUtil.ShowQuestion("Do you really want to exit Baseline Correction and loose selected correction points?",
+            if (MessageUtil.ShowQuestion("Do you really want to exit Baseline Correction and loose selected correction points?",
                     "Confirmation") == DialogResult.No)
             {
                 e.Cancel = true;
@@ -163,7 +163,7 @@ public partial class BaselineCorrectionForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Export corrected spectra failed.", "Error", ex);
+            MessageUtil.ShowAppError("Export corrected spectra failed.", "Error", ex);
         }
     }
 

@@ -31,7 +31,7 @@ public partial class PeakAnalysisForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Reset failed.", "Error", ex);
+            MessageUtil.ShowAppError("Reset failed.", "Error", ex);
         }
     }
 
@@ -43,7 +43,7 @@ public partial class PeakAnalysisForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Closing form failed.", "Error", ex);
+            MessageUtil.ShowAppError("Closing form failed.", "Error", ex);
         }
     }
 
@@ -51,7 +51,7 @@ public partial class PeakAnalysisForm : Form
     {
         if (peakAnalysisLayer.Peaks.Any() && !peakAnalysisLayer.IsExported)
         {
-            if (FormUtil.ShowQuestion("Do you really want to exit Peak Analysis and loose selected peaks?",
+            if (MessageUtil.ShowQuestion("Do you really want to exit Peak Analysis and loose selected peaks?",
                     "Confirmation") == DialogResult.No)
             {
                 e.Cancel = true;
@@ -67,7 +67,7 @@ public partial class PeakAnalysisForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Peaks export failed.", "Error", ex);
+            MessageUtil.ShowAppError("Peaks export failed.", "Error", ex);
         }
     }
 
@@ -87,7 +87,7 @@ public partial class PeakAnalysisForm : Form
                 var filePaths = saveFileDialog.FileNames.ToList();
                 if (filePaths.Count == 0)
                 {
-                    FormUtil.ShowUserError("No file was selected.", "No file selected");
+                    MessageUtil.ShowUserError("No file was selected.", "No file selected");
                     return;
                 }
                 try
@@ -95,11 +95,11 @@ public partial class PeakAnalysisForm : Form
                     var filePath = filePaths.First();
                     AppSettings.PeakAnalysisSaveFileDirectory = Path.GetDirectoryName(filePath);
                     peakAnalysisLayer.ExportPeaks(filePath);
-                    FormUtil.ShowInfo("Peaks were exported successfully.", "Export finished");
+                    MessageUtil.ShowInfo("Peaks were exported successfully.", "Export finished");
                 }
                 catch (Exception ex)
                 {
-                    FormUtil.ShowAppError("Exporting peaks failed.", "Export failed", ex);
+                    MessageUtil.ShowAppError("Exporting peaks failed.", "Export failed", ex);
                 }
             }
         }
@@ -113,7 +113,7 @@ public partial class PeakAnalysisForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Changing checkbox value failed.", "Error", ex);
+            MessageUtil.ShowAppError("Changing checkbox value failed.", "Error", ex);
         }
     }
 }

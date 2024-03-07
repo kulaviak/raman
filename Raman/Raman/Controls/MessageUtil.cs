@@ -2,7 +2,7 @@ using NLog;
 
 namespace Raman.Controls;
 
-public abstract class FormUtil
+public abstract class MessageUtil
 {
 
     private static Logger _logger = LogManager.GetCurrentClassLogger();

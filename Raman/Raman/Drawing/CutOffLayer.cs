@@ -24,12 +24,12 @@ public class CutOffLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel)
     {
         if (start == null)
         {
-            FormUtil.ShowInfo("Start point is not set.", "Information");
+            MessageUtil.ShowInfo("Start point is not set.", "Information");
             return;
         }
         if (end == null)
         {
-            FormUtil.ShowInfo("End point is not set.", "Information");
+            MessageUtil.ShowInfo("End point is not set.", "Information");
             return;
         }
         startHistory.Push(start);
@@ -45,7 +45,7 @@ public class CutOffLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel)
     {
         if (chartHistory.Count == 0)
         {
-            FormUtil.ShowInfo("There is no undo to do.", "Information");
+            MessageUtil.ShowInfo("There is no undo to do.", "Information");
             return;
         }
         start = startHistory.Pop();
@@ -94,7 +94,7 @@ public class CutOffLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel)
     {
         if (start == null && end == null)
         {
-            FormUtil.ShowInfo("There are no points to reset.", "Information");
+            MessageUtil.ShowInfo("There are no points to reset.", "Information");
             return;
         }
         start = null;

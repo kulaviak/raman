@@ -40,26 +40,67 @@ public class BaselineCorrectionLayer : LayerBase
     {
         if (e.Button == MouseButtons.Left)
         {
-            var point = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
+            var point = CalculateCorrectionPoint(e.Location, canvasPanel.VisibleCharts, AreCorrectionPointsAdjusted);
             CorrectionPoints.Add(point);
             Refresh();
         }
-        // else if (e.Button == MouseButtons.Middle)
-        // {
-        //     RemoveClosestPoint(e.Location);
-        //     Refresh();
-        // }
+        else if (e.Button == MouseButtons.Middle && Util.IsCtrlKeyPressed())
+        {
+            RemoveClosestPoint(e.Location);
+            Refresh();
+        }
         else if (e.Button == MouseButtons.Right)
         {
             ShowContextMenu(e.Location);
         }
     }
-        
+
+    private ValuePoint CalculateCorrectionPoint(Point pos, List<Chart> charts, bool areCorrectionPointsAdjusted)
+    {
+        if (areCorrectionPointsAdjusted)
+        {
+            var closestChart = new ClosestChartCalculator().GetClosestChart(charts, pos, CoordSystem); 
+            var closestPoints = GetClosestPoints(closestChart.Points, pos);
+            var averageY = closestPoints.Average(point => point.Y);
+            var ret = new ValuePoint(CoordSystem.ToValueX(pos.X), averageY);
+            return ret;
+        }
+        else
+        {
+            return CoordSystem.ToValuePoint(pos.X, pos.Y);
+        }
+    }
+
+    private List<ValuePoint> GetClosestPoints(List<ValuePoint> points, Point pos)
+    {
+        var ret = new List<ValuePoint>();
+        var closestPoint = points.MinByOrDefault(x => Util.GetPixelDistance(CoordSystem.ToPixelPoint(x), pos));
+        ret.Add(closestPoint);
+        var index = points.IndexOf(closestPoint);
+        if (index - 1 >= 0)
+        {
+            ret.Add(points[index - 1]);
+        }
+        if (index - 2 >= 0)
+        {
+            ret.Add(points[index - 2]);
+        }
+        if (index + 1 < points.Count)
+        {
+            ret.Add(points[index + 1]);
+        }
+        if (index + 2 >= points.Count)
+        {
+            ret.Add(points[index + 2]);
+        }
+        return ret;
+    }
+
     public void Reset()
     {
         if (!CorrectionPoints.Any())
         {
-            FormUtil.ShowInfo("There are no points to reset.", "Information");
+            MessageUtil.ShowInfo("There are no points to reset.", "Information");
             return;
         }
         CorrectionPoints.Clear();
@@ -82,7 +123,7 @@ public class BaselineCorrectionLayer : LayerBase
     {
         if (!CorrectionPoints.Any())
         {
-            FormUtil.ShowInfo("There are no baseline points to export.", "Information");
+            MessageUtil.ShowInfo("There are no baseline points to export.", "Information");
             return;
         }
         new OnePointPerLineFileWriter().WritePoints(CorrectionPoints, filePath);
@@ -92,7 +133,7 @@ public class BaselineCorrectionLayer : LayerBase
     {
         if (!CorrectionPoints.Any())
         {
-            FormUtil.ShowInfo("There are no baseline points defined.", "Information");
+            MessageUtil.ShowInfo("There are no baseline points defined.", "Information");
             return;
         }
         chartHistory.Push(canvasPanel.Charts);
@@ -107,7 +148,7 @@ public class BaselineCorrectionLayer : LayerBase
         var exportedCharts = canvasPanel.Charts.Where(x => x.IsBaselineCorrected).ToList();
         if (!exportedCharts.Any())
         {
-            FormUtil.ShowUserError("There are no corrected spectra.", "No spectra to export");
+            MessageUtil.ShowUserError("There are no corrected spectra.", "No spectra to export");
             return;
         }
         using (var folderBrowserDialog = new FolderBrowserDialog())
@@ -119,7 +160,7 @@ public class BaselineCorrectionLayer : LayerBase
                 {
                     ExportCorrectedChart(chart, selectedPath);                                                
                 }
-                FormUtil.ShowInfo("Export finished successfully.", "Export finished");
+                MessageUtil.ShowInfo("Export finished successfully.", "Export finished");
             }
         }
     }
@@ -138,7 +179,7 @@ public class BaselineCorrectionLayer : LayerBase
             }
             catch (Exception e)
             {
-                FormUtil.ShowAppError("Drawing baseline failed.", "Error", e);
+                MessageUtil.ShowAppError("Drawing baseline failed.", "Error", e);
             }
         }
     }
@@ -238,7 +279,7 @@ public class BaselineCorrectionLayer : LayerBase
     {
         if (chartHistory.Count == 0)
         {
-            FormUtil.ShowInfo("There is no undo to do.", "Information");
+            MessageUtil.ShowInfo("There is no undo to do.", "Information");
             return;
         }
         canvasPanel.Charts = chartHistory.Pop();

@@ -23,7 +23,7 @@ namespace Raman
             LogManager.GetCurrentClassLogger().Error(e, "Unexpected error happened");
             try
             {
-                FormUtil.ShowAppError("Unexpected error happened. Please close application.", "Error", e);
+                MessageUtil.ShowAppError("Unexpected error happened. Please close application.", "Error", e);
             }
             catch (Exception)
             {

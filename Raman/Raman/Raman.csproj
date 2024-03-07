@@ -130,7 +130,7 @@
     <Compile Include="Controls\ErrorForm.Designer.cs">
       <DependentUpon>ErrorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FormUtil.cs" />
+    <Compile Include="Controls\MessageUtil.cs" />
     <Compile Include="Controls\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

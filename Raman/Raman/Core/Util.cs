@@ -53,4 +53,9 @@ public abstract class Util
     {
         return Format(number, AppConstants.EXPORT_DECIMAL_PLACES);
     }
+
+    public static bool IsCtrlKeyPressed()
+    {
+        return Control.ModifierKeys == Keys.Control;
+    }
 }

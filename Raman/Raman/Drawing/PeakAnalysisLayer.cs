@@ -55,6 +55,11 @@ public class PeakAnalysisLayer : LayerBase
             }
             Refresh();
         }
+        else if (e.Button == MouseButtons.Middle && Util.IsCtrlKeyPressed())
+        {
+            RemoveClosestPeak(e.Location);
+            Refresh();
+        }
         else if (e.Button == MouseButtons.Right)
         {
             ShowContextMenu(e.Location);
@@ -126,7 +131,7 @@ public class PeakAnalysisLayer : LayerBase
     {
         if (!Peaks.Any())
         {
-            FormUtil.ShowInfo("There are no peak to reset.", "Information");
+            MessageUtil.ShowInfo("There are no peak to reset.", "Information");
             return;
         }
         Peaks.Clear();
@@ -207,7 +212,7 @@ public class PeakAnalysisLayer : LayerBase
     {
         if (!VisiblePeaks.Any())
         {
-            FormUtil.ShowInfo("There are no peaks to export.", "Information");
+            MessageUtil.ShowInfo("There are no peaks to export.", "Information");
             return;
         }
         new PeakAnalysisExporter().ExportPeaks(filePath, VisiblePeaks);

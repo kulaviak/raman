@@ -20,7 +20,7 @@ public partial class CutOffForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Closing form failed.", "Error", ex);
+            MessageUtil.ShowAppError("Closing form failed.", "Error", ex);
         }
     }
     
@@ -32,7 +32,7 @@ public partial class CutOffForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Cut Off failed.", "Error", ex);
+            MessageUtil.ShowAppError("Cut Off failed.", "Error", ex);
         }
     }
     
@@ -44,7 +44,7 @@ public partial class CutOffForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Undo Cut Off failed.", "Error", ex);
+            MessageUtil.ShowAppError("Undo Cut Off failed.", "Error", ex);
         }
     }
 
@@ -56,7 +56,7 @@ public partial class CutOffForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Reset points failed.", "Error", ex);
+            MessageUtil.ShowAppError("Reset points failed.", "Error", ex);
         }
     }
 
@@ -64,7 +64,7 @@ public partial class CutOffForm : Form
     {
         if (cutOffLayer.Start != null || cutOffLayer.End != null)
         {
-            if (FormUtil.ShowQuestion("You selected some cut off points. Do you really want to exit Cut Off without cutting of spectra?",
+            if (MessageUtil.ShowQuestion("You selected some cut off points. Do you really want to exit Cut Off without cutting of spectra?",
                     "Confirmation") == DialogResult.No)
             {
                 e.Cancel = true;

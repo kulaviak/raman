@@ -116,7 +116,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Opening single spectrum files failed.", "Opening files failed", ex);
+            MessageUtil.ShowAppError("Opening single spectrum files failed.", "Opening files failed", ex);
         }
     }
 
@@ -191,7 +191,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Zoom to window failed.", "Error", ex);
+            MessageUtil.ShowAppError("Zoom to window failed.", "Error", ex);
         }
     }
 
@@ -208,7 +208,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Zoom failed.", "Zoom failed", ex);
+            MessageUtil.ShowAppError("Zoom failed.", "Zoom failed", ex);
         }
     }
     
@@ -220,7 +220,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Baseline correction failed.", "Error", ex);
+            MessageUtil.ShowAppError("Baseline correction failed.", "Error", ex);
         }
     }
 
@@ -244,7 +244,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Closing Baseline Correction form failed.", "Error", ex);
+            MessageUtil.ShowAppError("Closing Baseline Correction form failed.", "Error", ex);
         }
     }
     
@@ -256,7 +256,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Opening single spectrum files failed.", "Opening files failed", ex);
+            MessageUtil.ShowAppError("Opening single spectrum files failed.", "Opening files failed", ex);
         }
     }
 
@@ -268,7 +268,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Zoom failed.", "Error", ex);
+            MessageUtil.ShowAppError("Zoom failed.", "Error", ex);
         }
     }
 
@@ -280,7 +280,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Zoom to original size failed.", "Error", ex);
+            MessageUtil.ShowAppError("Zoom to original size failed.", "Error", ex);
         }
     }
 
@@ -292,7 +292,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Baseline correction failed.", "Error", ex);
+            MessageUtil.ShowAppError("Baseline correction failed.", "Error", ex);
         }
     }
 
@@ -304,7 +304,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Form resize failed.", "Error", ex);
+            MessageUtil.ShowAppError("Form resize failed.", "Error", ex);
         }
     }
 
@@ -316,7 +316,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Peak analysis failed.", "Error", ex);
+            MessageUtil.ShowAppError("Peak analysis failed.", "Error", ex);
         }
     }
 
@@ -340,7 +340,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Closing Peak Analysis form failed.", "Error", ex);
+            MessageUtil.ShowAppError("Closing Peak Analysis form failed.", "Error", ex);
         }
     }
 
@@ -352,7 +352,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Peak analysis failed.", "Error", ex);
+            MessageUtil.ShowAppError("Peak analysis failed.", "Error", ex);
         }
     }
 
@@ -364,7 +364,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Opening multi spectrum files failed.", "Opening files failed", ex);
+            MessageUtil.ShowAppError("Opening multi spectrum files failed.", "Opening files failed", ex);
         }
     }
 
@@ -443,7 +443,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError($"Error opening PDF: {ex.Message}", "Error", ex);
+            MessageUtil.ShowAppError($"Error opening PDF: {ex.Message}", "Error", ex);
         }    
     }
 
@@ -455,7 +455,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Cut Off failed.", "Error", ex);
+            MessageUtil.ShowAppError("Cut Off failed.", "Error", ex);
         }
     }
 
@@ -479,7 +479,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Closing Cut Off form failed.", "Error", ex);
+            MessageUtil.ShowAppError("Closing Cut Off form failed.", "Error", ex);
         }
     }
 
@@ -491,7 +491,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Cut Off failed.", "Error", ex);
+            MessageUtil.ShowAppError("Cut Off failed.", "Error", ex);
         }
     }
 
@@ -503,7 +503,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Selecting spectra failed.", "Error", ex);
+            MessageUtil.ShowAppError("Selecting spectra failed.", "Error", ex);
         }
     }
 
@@ -535,7 +535,7 @@ public partial class MainForm : Form
         }
         catch (Exception ex)
         {
-            FormUtil.ShowAppError("Selecting spectra failed.", "Error", ex);
+            MessageUtil.ShowAppError("Selecting spectra failed.", "Error", ex);
         }
     }
 }
