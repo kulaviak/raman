@@ -435,16 +435,6 @@ public partial class MainForm : Form
 
     private void miHelp_Click(object sender, EventArgs e)
     {
-        try
-        {
-            var path = Path.Combine(Environment.CurrentDirectory, "doc/Raman.pdf");
-            // Use the default PDF viewer on the system to open the file
-            Process.Start(path);
-        }
-        catch (Exception ex)
-        {
-            MessageUtil.ShowAppError($"Error opening PDF: {ex.Message}", "Error", ex);
-        }    
     }
 
     private void miCutOff_Click(object sender, EventArgs e)
