@@ -293,7 +293,10 @@ public class BaselineCorrectionLayer : LayerBase
             MessageUtil.ShowInfo("There is no undo to do.", "Information");
             return;
         }
-        canvasPanel.Charts = chartHistory.Pop();
+
+        var charts = chartHistory.Pop();
+        Util.SetChartVisibilityAccordingToCurrentVisibleCharts(charts, canvasPanel.VisibleCharts);
+        canvasPanel.Charts = charts;
         CorrectionPoints = correctionPointHistory.Pop();
         canvasPanel.ZoomToSeeAllCharts();
     }
