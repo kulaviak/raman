@@ -18,6 +18,14 @@ public class Chart
         Name = name;
     }
 
+    public Chart(List<ValuePoint> points, string name, bool isBaselineCorrected, bool isVisible)
+    {
+        this.points = points;
+        Name = name;
+        IsBaselineCorrected = isBaselineCorrected;
+        IsVisible = isVisible;
+    }
+
     public decimal? GetValue(decimal x)
     {
         for (var i = 0; i < Points.Count - 1; i++)
@@ -53,5 +61,11 @@ public class Chart
     public override string ToString()
     {
         return $"Name: {Name}, Points.Count: {points.Count}, IsVisible: {IsVisible}, IsBaselineCorrected: {IsBaselineCorrected}";
+    }
+    
+    public Chart DeepClone()
+    {
+        var clonedPoints = Points.Select(point => point.DeepClone()).ToList();
+        return new Chart(clonedPoints, Name, IsBaselineCorrected, IsVisible);
     }
 }

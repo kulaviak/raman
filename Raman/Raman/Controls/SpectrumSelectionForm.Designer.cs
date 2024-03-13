@@ -83,6 +83,7 @@
             this.cbSpectra.Name = "cbSpectra";
             this.cbSpectra.Size = new System.Drawing.Size(281, 574);
             this.cbSpectra.TabIndex = 4;
+            this.cbSpectra.SelectedIndexChanged += new System.EventHandler(this.cbSpectra_SelectedIndexChanged);
             // 
             // SpectrumSelectionForm
             // 

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.IO;
+﻿using System.IO;
 using Raman.Controls;
 using Raman.Drawing;
 
@@ -500,13 +499,11 @@ public partial class MainForm : Form
     private void ShowSpectrumSelectionForm()
     {
         var orderedCharts = canvasPanel.Charts.OrderByDescending(chart => GetAverageY(chart)).ToList();
-        var form = new SpectrumSelectionForm(orderedCharts);
-        if (form.ShowDialog() == DialogResult.OK)
+        var form = new SpectrumSelectionForm(orderedCharts, canvasPanel);
+        var originalCharts = canvasPanel.Charts.Select(chart => chart.DeepClone()).ToList();
+        if (form.ShowDialog() == DialogResult.Cancel)
         {
-            foreach (var chart in orderedCharts)
-            {
-                chart.IsVisible = form.SelectedSpectrumNames.Contains(chart.Name);
-            }
+            canvasPanel.Charts = originalCharts;
         }
         canvasPanel.Refresh();
     }

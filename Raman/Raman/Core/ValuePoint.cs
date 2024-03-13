@@ -50,4 +50,9 @@ public class ValuePoint
     {
         return !Equals(left, right);
     }
+    
+    public ValuePoint DeepClone()
+    {
+        return new ValuePoint(X, Y);
+    }
 }

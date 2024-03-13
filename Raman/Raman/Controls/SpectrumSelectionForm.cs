@@ -4,23 +4,13 @@ namespace Raman.Controls
 {
     public partial class SpectrumSelectionForm : Form
     {
-        public SpectrumSelectionForm(List<Chart> charts)
+        private readonly CanvasPanel canvasPanel;
+        
+        public SpectrumSelectionForm(List<Chart> charts, CanvasPanel canvasPanel)
         {
+            this.canvasPanel = canvasPanel;
             InitializeComponent();
             AdditionalInitialization(charts);
-        }
-
-        public HashSet<string> SelectedSpectrumNames 
-        {
-            get
-            {
-                var ret = new HashSet<string>();
-                foreach (var item in cbSpectra.CheckedItems)
-                {
-                    ret.Add(item.ToString());
-                }
-                return ret;
-            }
         }
 
         private void AdditionalInitialization(List<Chart> charts)
@@ -42,6 +32,16 @@ namespace Raman.Controls
             {
                 cbSpectra.SetItemChecked(i, isSelected);
             }
+            RefreshCanvasPanel();
+        }
+
+        private void RefreshCanvasPanel()
+        {
+            foreach (var chart in canvasPanel.Charts)
+            {
+                chart.IsVisible = cbSpectra.CheckedItems.Contains(chart.Name);
+            }
+            canvasPanel.Refresh();
         }
 
         private void btnSelectAll_Click(object sender, EventArgs e)
@@ -52,6 +52,11 @@ namespace Raman.Controls
         private void btnOK_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
+        }
+
+        private void cbSpectra_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshCanvasPanel();
         }
     }
 }
