@@ -1,4 +1,5 @@
 using System.Globalization;
+using Raman.Drawing;
 
 namespace Raman.Core;
 
@@ -57,5 +58,14 @@ public abstract class Util
     public static bool IsCtrlKeyPressed()
     {
         return Control.ModifierKeys == Keys.Control;
+    }
+
+    public static void SetChartVisibilityAccordingToCurrentVisibleCharts(List<Chart> charts, List<Chart> visibleCharts)
+    {
+        var visibleChartNames = visibleCharts.Select(chart => chart.Name).ToHashSet();
+        foreach (var chart in charts)
+        {
+            chart.IsVisible = visibleChartNames.Contains(chart.Name);
+        }
     }
 }

@@ -50,7 +50,9 @@ public class CutOffLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel)
         }
         start = startHistory.Pop();
         end = endHistory.Pop();
-        canvasPanel.Charts = chartHistory.Pop();
+        var charts = chartHistory.Pop();
+        Util.SetChartVisibilityAccordingToCurrentVisibleCharts(charts, canvasPanel.VisibleCharts);
+        canvasPanel.Charts = charts;
         Refresh();
     }
     
