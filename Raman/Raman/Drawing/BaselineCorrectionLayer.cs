@@ -73,27 +73,14 @@ public class BaselineCorrectionLayer : LayerBase
 
     private List<ValuePoint> GetClosestPoints(List<ValuePoint> points, Point pos)
     {
-        var ret = new List<ValuePoint>();
-        var closestPoint = points.MinByOrDefault(x => Util.GetPixelDistance(CoordSystem.ToPixelPoint(x), pos));
-        ret.Add(closestPoint);
-        var index = points.IndexOf(closestPoint);
-        if (index - 1 >= 0)
-        {
-            ret.Add(points[index - 1]);
-        }
-        if (index - 2 >= 0)
-        {
-            ret.Add(points[index - 2]);
-        }
-        if (index + 1 < points.Count)
-        {
-            ret.Add(points[index + 1]);
-        }
-        if (index + 2 >= points.Count)
-        {
-            ret.Add(points[index + 2]);
-        }
+        var closestPoint = GetClosestPointInXDirection(points, CoordSystem.ToValuePoint(pos));
+        var ret = GetNeighbourhoodPoints(closestPoint, points);
         return ret;
+    }
+
+    private static ValuePoint GetClosestPointInXDirection(List<ValuePoint> points, ValuePoint point)
+    {
+        return points.MinByOrDefault(x => Math.Abs(x.X - point.X));
     }
 
     public void Reset()
@@ -138,7 +125,7 @@ public class BaselineCorrectionLayer : LayerBase
         }
         chartHistory.Push(canvasPanel.Charts);
         correctionPointHistory.Push(CorrectionPoints);
-        canvasPanel.Charts = canvasPanel.VisibleCharts.Select(x => CorrectBaseline(x, CorrectionPoints)).ToList();
+        canvasPanel.Charts = canvasPanel.VisibleCharts.Select(x => CorrectBaseline(x)).ToList();
         CorrectionPoints = new List<ValuePoint>();
         canvasPanel.ZoomToSeeAllCharts();
     }
@@ -263,15 +250,39 @@ public class BaselineCorrectionLayer : LayerBase
         }
     }
     
-    private Chart CorrectBaseline(Chart chart, List<ValuePoint> correctionPoints)
+    private Chart CorrectBaseline(Chart chart)
     {
-        var baselineStart = GetBaselineStart();
-        var baselineEnd = GetBaselineEnd();
-        var xPositions = chart.Points.Where(point => baselineStart <= point.X && point.X <= baselineEnd).Select(point => point.X).ToList();
-        var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, correctionPoints);
+        var start = GetBaselineStart();
+        var end = GetBaselineEnd();
+        var xPositions = chart.Points.Where(point => start <= point.X && point.X <= end).Select(point => point.X).ToList();
+        // todo jak vyresit situaci kdy pro dany graf nektere body byly adjusted a nektere ne - asi zakazat zmenit pote co byl nejaky bod vybran
+        var chartCorrectionPoints = GetChartCorrectionPoints(chart, CorrectionPoints, AreCorrectionPointsAdjusted);
+        var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, chartCorrectionPoints);
         var newChartPoints = new BaselineCorrector().CorrectChartByBaseline(chart.Points, baselinePoints);
         var ret = new Chart(newChartPoints, chart.Name);
         ret.IsBaselineCorrected = true;
+        return ret;
+    }
+
+    private static List<ValuePoint> GetChartCorrectionPoints(Chart chart, List<ValuePoint> correctionPoints, bool areCorrectionPointsAdjusted)
+    {
+        var ret = new List<ValuePoint>();
+        foreach (var correctionPoint in correctionPoints)
+        {
+            var chartPointClosestInXDirection = GetClosestPointInXDirection(chart.Points, correctionPoint);
+            decimal y;
+            if (areCorrectionPointsAdjusted)
+            {
+                var points = GetNeighbourhoodPoints(chartPointClosestInXDirection, chart.Points);
+                y = points.Average(point => point.Y);
+            }
+            else
+            {
+                y = chartPointClosestInXDirection.Y;
+            }
+            var point = new ValuePoint(chartPointClosestInXDirection.X, y);
+            ret.Add(point);
+        }   
         return ret;
     }
 
@@ -291,5 +302,31 @@ public class BaselineCorrectionLayer : LayerBase
     {
         var filePath = Path.Combine(folderPath, chart.Name + "_bc.txt");
         new OnePointPerLineFileWriter().WritePoints(chart.Points, filePath);
+    }
+ 
+    /// <summary>
+    /// Gets neighbourhood points including the point itself.
+    /// </summary>
+    private static List<ValuePoint> GetNeighbourhoodPoints(ValuePoint point, List<ValuePoint> points)
+    {
+        var ret = new List<ValuePoint>();
+        var index = points.IndexOf(point);
+        if (index - 1 >= 0)
+        {
+            ret.Add(points[index - 1]);
+        }
+        if (index - 2 >= 0)
+        {
+            ret.Add(points[index - 2]);
+        }
+        if (index + 1 < points.Count)
+        {
+            ret.Add(points[index + 1]);
+        }
+        if (index + 2 >= points.Count)
+        {
+            ret.Add(points[index + 2]);
+        }
+        return ret;
     }
 }
