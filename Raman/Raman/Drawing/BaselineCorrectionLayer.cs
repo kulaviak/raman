@@ -255,7 +255,6 @@ public class BaselineCorrectionLayer : LayerBase
         var start = GetBaselineStart();
         var end = GetBaselineEnd();
         var xPositions = chart.Points.Where(point => start <= point.X && point.X <= end).Select(point => point.X).ToList();
-        // todo jak vyresit situaci kdy pro dany graf nektere body byly adjusted a nektere ne - asi zakazat zmenit pote co byl nejaky bod vybran
         var chartCorrectionPoints = GetChartCorrectionPoints(chart, CorrectionPoints, AreCorrectionPointsAdjusted);
         var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, chartCorrectionPoints);
         var newChartPoints = new BaselineCorrector().CorrectChartByBaseline(chart.Points, baselinePoints);

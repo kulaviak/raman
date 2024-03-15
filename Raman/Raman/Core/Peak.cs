@@ -33,7 +33,9 @@ public class Peak
 
     public Line Vertical { get; } 
     
-    public decimal Height { get; } 
+    public decimal Height { get; }
+
+    public decimal Area => 0;
 
     public override string ToString()
     {

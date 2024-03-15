@@ -130,13 +130,14 @@ partial class BaselineCorrectionForm
         // 
         // cbAreCorrectionPointsAdjusted
         // 
+        this.cbAreCorrectionPointsAdjusted.AutoCheck = false;
         this.cbAreCorrectionPointsAdjusted.Location = new System.Drawing.Point(12, 212);
         this.cbAreCorrectionPointsAdjusted.Name = "cbAreCorrectionPointsAdjusted";
         this.cbAreCorrectionPointsAdjusted.Size = new System.Drawing.Size(153, 24);
         this.cbAreCorrectionPointsAdjusted.TabIndex = 14;
         this.cbAreCorrectionPointsAdjusted.Text = "Adjust Correction Points";
         this.cbAreCorrectionPointsAdjusted.UseVisualStyleBackColor = true;
-        this.cbAreCorrectionPointsAdjusted.CheckedChanged += new System.EventHandler(this.cbAreCorrectionPointsAdjusted_CheckedChanged);
+        this.cbAreCorrectionPointsAdjusted.Click += new System.EventHandler(this.cbAreCorrectionPointsAdjusted_Click);
         // 
         // BaselineCorrectionForm
         // 

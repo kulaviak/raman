@@ -174,9 +174,17 @@ public partial class BaselineCorrectionForm : Form
         AppSettings.AreBaselineEndsExtended = isChecked;
     }
 
-    private void cbAreCorrectionPointsAdjusted_CheckedChanged(object sender, EventArgs e)
+    private void cbAreCorrectionPointsAdjusted_Click(object sender, EventArgs e)
     {
-        var isChecked = ((CheckBox) sender).Checked;
+        // checkbox has Autocheck = false, because I want to be able to set the checked property programmatically and that's why I have to 
+        // react on Click event and not on CheckedChanged event
+        var isChecked = !((CheckBox) sender).Checked;
+        if (baselineCorrectionLayer.CorrectionPoints.Any())
+        {
+            MessageUtil.ShowUserError("Option Adjust Correction Points can not be changed after some points are already selected. Please remove points and try again.", "Error");
+            return;
+        }
+        cbAreCorrectionPointsAdjusted.Checked = isChecked;
         baselineCorrectionLayer.AreCorrectionPointsAdjusted = isChecked;
         AppSettings.AreCorrectionPointsAdjusted = isChecked;
     }
