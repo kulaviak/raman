@@ -1,5 +1,9 @@
 using System.ComponentModel;
 using Raman.Controls;
+using Raman.Tools.BaselineCorrection;
+using Raman.Tools.CutOff;
+using Raman.Tools.PeakAnalysis;
+using Raman.View;
 
 namespace Raman.Drawing;
 

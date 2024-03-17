@@ -1,6 +1,6 @@
-﻿using Raman.Drawing;
+﻿using Raman.Controls;
 
-namespace Raman.Controls;
+namespace Raman.Tools.CutOff;
 
 public partial class CutOffForm : Form
 {

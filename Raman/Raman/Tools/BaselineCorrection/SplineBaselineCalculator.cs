@@ -1,6 +1,6 @@
 using MathNet.Numerics.Interpolation;
 
-namespace Raman.Core;
+namespace Raman.Tools.BaselineCorrection;
 
 /// <summary>
 /// https://www.youtube.com/watch?v=D06d88NLdR4

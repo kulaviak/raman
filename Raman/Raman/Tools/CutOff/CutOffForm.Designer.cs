@@ -1,4 +1,4 @@
-﻿namespace Raman.Controls;
+﻿namespace Raman.Tools.CutOff;
 
 partial class CutOffForm
 {

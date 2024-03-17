@@ -1,7 +1,8 @@
 using MathNet.Numerics.Interpolation;
+using Raman.Drawing;
 using Point = System.Drawing.Point;
 
-namespace Raman.Drawing;
+namespace Raman.Tools.PeakAnalysis;
 
 /// <summary>
 /// Calculates which peak should be removed. It is the peak, which base is the closest to the location where user clicked.

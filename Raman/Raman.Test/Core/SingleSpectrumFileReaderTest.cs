@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using Raman.Core;
+using Raman.File;
 
 namespace Raman.Test;
 

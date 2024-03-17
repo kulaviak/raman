@@ -1,4 +1,6 @@
-﻿namespace Raman.Drawing;
+﻿using Raman.Drawing;
+
+namespace Raman.Core;
 
 /// <summary>
 /// Calculates closest chart to the mouse position.

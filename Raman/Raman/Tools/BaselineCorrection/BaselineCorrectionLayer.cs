@@ -1,7 +1,9 @@
 using System.IO;
 using Raman.Controls;
+using Raman.Drawing;
+using Raman.File;
 
-namespace Raman.Drawing;
+namespace Raman.Tools.BaselineCorrection;
 
 public class BaselineCorrectionLayer : LayerBase
 {

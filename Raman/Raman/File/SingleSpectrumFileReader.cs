@@ -1,6 +1,4 @@
-using System.IO;
-
-namespace Raman.Core;
+namespace Raman.File;
 
 public class SingleSpectrumFileReader
 {
@@ -18,7 +16,7 @@ public class SingleSpectrumFileReader
     {
         try
         {
-            var lines = File.ReadLines(filePath).ToList().Where(x => !string.IsNullOrWhiteSpace(x)).ToList();
+            var lines = System.IO.File.ReadLines(filePath).ToList().Where(x => !string.IsNullOrWhiteSpace(x)).ToList();
             var points = TryParseLines(lines);
             points = points.OrderBy(x => x.X).ToList();
             if (points.Count < 2)

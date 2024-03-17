@@ -1,13 +1,11 @@
-using System.IO;
-
-namespace Raman.Core;
+namespace Raman.File;
 
 public class OnePointPerLineFileWriter
 {
     public void WritePoints(List<ValuePoint> points, string filePath)
     {
         var lines = PointsToLines(points);
-        File.WriteAllLines(filePath, lines);
+        System.IO.File.WriteAllLines(filePath, lines);
     }
 
     private List<string> PointsToLines(List<ValuePoint> points)

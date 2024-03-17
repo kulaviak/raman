@@ -1,4 +1,4 @@
-namespace Raman.Core;
+namespace Raman.Tools.BaselineCorrection;
 
 public class BaselineCorrector
 {

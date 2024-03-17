@@ -1,4 +1,4 @@
-﻿namespace Raman.Controls
+﻿namespace Raman.View
 {
     partial class SpectrumSelectionForm
     {

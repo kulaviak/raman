@@ -1,6 +1,6 @@
 ﻿using Raman.Drawing;
 
-namespace Raman.Controls
+namespace Raman.View
 {
     public partial class SpectrumSelectionForm : Form
     {

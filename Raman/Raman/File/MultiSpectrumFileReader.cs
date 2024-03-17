@@ -1,6 +1,4 @@
-using System.IO;
-
-namespace Raman.Core;
+namespace Raman.File;
 
 public class MultiSpectrumFileReader
 {
@@ -19,7 +17,7 @@ public class MultiSpectrumFileReader
         List<string> lines;
         try
         {
-            lines = File.ReadLines(filePath).ToList().Where(x => !x.IsNullOrWhiteSpace()).ToList();
+            lines = System.IO.File.ReadLines(filePath).ToList().Where(x => !x.IsNullOrWhiteSpace()).ToList();
         }
         catch (Exception e)
         {

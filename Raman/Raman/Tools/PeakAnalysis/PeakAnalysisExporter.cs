@@ -1,6 +1,4 @@
-using System.IO;
-
-namespace Raman.Core;
+namespace Raman.Tools.PeakAnalysis;
 
 public class PeakAnalysisExporter
 {
@@ -13,7 +11,7 @@ public class PeakAnalysisExporter
             var lines = new List<string>();
             lines.Add(GetHeader());
             lines.AddRange(peakLines);
-            File.WriteAllLines(filePath, peakLines);
+            System.IO.File.WriteAllLines(filePath, peakLines);
         }
         catch (Exception ex)
         {

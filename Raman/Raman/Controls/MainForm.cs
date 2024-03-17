@@ -1,8 +1,12 @@
 ﻿using System.IO;
-using Raman.Controls;
 using Raman.Drawing;
+using Raman.File;
+using Raman.Tools.BaselineCorrection;
+using Raman.Tools.CutOff;
+using Raman.Tools.PeakAnalysis;
+using Raman.View;
 
-namespace Raman;
+namespace Raman.Controls;
 
 // window zoom made according to Chat GTP query How to implement zoom to area in graphics in windows forms
 public partial class MainForm : Form

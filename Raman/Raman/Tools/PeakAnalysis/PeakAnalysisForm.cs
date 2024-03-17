@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using Raman.Drawing;
+using Raman.Controls;
 
-namespace Raman.Controls;
+namespace Raman.Tools.PeakAnalysis;
 
 public partial class PeakAnalysisForm : Form
 {

@@ -1,6 +1,4 @@
-﻿using Raman.Drawing;
-
-namespace Raman;
+﻿namespace Raman.Controls;
 
 partial class MainForm
 {

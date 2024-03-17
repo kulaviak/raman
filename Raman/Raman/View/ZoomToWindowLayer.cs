@@ -1,6 +1,7 @@
+using Raman.Drawing;
 using Point = System.Drawing.Point;
 
-namespace Raman.Drawing;
+namespace Raman.View;
 
 public class ZoomToWindowLayer : LayerBase
 {

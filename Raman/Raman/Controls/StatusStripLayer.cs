@@ -1,6 +1,6 @@
-using Raman.Controls;
+using Raman.Drawing;
 
-namespace Raman.Drawing;
+namespace Raman.Controls;
 
 public class StatusStripLayer(CanvasCoordSystem coordSystem, AppStatusStrip statusStrip, CanvasPanel canvasPanel) : LayerBase(coordSystem)
 {

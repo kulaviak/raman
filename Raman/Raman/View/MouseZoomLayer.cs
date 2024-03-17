@@ -1,4 +1,6 @@
-﻿namespace Raman.Drawing;
+﻿using Raman.Drawing;
+
+namespace Raman.View;
 
 public class MouseZoomLayer(CanvasPanel canvasPanel) : LayerBase(canvasPanel.CoordSystem)
 {

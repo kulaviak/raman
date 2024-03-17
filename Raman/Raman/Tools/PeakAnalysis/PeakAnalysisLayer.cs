@@ -1,6 +1,7 @@
 using Raman.Controls;
+using Raman.Drawing;
 
-namespace Raman.Drawing;
+namespace Raman.Tools.PeakAnalysis;
 
 public class PeakAnalysisLayer : LayerBase
 {

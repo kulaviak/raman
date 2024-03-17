@@ -1,6 +1,7 @@
 using Raman.Controls;
+using Raman.Drawing;
 
-namespace Raman.Drawing;
+namespace Raman.Tools.CutOff;
 
 public class CutOffLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : LayerBase(coordSystem)
 {
