@@ -126,7 +126,7 @@ partial class MainForm
     // miSelectSpectra
     // 
     this.miSelectSpectra.Name = "miSelectSpectra";
-    this.miSelectSpectra.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.J)));
+    this.miSelectSpectra.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.K)));
     this.miSelectSpectra.Size = new System.Drawing.Size(231, 22);
     this.miSelectSpectra.Text = "Select Spectra";
     this.miSelectSpectra.Click += new System.EventHandler(this.miSelectSpectra_Click);
@@ -173,7 +173,7 @@ partial class MainForm
     // miShowHelp
     // 
     this.miShowHelp.Name = "miShowHelp";
-    this.miShowHelp.Size = new System.Drawing.Size(99, 22);
+    this.miShowHelp.Size = new System.Drawing.Size(152, 22);
     this.miShowHelp.Text = "Help";
     this.miShowHelp.Click += new System.EventHandler(this.miHelp_Click);
     // 

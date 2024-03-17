@@ -26,13 +26,26 @@ public class PeakAnalysisExporter
 
     private List<string> GetLines(List<Peak> peaks)
     {
-        var ret = peaks.Select(x => ToLine(x)).ToList();
+        var ret = peaks.Select(x => ToLine(x, peaks)).ToList();
         return ret;
     }
 
-    private string ToLine(Peak peak)
+    private string ToLine(Peak peak, List<Peak> peaks)
     {
-        var ret = $"{peak.Chart.Name};{0};{Util.Format(peak.Start.X)};{Util.Format(peak.End.X)};{Util.Format(peak.Height)};{Util.Format(peak.TopRoot.X)};{Util.Format(peak.Area)}";
+        var ret = $"{peak.Chart.Name};{GetPeakOrderNumber(peak, peaks) + 1};{Util.Format(peak.Start.X)};{Util.Format(peak.End.X)};{Util.Format(peak.Height)};{Util.Format(peak.TopRoot.X)};{Util.Format(peak.Area)}";
         return ret;
+    }
+
+    private int GetPeakOrderNumber(Peak peak, List<Peak> peaks)
+    {
+        var chartPeaks = peaks.Where(x => x.Chart.Name == peak.Chart.Name).OrderBy(x => x.TopRoot.X).ToList();
+        for (var i = 0; i < chartPeaks.Count; i++)
+        {
+            if (peak.TopRoot.X == chartPeaks[i].TopRoot.X)
+            {
+                return i;
+            }
+        }
+        throw new AppException("Peak number couldn't be calculated.");
     }
 }
