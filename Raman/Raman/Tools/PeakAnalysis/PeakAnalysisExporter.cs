@@ -11,7 +11,7 @@ public class PeakAnalysisExporter
             var lines = new List<string>();
             lines.Add(GetHeader());
             lines.AddRange(peakLines);
-            System.IO.File.WriteAllLines(filePath, peakLines);
+            System.IO.File.WriteAllLines(filePath, lines);
         }
         catch (Exception ex)
         {
@@ -21,7 +21,7 @@ public class PeakAnalysisExporter
 
     private string GetHeader()
     {
-        return "Spectrum_Name\tPeak_Number\tPeak_Start\tPeak_End\tPeak_Height\tPeak_Position\tArea";
+        return "Spectrum_Name;Peak_Number;Peak_Start;Peak_End;Peak_Height;Peak_Position;Area";
     }
 
     private List<string> GetLines(List<Peak> peaks)
@@ -32,7 +32,7 @@ public class PeakAnalysisExporter
 
     private string ToLine(Peak peak)
     {
-        var ret = $"{peak.Chart.Name}\t{0}\t{Util.Format(peak.Start.X)}\t{Util.Format(peak.End.X)}\t{Util.Format(peak.Height)}\t{Util.Format(peak.TopRoot.X)}\t{Util.Format(peak.Area)}";
+        var ret = $"{peak.Chart.Name};{0};{Util.Format(peak.Start.X)};{Util.Format(peak.End.X)};{Util.Format(peak.Height)};{Util.Format(peak.TopRoot.X)};{Util.Format(peak.Area)}";
         return ret;
     }
 }

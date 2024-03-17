@@ -1,5 +1,3 @@
-using Raman.Drawing;
-
 namespace Raman.Core;
 
 public class Peak
@@ -14,6 +12,7 @@ public class Peak
         Base = new Line(start, end);
         Vertical = new Line(TopRoot, top);
         Height = Util.GetDistance(Top, TopRoot);
+        Area = new PeakAreaCalculator().CalculateArea(this);
     }
 
     public ValuePoint Start { get; }
@@ -35,7 +34,7 @@ public class Peak
     
     public decimal Height { get; }
 
-    public decimal Area => 0;
+    public decimal Area { get; }
 
     public override string ToString()
     {

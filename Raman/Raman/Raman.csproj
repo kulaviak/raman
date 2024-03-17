@@ -129,6 +129,7 @@
     <Compile Include="Core\AppConstants.cs" />
     <Compile Include="Core\AppException.cs" />
     <Compile Include="Core\AppSettings.cs" />
+    <Compile Include="Core\PeakAreaCalculator.cs" />
     <Compile Include="Core\Chart.cs" />
     <Compile Include="Core\ClosestChartCalculator.cs" />
     <Compile Include="Core\ExceptionFormatter.cs" />

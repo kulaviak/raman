@@ -7,7 +7,7 @@ public partial class PeakAnalysisForm : Form
 {
     private readonly PeakAnalysisLayer peakAnalysisLayer;
     
-    private const string FILE_DIALOG_FILTER = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+    private const string FILE_DIALOG_FILTER = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*";
     
     public PeakAnalysisForm(PeakAnalysisLayer peakAnalysisLayer)
     {
