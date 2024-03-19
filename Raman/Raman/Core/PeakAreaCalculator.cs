@@ -8,11 +8,11 @@ public class PeakAreaCalculator
     /// <summary>
     /// Calculate peak area by dividing into many rectangles filling the area under the peak. It is the  principle of numerical integration. 
     /// </summary>
-    public decimal CalculateArea(Peak peak)
+    public double CalculateArea(Peak peak)
     {
         var dx = (peak.End.X - peak.Start.X) / NUMBER_OF_RECTANGLES;
         var dy = (peak.End.Y - peak.Start.Y) / NUMBER_OF_RECTANGLES;
-        var ret = 0m;
+        double ret = 0;
         // moving along peak bottom line by dx and dy
         for (var i = 0; i < NUMBER_OF_RECTANGLES - 1; i++)
         {

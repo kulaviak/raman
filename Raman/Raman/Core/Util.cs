@@ -1,5 +1,4 @@
 using System.Globalization;
-using Raman.Drawing;
 
 namespace Raman.Core;
 
@@ -13,11 +12,11 @@ public abstract class Util
         return ret;
     }
     
-    public static decimal GetDistance(ValuePoint point1, ValuePoint point2)
+    public static double GetDistance(ValuePoint point1, ValuePoint point2)
     {
-        var x = (double) Math.Abs(point1.X - point2.X);
-        var y = (double) Math.Abs(point1.Y - point2.Y);
-        var ret = (decimal) Math.Sqrt(x*x + y*y);
+        var x = Math.Abs(point1.X - point2.X);
+        var y = Math.Abs(point1.Y - point2.Y);
+        var ret = Math.Sqrt(x*x + y*y);
         return ret;
     }
         
@@ -26,7 +25,7 @@ public abstract class Util
     /// </summary>
     /// <param name="str"></param>
     /// <returns></returns>
-    public static Decimal? UniversalParseDecimal(string str)
+    public static Double? UniversalParseDouble(string str)
     {
         if (str.IsNullOrWhiteSpace())
         {
@@ -35,7 +34,7 @@ public abstract class Util
         str = str.Replace(",", ".");
         var style = NumberStyles.Number;
         var culture = CultureInfo.CreateSpecificCulture("en-US");
-        if (Decimal.TryParse(str, style, culture, out var ret))
+        if (Double.TryParse(str, style, culture, out var ret))
         {
             return ret;
         }
@@ -45,12 +44,12 @@ public abstract class Util
         }
     }
 
-    public static string Format(decimal value, int decimalPlaces)
+    public static string Format(double value, int decimalPlaces)
     {
         return Math.Round(value, decimalPlaces).ToString();
     }
     
-    public static string Format(decimal number)
+    public static string Format(double number)
     {
         return Format(number, AppConstants.EXPORT_DECIMAL_PLACES);
     }

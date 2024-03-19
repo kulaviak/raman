@@ -101,7 +101,7 @@ public class CutOffLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel)
         Refresh();
     }
 
-    private static List<Chart> GetCutOffCharts(List<Chart> charts, decimal start, decimal end)
+    private static List<Chart> GetCutOffCharts(List<Chart> charts, double start, double end)
     {
         var ret = new List<Chart>();
         foreach (var chart in charts)
@@ -112,7 +112,7 @@ public class CutOffLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel)
         return ret;
     }
 
-    private static Chart GetCutOffChart(Chart chart, decimal start, decimal end)
+    private static Chart GetCutOffChart(Chart chart, double start, double end)
     {
         var points = chart.Points.Where(point => start <= point.X && point.X <= end).ToList();
         var ret = new Chart(points, chart.Name);

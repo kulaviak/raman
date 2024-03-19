@@ -5,7 +5,7 @@ namespace Raman.View;
 public class MouseZoomLayer(CanvasPanel canvasPanel) : LayerBase(canvasPanel.CoordSystem)
 {
 
-    private const decimal ZOOM_RATIO = 0.8m;
+    private const double ZOOM_RATIO = 0.8;
 
     private Point? previousPosition;
     

@@ -76,7 +76,7 @@ public class MultiSpectrumFileReader
         }
     }
 
-    private static List<ValuePoint> GetPoints(List<decimal?> xValues, List<decimal?> yValues)
+    private static List<ValuePoint> GetPoints(List<double?> xValues, List<double?> yValues)
     {
         var ret = new List<ValuePoint>();
         for (var i = 0; i < xValues.Count; i++)
@@ -92,12 +92,12 @@ public class MultiSpectrumFileReader
         return ret;
     }
 
-    private static List<decimal?> TryParseLine(string line)
+    private static List<double?> TryParseLine(string line)
     {
         try
         {
             var parts = line.Split(' ', '\t');
-            var numbers = parts.Select(x => !x.IsNullOrWhiteSpace() ? Util.UniversalParseDecimal(x) : null).ToList();
+            var numbers = parts.Select(x => !x.IsNullOrWhiteSpace() ? Util.UniversalParseDouble(x) : null).ToList();
             var ret = numbers.Any() ? numbers : null;
             return ret;
         }

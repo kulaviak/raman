@@ -5,11 +5,11 @@ namespace Raman.Core;
 /// </summary>
 public class ValuePoint
 {
-    public decimal X { get; }
+    public double X { get; }
         
-    public decimal Y { get; }
+    public double Y { get; }
 
-    public ValuePoint(decimal x, decimal y)
+    public ValuePoint(double x, double y)
     {
         X = x;
         Y = y;

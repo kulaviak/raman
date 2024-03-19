@@ -28,7 +28,7 @@ public class Chart
         IsVisible = isVisible;
     }
 
-    public decimal? GetValue(decimal x)
+    public double? GetValue(double x)
     {
         for (var i = 0; i < Points.Count - 1; i++)
         {
@@ -47,7 +47,7 @@ public class Chart
         return null;
     }
 
-    private static decimal? GetInterpolatedValue(ValuePoint first, ValuePoint second, decimal x)
+    private static double? GetInterpolatedValue(ValuePoint first, ValuePoint second, double x)
     {
         var diffX = second.X - first.X;
         var diffY = second.Y - first.Y;

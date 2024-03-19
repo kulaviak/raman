@@ -528,7 +528,7 @@ public partial class MainForm : Form
         canvasPanel.Refresh();
     }
 
-    private decimal GetAverageY(Chart chart)
+    private double GetAverageY(Chart chart)
     {
         var ret = chart.Points.Average(point => point.Y);
         return ret;

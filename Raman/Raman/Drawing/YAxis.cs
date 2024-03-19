@@ -24,14 +24,14 @@ public class YAxis(CanvasCoordSystem coordSystem, Graphics graphics)
         numbers.ForEach(x => DrawNumberWithTick(x));
     }
         
-    private void DrawNumberWithTick(decimal number)
+    private void DrawNumberWithTick(double number)
     {
         var pos = coordSystem.ToPixelY(number);
         DrawTick(pos);
         DrawNumber(number, pos);
     }
 
-    private void DrawNumber(decimal number, float pos)
+    private void DrawNumber(double number, float pos)
     {
         var numberStr = number + "";
         var font = SystemFonts.DefaultFont;
@@ -58,11 +58,11 @@ public class YAxis(CanvasCoordSystem coordSystem, Graphics graphics)
         return ret;
     }
 
-    private static List<decimal> GetNumbers(decimal min, decimal max, int gap)
+    private static List<double> GetNumbers(double min, double max, int gap)
     {
         var firstNumber = ((int) min / gap + 1) * gap;
         var lastNumber = ((int) max / gap) * gap;
-        var ret = new List<decimal>();
+        var ret = new List<double>();
         for (var number = firstNumber; number <= lastNumber; number += gap)
         {
             ret.Add(number);    

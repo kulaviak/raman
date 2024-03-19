@@ -173,7 +173,7 @@ public class BaselineCorrectionLayer : LayerBase
         }
     }
 
-    private decimal GetBaselineEnd()
+    private double GetBaselineEnd()
     {
         if (AreBaselineEndsExtended)
         {
@@ -187,7 +187,7 @@ public class BaselineCorrectionLayer : LayerBase
         }
     }
 
-    private decimal GetBaselineStart()
+    private double GetBaselineStart()
     {
         if (AreBaselineEndsExtended)
         {
@@ -201,10 +201,10 @@ public class BaselineCorrectionLayer : LayerBase
         }
     }
 
-    private List<decimal> GetXPositions(decimal start, decimal end)
+    private List<double> GetXPositions(double start, double end)
     {
         var diff = (end - start) / 1000;
-        var ret = new List<decimal>();
+        var ret = new List<double>();
         for (var position = start; position  <= end; position += diff)
         {
             ret.Add(position);    
@@ -271,7 +271,7 @@ public class BaselineCorrectionLayer : LayerBase
         foreach (var correctionPoint in correctionPoints)
         {
             var chartPointClosestInXDirection = GetClosestPointInXDirection(chart.Points, correctionPoint);
-            decimal y;
+            double y;
             if (areCorrectionPointsAdjusted)
             {
                 var points = GetNeighbourhoodPoints(chartPointClosestInXDirection, chart.Points);

@@ -57,8 +57,8 @@ public class SingleSpectrumFileReader
             var parts = SplitOnWhitespaceOrTab(line);
             if (parts.Length >= 2)
             {
-                var x = Util.UniversalParseDecimal(parts[0]);
-                var y = Util.UniversalParseDecimal(parts[1]);
+                var x = Util.UniversalParseDouble(parts[0]);
+                var y = Util.UniversalParseDouble(parts[1]);
                 if (x != null && y != null)
                 {
                     return new ValuePoint(x.Value, y.Value);

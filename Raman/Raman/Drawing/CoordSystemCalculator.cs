@@ -4,13 +4,13 @@ public class CoordSystemCalculator
 {
     private const int PIXEL_SPACE = 25;
     
-    private const decimal MIN_Y = 0;
+    private const double MIN_Y = 0;
     
-    private const decimal MAX_Y = 1000;
+    private const double MAX_Y = 1000;
 
-    private const decimal MIN_X = 0;
+    private const double MIN_X = 0;
     
-    private const decimal MAX_X = 1000;
+    private const double MAX_X = 1000;
     
     public static CanvasCoordSystem GetCoordSystemToShowAllCharts(IList<Chart> charts, int canvasWidth, int canvasHeight)
     {
@@ -53,7 +53,7 @@ public class CoordSystemCalculator
         return new CanvasCoordSystem(canvasWidth, canvasHeight, MIN_X, MAX_X, MIN_Y, MAX_Y);
     }
 
-    public static CanvasCoordSystem GetCoordSystemForZoomMouseWheel(CanvasCoordSystem oldCoordSystem, Point point, decimal zoomRatio)
+    public static CanvasCoordSystem GetCoordSystemForZoomMouseWheel(CanvasCoordSystem oldCoordSystem, Point point, double zoomRatio)
     {
         var valuePoint = oldCoordSystem.ToValuePoint(point);
         var minX = valuePoint.X - (valuePoint.X - oldCoordSystem.MinX) * zoomRatio;

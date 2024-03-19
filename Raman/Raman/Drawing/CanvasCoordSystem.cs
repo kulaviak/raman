@@ -6,13 +6,13 @@ public class CanvasCoordSystem
 
     public int GraphicsHeight { get; }
 
-    public decimal MinX { get; }
+    public double  MinX { get; }
 
-    public decimal MaxX { get; }
+    public double MaxX { get; }
 
-    public decimal MinY { get; }
+    public double MinY { get; }
 
-    public decimal MaxY { get; }
+    public double MaxY { get; }
 
     // left and top border are higher because they need more space for axis values
     public float LeftBorder => 50;
@@ -31,7 +31,7 @@ public class CanvasCoordSystem
 
     public float ValueHeight => (float) (MaxY - MinY);
 
-    public CanvasCoordSystem(int graphicsWidth, int graphicsHeight, decimal minX, decimal maxX, decimal minY, decimal maxY)
+    public CanvasCoordSystem(int graphicsWidth, int graphicsHeight, double minX, double maxX, double minY, double maxY)
     {
         GraphicsWidth = graphicsWidth;
         GraphicsHeight = graphicsHeight;
@@ -41,31 +41,31 @@ public class CanvasCoordSystem
         MaxY = maxY;
     }
         
-    public float ToPixelX(decimal valueX)
+    public float ToPixelX(double valueX)
     {
         var valueDistance = valueX - MinX;
         var ret = LeftBorder + PixelWidth / ValueWidth * (float) valueDistance;
         return ret;
     }
         
-    public float ToPixelY(decimal valueY)
+    public float ToPixelY(double valueY)
     {
         var valueDistance = MaxY - valueY;
         var ret = TopBorder + PixelHeight / ValueHeight * (float) valueDistance;
         return ret;
     }
 
-    public decimal ToValueX(float pixelX)
+    public double ToValueX(float pixelX)
     {
         var pixelDistance = pixelX - LeftBorder;
-        var ret = ValueWidth / PixelWidth * pixelDistance + (double) MinX;
-        return (decimal) ret;
+        var ret = ValueWidth / PixelWidth * pixelDistance + MinX;
+        return ret;
     }
         
-    public decimal ToValueY(float pixelY)
+    public double ToValueY(float pixelY)
     {
         var pixelDistance = pixelY - TopBorder;
-        var ret = MaxY - (decimal) (ValueHeight / PixelHeight * pixelDistance);
+        var ret = MaxY - (ValueHeight / PixelHeight * pixelDistance);
         return ret;
     }
         
@@ -87,9 +87,9 @@ public class CanvasCoordSystem
                $"ValueWidth: {ValueWidth}, ValueHeight: {ValueHeight}";
     }
 
-    public System.Drawing.Point ToPixelPoint(ValuePoint point)
+    public Point ToPixelPoint(ValuePoint point)
     {
-        var ret = new System.Drawing.Point((int) ToPixelX(point.X), (int) ToPixelY(point.Y));
+        var ret = new Point((int) ToPixelX(point.X), (int) ToPixelY(point.Y));
         return ret;
     }
 }

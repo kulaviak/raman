@@ -7,7 +7,7 @@ namespace Raman.Tools.BaselineCorrection;
 /// </summary>
 public class SplineBaselineCalculator
 {
-    public List<ValuePoint> GetBaseline(List<decimal> xPositions, List<ValuePoint> correctionPoints)
+    public List<ValuePoint> GetBaseline(List<double> xPositions, List<ValuePoint> correctionPoints)
     {
         if (xPositions.Count < 2)
         {
@@ -21,8 +21,8 @@ public class SplineBaselineCalculator
         var spline = GetSplineFromCorrectionPoints(correctionPoints);
         foreach (var x in xPositions)
         {
-            var y = spline.Interpolate((double) x);
-            var interpolatedPoint = new ValuePoint(x, (decimal) y);
+            var y = spline.Interpolate(x);
+            var interpolatedPoint = new ValuePoint(x, y);
             ret.Add(interpolatedPoint);
         }
         return ret;

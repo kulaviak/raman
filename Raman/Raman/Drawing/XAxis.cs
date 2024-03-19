@@ -22,14 +22,14 @@ public class XAxis(CanvasCoordSystem coordSystem, Graphics graphics)
         numbers.ForEach(x => DrawNumberWithTicks(x));
     }
         
-    private void DrawNumberWithTicks(decimal number)
+    private void DrawNumberWithTicks(double number)
     {
         var x = coordSystem.ToPixelX(number);
         DrawTick(x);
         DrawNumber(number, x);
     }
 
-    private void DrawNumber(decimal number, float pos)
+    private void DrawNumber(double number, float pos)
     {
         var numberStr = number + "";
         var font = SystemFonts.DefaultFont;
@@ -50,11 +50,11 @@ public class XAxis(CanvasCoordSystem coordSystem, Graphics graphics)
         return ret;
     }
 
-    private static List<decimal> GetNumbers(decimal min, decimal max, int gap)
+    private static List<double> GetNumbers(double min, double max, int gap)
     {
         var firstNumber = ((int) min / gap + 1) * gap;
         var lastNumber = (int) max / gap * gap;
-        var ret = new List<decimal>();
+        var ret = new List<double>();
         for (var number = firstNumber; number <= lastNumber; number += gap)
         {
             ret.Add(number);    

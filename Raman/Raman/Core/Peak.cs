@@ -32,9 +32,9 @@ public class Peak
 
     public Line Vertical { get; } 
     
-    public decimal Height { get; }
+    public double Height { get; }
 
-    public decimal Area { get; }
+    public double Area { get; }
 
     public override string ToString()
     {
