@@ -18,7 +18,7 @@ public class PeakAreaCalculator
         {
             var bottomX = peak.Start.X + i * dx;
             var bottomY = peak.Start.Y + i * dy;
-            var topY = peak.Chart.GetValue(bottomX).Value;
+            var topY = peak.Spectrum.GetValue(bottomX).Value;
             var subArea = (topY - bottomY) * dx;
             // small parts that are bellow bottom line are ignored
             if (subArea > 0)

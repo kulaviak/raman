@@ -2,7 +2,7 @@ using Raman.Drawing;
 
 namespace Raman.Core;
 
-public class Chart
+public class Spectrum
 {
     public string Name { get; }
 
@@ -14,13 +14,13 @@ public class Chart
 
     public bool IsVisible { get; set; } = true;
 
-    public Chart(List<ValuePoint> points, string name)
+    public Spectrum(List<ValuePoint> points, string name)
     {
         this.points = points;
         Name = name;
     }
 
-    public Chart(List<ValuePoint> points, string name, bool isBaselineCorrected, bool isVisible)
+    public Spectrum(List<ValuePoint> points, string name, bool isBaselineCorrected, bool isVisible)
     {
         this.points = points;
         Name = name;
@@ -65,9 +65,9 @@ public class Chart
         return $"Name: {Name}, Points.Count: {points.Count}, IsVisible: {IsVisible}, IsBaselineCorrected: {IsBaselineCorrected}";
     }
     
-    public Chart DeepClone()
+    public Spectrum DeepClone()
     {
         var clonedPoints = Points.Select(point => point.DeepClone()).ToList();
-        return new Chart(clonedPoints, Name, IsBaselineCorrected, IsVisible);
+        return new Spectrum(clonedPoints, Name, IsBaselineCorrected, IsVisible);
     }
 }

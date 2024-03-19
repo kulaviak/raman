@@ -3,15 +3,15 @@ namespace Raman.Tools.BaselineCorrection;
 public class BaselineCorrector
 {
     /// <summary>
-    /// Expects that baseline points are calculated exactly at same places as chart points and this is exactly what SplineBaselineCalculator does.
+    /// Expects that baseline points are calculated exactly at same places as spectrum points and this is exactly what SplineBaselineCalculator does.
     /// </summary>
-    public List<ValuePoint> CorrectChartByBaseline(List<ValuePoint> chartPoints, List<ValuePoint> baselinePoints)
+    public List<ValuePoint> CorrectSpectrumByBaseline(List<ValuePoint> spectrumPoints, List<ValuePoint> baselinePoints)
     {
         var ret = new List<ValuePoint>();
-        foreach (var chartPoint in chartPoints)
+        foreach (var spectrumPoint in spectrumPoints)
         {
-            var baselinePoint = baselinePoints.FirstOrDefault(point => point.X == chartPoint.X);
-            var correctedPoint = baselinePoint != null ? new ValuePoint(chartPoint.X, chartPoint.Y - baselinePoint.Y) : chartPoint;
+            var baselinePoint = baselinePoints.FirstOrDefault(point => point.X == spectrumPoint.X);
+            var correctedPoint = baselinePoint != null ? new ValuePoint(spectrumPoint.X, spectrumPoint.Y - baselinePoint.Y) : spectrumPoint;
             ret.Add(correctedPoint);
         }
         return ret;

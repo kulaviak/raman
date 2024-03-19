@@ -5,13 +5,13 @@ namespace Raman.Controls;
 public class StatusStripLayer(CanvasCoordSystem coordSystem, AppStatusStrip statusStrip, CanvasPanel canvasPanel) : LayerBase(coordSystem)
 {
 
-    private const decimal MAX_ALLOWED_DISTANCE_FOR_CLOSEST_CHART = 100;
+    private const decimal MAX_ALLOWED_DISTANCE_FOR_CLOSEST_SPECTRUM = 100;
     
     public override void HandleMouseMove(object sender, MouseEventArgs e)
     {
-        var chart = new ClosestChartCalculator().GetClosestChart(canvasPanel.VisibleCharts, e.Location, canvasPanel.CoordSystem, MAX_ALLOWED_DISTANCE_FOR_CLOSEST_CHART);
+        var spectrum = new ClosestSpectrumCalculator().GetClosestSpectrum(canvasPanel.VisibleSpectra, e.Location, canvasPanel.CoordSystem, MAX_ALLOWED_DISTANCE_FOR_CLOSEST_SPECTRUM);
         var positionText = GetPositionText(e.Location);
-        var text = chart != null ? $"{positionText}     {chart.Name}" : positionText;
+        var text = spectrum != null ? $"{positionText}     {spectrum.Name}" : positionText;
         statusStrip.ShowText(text);
     }
     

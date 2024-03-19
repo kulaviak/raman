@@ -6,7 +6,7 @@ public class PeakAnalysisExporter
     {
         try
         {
-            peaks = peaks.OrderBy(peak => peak.TopRoot.X).ThenBy(x => x.Chart.Name).ToList();
+            peaks = peaks.OrderBy(peak => peak.TopRoot.X).ThenBy(x => x.Spectrum.Name).ToList();
             var peakLines = GetLines(peaks);
             var lines = new List<string>();
             lines.Add(GetHeader());
@@ -32,16 +32,16 @@ public class PeakAnalysisExporter
 
     private string ToLine(Peak peak, List<Peak> peaks)
     {
-        var ret = $"{peak.Chart.Name};{GetPeakOrderNumber(peak, peaks) + 1};{Util.Format(peak.Start.X)};{Util.Format(peak.End.X)};{Util.Format(peak.Height)};{Util.Format(peak.TopRoot.X)};{Util.Format(peak.Area)}";
+        var ret = $"{peak.Spectrum.Name};{GetPeakOrderNumber(peak, peaks) + 1};{Util.Format(peak.Start.X)};{Util.Format(peak.End.X)};{Util.Format(peak.Height)};{Util.Format(peak.TopRoot.X)};{Util.Format(peak.Area)}";
         return ret;
     }
 
     private int GetPeakOrderNumber(Peak peak, List<Peak> peaks)
     {
-        var chartPeaks = peaks.Where(x => x.Chart.Name == peak.Chart.Name).OrderBy(x => x.TopRoot.X).ToList();
-        for (var i = 0; i < chartPeaks.Count; i++)
+        var spectrumPeaks = peaks.Where(x => x.Spectrum.Name == peak.Spectrum.Name).OrderBy(x => x.TopRoot.X).ToList();
+        for (var i = 0; i < spectrumPeaks.Count; i++)
         {
-            if (peak.TopRoot.X == chartPeaks[i].TopRoot.X)
+            if (peak.TopRoot.X == spectrumPeaks[i].TopRoot.X)
             {
                 return i;
             }

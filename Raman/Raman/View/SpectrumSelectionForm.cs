@@ -6,18 +6,18 @@ namespace Raman.View
     {
         private readonly CanvasPanel canvasPanel;
         
-        public SpectrumSelectionForm(List<Chart> charts, CanvasPanel canvasPanel)
+        public SpectrumSelectionForm(List<Spectrum> spectra, CanvasPanel canvasPanel)
         {
             this.canvasPanel = canvasPanel;
             InitializeComponent();
-            AdditionalInitialization(charts);
+            AdditionalInitialization(spectra);
         }
 
-        private void AdditionalInitialization(List<Chart> charts)
+        private void AdditionalInitialization(List<Spectrum> spectra)
         {
-            foreach (var chart in charts)
+            foreach (var spectrum in spectra)
             {
-                cbSpectra.Items.Add(chart.Name, chart.IsVisible);
+                cbSpectra.Items.Add(spectrum.Name, spectrum.IsVisible);
             }
         }
 
@@ -37,9 +37,9 @@ namespace Raman.View
 
         private void RefreshCanvasPanel()
         {
-            foreach (var chart in canvasPanel.Charts)
+            foreach (var spectrum in canvasPanel.Spectra)
             {
-                chart.IsVisible = cbSpectra.CheckedItems.Contains(chart.Name);
+                spectrum.IsVisible = cbSpectra.CheckedItems.Contains(spectrum.Name);
             }
             canvasPanel.Refresh();
         }

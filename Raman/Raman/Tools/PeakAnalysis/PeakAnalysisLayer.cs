@@ -15,11 +15,11 @@ public class PeakAnalysisLayer : LayerBase
 
     public List<Peak> Peaks { get; set; } = new List<Peak>();
 
-    private List<Peak> VisiblePeaks => Peaks.Where(peak => peak.Chart.IsVisible).ToList();
+    private List<Peak> VisiblePeaks => Peaks.Where(peak => peak.Spectrum.IsVisible).ToList();
     
     public bool IsExported { get; set; }
     
-    public bool IsPeakAddedToAllCharts { get; set; }
+    public bool IsPeakAddedToAllSpectra { get; set; }
 
     public PeakAnalysisLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) : base(coordSystem)
     {
@@ -37,15 +37,15 @@ public class PeakAnalysisLayer : LayerBase
             else
             {
                 var end = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
-                if (IsPeakAddedToAllCharts)
+                if (IsPeakAddedToAllSpectra)
                 {
-                    var peaks = GetPeaksForAllCharts(start, end);
+                    var peaks = GetPeaksForAllSpectra(start, end);
                     Peaks.AddRange(peaks);
                 }
                 else
                 {
-                    var chart = new ClosestChartCalculator().GetClosestChart(canvasPanel.VisibleCharts, e.Location, canvasPanel.CoordSystem);                    
-                    var peak = GetPeakForChart(chart, start, end);
+                    var spectrum = new ClosestSpectrumCalculator().GetClosestSpectrum(canvasPanel.VisibleSpectra, e.Location, canvasPanel.CoordSystem);                    
+                    var peak = GetPeakForSpectrum(spectrum, start, end);
                     if (peak != null)
                     {
                         Peaks.Add(peak);
@@ -67,12 +67,12 @@ public class PeakAnalysisLayer : LayerBase
         }
     }
 
-    private List<Peak> GetPeaksForAllCharts(ValuePoint start, ValuePoint end)
+    private List<Peak> GetPeaksForAllSpectra(ValuePoint start, ValuePoint end)
     {
         var ret = new List<Peak>();
-        foreach (var chart in canvasPanel.VisibleCharts)
+        foreach (var spectrum in canvasPanel.VisibleSpectra)
         {
-            var peak = GetPeakForChart(chart, start, end);
+            var peak = GetPeakForSpectrum(spectrum, start, end);
             if (peak != null)
             {
                 ret.Add(peak);
@@ -81,43 +81,43 @@ public class PeakAnalysisLayer : LayerBase
         return ret;
     }
 
-    private Peak GetPeakForChart(Chart chart, ValuePoint userDefinedStart, ValuePoint userDefinedEnd)
+    private Peak GetPeakForSpectrum(Spectrum spectrum, ValuePoint userDefinedStart, ValuePoint userDefinedEnd)
     {
-        var startPointAtChart = GetPointAtChart(userDefinedStart, chart);
-        var endPointAtChart = GetPointAtChart(userDefinedEnd, chart);
-        var top = GetTopPoint(startPointAtChart, endPointAtChart, chart);
+        var startPointAtSpectrum = GetPointAtSpectrum(userDefinedStart, spectrum);
+        var endPointAtSpectrum = GetPointAtSpectrum(userDefinedEnd, spectrum);
+        var top = GetTopPoint(startPointAtSpectrum, endPointAtSpectrum, spectrum);
         // it can happen if user selects the point wrong way, like double click, so there is no point between start and end point
         if (top == null)
         {
             return null;
         }
         // if end is before start, then swap it
-        if (endPointAtChart.X < startPointAtChart.X)
+        if (endPointAtSpectrum.X < startPointAtSpectrum.X)
         {
-            (startPointAtChart, endPointAtChart) = (endPointAtChart, startPointAtChart);
+            (startPointAtSpectrum, endPointAtSpectrum) = (endPointAtSpectrum, startPointAtSpectrum);
         }
-        var peak = new Peak(startPointAtChart, endPointAtChart, top, chart);
+        var peak = new Peak(startPointAtSpectrum, endPointAtSpectrum, top, spectrum);
         return peak;
     }
 
-    private ValuePoint GetPointAtChart(ValuePoint point, Chart chart)
+    private ValuePoint GetPointAtSpectrum(ValuePoint point, Spectrum spectrum)
     {
-        var y = chart.GetValue(point.X);
+        var y = spectrum.GetValue(point.X);
         if (y != null)
         {
             var ret = new ValuePoint(point.X, y.Value);
             return ret;
         }
-        // if the x value of the point is out of range the chart, then return first or last point of chart
+        // if the x value of the point is out of range the spectrum, then return first or last point of spectrum
         else
         {
-            if (point.X < chart.Points.First().X)
+            if (point.X < spectrum.Points.First().X)
             {
-                return chart.Points.First();
+                return spectrum.Points.First();
             }
             else
             {
-                return chart.Points.Last();
+                return spectrum.Points.Last();
             }
         }
     }
@@ -164,7 +164,7 @@ public class PeakAnalysisLayer : LayerBase
 
     private void DrawPeaks(Graphics graphics)
     {
-        var visiblePeaks = Peaks.Where(x => x.Chart.IsVisible).ToList();
+        var visiblePeaks = Peaks.Where(x => x.Spectrum.IsVisible).ToList();
         foreach (var peak in visiblePeaks)
         {
             DrawPeak(peak, graphics);
@@ -178,9 +178,9 @@ public class PeakAnalysisLayer : LayerBase
         canvasDrawer.DrawLine(peak.Vertical, PEN);
     }
     
-    private ValuePoint GetTopPoint(ValuePoint start, ValuePoint end, Chart chart)
+    private ValuePoint GetTopPoint(ValuePoint start, ValuePoint end, Spectrum spectrum)
     {
-        var ret = chart.Points.Where(point => start.X < point.X && point.X <= end.X).MaxByOrDefault(point => point.Y);
+        var ret = spectrum.Points.Where(point => start.X < point.X && point.X <= end.X).MaxByOrDefault(point => point.Y);
         return ret;
     }
 

@@ -8,25 +8,25 @@ using Raman.View;
 namespace Raman.Drawing;
 
 /// <summary>
-/// Canvas panel is responsible for drawing charts and handling mouse events.
+/// Canvas panel is responsible for drawing spectra and handling mouse events.
 /// It is composed from layers and each layer is responsible for particular functionality. For example BaselineCorrectionLayer is
 /// responsible for drawing baseline points and handling mouse events when user is in baseline correction mode.
 /// </summary>
 public class CanvasPanel : Panel
 {
-    private List<Chart> charts = new List<Chart>();
+    private List<Spectrum> spectra = new List<Spectrum>();
     
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public List<Chart> Charts
+    public List<Spectrum> Spectra
     {
-        get { return charts; }
+        get { return spectra; }
         set
         {
-            charts = value;
+            spectra = value;
         }
     }
     
-    public List<Chart> VisibleCharts => Charts.Where(x => x.IsVisible).ToList();
+    public List<Spectrum> VisibleSpectra => Spectra.Where(x => x.IsVisible).ToList();
 
     private CanvasCoordSystem coordSystem;
 
@@ -90,14 +90,14 @@ public class CanvasPanel : Panel
         DoubleBuffered = true;
     }
     
-    public void SetCoordSystemToShowAllCharts()
+    public void SetCoordSystemToShowAllSpectra()
     {
-        CoordSystem = CoordSystemCalculator.GetCoordSystemToShowAllCharts(charts, Width, Height);
+        CoordSystem = CoordSystemCalculator.GetCoordSystemToShowAllSpectra(spectra, Width, Height);
     }
     
-    public void ZoomToSeeAllCharts()
+    public void ZoomToSeeAllSpectra()
     {
-        CoordSystem = CoordSystemCalculator.GetCoordSystemToShowAllCharts(charts, Width, Height);
+        CoordSystem = CoordSystemCalculator.GetCoordSystemToShowAllSpectra(spectra, Width, Height);
         DoRefresh();
     }
     
@@ -164,12 +164,12 @@ public class CanvasPanel : Panel
         graphics.Clear(Color.FromArgb(240, 240, 240));
         if (CoordSystem != null)
         {
-            ClipGraphicsToOnlyChartArea(graphics);
-            foreach (var chart in (IList<Chart>) charts)
+            ClipGraphicsToOnlySpectrumArea(graphics);
+            foreach (var spectrum in (IList<Spectrum>) spectra)
             {
-                if (chart.IsVisible)
+                if (spectrum.IsVisible)
                 {
-                    chart.Draw(CoordSystem, graphics);
+                    spectrum.Draw(CoordSystem, graphics);
                 }
             }
             graphics.ResetClip();
@@ -189,16 +189,16 @@ public class CanvasPanel : Panel
     }
 
     /// <summary>
-    /// Clip only to chart area => nothing will be drawn outside of the axes.
+    /// Clip only to spectrum area => nothing will be drawn outside of the axes.
     /// </summary>
-    private void ClipGraphicsToOnlyChartArea(Graphics graphics)
+    private void ClipGraphicsToOnlySpectrumArea(Graphics graphics)
     {
         var x = (int) CoordSystem.LeftBorder;
         var y = (int) CoordSystem.TopBorder;
         var width = (int) CoordSystem.PixelWidth;
         var height = (int) CoordSystem.PixelHeight;
-        var chartRectangle = new Rectangle(x, y, width, height);
-        graphics.SetClip(chartRectangle);
+        var spectrumRectangle = new Rectangle(x, y, width, height);
+        graphics.SetClip(spectrumRectangle);
     }
 
     private void DrawYAxis(Graphics graphics)

@@ -12,21 +12,21 @@ public class CoordSystemCalculator
     
     private const double MAX_X = 1000;
     
-    public static CanvasCoordSystem GetCoordSystemToShowAllCharts(IList<Chart> charts, int canvasWidth, int canvasHeight)
+    public static CanvasCoordSystem GetCoordSystemToShowAllSpectra(IList<Spectrum> spectra, int canvasWidth, int canvasHeight)
     {
-        if (charts.Count == 0)
+        if (spectra.Count == 0)
         {
             return GetDefaultCoordSystem(canvasWidth, canvasHeight);
         }
 
-        var allPoints = charts.SelectMany(x => x.Points).ToList();
+        var allPoints = spectra.SelectMany(x => x.Points).ToList();
         var minX = allPoints.Min(point => point.X);
         var maxX = allPoints.Max(point => point.X);
         var minY = allPoints.Min(point => point.Y);
         var maxY = allPoints.Max(point => point.Y);
         
-        // modify displayed range so the chart is not going to axes, but there is a distance to X or Y axis
-        // it is needed when baseline correction points are selected, I want to often select points that is beyond chart range
+        // modify displayed range so the spectrum is not going to axes, but there is a distance to X or Y axis
+        // it is needed when baseline correction points are selected, I want to often select points that is beyond spectrum range
         var spaceX = (maxX - minX) / canvasWidth * PIXEL_SPACE;
         var spaceY = (maxY - minY) / canvasHeight * PIXEL_SPACE;
         minX -= spaceX;
@@ -70,7 +70,7 @@ public class CoordSystemCalculator
         var endValuePoint = oldCoordSystem.ToValuePoint(endPoint);
         var incrementX = endValuePoint.X - startValuePoint.X;
         var incrementY = endValuePoint.Y - startValuePoint.Y;
-        // Increment is subtracted because, when user moves with mouse to the right it means, that he wants to see the left part of the chart => 
+        // Increment is subtracted because, when user moves with mouse to the right it means, that he wants to see the left part of the spectrum => 
         // decrease minX, maxX. The same is for Y direction.
         var minX = oldCoordSystem.MinX - incrementX;
         var maxX = oldCoordSystem.MaxX - incrementX;

@@ -25,7 +25,7 @@ public class BaselineCorrectionLayer : LayerBase
     
     public bool AreCorrectionPointsAdjusted { get; set; }
 
-    private Stack<List<Chart>> chartHistory = new Stack<List<Chart>>();
+    private Stack<List<Spectrum>> spectrumHistory = new Stack<List<Spectrum>>();
     
     private Stack<List<ValuePoint>> correctionPointHistory = new Stack<List<ValuePoint>>();
     
@@ -42,7 +42,7 @@ public class BaselineCorrectionLayer : LayerBase
     {
         if (e.Button == MouseButtons.Left)
         {
-            var point = CalculateCorrectionPoint(e.Location, canvasPanel.VisibleCharts, AreCorrectionPointsAdjusted);
+            var point = CalculateCorrectionPoint(e.Location, canvasPanel.VisibleSpectra, AreCorrectionPointsAdjusted);
             CorrectionPoints.Add(point);
             Refresh();
         }
@@ -57,12 +57,12 @@ public class BaselineCorrectionLayer : LayerBase
         }
     }
 
-    private ValuePoint CalculateCorrectionPoint(Point pos, List<Chart> charts, bool areCorrectionPointsAdjusted)
+    private ValuePoint CalculateCorrectionPoint(Point pos, List<Spectrum> spectra, bool areCorrectionPointsAdjusted)
     {
         if (areCorrectionPointsAdjusted)
         {
-            var closestChart = new ClosestChartCalculator().GetClosestChart(charts, pos, CoordSystem); 
-            var closestPoints = GetClosestPoints(closestChart.Points, pos);
+            var closestSpectrum = new ClosestSpectrumCalculator().GetClosestSpectrum(spectra, pos, CoordSystem); 
+            var closestPoints = GetClosestPoints(closestSpectrum.Points, pos);
             var averageY = closestPoints.Average(point => point.Y);
             var ret = new ValuePoint(CoordSystem.ToValueX(pos.X), averageY);
             return ret;
@@ -125,17 +125,17 @@ public class BaselineCorrectionLayer : LayerBase
             MessageUtil.ShowInfo("There are no baseline points defined.", "Information");
             return;
         }
-        chartHistory.Push(canvasPanel.Charts);
+        spectrumHistory.Push(canvasPanel.Spectra);
         correctionPointHistory.Push(CorrectionPoints);
-        canvasPanel.Charts = canvasPanel.VisibleCharts.Select(x => CorrectBaseline(x)).ToList();
+        canvasPanel.Spectra = canvasPanel.VisibleSpectra.Select(x => CorrectBaseline(x)).ToList();
         CorrectionPoints = new List<ValuePoint>();
-        canvasPanel.ZoomToSeeAllCharts();
+        canvasPanel.ZoomToSeeAllSpectra();
     }
     
-    public void ExportCorrectedCharts()
+    public void ExportCorrectedSpectra()
     {
-        var exportedCharts = canvasPanel.Charts.Where(x => x.IsBaselineCorrected).ToList();
-        if (!exportedCharts.Any())
+        var exportedSpectra = canvasPanel.Spectra.Where(x => x.IsBaselineCorrected).ToList();
+        if (!exportedSpectra.Any())
         {
             MessageUtil.ShowUserError("There are no corrected spectra.", "No spectra to export");
             return;
@@ -145,9 +145,9 @@ public class BaselineCorrectionLayer : LayerBase
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
                 var selectedPath = folderBrowserDialog.SelectedPath;
-                foreach (var chart in exportedCharts)
+                foreach (var spectrum in exportedSpectra)
                 {
-                    ExportCorrectedChart(chart, selectedPath);                                                
+                    ExportCorrectedSpectra(spectrum, selectedPath);                                                
                 }
                 MessageUtil.ShowInfo("Export finished successfully.", "Export finished");
             }
@@ -156,7 +156,7 @@ public class BaselineCorrectionLayer : LayerBase
     
     private void DrawBaselines(Graphics graphics)
     {
-        if (canvasPanel.VisibleCharts.Any() && CorrectionPoints.Count >= 4)
+        if (canvasPanel.VisibleSpectra.Any() && CorrectionPoints.Count >= 4)
         {
             try
             {
@@ -177,9 +177,9 @@ public class BaselineCorrectionLayer : LayerBase
     {
         if (AreBaselineEndsExtended)
         {
-            var chartPointsMax = canvasPanel.Charts.SelectMany(x => x.Points).Max(point => point.X);
+            var spectrumPointsMax = canvasPanel.Spectra.SelectMany(x => x.Points).Max(point => point.X);
             var correctionPointsMax = CorrectionPoints.Max(point => point.X);
-            return Math.Max(chartPointsMax, correctionPointsMax);
+            return Math.Max(spectrumPointsMax, correctionPointsMax);
         }
         else
         {
@@ -191,9 +191,9 @@ public class BaselineCorrectionLayer : LayerBase
     {
         if (AreBaselineEndsExtended)
         {
-            var chartPointsMin = canvasPanel.Charts.SelectMany(x => x.Points).Min(point => point.X);
+            var spectrumPointsMin = canvasPanel.Spectra.SelectMany(x => x.Points).Min(point => point.X);
             var correctionPointsMin = CorrectionPoints.Min(point => point.X);
-            return Math.Min(chartPointsMin, correctionPointsMin);
+            return Math.Min(spectrumPointsMin, correctionPointsMin);
         }
         else
         {
@@ -212,17 +212,17 @@ public class BaselineCorrectionLayer : LayerBase
         return ret;
     }
     
-    private List<double> GetXPositionsForBaseline(Chart chart, List<ValuePoint> chartCorrectionPoints)
+    private List<double> GetXPositionsForBaseline(Spectrum spectrum, List<ValuePoint> spectrumCorrectionPoints)
     {
         var baselineStart = GetBaselineStart();
         var baselineEnd = GetBaselineEnd();
-        var correctionPointsStart = chartCorrectionPoints.Select(point => point.X).Min();
-        var correctionPointsEnd = chartCorrectionPoints.Select(point => point.X).Max();
+        var correctionPointsStart = spectrumCorrectionPoints.Select(point => point.X).Min();
+        var correctionPointsEnd = spectrumCorrectionPoints.Select(point => point.X).Max();
         // limit the baseline range to the range of correction points, that determinate the baseline. Else the baseline can escape to
         // Infinity and calculation fails
         var start = Math.Max(baselineStart, correctionPointsStart);
         var end = Math.Min(baselineEnd, correctionPointsEnd);
-        return chart.Points.Where(point => start <= point.X && point.X <= end).Select(point => point.X).ToList();
+        return spectrum.Points.Where(point => start <= point.X && point.X <= end).Select(point => point.X).ToList();
     }
 
     private void RemoveClosestPoint(Point location)
@@ -265,34 +265,34 @@ public class BaselineCorrectionLayer : LayerBase
         }
     }
     
-    private Chart CorrectBaseline(Chart chart)
+    private Spectrum CorrectBaseline(Spectrum spectrum)
     {
-        var chartCorrectionPoints = GetChartCorrectionPoints(chart, CorrectionPoints, AreCorrectionPointsAdjusted);
-        var xPositions = GetXPositionsForBaseline(chart, chartCorrectionPoints);
-        var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, chartCorrectionPoints);
-        var newChartPoints = new BaselineCorrector().CorrectChartByBaseline(chart.Points, baselinePoints);
-        var ret = new Chart(newChartPoints, chart.Name);
+        var spectrumCorrectionPoints = GetSpectrumCorrectionPoints(spectrum, CorrectionPoints, AreCorrectionPointsAdjusted);
+        var xPositions = GetXPositionsForBaseline(spectrum, spectrumCorrectionPoints);
+        var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, spectrumCorrectionPoints);
+        var newSpectrumPoints = new BaselineCorrector().CorrectSpectrumByBaseline(spectrum.Points, baselinePoints);
+        var ret = new Spectrum(newSpectrumPoints, spectrum.Name);
         ret.IsBaselineCorrected = true;
         return ret;
     }
     
-    private static List<ValuePoint> GetChartCorrectionPoints(Chart chart, List<ValuePoint> correctionPoints, bool areCorrectionPointsAdjusted)
+    private static List<ValuePoint> GetSpectrumCorrectionPoints(Spectrum spectrum, List<ValuePoint> correctionPoints, bool areCorrectionPointsAdjusted)
     {
         var ret = new List<ValuePoint>();
         foreach (var correctionPoint in correctionPoints)
         {
-            var chartPointClosestInXDirection = GetClosestPointInXDirection(chart.Points, correctionPoint);
+            var spectrumPointClosestInXDirection = GetClosestPointInXDirection(spectrum.Points, correctionPoint);
             double y;
             if (areCorrectionPointsAdjusted)
             {
-                var points = GetNeighbourhoodPoints(chartPointClosestInXDirection, chart.Points);
+                var points = GetNeighbourhoodPoints(spectrumPointClosestInXDirection, spectrum.Points);
                 y = points.Average(point => point.Y);
             }
             else
             {
-                y = chartPointClosestInXDirection.Y;
+                y = spectrumPointClosestInXDirection.Y;
             }
-            var point = new ValuePoint(chartPointClosestInXDirection.X, y);
+            var point = new ValuePoint(spectrumPointClosestInXDirection.X, y);
             ret.Add(point);
         }   
         return ret;
@@ -300,23 +300,23 @@ public class BaselineCorrectionLayer : LayerBase
 
     public void UndoBaselineCorrection()
     {
-        if (chartHistory.Count == 0)
+        if (spectrumHistory.Count == 0)
         {
             MessageUtil.ShowInfo("There is no undo to do.", "Information");
             return;
         }
 
-        var charts = chartHistory.Pop();
-        Util.SetChartVisibilityAccordingToCurrentVisibleCharts(charts, canvasPanel.VisibleCharts);
-        canvasPanel.Charts = charts;
+        var spectra = spectrumHistory.Pop();
+        Util.SetSpectrumVisibilityAccordingToCurrentVisibleSpectra(spectra, canvasPanel.VisibleSpectra);
+        canvasPanel.Spectra = spectra;
         CorrectionPoints = correctionPointHistory.Pop();
-        canvasPanel.ZoomToSeeAllCharts();
+        canvasPanel.ZoomToSeeAllSpectra();
     }
     
-    private void ExportCorrectedChart(Chart chart, string folderPath)
+    private void ExportCorrectedSpectra(Spectrum spectrum, string folderPath)
     {
-        var filePath = Path.Combine(folderPath, chart.Name + "_bc.txt");
-        new OnePointPerLineFileWriter().WritePoints(chart.Points, filePath);
+        var filePath = Path.Combine(folderPath, spectrum.Name + "_bc.txt");
+        new OnePointPerLineFileWriter().WritePoints(spectrum.Points, filePath);
     }
  
     /// <summary>

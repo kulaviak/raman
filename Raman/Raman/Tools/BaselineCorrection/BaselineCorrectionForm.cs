@@ -156,11 +156,11 @@ public partial class BaselineCorrectionForm : Form
         }
     }
 
-    private void btnExportCorrectedCharts_Click(object sender, EventArgs e)
+    private void btnExportCorrectedSpectra_Click(object sender, EventArgs e)
     {
         try
         {
-            baselineCorrectionLayer.ExportCorrectedCharts();
+            baselineCorrectionLayer.ExportCorrectedSpectra();
         }
         catch (Exception ex)
         {

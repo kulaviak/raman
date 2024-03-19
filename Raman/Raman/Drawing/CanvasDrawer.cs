@@ -30,7 +30,7 @@ public class CanvasDrawer
     {
         if (points.Count < 2)
         {
-            throw new AppException("Chart has less than 2 points.");
+            throw new AppException("Spectrum has less than 2 points.");
         }
         for (var i = 0; i < points.Count - 1; i++)
         {

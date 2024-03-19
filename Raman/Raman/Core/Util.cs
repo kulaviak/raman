@@ -59,12 +59,12 @@ public abstract class Util
         return Control.ModifierKeys == Keys.Control;
     }
 
-    public static void SetChartVisibilityAccordingToCurrentVisibleCharts(List<Chart> charts, List<Chart> visibleCharts)
+    public static void SetSpectrumVisibilityAccordingToCurrentVisibleSpectra(List<Spectrum> spectra, List<Spectrum> visibleSpectra)
     {
-        var visibleChartNames = visibleCharts.Select(chart => chart.Name).ToHashSet();
-        foreach (var chart in charts)
+        var visibleSpectrumNames = visibleSpectra.Select(spectrum => spectrum.Name).ToHashSet();
+        foreach (var spectrum in spectra)
         {
-            chart.IsVisible = visibleChartNames.Contains(chart.Name);
+            spectrum.IsVisible = visibleSpectrumNames.Contains(spectrum.Name);
         }
     }
 }

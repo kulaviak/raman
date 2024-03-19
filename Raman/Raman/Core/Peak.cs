@@ -2,12 +2,12 @@ namespace Raman.Core;
 
 public class Peak
 {
-    public Peak(ValuePoint start, ValuePoint end, ValuePoint top, Chart chart)
+    public Peak(ValuePoint start, ValuePoint end, ValuePoint top, Spectrum spectrum)
     {
         Start = start;
         End = end;
         Top = top;
-        Chart = chart;
+        Spectrum = spectrum;
         TopRoot = GetIntersectionOfBaseAndVertical(start, end, top);
         Base = new Line(start, end);
         Vertical = new Line(TopRoot, top);
@@ -21,7 +21,7 @@ public class Peak
 
     public ValuePoint Top { get; }
     
-    public Chart Chart { get; }
+    public Spectrum Spectrum { get; }
 
     /// <summary>
     /// TopRoot is the intersection of line drawn from Start to End and vertical line drawn from Top.
@@ -38,7 +38,7 @@ public class Peak
 
     public override string ToString()
     {
-        return $"Start: {Start}, End: {End}, Top: {Top}, Height: {Height}, TopRoot: {TopRoot}, Base: {Base}, Vertical: {Vertical}, Chart: {Chart}";
+        return $"Start: {Start}, End: {End}, Top: {Top}, Height: {Height}, TopRoot: {TopRoot}, Base: {Base}, Vertical: {Vertical}, Spectrum?.Name: {Spectrum?.Name}";
     }
 
     protected bool Equals(Peak other)

@@ -11,7 +11,7 @@ public class SplineBaselineCalculator
     {
         if (xPositions.Count < 2)
         {
-            throw new AppException("Calculation of baseline failed. There are less than 2 chart points.");
+            throw new AppException("Calculation of baseline failed. There are less than 2 spectrum points.");
         }
         if (correctionPoints.Count < 4)
         {

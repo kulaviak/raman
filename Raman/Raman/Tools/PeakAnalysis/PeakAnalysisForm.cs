@@ -18,9 +18,9 @@ public partial class PeakAnalysisForm : Form
 
     private void AdditionalInitialization()
     {
-        var isPeakAddedToAllCharts = true;
-        cbAddToAllCharts.Checked = isPeakAddedToAllCharts;
-        peakAnalysisLayer.IsPeakAddedToAllCharts = isPeakAddedToAllCharts;
+        var isPeakAddedToAllSpectra = true;
+        cbAddToAllSpectra.Checked = isPeakAddedToAllSpectra;
+        peakAnalysisLayer.IsPeakAddedToAllSpectra = isPeakAddedToAllSpectra;
     }
 
     private void btnReset_Click(object sender, EventArgs e)
@@ -105,11 +105,11 @@ public partial class PeakAnalysisForm : Form
         }
     }
 
-    private void cbAddToAllCharts_CheckedChanged(object sender, EventArgs e)
+    private void cbAddToAllSpectra_CheckedChanged(object sender, EventArgs e)
     {
         try
         {
-            peakAnalysisLayer.IsPeakAddedToAllCharts = ((CheckBox) sender).Checked;
+            peakAnalysisLayer.IsPeakAddedToAllSpectra = ((CheckBox) sender).Checked;
         }
         catch (Exception ex)
         {

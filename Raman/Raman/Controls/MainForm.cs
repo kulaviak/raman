@@ -13,13 +13,13 @@ public partial class MainForm : Form
 {
     private const int SIDE_PANEL_WIDTH = 175;
 
-    private List<Chart> Charts
+    private List<Spectrum> Spectra
     {
-        get { return canvasPanel.Charts; }
+        get { return canvasPanel.Spectra; }
         set
         {
-            canvasPanel.Charts = value;
-            canvasPanel.SetCoordSystemToShowAllCharts();
+            canvasPanel.Spectra = value;
+            canvasPanel.SetCoordSystemToShowAllSpectra();
             canvasPanel.Refresh();
             EnableOrDisableItems();
         }
@@ -27,25 +27,25 @@ public partial class MainForm : Form
 
     private void EnableOrDisableItems()
     {
-        var areAnyCharts = canvasPanel.Charts.Count != 0;
+        var areAnySpectra = canvasPanel.Spectra.Count != 0;
 
-        miZoomWindow.Enabled = areAnyCharts;
-        tsbZoomToWindow.Enabled = areAnyCharts;
+        miZoomWindow.Enabled = areAnySpectra;
+        tsbZoomToWindow.Enabled = areAnySpectra;
 
-        miZoomToOriginalSize.Enabled = areAnyCharts;
-        tsbZoomToOriginalSize.Enabled = areAnyCharts;
+        miZoomToOriginalSize.Enabled = areAnySpectra;
+        tsbZoomToOriginalSize.Enabled = areAnySpectra;
 
-        miBaselineCorrection.Enabled = areAnyCharts;
-        tsbBaselineCorrection.Enabled = areAnyCharts;
+        miBaselineCorrection.Enabled = areAnySpectra;
+        tsbBaselineCorrection.Enabled = areAnySpectra;
 
-        miPeakAnalysis.Enabled = areAnyCharts;
-        tsbPeakAnalysis.Enabled = areAnyCharts;
+        miPeakAnalysis.Enabled = areAnySpectra;
+        tsbPeakAnalysis.Enabled = areAnySpectra;
 
-        miCutOff.Enabled = areAnyCharts;
-        tsbCutOff.Enabled = areAnyCharts;
+        miCutOff.Enabled = areAnySpectra;
+        tsbCutOff.Enabled = areAnySpectra;
 
-        miSelectSpectra.Enabled = areAnyCharts;
-        tsbSelectSpectra.Enabled = areAnyCharts;
+        miSelectSpectra.Enabled = areAnySpectra;
+        tsbSelectSpectra.Enabled = areAnySpectra;
     }
 
     public MainForm()
@@ -155,16 +155,16 @@ public partial class MainForm : Form
     private void OpenSingleSpectraFilesInternal(List<string> filePaths)
     {
         SetFormToDefaultState();
-        var charts = new List<Chart>();
+        var spectra = new List<Spectrum>();
         foreach (var filePath in filePaths)
         {
             var fileReader = new SingleSpectrumFileReader(filePath);
             var points = fileReader.TryReadFile();
             var name = Path.GetFileNameWithoutExtension(filePath);
-            charts.Add(new Chart(points, name));
+            spectra.Add(new Spectrum(points, name));
         }
 
-        Charts = charts;
+        Spectra = spectra;
     }
 
     private void LoadDemoSpectrum()
@@ -217,7 +217,7 @@ public partial class MainForm : Form
     {
         try
         {
-            canvasPanel.ZoomToSeeAllCharts();
+            canvasPanel.ZoomToSeeAllSpectra();
         }
         catch (Exception ex)
         {
@@ -291,7 +291,7 @@ public partial class MainForm : Form
     {
         try
         {
-            canvasPanel.ZoomToSeeAllCharts();
+            canvasPanel.ZoomToSeeAllSpectra();
         }
         catch (Exception ex)
         {
@@ -420,7 +420,7 @@ public partial class MainForm : Form
     private void OpenMultiSpectrumFilesInternal(List<string> filePaths)
     {
         SetFormToDefaultState();
-        var charts = new List<Chart>();
+        var spectra = new List<Spectrum>();
         foreach (var filePath in filePaths)
         {
             List<List<ValuePoint>> spectraPoints;
@@ -438,12 +438,12 @@ public partial class MainForm : Form
             for (var i = 0; i < spectraPoints.Count; i++)
             {
                 var spectrumPoints = spectraPoints[i];
-                var chart = new Chart(spectrumPoints, name + $"_{i + 1}");
-                charts.Add(chart);
+                var spectrum = new Spectrum(spectrumPoints, name + $"_{i + 1}");
+                spectra.Add(spectrum);
             }
         }
 
-        Charts = charts;
+        Spectra = spectra;
     }
 
     private void OnKeyDown(object sender, KeyEventArgs e)
@@ -517,20 +517,20 @@ public partial class MainForm : Form
 
     private void ShowSpectrumSelectionForm()
     {
-        var orderedCharts = canvasPanel.Charts.OrderByDescending(chart => GetAverageY(chart)).ToList();
-        var form = new SpectrumSelectionForm(orderedCharts, canvasPanel);
-        var originalCharts = canvasPanel.Charts.Select(chart => chart.DeepClone()).ToList();
+        var orderedSpectra = canvasPanel.Spectra.OrderByDescending(spectrum => GetAverageY(spectrum)).ToList();
+        var form = new SpectrumSelectionForm(orderedSpectra, canvasPanel);
+        var originalSpectra = canvasPanel.Spectra.Select(spectrum => spectrum.DeepClone()).ToList();
         if (form.ShowDialog() == DialogResult.Cancel)
         {
-            canvasPanel.Charts = originalCharts;
+            canvasPanel.Spectra = originalSpectra;
         }
 
         canvasPanel.Refresh();
     }
 
-    private double GetAverageY(Chart chart)
+    private double GetAverageY(Spectrum spectrum)
     {
-        var ret = chart.Points.Average(point => point.Y);
+        var ret = spectrum.Points.Average(point => point.Y);
         return ret;
     }
 

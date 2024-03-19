@@ -32,7 +32,7 @@ partial class PeakAnalysisForm
         this.label1 = new System.Windows.Forms.Label();
         this.btnClose = new System.Windows.Forms.Button();
         this.btnExportPeaks = new System.Windows.Forms.Button();
-        this.cbAddToAllCharts = new System.Windows.Forms.CheckBox();
+        this.cbAddToAllSpectra = new System.Windows.Forms.CheckBox();
         this.SuspendLayout();
         // 
         // btnReset
@@ -73,22 +73,22 @@ partial class PeakAnalysisForm
         this.btnExportPeaks.UseVisualStyleBackColor = true;
         this.btnExportPeaks.Click += new System.EventHandler(this.btnExportPeaks_Click);
         // 
-        // cbAddToAllCharts
+        // cbAddToAllSpectra
         // 
-        this.cbAddToAllCharts.Location = new System.Drawing.Point(7, 61);
-        this.cbAddToAllCharts.Name = "cbAddToAllCharts";
-        this.cbAddToAllCharts.Size = new System.Drawing.Size(148, 24);
-        this.cbAddToAllCharts.TabIndex = 13;
-        this.cbAddToAllCharts.Text = "Add Peak To All Spectra";
-        this.cbAddToAllCharts.UseVisualStyleBackColor = true;
-        this.cbAddToAllCharts.CheckedChanged += new System.EventHandler(this.cbAddToAllCharts_CheckedChanged);
+        this.cbAddToAllSpectra.Location = new System.Drawing.Point(7, 61);
+        this.cbAddToAllSpectra.Name = "cbAddToAllSpectra";
+        this.cbAddToAllSpectra.Size = new System.Drawing.Size(148, 24);
+        this.cbAddToAllSpectra.TabIndex = 13;
+        this.cbAddToAllSpectra.Text = "Add Peak To All Spectra";
+        this.cbAddToAllSpectra.UseVisualStyleBackColor = true;
+        this.cbAddToAllSpectra.CheckedChanged += new System.EventHandler(this.cbAddToAllSpectra_CheckedChanged);
         // 
         // PeakAnalysisForm
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.ClientSize = new System.Drawing.Size(169, 450);
-        this.Controls.Add(this.cbAddToAllCharts);
+        this.Controls.Add(this.cbAddToAllSpectra);
         this.Controls.Add(this.btnExportPeaks);
         this.Controls.Add(this.btnClose);
         this.Controls.Add(this.label1);
@@ -100,7 +100,7 @@ partial class PeakAnalysisForm
         this.ResumeLayout(false);
     }
 
-    private System.Windows.Forms.CheckBox cbAddToAllCharts;
+    private System.Windows.Forms.CheckBox cbAddToAllSpectra;
 
     private System.Windows.Forms.Button btnExportPeaks;
 

@@ -35,7 +35,7 @@ partial class BaselineCorrectionForm
         this.btnReset = new System.Windows.Forms.Button();
         this.label1 = new System.Windows.Forms.Label();
         this.btnClose = new System.Windows.Forms.Button();
-        this.btnExportCorrectedCharts = new System.Windows.Forms.Button();
+        this.btnExportCorrectedSpectra = new System.Windows.Forms.Button();
         this.cbAreBaselineEndsExtended = new System.Windows.Forms.CheckBox();
         this.cbAreCorrectionPointsAdjusted = new System.Windows.Forms.CheckBox();
         this.SuspendLayout();
@@ -108,15 +108,15 @@ partial class BaselineCorrectionForm
         this.btnClose.UseVisualStyleBackColor = true;
         this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
         // 
-        // btnExportCorrectedCharts
+        // btnExportCorrectedSpectra
         // 
-        this.btnExportCorrectedCharts.Location = new System.Drawing.Point(7, 300);
-        this.btnExportCorrectedCharts.Name = "btnExportCorrectedCharts";
-        this.btnExportCorrectedCharts.Size = new System.Drawing.Size(142, 23);
-        this.btnExportCorrectedCharts.TabIndex = 12;
-        this.btnExportCorrectedCharts.Text = "Export Corrected Charts";
-        this.btnExportCorrectedCharts.UseVisualStyleBackColor = true;
-        this.btnExportCorrectedCharts.Click += new System.EventHandler(this.btnExportCorrectedCharts_Click);
+        this.btnExportCorrectedSpectra.Location = new System.Drawing.Point(7, 300);
+        this.btnExportCorrectedSpectra.Name = "btnExportCorrectedSpectra";
+        this.btnExportCorrectedSpectra.Size = new System.Drawing.Size(142, 23);
+        this.btnExportCorrectedSpectra.TabIndex = 12;
+        this.btnExportCorrectedSpectra.Text = "Export Corrected Spectra";
+        this.btnExportCorrectedSpectra.UseVisualStyleBackColor = true;
+        this.btnExportCorrectedSpectra.Click += new System.EventHandler(this.btnExportCorrectedSpectra_Click);
         // 
         // cbAreBaselineEndsExtended
         // 
@@ -146,7 +146,7 @@ partial class BaselineCorrectionForm
         this.ClientSize = new System.Drawing.Size(169, 450);
         this.Controls.Add(this.cbAreCorrectionPointsAdjusted);
         this.Controls.Add(this.cbAreBaselineEndsExtended);
-        this.Controls.Add(this.btnExportCorrectedCharts);
+        this.Controls.Add(this.btnExportCorrectedSpectra);
         this.Controls.Add(this.btnClose);
         this.Controls.Add(this.label1);
         this.Controls.Add(this.btnReset);
@@ -164,7 +164,7 @@ partial class BaselineCorrectionForm
     private System.Windows.Forms.CheckBox cbAreBaselineEndsExtended;
     private System.Windows.Forms.CheckBox cbAreCorrectionPointsAdjusted;
 
-    private System.Windows.Forms.Button btnExportCorrectedCharts;
+    private System.Windows.Forms.Button btnExportCorrectedSpectra;
 
     private System.Windows.Forms.Button btnClose;
 

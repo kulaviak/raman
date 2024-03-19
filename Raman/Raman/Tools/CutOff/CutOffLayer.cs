@@ -15,7 +15,7 @@ public class CutOffLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel)
 
     private static Color COLOR = Color.Red;
 
-    private Stack<List<Chart>> chartHistory = new Stack<List<Chart>>();
+    private Stack<List<Spectrum>> spectrumHistory = new Stack<List<Spectrum>>();
     
     private Stack<ValuePoint> startHistory = new Stack<ValuePoint>();
     
@@ -35,8 +35,8 @@ public class CutOffLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel)
         }
         startHistory.Push(start);
         endHistory.Push(end);
-        chartHistory.Push(canvasPanel.Charts);
-        canvasPanel.Charts = GetCutOffCharts(canvasPanel.Charts, start.X, end.X);
+        spectrumHistory.Push(canvasPanel.Spectra);
+        canvasPanel.Spectra = GetCutOffSpectra(canvasPanel.Spectra, start.X, end.X);
         start = null;
         end = null;
         Refresh();
@@ -44,16 +44,16 @@ public class CutOffLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel)
     
     public void UndoCutOff()
     {
-        if (chartHistory.Count == 0)
+        if (spectrumHistory.Count == 0)
         {
             MessageUtil.ShowInfo("There is no undo to do.", "Information");
             return;
         }
         start = startHistory.Pop();
         end = endHistory.Pop();
-        var charts = chartHistory.Pop();
-        Util.SetChartVisibilityAccordingToCurrentVisibleCharts(charts, canvasPanel.VisibleCharts);
-        canvasPanel.Charts = charts;
+        var spectra = spectrumHistory.Pop();
+        Util.SetSpectrumVisibilityAccordingToCurrentVisibleSpectra(spectra, canvasPanel.VisibleSpectra);
+        canvasPanel.Spectra = spectra;
         Refresh();
     }
     
@@ -101,21 +101,21 @@ public class CutOffLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel)
         Refresh();
     }
 
-    private static List<Chart> GetCutOffCharts(List<Chart> charts, double start, double end)
+    private static List<Spectrum> GetCutOffSpectra(List<Spectrum> spectra, double start, double end)
     {
-        var ret = new List<Chart>();
-        foreach (var chart in charts)
+        var ret = new List<Spectrum>();
+        foreach (var spectrum in spectra)
         {
-            var newChart = chart.IsVisible ? GetCutOffChart(chart, start, end) : chart;
-            ret.Add(newChart);
+            var newSpectrum = spectrum.IsVisible ? GetCutOffSpectrum(spectrum, start, end) : spectrum;
+            ret.Add(newSpectrum);
         }
         return ret;
     }
 
-    private static Chart GetCutOffChart(Chart chart, double start, double end)
+    private static Spectrum GetCutOffSpectrum(Spectrum spectrum, double start, double end)
     {
-        var points = chart.Points.Where(point => start <= point.X && point.X <= end).ToList();
-        var ret = new Chart(points, chart.Name);
+        var points = spectrum.Points.Where(point => start <= point.X && point.X <= end).ToList();
+        var ret = new Spectrum(points, spectrum.Name);
         return ret;
     }
 
