@@ -28,13 +28,13 @@ public partial class MainForm : Form
     private void EnableOrDisableItems()
     {
         var areAnyCharts = canvasPanel.Charts.Count != 0;
-        
+
         miZoomWindow.Enabled = areAnyCharts;
         tsbZoomToWindow.Enabled = areAnyCharts;
-        
+
         miZoomToOriginalSize.Enabled = areAnyCharts;
         tsbZoomToOriginalSize.Enabled = areAnyCharts;
-        
+
         miBaselineCorrection.Enabled = areAnyCharts;
         tsbBaselineCorrection.Enabled = areAnyCharts;
 
@@ -65,10 +65,10 @@ public partial class MainForm : Form
         Shown += OnShown;
         EnableOrDisableItems();
     }
-    
+
     private void OnShown(object sender, EventArgs e)
     {
-        // LoadDemoSpectrum();
+        LoadDemoSpectrum();
         LoadDemoSpectra();
     }
 
@@ -135,6 +135,7 @@ public partial class MainForm : Form
             {
                 openFileDialog.InitialDirectory = AppSettings.SingleSpectrumOpenFileDirectory;
             }
+
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 var filePaths = openFileDialog.FileNames.ToList();
@@ -144,6 +145,7 @@ public partial class MainForm : Form
                         MessageBoxIcon.Error);
                     return;
                 }
+
                 AppSettings.SingleSpectrumOpenFileDirectory = Path.GetDirectoryName(filePaths[0]);
                 OpenSingleSpectraFilesInternal(filePaths);
             }
@@ -161,12 +163,17 @@ public partial class MainForm : Form
             var name = Path.GetFileNameWithoutExtension(filePath);
             charts.Add(new Chart(points, name));
         }
+
         Charts = charts;
     }
 
     private void LoadDemoSpectrum()
     {
-        OpenSingleSpectraFilesInternal(new List<string> {"c:/github/kulaviak/raman/data/spektra/spectrum.txt"});
+        var filePath = "c:/github/kulaviak/raman/data/spektra/spectrum.txt";
+        if (System.IO.File.Exists(filePath))
+        {
+            OpenSingleSpectraFilesInternal(new List<string> {filePath});
+        }
     }
 
     private void LoadDemoSpectra()
@@ -183,7 +190,10 @@ public partial class MainForm : Form
             "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X3.txt",
             "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X4.txt"
         };
-        OpenSingleSpectraFilesInternal(filePaths);
+        if (filePaths.TrueForAll(filePath => System.IO.File.Exists(filePath)))
+        {
+            OpenSingleSpectraFilesInternal(filePaths);
+        }
     }
 
     private void miZoomWindow_Click(object sender, EventArgs e)
@@ -214,7 +224,7 @@ public partial class MainForm : Form
             MessageUtil.ShowAppError("Zoom failed.", "Zoom failed", ex);
         }
     }
-    
+
     private void miBaselineCorrection_Click(object sender, EventArgs e)
     {
         try
@@ -230,13 +240,15 @@ public partial class MainForm : Form
     private void BaselineCorrection()
     {
         SetFormToDefaultState();
-        var baselineCorrectionLayer = new BaselineCorrectionLayer(canvasPanel.CoordSystem, canvasPanel, AppSettings.AreBaselineEndsExtended, AppSettings.AreCorrectionPointsAdjusted);
+        var baselineCorrectionLayer = new BaselineCorrectionLayer(canvasPanel.CoordSystem, canvasPanel, AppSettings.AreBaselineEndsExtended,
+            AppSettings.AreCorrectionPointsAdjusted);
         canvasPanel.BaselineCorrectionLayer = baselineCorrectionLayer;
-        var form = new BaselineCorrectionForm(baselineCorrectionLayer,AppSettings.AreBaselineEndsExtended, AppSettings.AreCorrectionPointsAdjusted);
+        var form = new BaselineCorrectionForm(baselineCorrectionLayer, AppSettings.AreBaselineEndsExtended,
+            AppSettings.AreCorrectionPointsAdjusted);
         form.Closed += BaselineForm_Closed;
         ShowSidePanel(form);
     }
-    
+
     private void BaselineForm_Closed(object sender, EventArgs e)
     {
         try
@@ -250,7 +262,7 @@ public partial class MainForm : Form
             MessageUtil.ShowAppError("Closing Baseline Correction form failed.", "Error", ex);
         }
     }
-    
+
     private void tsbOpenFiles_Click(object sender, EventArgs e)
     {
         try
@@ -392,12 +404,13 @@ public partial class MainForm : Form
                     MessageBox.Show("No files were selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+
                 AppSettings.MultipleSpectrumOpenFileDirectory = Path.GetDirectoryName(filePaths[0]);
                 OpenMultiSpectrumFilesInternal(filePaths);
             }
         }
     }
-    
+
     private void SetFormToDefaultState()
     {
         HideSidePanel();
@@ -420,17 +433,19 @@ public partial class MainForm : Form
             {
                 throw new AppException($"Opening file {filePath} failed.", e);
             }
+
             var name = Path.GetFileNameWithoutExtension(filePath);
             for (var i = 0; i < spectraPoints.Count; i++)
             {
                 var spectrumPoints = spectraPoints[i];
-                var chart = new Chart(spectrumPoints, name + $"_{i+1}");
+                var chart = new Chart(spectrumPoints, name + $"_{i + 1}");
                 charts.Add(chart);
             }
         }
+
         Charts = charts;
     }
-    
+
     private void OnKeyDown(object sender, KeyEventArgs e)
     {
         canvasPanel.HandleKeyPress(sender, e);
@@ -461,7 +476,7 @@ public partial class MainForm : Form
         form.Closed += CutOffForm_Closed;
         ShowSidePanel(form);
     }
-    
+
     private void CutOffForm_Closed(object sender, EventArgs e)
     {
         try
@@ -509,6 +524,7 @@ public partial class MainForm : Form
         {
             canvasPanel.Charts = originalCharts;
         }
+
         canvasPanel.Refresh();
     }
 
