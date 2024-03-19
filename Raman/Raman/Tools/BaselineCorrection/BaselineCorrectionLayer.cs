@@ -162,7 +162,7 @@ public class BaselineCorrectionLayer : LayerBase
             {
                 var start = GetBaselineStart();
                 var end = GetBaselineEnd();
-                var xPositions = GetXPositions(start, end);
+                var xPositions = GetXPositionsForBaselineDrawing(start, end);
                 var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, CorrectionPoints);
                 new CanvasDrawer(canvasPanel.CoordSystem, graphics).DrawLines(baselinePoints, Pens.Green);
             }
@@ -201,7 +201,7 @@ public class BaselineCorrectionLayer : LayerBase
         }
     }
 
-    private List<double> GetXPositions(double start, double end)
+    private List<double> GetXPositionsForBaselineDrawing(double start, double end)
     {
         var diff = (end - start) / 1000;
         var ret = new List<double>();
@@ -210,6 +210,19 @@ public class BaselineCorrectionLayer : LayerBase
             ret.Add(position);    
         }
         return ret;
+    }
+    
+    private List<double> GetXPositionsForBaseline(Chart chart, List<ValuePoint> chartCorrectionPoints)
+    {
+        var baselineStart = GetBaselineStart();
+        var baselineEnd = GetBaselineEnd();
+        var correctionPointsStart = chartCorrectionPoints.Select(point => point.X).Min();
+        var correctionPointsEnd = chartCorrectionPoints.Select(point => point.X).Max();
+        // limit the baseline range to the range of correction points, that determinate the baseline. Else the baseline can escape to
+        // Infinity and calculation fails
+        var start = Math.Max(baselineStart, correctionPointsStart);
+        var end = Math.Min(baselineEnd, correctionPointsEnd);
+        return chart.Points.Where(point => start <= point.X && point.X <= end).Select(point => point.X).ToList();
     }
 
     private void RemoveClosestPoint(Point location)
@@ -254,17 +267,15 @@ public class BaselineCorrectionLayer : LayerBase
     
     private Chart CorrectBaseline(Chart chart)
     {
-        var start = GetBaselineStart();
-        var end = GetBaselineEnd();
-        var xPositions = chart.Points.Where(point => start <= point.X && point.X <= end).Select(point => point.X).ToList();
         var chartCorrectionPoints = GetChartCorrectionPoints(chart, CorrectionPoints, AreCorrectionPointsAdjusted);
+        var xPositions = GetXPositionsForBaseline(chart, chartCorrectionPoints);
         var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, chartCorrectionPoints);
         var newChartPoints = new BaselineCorrector().CorrectChartByBaseline(chart.Points, baselinePoints);
         var ret = new Chart(newChartPoints, chart.Name);
         ret.IsBaselineCorrected = true;
         return ret;
     }
-
+    
     private static List<ValuePoint> GetChartCorrectionPoints(Chart chart, List<ValuePoint> correctionPoints, bool areCorrectionPointsAdjusted)
     {
         var ret = new List<ValuePoint>();
