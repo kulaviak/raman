@@ -133,7 +133,6 @@
     <Compile Include="Core\NewClosestSpectrumCalculator.cs" />
     <Compile Include="Core\PeakAreaCalculator.cs" />
     <Compile Include="Core\Spectrum.cs" />
-    <Compile Include="Core\ClosestSpectrumCalculator.cs" />
     <Compile Include="Core\ExceptionFormatter.cs" />
     <Compile Include="Core\Extensions.cs" />
     <Compile Include="Core\Global.cs" />
