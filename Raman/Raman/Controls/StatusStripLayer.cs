@@ -28,7 +28,8 @@ public class StatusStripLayer : LayerBase
         if (timer != null)
         {
             timer.Stop();
-        }
+        } 
+        // improve performance, don't react on every mouse location change by delaying the response
         timer = new Timer {Interval = DELAYED_RESPONSE_TIME_IN_MILISECONDS};
         timer.Tick += (_, _) =>
         {
