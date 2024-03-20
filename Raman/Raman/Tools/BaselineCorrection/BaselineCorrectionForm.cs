@@ -6,9 +6,9 @@ namespace Raman.Tools.BaselineCorrection;
 public partial class BaselineCorrectionForm : Form
 {
     private readonly BaselineCorrectionLayer baselineCorrectionLayer;
-    
+
     private const string FILE_DIALOG_FILTER = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
-        
+
     public BaselineCorrectionForm(BaselineCorrectionLayer baselineCorrectionLayer, bool areBaselineEndsExtended,
         bool areCorrectionPointsAdjusted)
     {
@@ -34,7 +34,7 @@ public partial class BaselineCorrectionForm : Form
     {
         using (var openFileDialog = new OpenFileDialog())
         {
-            openFileDialog.Filter = FILE_DIALOG_FILTER; 
+            openFileDialog.Filter = FILE_DIALOG_FILTER;
             openFileDialog.FilterIndex = 1;
             openFileDialog.Multiselect = false;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -45,22 +45,12 @@ public partial class BaselineCorrectionForm : Form
                     MessageUtil.ShowUserError("No file was selected.", "No file selected");
                     return;
                 }
-                try
-                {
-                    ImportPointsInternal(filePaths.First());
-                }
-                catch (Exception ex)
-                {
-                    MessageUtil.ShowAppError($"Importing baseline correction points failed. Error: {ex.Message}", "Import failed", ex);
-                }
+
+                var filePath = filePaths.First();
+                var points = new SingleSpectrumFileReader(filePath).TryReadFile();
+                baselineCorrectionLayer.ImportPoints(points);
             }
         }
-    }
-
-    private void ImportPointsInternal(string filePath)
-    {
-        var points = new SingleSpectrumFileReader(filePath).TryReadFile();
-        baselineCorrectionLayer.ImportPoints(points);
     }
 
     private void btnExportPoints_Click(object sender, EventArgs e)
@@ -79,7 +69,7 @@ public partial class BaselineCorrectionForm : Form
     {
         using (var saveFileDialog = new SaveFileDialog())
         {
-            saveFileDialog.Filter = FILE_DIALOG_FILTER; 
+            saveFileDialog.Filter = FILE_DIALOG_FILTER;
             saveFileDialog.FilterIndex = 1;
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -89,16 +79,9 @@ public partial class BaselineCorrectionForm : Form
                     MessageUtil.ShowUserError("No file was selected.", "No file selected");
                     return;
                 }
-                try
-                {
-                    var filePath = filePaths.First();
-                    baselineCorrectionLayer.ExportPoints(filePath);
-                    MessageUtil.ShowInfo("Points were exported successfully.", "Export finished");
-                }
-                catch (Exception ex)
-                {
-                    MessageUtil.ShowAppError($"Exporting baseline correction points failed. Error: {ex.Message}", "Export failed", ex);
-                }
+                var filePath = filePaths.First();
+                baselineCorrectionLayer.ExportPoints(filePath);
+                MessageUtil.ShowInfo("Points were exported successfully.", "Export finished");
             }
         }
     }
@@ -182,7 +165,9 @@ public partial class BaselineCorrectionForm : Form
         var isChecked = !((CheckBox) sender).Checked;
         if (baselineCorrectionLayer.CorrectionPoints.Any())
         {
-            MessageUtil.ShowUserError("Option Adjust Correction Points can not be changed after some points are already selected. Please remove points and try again.", "Error");
+            MessageUtil.ShowUserError(
+                "Option Adjust Correction Points can not be changed after some points are already selected. Please remove points and try again.",
+                "Error");
             return;
         }
         cbAreCorrectionPointsAdjusted.Checked = isChecked;

@@ -34,19 +34,7 @@ public class SingleSpectrumFileReader
 
     private List<ValuePoint> TryParseLines(List<string> lines)
     {
-        var ret = new List<ValuePoint>();
-        foreach (var line in lines)
-        {
-            var point = TryParseLine(line);
-            if (point != null)
-            {
-                ret.Add(point);
-            }
-            else
-            {
-                // ignore
-            }
-        }
+        var ret = lines.Select(line => TryParseLine(line)).Where(x => x != null).ToList();
         return ret;
     }
 
