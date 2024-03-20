@@ -37,7 +37,7 @@ partial class PeakAnalysisForm
         // 
         // btnReset
         // 
-        this.btnReset.Location = new System.Drawing.Point(7, 91);
+        this.btnReset.Location = new System.Drawing.Point(7, 146);
         this.btnReset.Name = "btnReset";
         this.btnReset.Size = new System.Drawing.Size(142, 23);
         this.btnReset.TabIndex = 9;
@@ -55,7 +55,7 @@ partial class PeakAnalysisForm
         // 
         // btnClose
         // 
-        this.btnClose.Location = new System.Drawing.Point(38, 149);
+        this.btnClose.Location = new System.Drawing.Point(37, 208);
         this.btnClose.Name = "btnClose";
         this.btnClose.Size = new System.Drawing.Size(75, 23);
         this.btnClose.TabIndex = 11;
@@ -65,7 +65,7 @@ partial class PeakAnalysisForm
         // 
         // btnExportPeaks
         // 
-        this.btnExportPeaks.Location = new System.Drawing.Point(7, 120);
+        this.btnExportPeaks.Location = new System.Drawing.Point(7, 117);
         this.btnExportPeaks.Name = "btnExportPeaks";
         this.btnExportPeaks.Size = new System.Drawing.Size(142, 23);
         this.btnExportPeaks.TabIndex = 12;

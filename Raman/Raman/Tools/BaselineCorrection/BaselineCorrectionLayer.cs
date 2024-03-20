@@ -61,7 +61,8 @@ public class BaselineCorrectionLayer : LayerBase
     {
         if (areCorrectionPointsAdjusted)
         {
-            var closestSpectrum = new ClosestSpectrumCalculator().GetClosestSpectrum(spectra, pos, CoordSystem); 
+            var point = CoordSystem.ToValuePoint(pos);
+            var closestSpectrum = new NewClosestSpectrumCalculator().GetClosestSpectrum(spectra, point); 
             var closestPoints = GetClosestPoints(closestSpectrum.Points, pos);
             var averageY = closestPoints.Average(point => point.Y);
             var ret = new ValuePoint(CoordSystem.ToValueX(pos.X), averageY);

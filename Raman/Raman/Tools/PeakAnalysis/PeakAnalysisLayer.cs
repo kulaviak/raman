@@ -44,7 +44,8 @@ public class PeakAnalysisLayer : LayerBase
                 }
                 else
                 {
-                    var spectrum = new ClosestSpectrumCalculator().GetClosestSpectrum(canvasPanel.VisibleSpectra, e.Location, canvasPanel.CoordSystem);                    
+                    var point = canvasPanel.CoordSystem.ToValuePoint(e.Location);
+                    var spectrum = new NewClosestSpectrumCalculator().GetClosestSpectrum(canvasPanel.VisibleSpectra, point);                    
                     var peak = GetPeakForSpectrum(spectrum, start, end);
                     if (peak != null)
                     {

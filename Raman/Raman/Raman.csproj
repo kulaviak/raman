@@ -129,6 +129,8 @@
     <Compile Include="Core\AppConstants.cs" />
     <Compile Include="Core\AppException.cs" />
     <Compile Include="Core\AppSettings.cs" />
+    <Compile Include="Core\LineSegment.cs" />
+    <Compile Include="Core\NewClosestSpectrumCalculator.cs" />
     <Compile Include="Core\PeakAreaCalculator.cs" />
     <Compile Include="Core\Spectrum.cs" />
     <Compile Include="Core\ClosestSpectrumCalculator.cs" />
