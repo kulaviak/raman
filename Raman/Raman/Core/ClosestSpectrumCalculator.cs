@@ -7,7 +7,7 @@ namespace Raman.Core;
 /// coordination system of spectrum has axes x and y that have different dimensions. It doesn't make sense measure distance in such coordination
 /// system.
 /// </summary>
-public class NewClosestSpectrumCalculator
+public class ClosestSpectrumCalculator
 {
     public Spectrum GetClosestSpectrum(List<Spectrum> spectra, Point point, CanvasCoordSystem coordSystem, double maxAllowedDistance = double.MaxValue)
     {

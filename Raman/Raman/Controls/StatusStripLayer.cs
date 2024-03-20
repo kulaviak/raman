@@ -18,7 +18,7 @@ public class StatusStripLayer : LayerBase
     
     public override void HandleMouseMove(object sender, MouseEventArgs e)
     {
-        var spectrum = new NewClosestSpectrumCalculator().GetClosestSpectrum(canvasPanel.VisibleSpectra, e.Location, CoordSystem, MAX_ALLOWED_DISTANCE_FOR_CLOSEST_SPECTRUM);
+        var spectrum = new ClosestSpectrumCalculator().GetClosestSpectrum(canvasPanel.VisibleSpectra, e.Location, CoordSystem, MAX_ALLOWED_DISTANCE_FOR_CLOSEST_SPECTRUM);
         var positionText = GetPositionText(e.Location);
         var text = spectrum != null ? $"{positionText}     {spectrum.Name}" : positionText;
         statusStrip.ShowText(text);
