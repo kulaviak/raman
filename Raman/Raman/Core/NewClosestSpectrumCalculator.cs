@@ -1,39 +1,53 @@
+using Raman.Drawing;
+
 namespace Raman.Core;
 
+/// <summary>
+/// Spectrum calculator must work in coordination system of canvas! Because user wants the closest spectrum to the mouse position. The
+/// coordination system of spectrum has axes x and y that have different dimensions. It doesn't make sense measure distance in such coordination
+/// system.
+/// </summary>
 public class NewClosestSpectrumCalculator
 {
-    public Spectrum GetClosestSpectrum(List<Spectrum> spectra, ValuePoint point, double maxAllowedDistance = double.MaxValue)
+    public Spectrum GetClosestSpectrum(List<Spectrum> spectra, Point point, CanvasCoordSystem coordSystem, double maxAllowedDistance = double.MaxValue)
     {
         if (!spectra.Any()) return null;
         var segments = GetAllSegments(spectra);
-        segments = segments.OrderBy(segment => GetDistanceToSegment(point, segment)).ToList();
+        segments = segments.OrderBy(segment => GetDistanceToSegment(point, segment, coordSystem)).ToList();
         var closestSegment = segments.First();
-        Console.WriteLine("Point: " + point);
-        var distanceToClosestSegment = GetDistanceToSegment(point, closestSegment);
-        Console.WriteLine("distanceToClosestSegment: " + distanceToClosestSegment);
+        // Console.WriteLine("Point: " + point);
+        var distanceToClosestSegment = GetDistanceToSegment(point, closestSegment, coordSystem);
+        // Console.WriteLine("distanceToClosestSegment: " + distanceToClosestSegment);
         var ret = distanceToClosestSegment <= maxAllowedDistance ? closestSegment.Spectrum : null;
         return ret;
     }
-    
+
+    private static double GetDistanceToSegment(Point point, LineSegment segment, CanvasCoordSystem coordSystem)
+    {
+        var ret = GetDistanceToSegment(point, coordSystem.ToPixelPoint(segment.Start), coordSystem.ToPixelPoint(segment.End));
+        return ret;
+    }
+
     // chatGPT prompt: create c# method for getting distance between line segment and point
-    public static double GetDistanceToSegment(ValuePoint point, LineSegment segment)
+    private static double GetDistanceToSegment(Point point, Point start, Point end)
     {
         // Calculate the squared length of the line segment AB
-        var l2 = Math.Pow(segment.End.X - segment.Start.X, 2) + Math.Pow(segment.End.Y - segment.Start.Y, 2);
+        var l2 = Math.Pow(end.X - start.X, 2) + Math.Pow(end.Y - start.Y, 2);
 
         // If the line segment is degenerate (i.e., A == B), return the distance to A
         if (l2 == 0.0)
-            return Math.Sqrt(Math.Pow(point.X - segment.Start.X, 2) + Math.Pow(point.Y - segment.Start.Y, 2));
+            return Math.Sqrt(Math.Pow(point.X - start.X, 2) + Math.Pow(point.Y - start.Y, 2));
 
         // Calculate the projection of point C onto the line segment AB
-        var t = Math.Max(0, Math.Min(1, ((point.X - segment.Start.X) * (segment.End.X - segment.Start.X) + (point.Y - segment.Start.Y) * (segment.End.Y - segment.Start.Y)) / l2));
+        var t = Math.Max(0, Math.Min(1, ((point.X - start.X) * (end.X - start.X) + (point.Y - start.Y) * (end.Y - start.Y)) / l2));
 
-        var x = segment.Start.X + t * (segment.End.X - segment.Start.X);
-        var y = segment.Start.Y + t * (segment.End.Y - segment.Start.Y);
+        var x = start.X + t * (end.X - start.X);
+        var y = start.Y + t * (end.Y - start.Y);
         var projection = new ValuePoint(x, y);
 
         // Return the distance between point C and the projection
-        return Math.Sqrt(Math.Pow(point.X - projection.X, 2) + Math.Pow(point.Y - projection.Y, 2));
+        var ret = Math.Sqrt(Math.Pow(point.X - projection.X, 2) + Math.Pow(point.Y - projection.Y, 2));
+        return ret;
     }
 
     private List<LineSegment> GetAllSegments(List<Spectrum> spectra)
