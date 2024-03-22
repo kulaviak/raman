@@ -53,8 +53,7 @@ public static class AppSettings
         {
             if (_configuration == null)
             {
-                var builder = new ConfigurationBuilder()
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                var builder = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
                 _configuration = builder.Build();
             }
             return _configuration;
