@@ -46,7 +46,9 @@ public abstract class Util
 
     public static string Format(double value, int decimalPlaces)
     {
-        return Math.Round(value, decimalPlaces).ToString();
+        var culture = new CultureInfo("en-US");
+        culture.NumberFormat.NumberDecimalSeparator = AppSettings.DecimalSeparator;
+        return Math.Round(value, decimalPlaces).ToString(culture);
     }
     
     public static string Format(double number)

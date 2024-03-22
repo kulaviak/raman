@@ -21,7 +21,8 @@ public class PeakAnalysisExporter
 
     private string GetHeader()
     {
-        return "Spectrum_Name;Peak_Number;Peak_Start;Peak_End;Peak_Height;Peak_Position;Area";
+        var sep = AppSettings.CsvSeparator;
+        return $"Spectrum_Name{sep}Peak_Number{sep}Peak_Start{sep}Peak_End{sep}Peak_Height{sep}Peak_Position{sep}Area";
     }
 
     private List<string> GetLines(List<Peak> peaks)
@@ -32,7 +33,9 @@ public class PeakAnalysisExporter
 
     private string ToLine(Peak peak, List<Peak> peaks)
     {
-        var ret = $"{peak.Spectrum.Name};{GetPeakOrderNumber(peak, peaks) + 1};{Util.Format(peak.Start.X)};{Util.Format(peak.End.X)};{Util.Format(peak.Height)};{Util.Format(peak.TopRoot.X)};{Util.Format(peak.Area)}";
+        var sep = AppSettings.CsvSeparator;
+        var ret = $"{peak.Spectrum.Name}{sep}{GetPeakOrderNumber(peak, peaks) + 1}{sep}{Util.Format(peak.Start.X)}{sep}{Util.Format(peak.End.X)}" +
+                  $"{sep}{Util.Format(peak.Height)}{sep}{Util.Format(peak.TopRoot.X)}{sep}{Util.Format(peak.Area)}";
         return ret;
     }
 

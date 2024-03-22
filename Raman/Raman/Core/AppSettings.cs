@@ -36,6 +36,16 @@ public static class AppSettings
         get => GetBool("AreCorrectionPointsAdjusted") ?? false;
         set => SetBool("AreCorrectionPointsAdjusted", value);
     }
+    
+    /// <summary>
+    /// Use '.' It is universal decimal separator
+    /// </summary>
+    public static string DecimalSeparator => ".";
+    
+    /// <summary>
+    /// Use ',' to comply with CSV definition.
+    /// </summary>
+    public static string CsvSeparator => ",";
 
     private static IConfiguration Configuration
     {
