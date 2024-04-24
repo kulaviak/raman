@@ -127,11 +127,22 @@ public class BaselineCorrectionLayer : LayerBase
         }
         spectrumHistory.Push(canvasPanel.Spectra);
         correctionPointHistory.Push(CorrectionPoints);
-        canvasPanel.Spectra = canvasPanel.VisibleSpectra.Select(x => CorrectBaseline(x)).ToList();
+        canvasPanel.Spectra = GetCorrectedSpectra(canvasPanel.Spectra);
         CorrectionPoints = new List<ValuePoint>();
         canvasPanel.ZoomToSeeAllSpectra();
     }
-    
+
+    private List<Spectrum> GetCorrectedSpectra(List<Spectrum> spectra)
+    {
+        var ret = new List<Spectrum>();
+        foreach (var spectrum in spectra)
+        {
+            var newSpectrum = spectrum.IsVisible ? CorrectBaseline(spectrum) : spectrum;
+            ret.Add(newSpectrum);
+        }
+        return ret;
+    }
+
     public void ExportCorrectedSpectra()
     {
         var exportedSpectra = canvasPanel.Spectra.Where(x => x.IsBaselineCorrected).ToList();
