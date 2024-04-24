@@ -137,7 +137,7 @@ public class BaselineCorrectionLayer : LayerBase
         var ret = new List<Spectrum>();
         foreach (var spectrum in spectra)
         {
-            var newSpectrum = spectrum.IsVisible ? CorrectBaseline(spectrum) : spectrum;
+            var newSpectrum = spectrum.IsVisible ? CorrectBaseline(spectrum, CorrectionPoints, AreCorrectionPointsAdjusted, canvasPanel.VisibleSpectra) : spectrum;
             ret.Add(newSpectrum);
         }
         return ret;
@@ -171,8 +171,8 @@ public class BaselineCorrectionLayer : LayerBase
         {
             try
             {
-                var start = GetBaselineStart();
-                var end = GetBaselineEnd();
+                var start = GetBaselineStart(canvasPanel.VisibleSpectra, CorrectionPoints, AreCorrectionPointsAdjusted);
+                var end = GetBaselineEnd(canvasPanel.VisibleSpectra, CorrectionPoints, AreCorrectionPointsAdjusted);
                 var xPositions = GetXPositionsForBaselineDrawing(start, end);
                 var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, CorrectionPoints);
                 new CanvasDrawer(canvasPanel.CoordSystem, graphics).DrawLines(baselinePoints, Pens.Green);
@@ -184,31 +184,31 @@ public class BaselineCorrectionLayer : LayerBase
         }
     }
 
-    private double GetBaselineEnd()
+    private static double GetBaselineEnd(List<Spectrum> visibleSpectra, List<ValuePoint> correctionPoints, bool areBaselineEndsExtended)
     {
-        if (AreBaselineEndsExtended)
+        if (areBaselineEndsExtended)
         {
-            var spectrumPointsMax = canvasPanel.Spectra.SelectMany(x => x.Points).Max(point => point.X);
-            var correctionPointsMax = CorrectionPoints.Max(point => point.X);
+            var spectrumPointsMax = visibleSpectra.SelectMany(x => x.Points).Max(point => point.X);
+            var correctionPointsMax = correctionPoints.Max(point => point.X);
             return Math.Max(spectrumPointsMax, correctionPointsMax);
         }
         else
         {
-            return CorrectionPoints.Max(point => point.X);
+            return correctionPoints.Max(point => point.X);
         }
     }
 
-    private double GetBaselineStart()
+    private static double GetBaselineStart(List<Spectrum> visibleSpectra, List<ValuePoint> correctionPoints, bool areBaselineEndsExtended)
     {
-        if (AreBaselineEndsExtended)
+        if (areBaselineEndsExtended)
         {
-            var spectrumPointsMin = canvasPanel.Spectra.SelectMany(x => x.Points).Min(point => point.X);
-            var correctionPointsMin = CorrectionPoints.Min(point => point.X);
+            var spectrumPointsMin = visibleSpectra.SelectMany(x => x.Points).Min(point => point.X);
+            var correctionPointsMin = correctionPoints.Min(point => point.X);
             return Math.Min(spectrumPointsMin, correctionPointsMin);
         }
         else
         {
-            return CorrectionPoints.Min(point => point.X);
+            return correctionPoints.Min(point => point.X);
         }
     }
 
@@ -223,10 +223,11 @@ public class BaselineCorrectionLayer : LayerBase
         return ret;
     }
     
-    private List<double> GetXPositionsForBaseline(Spectrum spectrum, List<ValuePoint> spectrumCorrectionPoints)
+    private static List<double> GetXPositionsForBaseline(Spectrum spectrum, List<ValuePoint> spectrumCorrectionPoints, 
+        List<Spectrum> visibleSpectra, bool areBaselineEndsExtended)
     {
-        var baselineStart = GetBaselineStart();
-        var baselineEnd = GetBaselineEnd();
+        var baselineStart = GetBaselineStart(visibleSpectra, spectrumCorrectionPoints, areBaselineEndsExtended);
+        var baselineEnd = GetBaselineEnd(visibleSpectra, spectrumCorrectionPoints, areBaselineEndsExtended);
         var correctionPointsStart = spectrumCorrectionPoints.Select(point => point.X).Min();
         var correctionPointsEnd = spectrumCorrectionPoints.Select(point => point.X).Max();
         // limit the baseline range to the range of correction points, that determinate the baseline. Else the baseline can escape to
@@ -276,10 +277,10 @@ public class BaselineCorrectionLayer : LayerBase
         }
     }
     
-    private Spectrum CorrectBaseline(Spectrum spectrum)
+    private static Spectrum CorrectBaseline(Spectrum spectrum, List<ValuePoint> correctionPoints, bool areCorrectionPointsAdjusted, List<Spectrum> visibleSpectra)
     {
-        var spectrumCorrectionPoints = GetSpectrumCorrectionPoints(spectrum, CorrectionPoints, AreCorrectionPointsAdjusted);
-        var xPositions = GetXPositionsForBaseline(spectrum, spectrumCorrectionPoints);
+        var spectrumCorrectionPoints = GetSpectrumCorrectionPoints(spectrum, correctionPoints, areCorrectionPointsAdjusted);
+        var xPositions = GetXPositionsForBaseline(spectrum, spectrumCorrectionPoints, visibleSpectra, areCorrectionPointsAdjusted);
         var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, spectrumCorrectionPoints);
         var newSpectrumPoints = new BaselineCorrector().CorrectSpectrumByBaseline(spectrum.Points, baselinePoints);
         var ret = new Spectrum(newSpectrumPoints, spectrum.Name);
