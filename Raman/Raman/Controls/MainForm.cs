@@ -453,6 +453,7 @@ public partial class MainForm : Form
 
     private void miHelp_Click(object sender, EventArgs e)
     {
+        MessageUtil.ShowInfo("Please see doc/Raman.pdf in application directory.", "Help");
     }
 
     private void miCutOff_Click(object sender, EventArgs e)
