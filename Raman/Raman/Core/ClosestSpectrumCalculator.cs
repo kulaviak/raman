@@ -29,7 +29,7 @@ public class ClosestSpectrumCalculator
     }
 
     // chatGPT prompt: create c# method for getting distance between line segment and point
-    private static double GetDistanceToSegment(Point point, Point start, Point end)
+    public static double GetDistanceToSegment(Point point, Point start, Point end)
     {
         // Calculate the squared length of the line segment AB
         var l2 = Math.Pow(end.X - start.X, 2) + Math.Pow(end.Y - start.Y, 2);

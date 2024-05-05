@@ -30,8 +30,8 @@ public class SplineBaselineCalculator
 
     private static CubicSpline GetSplineFromCorrectionPoints(List<ValuePoint> correctionPoints)
     {
-        var xValues = correctionPoints.Select(point => (double) point.X).ToArray();
-        var yValues = correctionPoints.Select(point => (double) point.Y).ToArray();
+        var xValues = correctionPoints.Select(point => point.X).ToArray();
+        var yValues = correctionPoints.Select(point => point.Y).ToArray();
         var spline = CubicSpline.InterpolateNatural(xValues, yValues);
         return spline;
     }
