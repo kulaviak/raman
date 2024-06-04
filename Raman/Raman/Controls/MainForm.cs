@@ -66,11 +66,7 @@ public partial class MainForm : Form
         EnableOrDisableItems();
     }
 
-    private void OnShown(object sender, EventArgs e)
-    {
-        LoadDemoSpectrum();
-        LoadDemoSpectra();
-    }
+    private void OnShown(object sender, EventArgs e) {}
 
     private void HideSidePanel()
     {
@@ -104,11 +100,11 @@ public partial class MainForm : Form
 
     private void RamanForm_FormClosing(object sender, FormClosingEventArgs e)
     {
-        // if (MessageBox.Show("Do you really want to exit?", "Exit Confirmation", MessageBoxButtons.YesNo,
-        //         MessageBoxIcon.Question) == DialogResult.No)
-        // {
-        //     e.Cancel = true;
-        // }
+        if (MessageBox.Show("Do you really want to exit?", "Exit Confirmation", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) == DialogResult.No)
+        {
+            e.Cancel = true;
+        }
     }
 
     private void miOpenSingleSpectrumFiles_Click(object sender, EventArgs e)
@@ -167,34 +163,34 @@ public partial class MainForm : Form
         Spectra = spectra;
     }
 
-    private void LoadDemoSpectrum()
-    {
-        var filePath = "c:/github/kulaviak/raman/data/spektra/spectrum.txt";
-        if (System.IO.File.Exists(filePath))
-        {
-            OpenSingleSpectraFilesInternal(new List<string> {filePath});
-        }
-    }
-
-    private void LoadDemoSpectra()
-    {
-        var filePaths = new List<string>
-        {
-            "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y0_X0.txt",
-            "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y0_X1.txt",
-            "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y0_X3.txt",
-            "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y0_X4.txt",
-            "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X0.txt",
-            "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X1.txt",
-            "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X2.txt",
-            "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X3.txt",
-            "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X4.txt"
-        };
-        if (filePaths.TrueForAll(filePath => System.IO.File.Exists(filePath)))
-        {
-            OpenSingleSpectraFilesInternal(filePaths);
-        }
-    }
+    // private void LoadDemoSpectrum()
+    // {
+    //     var filePath = "c:/github/kulaviak/raman/data/spektra/spectrum.txt";
+    //     if (System.IO.File.Exists(filePath))
+    //     {
+    //         OpenSingleSpectraFilesInternal(new List<string> {filePath});
+    //     }
+    // }
+    //
+    // private void LoadDemoSpectra()
+    // {
+    //     var filePaths = new List<string>
+    //     {
+    //         "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y0_X0.txt",
+    //         "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y0_X1.txt",
+    //         "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y0_X3.txt",
+    //         "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y0_X4.txt",
+    //         "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X0.txt",
+    //         "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X1.txt",
+    //         "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X2.txt",
+    //         "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X3.txt",
+    //         "c:/github/kulaviak/raman/data/spektra/UHK-0-1-5/UHK-0-1-5_Y1_X4.txt"
+    //     };
+    //     if (filePaths.TrueForAll(filePath => System.IO.File.Exists(filePath)))
+    //     {
+    //         OpenSingleSpectraFilesInternal(filePaths);
+    //     }
+    // }
 
     private void miZoomWindow_Click(object sender, EventArgs e)
     {
