@@ -174,4 +174,11 @@ public partial class BaselineCorrectionForm : Form
         baselineCorrectionLayer.AreCorrectionPointsAdjusted = isChecked;
         AppSettings.AreCorrectionPointsAdjusted = isChecked;
     }
+
+    private void cbAreBaselinesExportedToSeparateFiles_CheckedChanged(object sender, EventArgs e)
+    {
+        var isChecked = ((CheckBox) sender).Checked;
+        baselineCorrectionLayer.AreBaselinesExportedToSeparateFiles = isChecked;
+        AppSettings.AreBaselinesExportedToSeparateFiles = isChecked;
+    }
 }

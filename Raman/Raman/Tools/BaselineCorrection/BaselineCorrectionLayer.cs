@@ -24,6 +24,8 @@ public class BaselineCorrectionLayer : LayerBase
     }
     
     public bool AreCorrectionPointsAdjusted { get; set; }
+    
+    public bool AreBaselinesExportedToSeparateFiles { get; set; }
 
     private Stack<List<Spectrum>> spectrumHistory = new Stack<List<Spectrum>>();
     

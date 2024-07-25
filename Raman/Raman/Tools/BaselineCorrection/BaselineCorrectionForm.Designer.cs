@@ -38,11 +38,12 @@ partial class BaselineCorrectionForm
         this.btnExportCorrectedSpectra = new System.Windows.Forms.Button();
         this.cbAreBaselineEndsExtended = new System.Windows.Forms.CheckBox();
         this.cbAreCorrectionPointsAdjusted = new System.Windows.Forms.CheckBox();
+        this.cbAreBaselinesExportedToSeparateFiles = new System.Windows.Forms.CheckBox();
         this.SuspendLayout();
         // 
         // btnUndoBaselineCorrection
         // 
-        this.btnUndoBaselineCorrection.Location = new System.Drawing.Point(7, 271);
+        this.btnUndoBaselineCorrection.Location = new System.Drawing.Point(7, 287);
         this.btnUndoBaselineCorrection.Name = "btnUndoBaselineCorrection";
         this.btnUndoBaselineCorrection.Size = new System.Drawing.Size(142, 23);
         this.btnUndoBaselineCorrection.TabIndex = 8;
@@ -52,7 +53,7 @@ partial class BaselineCorrectionForm
         // 
         // btnDoBaselineCorrection
         // 
-        this.btnDoBaselineCorrection.Location = new System.Drawing.Point(7, 242);
+        this.btnDoBaselineCorrection.Location = new System.Drawing.Point(7, 258);
         this.btnDoBaselineCorrection.Name = "btnDoBaselineCorrection";
         this.btnDoBaselineCorrection.Size = new System.Drawing.Size(142, 23);
         this.btnDoBaselineCorrection.TabIndex = 7;
@@ -100,7 +101,7 @@ partial class BaselineCorrectionForm
         // 
         // btnClose
         // 
-        this.btnClose.Location = new System.Drawing.Point(35, 349);
+        this.btnClose.Location = new System.Drawing.Point(35, 351);
         this.btnClose.Name = "btnClose";
         this.btnClose.Size = new System.Drawing.Size(75, 23);
         this.btnClose.TabIndex = 11;
@@ -110,7 +111,7 @@ partial class BaselineCorrectionForm
         // 
         // btnExportCorrectedSpectra
         // 
-        this.btnExportCorrectedSpectra.Location = new System.Drawing.Point(7, 300);
+        this.btnExportCorrectedSpectra.Location = new System.Drawing.Point(7, 316);
         this.btnExportCorrectedSpectra.Name = "btnExportCorrectedSpectra";
         this.btnExportCorrectedSpectra.Size = new System.Drawing.Size(142, 23);
         this.btnExportCorrectedSpectra.TabIndex = 12;
@@ -120,7 +121,7 @@ partial class BaselineCorrectionForm
         // 
         // cbAreBaselineEndsExtended
         // 
-        this.cbAreBaselineEndsExtended.Location = new System.Drawing.Point(12, 191);
+        this.cbAreBaselineEndsExtended.Location = new System.Drawing.Point(7, 178);
         this.cbAreBaselineEndsExtended.Name = "cbAreBaselineEndsExtended";
         this.cbAreBaselineEndsExtended.Size = new System.Drawing.Size(153, 24);
         this.cbAreBaselineEndsExtended.TabIndex = 13;
@@ -131,7 +132,7 @@ partial class BaselineCorrectionForm
         // cbAreCorrectionPointsAdjusted
         // 
         this.cbAreCorrectionPointsAdjusted.AutoCheck = false;
-        this.cbAreCorrectionPointsAdjusted.Location = new System.Drawing.Point(12, 212);
+        this.cbAreCorrectionPointsAdjusted.Location = new System.Drawing.Point(7, 199);
         this.cbAreCorrectionPointsAdjusted.Name = "cbAreCorrectionPointsAdjusted";
         this.cbAreCorrectionPointsAdjusted.Size = new System.Drawing.Size(153, 24);
         this.cbAreCorrectionPointsAdjusted.TabIndex = 14;
@@ -139,11 +140,23 @@ partial class BaselineCorrectionForm
         this.cbAreCorrectionPointsAdjusted.UseVisualStyleBackColor = true;
         this.cbAreCorrectionPointsAdjusted.Click += new System.EventHandler(this.cbAreCorrectionPointsAdjusted_Click);
         // 
+        // cbAreBaselinesExportedToSeparateFiles
+        // 
+        this.cbAreBaselinesExportedToSeparateFiles.AutoCheck = false;
+        this.cbAreBaselinesExportedToSeparateFiles.Location = new System.Drawing.Point(7, 220);
+        this.cbAreBaselinesExportedToSeparateFiles.Name = "cbAreBaselinesExportedToSeparateFiles";
+        this.cbAreBaselinesExportedToSeparateFiles.Size = new System.Drawing.Size(153, 32);
+        this.cbAreBaselinesExportedToSeparateFiles.TabIndex = 15;
+        this.cbAreBaselinesExportedToSeparateFiles.Text = "Are Baselines exported to separate files";
+        this.cbAreBaselinesExportedToSeparateFiles.UseVisualStyleBackColor = true;
+        this.cbAreBaselinesExportedToSeparateFiles.CheckedChanged += new System.EventHandler(this.cbAreBaselinesExportedToSeparateFiles_CheckedChanged);
+        // 
         // BaselineCorrectionForm
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.ClientSize = new System.Drawing.Size(169, 450);
+        this.Controls.Add(this.cbAreBaselinesExportedToSeparateFiles);
         this.Controls.Add(this.cbAreCorrectionPointsAdjusted);
         this.Controls.Add(this.cbAreBaselineEndsExtended);
         this.Controls.Add(this.btnExportCorrectedSpectra);
@@ -160,6 +173,8 @@ partial class BaselineCorrectionForm
         this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BaselineCorrectionForm_FormClosing);
         this.ResumeLayout(false);
     }
+
+    private System.Windows.Forms.CheckBox cbAreBaselinesExportedToSeparateFiles;
 
     private System.Windows.Forms.CheckBox cbAreBaselineEndsExtended;
     private System.Windows.Forms.CheckBox cbAreCorrectionPointsAdjusted;

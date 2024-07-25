@@ -36,6 +36,12 @@ public static class AppSettings
         get => GetBool("AreCorrectionPointsAdjusted") ?? false;
         set => SetBool("AreCorrectionPointsAdjusted", value);
     }
+
+    public static bool AreBaselinesExportedToSeparateFiles
+    {
+        get => GetBool("AreBaselinesExportedToSeparateFiles") ?? false;
+        set => SetBool("AreBaselinesExportedToSeparateFiles", value);
+    }
     
     /// <summary>
     /// Use '.' It is universal decimal separator
@@ -59,7 +65,7 @@ public static class AppSettings
             return _configuration;
         }
     }
-
+    
     public static string Get(string key)
     {
         var ret = Configuration[key];
