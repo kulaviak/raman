@@ -147,7 +147,7 @@ partial class BaselineCorrectionForm
         this.cbAreBaselinesExportedToSeparateFiles.Name = "cbAreBaselinesExportedToSeparateFiles";
         this.cbAreBaselinesExportedToSeparateFiles.Size = new System.Drawing.Size(153, 32);
         this.cbAreBaselinesExportedToSeparateFiles.TabIndex = 15;
-        this.cbAreBaselinesExportedToSeparateFiles.Text = "Are Baselines exported to separate files";
+        this.cbAreBaselinesExportedToSeparateFiles.Text = "Export spectra to separate files";
         this.cbAreBaselinesExportedToSeparateFiles.UseVisualStyleBackColor = true;
         this.cbAreBaselinesExportedToSeparateFiles.CheckedChanged += new System.EventHandler(this.cbAreBaselinesExportedToSeparateFiles_CheckedChanged);
         // 
