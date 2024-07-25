@@ -153,20 +153,64 @@ public class BaselineCorrectionLayer : LayerBase
             MessageUtil.ShowUserError("There are no corrected spectra.", "No spectra to export");
             return;
         }
+        if (AreBaselinesExportedToSeparateFiles)
+        {   
+            ExportToSeparateFiles(exportedSpectra);
+        }
+        else
+        {
+            ExportToOneFile(exportedSpectra);
+        }
+    }
+
+    private void ExportToOneFile(List<Spectrum> spectra)
+    {
+        using (var saveFileDialog = new SaveFileDialog())
+        {
+            saveFileDialog.Title = "Export Corrected Spectra";
+            saveFileDialog.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*"; 
+            saveFileDialog.FilterIndex = 1;
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                var filePaths = saveFileDialog.FileNames.ToList();
+                if (filePaths.Count == 0)
+                {
+                    MessageUtil.ShowUserError("No file was selected.", "No file selected");
+                    return;
+                }
+                try
+                {
+                    var filePath = filePaths.First();
+                    AppSettings.PeakAnalysisSaveFileDirectory = Path.GetDirectoryName(filePath);
+                    var points = spectra.SelectMany(x => x.Points).ToList();
+                    new OnePointPerLineFileWriter().WritePoints(points, filePath);
+                    MessageUtil.ShowInfo("Corrected finish successfully.", "Export finished");
+                }
+                catch (Exception ex)
+                {
+                    MessageUtil.ShowAppError("Exporting failed.", "Export failed", ex);
+                }
+            }
+        }
+    }
+
+    private void ExportToSeparateFiles(List<Spectrum> spectra)
+    {
         using (var folderBrowserDialog = new FolderBrowserDialog())
         {
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
                 var selectedPath = folderBrowserDialog.SelectedPath;
-                foreach (var spectrum in exportedSpectra)
+                foreach (var spectrum in spectra)
                 {
-                    ExportCorrectedSpectra(spectrum, selectedPath);                                                
+                    var filePath = Path.Combine(selectedPath, spectrum.Name + "_bc.txt");
+                    new OnePointPerLineFileWriter().WritePoints(spectrum.Points, filePath);
                 }
                 MessageUtil.ShowInfo("Export finished successfully.", "Export finished");
             }
         }
     }
-    
+
     private void DrawBaselines(Graphics graphics)
     {
         if (canvasPanel.VisibleSpectra.Any() && CorrectionPoints.Count >= 4)
