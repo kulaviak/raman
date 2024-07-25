@@ -175,10 +175,10 @@ public partial class BaselineCorrectionForm : Form
         AppSettings.AreCorrectionPointsAdjusted = isChecked;
     }
 
-    private void cbAreBaselinesExportedToSeparateFiles_CheckedChanged(object sender, EventArgs e)
+    private void cbAreCorrectedSpectraExportedToSeparateFiles_CheckedChanged(object sender, EventArgs e)
     {
         var isChecked = ((CheckBox) sender).Checked;
-        baselineCorrectionLayer.AreBaselinesExportedToSeparateFiles = isChecked;
-        AppSettings.AreBaselinesExportedToSeparateFiles = isChecked;
+        baselineCorrectionLayer.AreCorrectedSpectraExportedToSeparateFiles = isChecked;
+        AppSettings.AreCorrectedSpectraExportedToSeparateFiles = isChecked;
     }
 }

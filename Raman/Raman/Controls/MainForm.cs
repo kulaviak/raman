@@ -141,7 +141,6 @@ public partial class MainForm : Form
                         MessageBoxIcon.Error);
                     return;
                 }
-
                 AppSettings.SingleSpectrumOpenFileDirectory = Path.GetDirectoryName(filePaths[0]);
                 OpenSingleSpectraFilesInternal(filePaths);
             }

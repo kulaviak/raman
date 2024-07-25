@@ -38,7 +38,7 @@ partial class BaselineCorrectionForm
         this.btnExportCorrectedSpectra = new System.Windows.Forms.Button();
         this.cbAreBaselineEndsExtended = new System.Windows.Forms.CheckBox();
         this.cbAreCorrectionPointsAdjusted = new System.Windows.Forms.CheckBox();
-        this.cbAreBaselinesExportedToSeparateFiles = new System.Windows.Forms.CheckBox();
+        this.cbAreCorrectedSpectraExportedToSeparateFiles = new System.Windows.Forms.CheckBox();
         this.SuspendLayout();
         // 
         // btnUndoBaselineCorrection
@@ -140,23 +140,22 @@ partial class BaselineCorrectionForm
         this.cbAreCorrectionPointsAdjusted.UseVisualStyleBackColor = true;
         this.cbAreCorrectionPointsAdjusted.Click += new System.EventHandler(this.cbAreCorrectionPointsAdjusted_Click);
         // 
-        // cbAreBaselinesExportedToSeparateFiles
+        // cbAreCorrectedSpectraExportedToSeparateFiles
         // 
-        this.cbAreBaselinesExportedToSeparateFiles.AutoCheck = false;
-        this.cbAreBaselinesExportedToSeparateFiles.Location = new System.Drawing.Point(7, 220);
-        this.cbAreBaselinesExportedToSeparateFiles.Name = "cbAreBaselinesExportedToSeparateFiles";
-        this.cbAreBaselinesExportedToSeparateFiles.Size = new System.Drawing.Size(153, 32);
-        this.cbAreBaselinesExportedToSeparateFiles.TabIndex = 15;
-        this.cbAreBaselinesExportedToSeparateFiles.Text = "Export spectra to separate files";
-        this.cbAreBaselinesExportedToSeparateFiles.UseVisualStyleBackColor = true;
-        this.cbAreBaselinesExportedToSeparateFiles.CheckedChanged += new System.EventHandler(this.cbAreBaselinesExportedToSeparateFiles_CheckedChanged);
+        this.cbAreCorrectedSpectraExportedToSeparateFiles.Location = new System.Drawing.Point(7, 220);
+        this.cbAreCorrectedSpectraExportedToSeparateFiles.Name = "cbAreCorrectedSpectraExportedToSeparateFiles";
+        this.cbAreCorrectedSpectraExportedToSeparateFiles.Size = new System.Drawing.Size(153, 32);
+        this.cbAreCorrectedSpectraExportedToSeparateFiles.TabIndex = 15;
+        this.cbAreCorrectedSpectraExportedToSeparateFiles.Text = "Export spectra to separate files";
+        this.cbAreCorrectedSpectraExportedToSeparateFiles.UseVisualStyleBackColor = true;
+        this.cbAreCorrectedSpectraExportedToSeparateFiles.CheckedChanged += new System.EventHandler(this.cbAreCorrectedSpectraExportedToSeparateFiles_CheckedChanged);
         // 
         // BaselineCorrectionForm
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.ClientSize = new System.Drawing.Size(169, 450);
-        this.Controls.Add(this.cbAreBaselinesExportedToSeparateFiles);
+        this.Controls.Add(this.cbAreCorrectedSpectraExportedToSeparateFiles);
         this.Controls.Add(this.cbAreCorrectionPointsAdjusted);
         this.Controls.Add(this.cbAreBaselineEndsExtended);
         this.Controls.Add(this.btnExportCorrectedSpectra);
@@ -174,7 +173,7 @@ partial class BaselineCorrectionForm
         this.ResumeLayout(false);
     }
 
-    private System.Windows.Forms.CheckBox cbAreBaselinesExportedToSeparateFiles;
+    private System.Windows.Forms.CheckBox cbAreCorrectedSpectraExportedToSeparateFiles;
 
     private System.Windows.Forms.CheckBox cbAreBaselineEndsExtended;
     private System.Windows.Forms.CheckBox cbAreCorrectionPointsAdjusted;

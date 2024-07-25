@@ -25,7 +25,7 @@ public class BaselineCorrectionLayer : LayerBase
     
     public bool AreCorrectionPointsAdjusted { get; set; }
     
-    public bool AreBaselinesExportedToSeparateFiles { get; set; }
+    public bool AreCorrectedSpectraExportedToSeparateFiles { get; set; }
 
     private Stack<List<Spectrum>> spectrumHistory = new Stack<List<Spectrum>>();
     
@@ -153,7 +153,7 @@ public class BaselineCorrectionLayer : LayerBase
             MessageUtil.ShowUserError("There are no corrected spectra.", "No spectra to export");
             return;
         }
-        if (AreBaselinesExportedToSeparateFiles)
+        if (AreCorrectedSpectraExportedToSeparateFiles)
         {   
             ExportToSeparateFiles(exportedSpectra);
         }
@@ -168,8 +168,12 @@ public class BaselineCorrectionLayer : LayerBase
         using (var saveFileDialog = new SaveFileDialog())
         {
             saveFileDialog.Title = "Export Corrected Spectra";
-            saveFileDialog.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*"; 
+            saveFileDialog.Filter = "TXT Files (*.txt)|*.txt|All Files (*.*)|*.*"; 
             saveFileDialog.FilterIndex = 1;
+            if (AppSettings.BaselineCorrectionSaveFileDirectory != null)
+            {
+                saveFileDialog.InitialDirectory = AppSettings.BaselineCorrectionSaveFileDirectory;
+            }
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 var filePaths = saveFileDialog.FileNames.ToList();
@@ -181,7 +185,7 @@ public class BaselineCorrectionLayer : LayerBase
                 try
                 {
                     var filePath = filePaths.First();
-                    AppSettings.PeakAnalysisSaveFileDirectory = Path.GetDirectoryName(filePath);
+                    AppSettings.BaselineCorrectionSaveFileDirectory = Path.GetDirectoryName(filePath);
                     var points = spectra.SelectMany(x => x.Points).ToList();
                     new OnePointPerLineFileWriter().WritePoints(points, filePath);
                     MessageUtil.ShowInfo("Export finish successfully.", "Export finished");

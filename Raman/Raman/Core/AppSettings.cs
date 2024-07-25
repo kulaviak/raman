@@ -37,10 +37,16 @@ public static class AppSettings
         set => SetBool("AreCorrectionPointsAdjusted", value);
     }
 
-    public static bool AreBaselinesExportedToSeparateFiles
+    public static bool AreCorrectedSpectraExportedToSeparateFiles
     {
-        get => GetBool("AreBaselinesExportedToSeparateFiles") ?? false;
-        set => SetBool("AreBaselinesExportedToSeparateFiles", value);
+        get => GetBool("AreCorrectedSpectraExportedToSeparateFiles") ?? false;
+        set => SetBool("AreCorrectedSpectraExportedToSeparateFiles", value);
+    }
+
+    public static string BaselineCorrectionSaveFileDirectory
+    {
+        get => Get("BaselineCorrectionSaveFileDirectory");
+        set => Set("BaselineCorrectionSaveFileDirectory", value);
     }
     
     /// <summary>
@@ -65,7 +71,8 @@ public static class AppSettings
             return _configuration;
         }
     }
-    
+
+
     public static string Get(string key)
     {
         var ret = Configuration[key];
