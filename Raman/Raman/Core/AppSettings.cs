@@ -1,11 +1,42 @@
-using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace Raman.Core;
 
 public static class AppSettings
 {
 
-    private static IConfiguration _configuration;
+    private static Dictionary<string, string> _keyValues;
+
+    private static Dictionary<string, string> KeyValues
+    {
+        get
+        {
+            if (_keyValues == null)
+            {
+                try
+                {
+                    if (System.IO.File.Exists(_fileName))
+                    {
+                        var json = System.IO.File.ReadAllText(_fileName);
+                        _keyValues = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+
+                    }
+                    else
+                    {
+                        _keyValues = new Dictionary<string, string>();
+                    }
+                }
+                catch (Exception)
+                {
+                    // ignore
+                    _keyValues = new Dictionary<string, string>();
+                }
+            }
+            return _keyValues;
+        }
+    }
+
+    private static string _fileName = "appsettings.json";
 
     public static string SingleSpectrumOpenFileDirectory
     {
@@ -59,34 +90,27 @@ public static class AppSettings
     /// </summary>
     public static string CsvSeparator => ",";
 
-    private static IConfiguration Configuration
-    {
-        get
-        {
-            if (_configuration == null)
-            {
-                var builder = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-                _configuration = builder.Build();
-            }
-            return _configuration;
-        }
-    }
-
-
     public static string Get(string key)
     {
-        var ret = Configuration[key];
+        var ret = KeyValues.Get(key);
         return ret;
     }
 
     public static void Set(string key, string value)
     {
-        Configuration[key] = value;
+        KeyValues[key] = value;
+        Save();
+    }
+
+    private static void Save()
+    {
+        var json = JsonConvert.SerializeObject(KeyValues, Formatting.Indented);
+        System.IO.File.WriteAllText(_fileName, json);
     }
 
     public static bool? GetBool(string key)
     {
-        var str = Configuration[key];
+        var str = Get(key);
         if (Boolean.TryParse(str, out var ret))
         {
             return ret;
@@ -96,16 +120,6 @@ public static class AppSettings
     
     public static void SetBool(string key, bool value)
     {
-        Configuration[key] = value.ToString();
+        Set(key, value.ToString());
     }
-        
-    // public static int? GetInt(string key)
-    // {
-    //     var str = Configuration[key];
-    //     if (Int32.TryParse(str, out var ret))
-    //     {
-    //         return ret;
-    //     }
-    //     return null;
-    // }
 }

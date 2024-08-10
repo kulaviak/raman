@@ -112,11 +112,6 @@ public class BaselineCorrectionLayer : LayerBase
 
     public void ExportPoints(string filePath)
     {
-        if (!CorrectionPoints.Any())
-        {
-            MessageUtil.ShowInfo("There are no baseline points to export.", "Information");
-            return;
-        }
         new OnePointPerLineFileWriter().WritePoints(CorrectionPoints, filePath);
     }
 

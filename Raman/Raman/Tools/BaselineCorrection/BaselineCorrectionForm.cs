@@ -80,6 +80,11 @@ public partial class BaselineCorrectionForm : Form
                     return;
                 }
                 var filePath = filePaths.First();
+                if (!baselineCorrectionLayer.CorrectionPoints.Any())
+                {
+                    MessageUtil.ShowUserError("There are no baseline points to export.", "Error");
+                    return;
+                }
                 baselineCorrectionLayer.ExportPoints(filePath);
                 MessageUtil.ShowInfo("Points were exported successfully.", "Export finished");
             }
