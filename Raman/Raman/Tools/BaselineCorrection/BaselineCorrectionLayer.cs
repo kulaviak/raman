@@ -186,8 +186,7 @@ public class BaselineCorrectionLayer : LayerBase
                 {
                     var filePath = filePaths.First();
                     AppSettings.BaselineCorrectionSaveFileDirectory = Path.GetDirectoryName(filePath);
-                    var points = spectra.SelectMany(x => x.Points).ToList();
-                    new OnePointPerLineFileWriter().WritePoints(points, filePath);
+                    new MultiplePointPerLineFileWriter().WritePoints(spectra, filePath);
                     MessageUtil.ShowInfo("Export finish successfully.", "Export finished");
                 }
                 catch (Exception ex)

@@ -151,6 +151,7 @@
     <Compile Include="Drawing\XAxis.cs" />
     <Compile Include="Drawing\YAxis.cs" />
     <Compile Include="Drawing\ZeroYLevel.cs" />
+    <Compile Include="File\MultiplePointPerLineFileWriter.cs" />
     <Compile Include="File\MultiSpectrumFileReader.cs" />
     <Compile Include="File\OnePointPerLineFileWriter.cs" />
     <Compile Include="File\SingleSpectrumFileReader.cs" />
