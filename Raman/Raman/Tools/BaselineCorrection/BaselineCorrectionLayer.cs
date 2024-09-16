@@ -215,8 +215,8 @@ public class BaselineCorrectionLayer : LayerBase
         {
             try
             {
-                var start = GetBaselineStart(canvasPanel.VisibleSpectra, CorrectionPoints, AreCorrectionPointsAdjusted);
-                var end = GetBaselineEnd(canvasPanel.VisibleSpectra, CorrectionPoints, AreCorrectionPointsAdjusted);
+                var start = GetBaselineStart(canvasPanel.VisibleSpectra, CorrectionPoints, AreBaselineEndsExtended);
+                var end = GetBaselineEnd(canvasPanel.VisibleSpectra, CorrectionPoints, AreBaselineEndsExtended);
                 var xPositions = GetXPositionsForBaselineDrawing(start, end);
                 var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, CorrectionPoints);
                 new CanvasDrawer(canvasPanel.CoordSystem, graphics).DrawLines(baselinePoints, Pens.Green);
