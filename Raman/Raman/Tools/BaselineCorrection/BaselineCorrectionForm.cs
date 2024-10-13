@@ -9,12 +9,11 @@ public partial class BaselineCorrectionForm : Form
 
     private const string FILE_DIALOG_FILTER = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
 
-    public BaselineCorrectionForm(BaselineCorrectionLayer baselineCorrectionLayer, bool areBaselineEndsExtended,
+    public BaselineCorrectionForm(BaselineCorrectionLayer baselineCorrectionLayer,
         bool areCorrectionPointsAdjusted)
     {
         this.baselineCorrectionLayer = baselineCorrectionLayer;
         InitializeComponent();
-        cbAreBaselineEndsExtended.Checked = areBaselineEndsExtended;
         cbAreCorrectionPointsAdjusted.Checked = areCorrectionPointsAdjusted;
     }
 
@@ -155,14 +154,7 @@ public partial class BaselineCorrectionForm : Form
             MessageUtil.ShowAppError("Export corrected spectra failed.", "Error", ex);
         }
     }
-
-    private void cbAreBaselineEndExtended_CheckedChanged(object sender, EventArgs e)
-    {
-        var isChecked = ((CheckBox) sender).Checked;
-        baselineCorrectionLayer.AreBaselineEndsExtended = isChecked;
-        AppSettings.AreBaselineEndsExtended = isChecked;
-    }
-
+    
     private void cbAreCorrectionPointsAdjusted_Click(object sender, EventArgs e)
     {
         // checkbox has Autocheck = false, because I want to be able to set the checked property programmatically and that's why I have to 

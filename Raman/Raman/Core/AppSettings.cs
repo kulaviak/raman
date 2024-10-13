@@ -55,12 +55,6 @@ public static class AppSettings
         get => Get("PeakAnalysisSaveFileDirectory");
         set => Set("PeakAnalysisSaveFileDirectory", value);
     }
-
-    public static bool AreBaselineEndsExtended
-    {
-        get => GetBool("AreBaselineEndsExtended") ?? false;
-        set => SetBool("AreBaselineEndsExtended", value);
-    }
     
     public static bool AreCorrectionPointsAdjusted
     {

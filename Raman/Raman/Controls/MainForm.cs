@@ -236,10 +236,9 @@ public partial class MainForm : Form
     private void BaselineCorrection()
     {
         SetFormToDefaultState();
-        var baselineCorrectionLayer = new BaselineCorrectionLayer(canvasPanel.CoordSystem, canvasPanel, AppSettings.AreBaselineEndsExtended,
-            AppSettings.AreCorrectionPointsAdjusted);
+        var baselineCorrectionLayer = new BaselineCorrectionLayer(canvasPanel.CoordSystem, canvasPanel, AppSettings.AreCorrectionPointsAdjusted);
         canvasPanel.BaselineCorrectionLayer = baselineCorrectionLayer;
-        var form = new BaselineCorrectionForm(baselineCorrectionLayer, AppSettings.AreBaselineEndsExtended,
+        var form = new BaselineCorrectionForm(baselineCorrectionLayer,
             AppSettings.AreCorrectionPointsAdjusted);
         form.Closed += BaselineForm_Closed;
         ShowSidePanel(form);

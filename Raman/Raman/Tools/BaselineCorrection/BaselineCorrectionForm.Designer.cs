@@ -36,7 +36,6 @@ partial class BaselineCorrectionForm
         this.label1 = new System.Windows.Forms.Label();
         this.btnClose = new System.Windows.Forms.Button();
         this.btnExportCorrectedSpectra = new System.Windows.Forms.Button();
-        this.cbAreBaselineEndsExtended = new System.Windows.Forms.CheckBox();
         this.cbAreCorrectionPointsAdjusted = new System.Windows.Forms.CheckBox();
         this.cbAreCorrectedSpectraExportedToSeparateFiles = new System.Windows.Forms.CheckBox();
         this.SuspendLayout();
@@ -119,16 +118,6 @@ partial class BaselineCorrectionForm
         this.btnExportCorrectedSpectra.UseVisualStyleBackColor = true;
         this.btnExportCorrectedSpectra.Click += new System.EventHandler(this.btnExportCorrectedSpectra_Click);
         // 
-        // cbAreBaselineEndsExtended
-        // 
-        this.cbAreBaselineEndsExtended.Location = new System.Drawing.Point(7, 178);
-        this.cbAreBaselineEndsExtended.Name = "cbAreBaselineEndsExtended";
-        this.cbAreBaselineEndsExtended.Size = new System.Drawing.Size(153, 24);
-        this.cbAreBaselineEndsExtended.TabIndex = 13;
-        this.cbAreBaselineEndsExtended.Text = "Extend Baseline To Ends";
-        this.cbAreBaselineEndsExtended.UseVisualStyleBackColor = true;
-        this.cbAreBaselineEndsExtended.CheckedChanged += new System.EventHandler(this.cbAreBaselineEndExtended_CheckedChanged);
-        // 
         // cbAreCorrectionPointsAdjusted
         // 
         this.cbAreCorrectionPointsAdjusted.AutoCheck = false;
@@ -157,7 +146,6 @@ partial class BaselineCorrectionForm
         this.ClientSize = new System.Drawing.Size(169, 450);
         this.Controls.Add(this.cbAreCorrectedSpectraExportedToSeparateFiles);
         this.Controls.Add(this.cbAreCorrectionPointsAdjusted);
-        this.Controls.Add(this.cbAreBaselineEndsExtended);
         this.Controls.Add(this.btnExportCorrectedSpectra);
         this.Controls.Add(this.btnClose);
         this.Controls.Add(this.label1);
@@ -175,7 +163,6 @@ partial class BaselineCorrectionForm
 
     private System.Windows.Forms.CheckBox cbAreCorrectedSpectraExportedToSeparateFiles;
 
-    private System.Windows.Forms.CheckBox cbAreBaselineEndsExtended;
     private System.Windows.Forms.CheckBox cbAreCorrectionPointsAdjusted;
 
     private System.Windows.Forms.Button btnExportCorrectedSpectra;

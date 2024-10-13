@@ -12,16 +12,6 @@ public class BaselineCorrectionLayer : LayerBase
     private static Color COLOR = Color.Red;
 
     public List<ValuePoint> CorrectionPoints { get; set; } = new List<ValuePoint>();
-
-    public bool AreBaselineEndsExtended
-    {
-        get => areBaselineEndsExtended;
-        set
-        {
-            areBaselineEndsExtended = value;
-            Refresh();
-        }
-    }
     
     public bool AreCorrectionPointsAdjusted { get; set; }
     
@@ -31,12 +21,9 @@ public class BaselineCorrectionLayer : LayerBase
     
     private Stack<List<ValuePoint>> correctionPointHistory = new Stack<List<ValuePoint>>();
     
-    private bool areBaselineEndsExtended;
-
-    public BaselineCorrectionLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel, bool areBaselineEndsExtended, bool areCorrectionPointsAdjusted) : base(coordSystem)
+    public BaselineCorrectionLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel, bool areCorrectionPointsAdjusted) : base(coordSystem)
     {
         this.canvasPanel = canvasPanel;
-        AreBaselineEndsExtended = areBaselineEndsExtended;
         AreCorrectionPointsAdjusted = areCorrectionPointsAdjusted;
     }
         
@@ -134,7 +121,7 @@ public class BaselineCorrectionLayer : LayerBase
         var ret = new List<Spectrum>();
         foreach (var spectrum in spectra)
         {
-            var newSpectrum = spectrum.IsVisible ? CorrectBaseline(spectrum, CorrectionPoints, AreCorrectionPointsAdjusted, canvasPanel.VisibleSpectra) : spectrum;
+            var newSpectrum = spectrum.IsVisible ? CorrectBaseline(spectrum, CorrectionPoints, AreCorrectionPointsAdjusted) : spectrum;
             ret.Add(newSpectrum);
         }
         return ret;
@@ -160,52 +147,48 @@ public class BaselineCorrectionLayer : LayerBase
 
     private void ExportToOneFile(List<Spectrum> spectra)
     {
-        using (var saveFileDialog = new SaveFileDialog())
+        using var saveFileDialog = new SaveFileDialog();
+        saveFileDialog.Title = "Export Corrected Spectra";
+        saveFileDialog.Filter = "TXT Files (*.txt)|*.txt|All Files (*.*)|*.*"; 
+        saveFileDialog.FilterIndex = 1;
+        if (AppSettings.BaselineCorrectionSaveFileDirectory != null)
         {
-            saveFileDialog.Title = "Export Corrected Spectra";
-            saveFileDialog.Filter = "TXT Files (*.txt)|*.txt|All Files (*.*)|*.*"; 
-            saveFileDialog.FilterIndex = 1;
-            if (AppSettings.BaselineCorrectionSaveFileDirectory != null)
+            saveFileDialog.InitialDirectory = AppSettings.BaselineCorrectionSaveFileDirectory;
+        }
+        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+        {
+            var filePaths = saveFileDialog.FileNames.ToList();
+            if (filePaths.Count == 0)
             {
-                saveFileDialog.InitialDirectory = AppSettings.BaselineCorrectionSaveFileDirectory;
+                MessageUtil.ShowUserError("No file was selected.", "No file selected");
+                return;
             }
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            try
             {
-                var filePaths = saveFileDialog.FileNames.ToList();
-                if (filePaths.Count == 0)
-                {
-                    MessageUtil.ShowUserError("No file was selected.", "No file selected");
-                    return;
-                }
-                try
-                {
-                    var filePath = filePaths.First();
-                    AppSettings.BaselineCorrectionSaveFileDirectory = Path.GetDirectoryName(filePath);
-                    new MultiplePointPerLineFileWriter().WritePoints(spectra, filePath);
-                    MessageUtil.ShowInfo("Export finish successfully.", "Export finished");
-                }
-                catch (Exception ex)
-                {
-                    MessageUtil.ShowAppError("Exporting failed.", "Export failed", ex);
-                }
+                var filePath = filePaths.First();
+                AppSettings.BaselineCorrectionSaveFileDirectory = Path.GetDirectoryName(filePath);
+                new MultiplePointPerLineFileWriter().WritePoints(spectra, filePath);
+                MessageUtil.ShowInfo("Export finish successfully.", "Export finished");
+            }
+            catch (Exception ex)
+            {
+                MessageUtil.ShowAppError("Exporting failed.", "Export failed", ex);
             }
         }
     }
 
     private void ExportToSeparateFiles(List<Spectrum> spectra)
     {
-        using (var folderBrowserDialog = new FolderBrowserDialog())
+        using var folderBrowserDialog = new FolderBrowserDialog();
+        if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
         {
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            var selectedPath = folderBrowserDialog.SelectedPath;
+            foreach (var spectrum in spectra)
             {
-                var selectedPath = folderBrowserDialog.SelectedPath;
-                foreach (var spectrum in spectra)
-                {
-                    var filePath = Path.Combine(selectedPath, spectrum.Name + "_bc.txt");
-                    new OnePointPerLineFileWriter().WritePoints(spectrum.Points, filePath);
-                }
-                MessageUtil.ShowInfo("Export finished successfully.", "Export finished");
+                var filePath = Path.Combine(selectedPath, spectrum.Name + "_bc.txt");
+                new OnePointPerLineFileWriter().WritePoints(spectrum.Points, filePath);
             }
+            MessageUtil.ShowInfo("Export finished successfully.", "Export finished");
         }
     }
 
@@ -215,8 +198,8 @@ public class BaselineCorrectionLayer : LayerBase
         {
             try
             {
-                var start = GetBaselineStart(canvasPanel.VisibleSpectra, CorrectionPoints, AreBaselineEndsExtended);
-                var end = GetBaselineEnd(canvasPanel.VisibleSpectra, CorrectionPoints, AreBaselineEndsExtended);
+                var start = GetBaselineStart(CorrectionPoints);
+                var end = GetBaselineEnd(CorrectionPoints);
                 var xPositions = GetXPositionsForBaselineDrawing(start, end);
                 var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, CorrectionPoints);
                 new CanvasDrawer(canvasPanel.CoordSystem, graphics).DrawLines(baselinePoints, Pens.Green);
@@ -228,32 +211,14 @@ public class BaselineCorrectionLayer : LayerBase
         }
     }
 
-    private static double GetBaselineEnd(List<Spectrum> visibleSpectra, List<ValuePoint> correctionPoints, bool areBaselineEndsExtended)
+    private static double GetBaselineEnd(List<ValuePoint> correctionPoints)
     {
-        if (areBaselineEndsExtended)
-        {
-            var spectrumPointsMax = visibleSpectra.SelectMany(x => x.Points).Max(point => point.X);
-            var correctionPointsMax = correctionPoints.Max(point => point.X);
-            return Math.Max(spectrumPointsMax, correctionPointsMax);
-        }
-        else
-        {
-            return correctionPoints.Max(point => point.X);
-        }
+        return correctionPoints.Max(point => point.X);
     }
 
-    private static double GetBaselineStart(List<Spectrum> visibleSpectra, List<ValuePoint> correctionPoints, bool areBaselineEndsExtended)
+    private static double GetBaselineStart(List<ValuePoint> correctionPoints)
     {
-        if (areBaselineEndsExtended)
-        {
-            var spectrumPointsMin = visibleSpectra.SelectMany(x => x.Points).Min(point => point.X);
-            var correctionPointsMin = correctionPoints.Min(point => point.X);
-            return Math.Min(spectrumPointsMin, correctionPointsMin);
-        }
-        else
-        {
-            return correctionPoints.Min(point => point.X);
-        }
+        return correctionPoints.Min(point => point.X);
     }
 
     private List<double> GetXPositionsForBaselineDrawing(double start, double end)
@@ -267,11 +232,10 @@ public class BaselineCorrectionLayer : LayerBase
         return ret;
     }
     
-    private static List<double> GetXPositionsForBaseline(Spectrum spectrum, List<ValuePoint> spectrumCorrectionPoints, 
-        List<Spectrum> visibleSpectra, bool areBaselineEndsExtended)
+    private static List<double> GetXPositionsForBaseline(Spectrum spectrum, List<ValuePoint> spectrumCorrectionPoints)
     {
-        var baselineStart = GetBaselineStart(visibleSpectra, spectrumCorrectionPoints, areBaselineEndsExtended);
-        var baselineEnd = GetBaselineEnd(visibleSpectra, spectrumCorrectionPoints, areBaselineEndsExtended);
+        var baselineStart = GetBaselineStart(spectrumCorrectionPoints);
+        var baselineEnd = GetBaselineEnd(spectrumCorrectionPoints);
         var correctionPointsStart = spectrumCorrectionPoints.Select(point => point.X).Min();
         var correctionPointsEnd = spectrumCorrectionPoints.Select(point => point.X).Max();
         // limit the baseline range to the range of correction points, that determinate the baseline. Else the baseline can escape to
@@ -321,10 +285,10 @@ public class BaselineCorrectionLayer : LayerBase
         }
     }
     
-    private static Spectrum CorrectBaseline(Spectrum spectrum, List<ValuePoint> correctionPoints, bool areCorrectionPointsAdjusted, List<Spectrum> visibleSpectra)
+    private static Spectrum CorrectBaseline(Spectrum spectrum, List<ValuePoint> correctionPoints, bool areCorrectionPointsAdjusted)
     {
         var spectrumCorrectionPoints = GetSpectrumCorrectionPoints(spectrum, correctionPoints, areCorrectionPointsAdjusted);
-        var xPositions = GetXPositionsForBaseline(spectrum, spectrumCorrectionPoints, visibleSpectra, areCorrectionPointsAdjusted);
+        var xPositions = GetXPositionsForBaseline(spectrum, spectrumCorrectionPoints);
         var baselinePoints = new SplineBaselineCalculator().GetBaseline(xPositions, spectrumCorrectionPoints);
         var newSpectrumPoints = new BaselineCorrector().CorrectSpectrumByBaseline(spectrum.Points, baselinePoints);
         var ret = new Spectrum(newSpectrumPoints, spectrum.Name);
