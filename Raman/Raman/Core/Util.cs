@@ -53,7 +53,7 @@ public abstract class Util
     
     public static string Format(double number)
     {
-        return Format(number, AppConstants.EXPORT_DECIMAL_PLACES);
+        return Format(number, 0);
     }
 
     public static bool IsCtrlKeyPressed()

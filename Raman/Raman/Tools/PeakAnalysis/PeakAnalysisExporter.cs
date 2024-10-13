@@ -34,8 +34,9 @@ public class PeakAnalysisExporter
     private string ToLine(Peak peak, List<Peak> peaks)
     {
         var sep = AppSettings.CsvSeparator;
-        var ret = $"{peak.Spectrum.Name}{sep}{GetPeakOrderNumber(peak, peaks) + 1}{sep}{Util.Format(peak.Start.X)}{sep}{Util.Format(peak.End.X)}" +
-                  $"{sep}{Util.Format(peak.Height)}{sep}{Util.Format(peak.TopRoot.X)}{sep}{Util.Format(peak.Area)}";
+        var decimalPlaces = Math.Max(AppSettings.XDecimalPlaces, AppSettings.YDecimalPlaces);
+        var ret = $"{peak.Spectrum.Name}{sep}{GetPeakOrderNumber(peak, peaks) + 1}{sep}{Util.Format(peak.Start.X, AppSettings.XDecimalPlaces)}{sep}{Util.Format(peak.End.X, AppSettings.XDecimalPlaces)}" +
+                  $"{sep}{Util.Format(peak.Height, AppSettings.YDecimalPlaces)}{sep}{Util.Format(peak.TopRoot.X, AppSettings.XDecimalPlaces)}{sep}{Util.Format(peak.Area, decimalPlaces)}";
         return ret;
     }
 

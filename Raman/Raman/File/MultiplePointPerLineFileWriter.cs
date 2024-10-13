@@ -27,14 +27,14 @@ public class MultiplePointPerLineFileWriter
 
     private string GetLine(double x, List<Spectrum> spectra)
     {
-        var sb = new StringBuilder(Util.Format(x, AppConstants.EXPORT_DECIMAL_PLACES));
+        var sb = new StringBuilder(Util.Format(x, AppSettings.XDecimalPlaces));
         foreach (var spectrum in spectra)
         {
             var point = spectrum.Points.First(point => point.X == x);
             sb.Append("\t"); 
             if (point != null)
             {
-                sb.Append(Util.Format(point.Y, AppConstants.EXPORT_DECIMAL_PLACES));
+                sb.Append(Util.Format(point.Y, AppSettings.YDecimalPlaces));
             }
         }
         var ret = sb.ToString();

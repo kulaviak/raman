@@ -16,6 +16,6 @@ public class OnePointPerLineFileWriter
 
     private string PointToLine(ValuePoint point)
     {
-        return $"{Util.Format(point.X, AppConstants.EXPORT_DECIMAL_PLACES)}\t{Util.Format(point.Y, AppConstants.EXPORT_DECIMAL_PLACES)}";
+        return $"{Util.Format(point.X, AppSettings.XDecimalPlaces)}\t{Util.Format(point.Y, AppSettings.YDecimalPlaces)}";
     }
 }

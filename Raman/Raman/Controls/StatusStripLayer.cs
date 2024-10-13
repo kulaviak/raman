@@ -51,7 +51,7 @@ public class StatusStripLayer : LayerBase
     {
         var point = CoordSystem.ToValuePoint(location);
         // Showing superscripts on label https://stackoverflow.com/questions/19682459/superscript-label-or-form-name
-        var ret = $"X Axis (a.u.): {Util.Format(point.X, 0)}  Y Axis (a.u.): {Util.Format(point.Y, 0)}";
+        var ret = $"X Axis (a.u.): {Util.Format(point.X, AppSettings.XDecimalPlaces)}  Y Axis (a.u.): {Util.Format(point.Y, AppSettings.YDecimalPlaces)}";
         return ret;
     }
  }

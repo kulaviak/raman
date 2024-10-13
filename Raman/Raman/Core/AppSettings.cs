@@ -74,6 +74,18 @@ public static class AppSettings
         set => Set("BaselineCorrectionSaveFileDirectory", value);
     }
     
+    public static int XDecimalPlaces
+    {
+        get => GetInt("XDecimalPlaces") ?? 0;
+        set => SetInt("XDecimalPlaces", value);
+    }
+    
+    public static int YDecimalPlaces
+    {
+        get => GetInt("YDecimalPlaces") ?? 2;
+        set => SetInt("YDecimalPlaces", value);
+    }
+    
     /// <summary>
     /// Use '.' It is universal decimal separator
     /// </summary>
@@ -113,6 +125,21 @@ public static class AppSettings
     }
     
     public static void SetBool(string key, bool value)
+    {
+        Set(key, value.ToString());
+    }
+    
+    public static int? GetInt(string key)
+    {
+        var str = Get(key);
+        if (Int32.TryParse(str, out var ret))
+        {
+            return ret;
+        }
+        return null;
+    }
+    
+    public static void SetInt(string key, int value)
     {
         Set(key, value.ToString());
     }
