@@ -42,6 +42,7 @@ partial class MainForm
     this.miBaselineCorrection = new System.Windows.Forms.ToolStripMenuItem();
     this.miPeakAnalysis = new System.Windows.Forms.ToolStripMenuItem();
     this.miCutOff = new System.Windows.Forms.ToolStripMenuItem();
+    this.importClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
     this.miHelp = new System.Windows.Forms.ToolStripMenuItem();
     this.miShowHelp = new System.Windows.Forms.ToolStripMenuItem();
     this.toolStrip = new System.Windows.Forms.ToolStrip();
@@ -133,7 +134,7 @@ partial class MainForm
     // 
     // miTools
     // 
-    this.miTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miBaselineCorrection, this.miPeakAnalysis, this.miCutOff});
+    this.miTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miBaselineCorrection, this.miPeakAnalysis, this.miCutOff, this.importClipboardToolStripMenuItem});
     this.miTools.Name = "miTools";
     this.miTools.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
     this.miTools.Size = new System.Drawing.Size(46, 20);
@@ -162,6 +163,14 @@ partial class MainForm
     this.miCutOff.Size = new System.Drawing.Size(217, 22);
     this.miCutOff.Text = "Cut Off";
     this.miCutOff.Click += new System.EventHandler(this.miCutOff_Click);
+    // 
+    // importClipboardToolStripMenuItem
+    // 
+    this.importClipboardToolStripMenuItem.Name = "importClipboardToolStripMenuItem";
+    this.importClipboardToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+    this.importClipboardToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+    this.importClipboardToolStripMenuItem.Text = "Import Clipboard";
+    this.importClipboardToolStripMenuItem.Click += new System.EventHandler(this.importClipboardToolStripMenuItem_Click);
     // 
     // miHelp
     // 
@@ -317,6 +326,8 @@ partial class MainForm
     this.ResumeLayout(false);
     this.PerformLayout();
   }
+
+  private System.Windows.Forms.ToolStripMenuItem importClipboardToolStripMenuItem;
 
   private System.Windows.Forms.ToolStripMenuItem miSelectSpectra;
 

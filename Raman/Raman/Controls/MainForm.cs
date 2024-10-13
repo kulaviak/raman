@@ -159,7 +159,6 @@ public partial class MainForm : Form
             var name = Path.GetFileNameWithoutExtension(filePath);
             spectra.Add(new Spectrum(points, name));
         }
-
         Spectra = spectra;
     }
 
@@ -520,7 +519,6 @@ public partial class MainForm : Form
         {
             canvasPanel.Spectra = originalSpectra;
         }
-
         canvasPanel.Refresh();
     }
 
@@ -539,6 +537,21 @@ public partial class MainForm : Form
         catch (Exception ex)
         {
             MessageUtil.ShowAppError("Selecting spectra failed.", "Error", ex);
+        }
+    }
+
+    private void importClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            var points = new ClipboardImporter().ImportExcelData();
+            var name = "Clipboard";
+            var spectrum = new Spectrum(points, name);
+            Spectra = [spectrum];
+        }
+        catch (Exception ex)
+        {
+            MessageUtil.ShowAppError("Importing clipboard failed.", "Error", ex);
         }
     }
 }

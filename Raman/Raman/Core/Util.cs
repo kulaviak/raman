@@ -69,4 +69,9 @@ public abstract class Util
             spectrum.IsVisible = visibleSpectrumNames.Contains(spectrum.Name);
         }
     }
+
+    public static string[] SplitOnWhitespaceOrTab(string line)
+    {
+        return line.Split(new[] {' ', '\t'}, StringSplitOptions.RemoveEmptyEntries);
+    }
 }

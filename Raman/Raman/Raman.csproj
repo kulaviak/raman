@@ -132,6 +132,7 @@
     <Compile Include="Core\AppConstants.cs" />
     <Compile Include="Core\AppException.cs" />
     <Compile Include="Core\AppSettings.cs" />
+    <Compile Include="Core\ClipboardImporter.cs" />
     <Compile Include="Core\LineSegment.cs" />
     <Compile Include="Core\ClosestSpectrumCalculator.cs" />
     <Compile Include="Core\PeakAreaCalculator.cs" />

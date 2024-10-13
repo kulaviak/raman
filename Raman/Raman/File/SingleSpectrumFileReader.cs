@@ -42,7 +42,7 @@ public class SingleSpectrumFileReader
     {
         try
         {
-            var parts = SplitOnWhitespaceOrTab(line);
+            var parts = Util.SplitOnWhitespaceOrTab(line);
             if (parts.Length >= 2)
             {
                 var x = Util.UniversalParseDouble(parts[0]);
@@ -65,10 +65,5 @@ public class SingleSpectrumFileReader
         {
             throw new AppException($"Parsing line {line} failed.", e);
         }
-    }
-
-    public static string[] SplitOnWhitespaceOrTab(string line)
-    {
-        return line.Split(new[] {' ', '\t'}, StringSplitOptions.RemoveEmptyEntries);
     }
 }
