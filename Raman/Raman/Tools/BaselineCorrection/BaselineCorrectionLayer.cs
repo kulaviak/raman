@@ -358,7 +358,7 @@ public class BaselineCorrectionLayer : LayerBase
         {
             ret.Add(points[index + 1]);
         }
-        if (index + 2 >= points.Count)
+        if (index + 2 < points.Count)
         {
             ret.Add(points[index + 2]);
         }
