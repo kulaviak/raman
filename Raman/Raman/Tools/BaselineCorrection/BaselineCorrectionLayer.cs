@@ -8,25 +8,26 @@ namespace Raman.Tools.BaselineCorrection;
 public class BaselineCorrectionLayer : LayerBase
 {
     private readonly CanvasPanel canvasPanel;
-        
+
     private static Color COLOR = Color.Red;
 
     public List<ValuePoint> CorrectionPoints { get; set; } = new List<ValuePoint>();
-    
+
     public bool AreCorrectionPointsAdjusted { get; set; }
-    
+
     public bool AreCorrectedSpectraExportedToSeparateFiles { get; set; }
 
     private Stack<List<Spectrum>> spectrumHistory = new Stack<List<Spectrum>>();
-    
+
     private Stack<List<ValuePoint>> correctionPointHistory = new Stack<List<ValuePoint>>();
-    
-    public BaselineCorrectionLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel, bool areCorrectionPointsAdjusted) : base(coordSystem)
+
+    public BaselineCorrectionLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel, bool areCorrectionPointsAdjusted) :
+        base(coordSystem)
     {
         this.canvasPanel = canvasPanel;
         AreCorrectionPointsAdjusted = areCorrectionPointsAdjusted;
     }
-        
+
     public override void HandleMouseDown(object sender, MouseEventArgs e)
     {
         if (e.Button == MouseButtons.Left)
@@ -50,7 +51,7 @@ public class BaselineCorrectionLayer : LayerBase
     {
         if (areCorrectionPointsAdjusted)
         {
-            var closestSpectrum = new ClosestSpectrumCalculator().GetClosestSpectrum(spectra, pos, CoordSystem); 
+            var closestSpectrum = new ClosestSpectrumCalculator().GetClosestSpectrum(spectra, pos, CoordSystem);
             var closestPoints = GetClosestPoints(closestSpectrum.Points, pos);
             var averageY = closestPoints.Average(point => point.Y);
             var ret = new ValuePoint(CoordSystem.ToValueX(pos.X), averageY);
@@ -84,13 +85,13 @@ public class BaselineCorrectionLayer : LayerBase
         CorrectionPoints.Clear();
         Refresh();
     }
-        
+
     public override void Draw(Graphics graphics)
     {
         DrawBaselines(graphics);
         DrawMarks(graphics);
     }
-    
+
     public void ImportPoints(List<ValuePoint> points)
     {
         CorrectionPoints = points;
@@ -136,7 +137,7 @@ public class BaselineCorrectionLayer : LayerBase
             return;
         }
         if (AreCorrectedSpectraExportedToSeparateFiles)
-        {   
+        {
             ExportToSeparateFiles(exportedSpectra);
         }
         else
@@ -149,7 +150,7 @@ public class BaselineCorrectionLayer : LayerBase
     {
         using var saveFileDialog = new SaveFileDialog();
         saveFileDialog.Title = "Export Corrected Spectra";
-        saveFileDialog.Filter = "TXT Files (*.txt)|*.txt|All Files (*.*)|*.*"; 
+        saveFileDialog.Filter = "TXT Files (*.txt)|*.txt|All Files (*.*)|*.*";
         saveFileDialog.FilterIndex = 1;
         if (AppSettings.BaselineCorrectionSaveFileDirectory != null)
         {
@@ -225,13 +226,13 @@ public class BaselineCorrectionLayer : LayerBase
     {
         var diff = (end - start) / 1000;
         var ret = new List<double>();
-        for (var position = start; position  <= end; position += diff)
+        for (var position = start; position <= end; position += diff)
         {
-            ret.Add(position);    
+            ret.Add(position);
         }
         return ret;
     }
-    
+
     private static List<double> GetXPositionsForBaseline(Spectrum spectrum, List<ValuePoint> spectrumCorrectionPoints)
     {
         var baselineStart = GetBaselineStart(spectrumCorrectionPoints);
@@ -266,7 +267,7 @@ public class BaselineCorrectionLayer : LayerBase
         contextMenu.Items.Add("Remove Closest Point", null, (_, _) => RemoveClosestPoint(location));
         contextMenu.Show(canvasPanel, location);
     }
-        
+
     private ValuePoint GetPointToRemove(Point pos)
     {
         var closestPoint = CorrectionPoints.MinByOrDefault(x => Util.GetPixelDistance(CoordSystem.ToPixelPoint(x), pos));
@@ -276,7 +277,7 @@ public class BaselineCorrectionLayer : LayerBase
         }
         return null;
     }
-        
+
     private void DrawMarks(Graphics graphics)
     {
         foreach (var point in CorrectionPoints)
@@ -284,7 +285,7 @@ public class BaselineCorrectionLayer : LayerBase
             new Mark(CoordSystem, graphics, COLOR, point).Draw();
         }
     }
-    
+
     private static Spectrum CorrectBaseline(Spectrum spectrum, List<ValuePoint> correctionPoints, bool areCorrectionPointsAdjusted)
     {
         var spectrumCorrectionPoints = GetSpectrumCorrectionPoints(spectrum, correctionPoints, areCorrectionPointsAdjusted);
@@ -295,8 +296,9 @@ public class BaselineCorrectionLayer : LayerBase
         ret.IsBaselineCorrected = true;
         return ret;
     }
-    
-    private static List<ValuePoint> GetSpectrumCorrectionPoints(Spectrum spectrum, List<ValuePoint> correctionPoints, bool areCorrectionPointsAdjusted)
+
+    private static List<ValuePoint> GetSpectrumCorrectionPoints(Spectrum spectrum, List<ValuePoint> correctionPoints,
+        bool areCorrectionPointsAdjusted)
     {
         var ret = new List<ValuePoint>();
         foreach (var correctionPoint in correctionPoints)
@@ -314,7 +316,7 @@ public class BaselineCorrectionLayer : LayerBase
             }
             var point = new ValuePoint(spectrumPointClosestInXDirection.X, y);
             ret.Add(point);
-        }   
+        }
         return ret;
     }
 
@@ -332,13 +334,13 @@ public class BaselineCorrectionLayer : LayerBase
         CorrectionPoints = correctionPointHistory.Pop();
         canvasPanel.ZoomToSeeAllSpectra();
     }
-    
+
     private void ExportCorrectedSpectra(Spectrum spectrum, string folderPath)
     {
         var filePath = Path.Combine(folderPath, spectrum.Name + "_bc.txt");
         new OnePointPerLineFileWriter().WritePoints(spectrum.Points, filePath);
     }
- 
+
     /// <summary>
     /// Gets neighbourhood points including the point itself.
     /// </summary>
