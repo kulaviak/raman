@@ -12,7 +12,9 @@ public class ClipboardImporter
     public List<ValuePoint> ImportExcelData()
     {
         var data = Clipboard.GetText(TextDataFormat.Text);
-        var rows = data.Split(["\r\n"], StringSplitOptions.RemoveEmptyEntries);
+        // support both windows and linux files
+        string[] separators = ["\r\n", "\n"];
+        var rows = data.Split(separators, StringSplitOptions.RemoveEmptyEntries);
         var ret = new List<ValuePoint>();
         foreach (var row in rows)
         {
