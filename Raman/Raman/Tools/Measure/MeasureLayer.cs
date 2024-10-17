@@ -12,7 +12,7 @@ public class MeasureLayer : LayerBase
     
     private ValuePoint currentPoint;
     
-    private static Pen PEN = Pens.Orange;
+    private static Pen PEN = Pens.Brown;
 
     public MeasureLayer(CanvasCoordSystem coordSystem, CanvasPanel canvasPanel) :
         base(coordSystem)

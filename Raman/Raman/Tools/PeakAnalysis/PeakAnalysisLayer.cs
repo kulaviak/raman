@@ -66,7 +66,49 @@ public class PeakAnalysisLayer : LayerBase
             ShowContextMenu(e.Location);
         }
     }
+    
+    public override void HandleMouseMove(object sender, MouseEventArgs e)
+    {
+        currentPoint = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
+        canvasPanel.Refresh();
+    }
 
+    public void Reset()
+    {
+        if (!Peaks.Any())
+        {
+            MessageUtil.ShowInfo("There are no peak to reset.", "Information");
+            return;
+        }
+        Peaks.Clear();
+        Refresh();
+    }
+        
+    public override void Draw(Graphics graphics)
+    {
+        DrawPeaks(graphics);
+        DrawCurrentLine(graphics);
+    }
+
+    public override void HandleKeyPress(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Escape && currentPoint != null)
+        {
+            start = null;
+            Refresh();
+        }
+    }
+    
+    public void ExportPeaks(string filePath)
+    {
+        if (!VisiblePeaks.Any())
+        {
+            MessageUtil.ShowInfo("There are no peaks to export.", "Information");
+            return;
+        }
+        new PeakAnalysisExporter().ExportPeaks(filePath, VisiblePeaks);
+    }
+    
     private List<Peak> GetPeaksForAllSpectra(ValuePoint start, ValuePoint end)
     {
         var ret = new List<Peak>();
@@ -119,38 +161,6 @@ public class PeakAnalysisLayer : LayerBase
             {
                 return spectrum.Points.Last();
             }
-        }
-    }
-
-    public override void HandleMouseMove(object sender, MouseEventArgs e)
-    {
-        currentPoint = CoordSystem.ToValuePoint(e.Location.X, e.Location.Y);
-        canvasPanel.Refresh();
-    }
-
-    public void Reset()
-    {
-        if (!Peaks.Any())
-        {
-            MessageUtil.ShowInfo("There are no peak to reset.", "Information");
-            return;
-        }
-        Peaks.Clear();
-        Refresh();
-    }
-        
-    public override void Draw(Graphics graphics)
-    {
-        DrawPeaks(graphics);
-        DrawCurrentLine(graphics);
-    }
-
-    public override void HandleKeyPress(object sender, KeyEventArgs e)
-    {
-        if (e.KeyCode == Keys.Escape && currentPoint != null)
-        {
-            start = null;
-            Refresh();
         }
     }
 
@@ -207,15 +217,5 @@ public class PeakAnalysisLayer : LayerBase
         var contextMenu = new ContextMenuStrip();
         contextMenu.Items.Add("Remove Closest Line", null, (_, _) => RemoveClosestPeak(point));
         contextMenu.Show(canvasPanel, point);
-    }
-
-    public void ExportPeaks(string filePath)
-    {
-        if (!VisiblePeaks.Any())
-        {
-            MessageUtil.ShowInfo("There are no peaks to export.", "Information");
-            return;
-        }
-        new PeakAnalysisExporter().ExportPeaks(filePath, VisiblePeaks);
     }
 }
