@@ -36,7 +36,7 @@ public static class AppSettings
         }
     }
 
-    private static string _fileName = "appsettings.json";
+    private static string _fileName = "Raman.json";
 
     public static string SingleSpectrumOpenFileDirectory
     {

@@ -240,7 +240,7 @@
     <AdditionalFiles Include="doc\Raman.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AdditionalFiles>
-    <AdditionalFiles Include="appsettings.json">
+    <AdditionalFiles Include="Raman.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AdditionalFiles>
     <Content Include="README.md" />
