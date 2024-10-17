@@ -62,6 +62,10 @@ public class CanvasPanel : Panel
             {
                 MouseZoomLayer.CoordSystem = value;
             }
+            if (MeasureLayer != null)
+            {
+                MeasureLayer.CoordSystem = value;
+            }
         }
     }
 
@@ -82,6 +86,9 @@ public class CanvasPanel : Panel
     
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public MouseZoomLayer MouseZoomLayer { get; set; }
+    
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public MeasureLayer MeasureLayer { get; set; }
     
     public CanvasPanel()
     {
@@ -130,6 +137,7 @@ public class CanvasPanel : Panel
         PeakAnalysisLayer = null;
         ZoomToWindowLayer = null;
         CutOffLayer = null;
+        MeasureLayer = null;
         StatusStripLayer = new StatusStripLayer(CoordSystem, statusStrip, this);
         MouseZoomLayer = new MouseZoomLayer(this);
     }
@@ -181,6 +189,7 @@ public class CanvasPanel : Panel
         BaselineCorrectionLayer?.Draw(graphics);
         PeakAnalysisLayer?.Draw(graphics);
         CutOffLayer?.Draw(graphics);
+        MeasureLayer?.Draw(graphics);
     }
 
     private void DrawZeroYLevel(Graphics graphics)
@@ -228,8 +237,10 @@ public class CanvasPanel : Panel
     private void HandleMouseDown(object sender, MouseEventArgs e)
     {
         ZoomToWindowLayer?.HandleMouseDown(sender, e);
+        MeasureLayer?.HandleMouseDown(sender, e);
         var isInZoomMode = ZoomToWindowLayer != null;
-        if (!isInZoomMode)
+        var isInMeasureMode = MeasureLayer != null;
+        if (!isInZoomMode && !isInMeasureMode)
         {
             BaselineCorrectionLayer?.HandleMouseDown(sender, e);
             PeakAnalysisLayer?.HandleMouseDown(sender, e);
@@ -249,6 +260,7 @@ public class CanvasPanel : Panel
         }
         StatusStripLayer?.HandleMouseMove(sender, e);
         MouseZoomLayer?.HandleMouseMove(sender, e);
+        MeasureLayer?.HandleMouseMove(sender, e);
     }
 
     private void HandleMouseUp(object sender, MouseEventArgs e)
@@ -261,5 +273,10 @@ public class CanvasPanel : Panel
             PeakAnalysisLayer?.HandleMouseUp(sender, e);
         }
         MouseZoomLayer?.HandleMouseUp(sender, e);
+    }
+
+    public void CancelMeasureMode()
+    {
+        MeasureLayer = null;
     }
 }

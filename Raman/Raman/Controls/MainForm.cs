@@ -379,29 +379,27 @@ public partial class MainForm : Form
 
     private void OpenMultiSpectrumFiles()
     {
-        using (var openFileDialog = new OpenFileDialog())
+        using var openFileDialog = new OpenFileDialog();
+        openFileDialog.Title = "Open Multiple Spectrum Files";
+        openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+        openFileDialog.FilterIndex = 1;
+        openFileDialog.Multiselect = true;
+        if (AppSettings.MultipleSpectrumOpenFileDirectory != null)
         {
-            openFileDialog.Title = "Open Multiple Spectrum Files";
-            openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
-            openFileDialog.FilterIndex = 1;
-            openFileDialog.Multiselect = true;
-            if (AppSettings.MultipleSpectrumOpenFileDirectory != null)
+            openFileDialog.InitialDirectory = AppSettings.MultipleSpectrumOpenFileDirectory;
+        }
+
+        if (openFileDialog.ShowDialog() == DialogResult.OK)
+        {
+            var filePaths = openFileDialog.FileNames.ToList();
+            if (filePaths.Count == 0)
             {
-                openFileDialog.InitialDirectory = AppSettings.MultipleSpectrumOpenFileDirectory;
+                MessageBox.Show("No files were selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                var filePaths = openFileDialog.FileNames.ToList();
-                if (filePaths.Count == 0)
-                {
-                    MessageBox.Show("No files were selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                AppSettings.MultipleSpectrumOpenFileDirectory = Path.GetDirectoryName(filePaths[0]);
-                OpenMultiSpectrumFilesInternal(filePaths);
-            }
+            AppSettings.MultipleSpectrumOpenFileDirectory = Path.GetDirectoryName(filePaths[0]);
+            OpenMultiSpectrumFilesInternal(filePaths);
         }
     }
 
@@ -540,7 +538,7 @@ public partial class MainForm : Form
         }
     }
 
-    private void importClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+    private void miImportClipboard_Click(object sender, EventArgs e)
     {
         try
         {
@@ -552,6 +550,33 @@ public partial class MainForm : Form
         catch (Exception ex)
         {
             MessageUtil.ShowAppError("Importing clipboard failed.", "Error", ex);
+        }
+    }
+
+    private void measureToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            Measure();
+        }
+        catch (Exception ex)
+        {
+            MessageUtil.ShowAppError("Measuring failed.", "Error", ex);
+        }
+    }
+
+    private void Measure()
+    {
+        var measureLayer = new MeasureLayer(canvasPanel.CoordSystem, canvasPanel);
+        canvasPanel.MeasureLayer = measureLayer;
+    }
+
+    private void MainForm_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Escape)
+        {
+            canvasPanel.CancelMeasureMode();
+            canvasPanel.Refresh();
         }
     }
 }

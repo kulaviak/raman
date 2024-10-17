@@ -50,8 +50,14 @@ public class StatusStripLayer : LayerBase
     private string GetPositionText(Point location)
     {
         var point = CoordSystem.ToValuePoint(location);
-        // Showing superscripts on label https://stackoverflow.com/questions/19682459/superscript-label-or-form-name
-        var ret = $"X Axis (a.u.): {Util.Format(point.X, AppSettings.XDecimalPlaces)}  Y Axis (a.u.): {Util.Format(point.Y, AppSettings.YDecimalPlaces)}";
+        var xStr = Util.Format(point.X, AppSettings.XDecimalPlaces);
+        var yStr = Util.Format(point.Y, AppSettings.YDecimalPlaces);
+        var ret = $"Position: [{xStr}, {yStr}]";
+        var distanceText = canvasPanel.MeasureLayer?.GetDistanceText();
+        if (distanceText != null)
+        {
+            ret += " " + distanceText;
+        }
         return ret;
     }
  }

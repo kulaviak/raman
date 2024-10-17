@@ -176,6 +176,7 @@
       <DependentUpon>CutOffForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Tools\CutOff\CutOffLayer.cs" />
+    <Compile Include="Tools\Measure\MeasureLayer.cs" />
     <Compile Include="Tools\PeakAnalysis\PeakAnalysisExporter.cs" />
     <Compile Include="Tools\PeakAnalysis\PeakAnalysisForm.cs">
       <SubType>Form</SubType>

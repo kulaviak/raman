@@ -42,7 +42,8 @@ partial class MainForm
     this.miBaselineCorrection = new System.Windows.Forms.ToolStripMenuItem();
     this.miPeakAnalysis = new System.Windows.Forms.ToolStripMenuItem();
     this.miCutOff = new System.Windows.Forms.ToolStripMenuItem();
-    this.importClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+    this.miImportClipboard = new System.Windows.Forms.ToolStripMenuItem();
+    this.measureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
     this.miHelp = new System.Windows.Forms.ToolStripMenuItem();
     this.miShowHelp = new System.Windows.Forms.ToolStripMenuItem();
     this.toolStrip = new System.Windows.Forms.ToolStrip();
@@ -134,7 +135,7 @@ partial class MainForm
     // 
     // miTools
     // 
-    this.miTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miBaselineCorrection, this.miPeakAnalysis, this.miCutOff, this.importClipboardToolStripMenuItem});
+    this.miTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miBaselineCorrection, this.miPeakAnalysis, this.miCutOff, this.miImportClipboard, this.measureToolStripMenuItem});
     this.miTools.Name = "miTools";
     this.miTools.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
     this.miTools.Size = new System.Drawing.Size(46, 20);
@@ -164,13 +165,21 @@ partial class MainForm
     this.miCutOff.Text = "Cut Off";
     this.miCutOff.Click += new System.EventHandler(this.miCutOff_Click);
     // 
-    // importClipboardToolStripMenuItem
+    // miImportClipboard
     // 
-    this.importClipboardToolStripMenuItem.Name = "importClipboardToolStripMenuItem";
-    this.importClipboardToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-    this.importClipboardToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-    this.importClipboardToolStripMenuItem.Text = "Import Clipboard";
-    this.importClipboardToolStripMenuItem.Click += new System.EventHandler(this.importClipboardToolStripMenuItem_Click);
+    this.miImportClipboard.Name = "miImportClipboard";
+    this.miImportClipboard.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+    this.miImportClipboard.Size = new System.Drawing.Size(217, 22);
+    this.miImportClipboard.Text = "Import Clipboard";
+    this.miImportClipboard.Click += new System.EventHandler(this.miImportClipboard_Click);
+    // 
+    // measureToolStripMenuItem
+    // 
+    this.measureToolStripMenuItem.Name = "measureToolStripMenuItem";
+    this.measureToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
+    this.measureToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+    this.measureToolStripMenuItem.Text = "Measure";
+    this.measureToolStripMenuItem.Click += new System.EventHandler(this.measureToolStripMenuItem_Click);
     // 
     // miHelp
     // 
@@ -314,6 +323,7 @@ partial class MainForm
     this.Text = "Raman";
     this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
     this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RamanForm_FormClosing);
+    this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
     this.Resize += new System.EventHandler(this.MainForm_Resize);
     this.menuStrip.ResumeLayout(false);
     this.menuStrip.PerformLayout();
@@ -327,7 +337,9 @@ partial class MainForm
     this.PerformLayout();
   }
 
-  private System.Windows.Forms.ToolStripMenuItem importClipboardToolStripMenuItem;
+  private System.Windows.Forms.ToolStripMenuItem measureToolStripMenuItem;
+
+  private System.Windows.Forms.ToolStripMenuItem miImportClipboard;
 
   private System.Windows.Forms.ToolStripMenuItem miSelectSpectra;
 
