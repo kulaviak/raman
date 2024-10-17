@@ -46,15 +46,7 @@ public class Spectrum
         }
         return null;
     }
-
-    private static double? GetInterpolatedValue(ValuePoint first, ValuePoint second, double x)
-    {
-        var diffX = second.X - first.X;
-        var diffY = second.Y - first.Y;
-        var ret = first.Y + (diffY / diffX) * (x - first.X);
-        return ret;
-    }
-
+    
     public void Draw(CanvasCoordSystem coordSystem, Graphics graphics)
     {
         new CanvasDrawer(coordSystem, graphics).DrawLines(points, Pens.Blue);
@@ -69,5 +61,13 @@ public class Spectrum
     {
         var clonedPoints = Points.Select(point => point.DeepClone()).ToList();
         return new Spectrum(clonedPoints, Name, IsBaselineCorrected, IsVisible);
+    }
+    
+    private static double? GetInterpolatedValue(ValuePoint first, ValuePoint second, double x)
+    {
+        var diffX = second.X - first.X;
+        var diffY = second.Y - first.Y;
+        var ret = first.Y + (diffY / diffX) * (x - first.X);
+        return ret;
     }
 }

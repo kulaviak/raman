@@ -21,13 +21,7 @@ public class ClosestSpectrumCalculator
         var ret = distanceToClosestSegment <= maxAllowedDistance ? closestSegment.Spectrum : null;
         return ret;
     }
-
-    private static double GetDistanceToSegment(Point point, LineSegment segment, CanvasCoordSystem coordSystem)
-    {
-        var ret = GetDistanceToSegment(point, coordSystem.ToPixelPoint(segment.Start), coordSystem.ToPixelPoint(segment.End));
-        return ret;
-    }
-
+    
     // chatGPT prompt: create c# method for getting distance between line segment and point
     public static double GetDistanceToSegment(Point point, Point start, Point end)
     {
@@ -47,6 +41,12 @@ public class ClosestSpectrumCalculator
 
         // Return the distance between point C and the projection
         var ret = Math.Sqrt(Math.Pow(point.X - projection.X, 2) + Math.Pow(point.Y - projection.Y, 2));
+        return ret;
+    }
+    
+    private static double GetDistanceToSegment(Point point, LineSegment segment, CanvasCoordSystem coordSystem)
+    {
+        var ret = GetDistanceToSegment(point, coordSystem.ToPixelPoint(segment.Start), coordSystem.ToPixelPoint(segment.End));
         return ret;
     }
 

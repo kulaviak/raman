@@ -324,6 +324,7 @@ partial class MainForm
     this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
     this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RamanForm_FormClosing);
     this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
+    this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainForm_KeyPress);
     this.Resize += new System.EventHandler(this.MainForm_Resize);
     this.menuStrip.ResumeLayout(false);
     this.menuStrip.PerformLayout();

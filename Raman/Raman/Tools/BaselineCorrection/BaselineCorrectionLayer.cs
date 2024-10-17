@@ -46,35 +46,7 @@ public class BaselineCorrectionLayer : LayerBase
             ShowContextMenu(e.Location);
         }
     }
-
-    private ValuePoint CalculateCorrectionPoint(Point pos, List<Spectrum> spectra, bool areCorrectionPointsAdjusted)
-    {
-        if (areCorrectionPointsAdjusted)
-        {
-            var closestSpectrum = new ClosestSpectrumCalculator().GetClosestSpectrum(spectra, pos, CoordSystem);
-            var closestPoints = GetClosestPoints(closestSpectrum.Points, pos);
-            var averageY = closestPoints.Average(point => point.Y);
-            var ret = new ValuePoint(CoordSystem.ToValueX(pos.X), averageY);
-            return ret;
-        }
-        else
-        {
-            return CoordSystem.ToValuePoint(pos.X, pos.Y);
-        }
-    }
-
-    private List<ValuePoint> GetClosestPoints(List<ValuePoint> points, Point pos)
-    {
-        var closestPoint = GetClosestPointInXDirection(points, CoordSystem.ToValuePoint(pos));
-        var ret = GetNeighbourhoodPoints(closestPoint, points);
-        return ret;
-    }
-
-    private static ValuePoint GetClosestPointInXDirection(List<ValuePoint> points, ValuePoint point)
-    {
-        return points.MinByOrDefault(x => Math.Abs(x.X - point.X));
-    }
-
+    
     public void Reset()
     {
         if (!CorrectionPoints.Any())
@@ -116,18 +88,7 @@ public class BaselineCorrectionLayer : LayerBase
         CorrectionPoints = new List<ValuePoint>();
         canvasPanel.ZoomToSeeAllSpectra();
     }
-
-    private List<Spectrum> GetCorrectedSpectra(List<Spectrum> spectra)
-    {
-        var ret = new List<Spectrum>();
-        foreach (var spectrum in spectra)
-        {
-            var newSpectrum = spectrum.IsVisible ? CorrectBaseline(spectrum, CorrectionPoints, AreCorrectionPointsAdjusted) : spectrum;
-            ret.Add(newSpectrum);
-        }
-        return ret;
-    }
-
+    
     public void ExportCorrectedSpectra()
     {
         var exportedSpectra = canvasPanel.Spectra.Where(x => x.IsBaselineCorrected).ToList();
@@ -145,7 +106,46 @@ public class BaselineCorrectionLayer : LayerBase
             ExportToOneFile(exportedSpectra);
         }
     }
+    
+    private ValuePoint CalculateCorrectionPoint(Point pos, List<Spectrum> spectra, bool areCorrectionPointsAdjusted)
+    {
+        if (areCorrectionPointsAdjusted)
+        {
+            var closestSpectrum = new ClosestSpectrumCalculator().GetClosestSpectrum(spectra, pos, CoordSystem);
+            var closestPoints = GetClosestPoints(closestSpectrum.Points, pos);
+            var averageY = closestPoints.Average(point => point.Y);
+            var ret = new ValuePoint(CoordSystem.ToValueX(pos.X), averageY);
+            return ret;
+        }
+        else
+        {
+            return CoordSystem.ToValuePoint(pos.X, pos.Y);
+        }
+    }
 
+    private List<ValuePoint> GetClosestPoints(List<ValuePoint> points, Point pos)
+    {
+        var closestPoint = GetClosestPointInXDirection(points, CoordSystem.ToValuePoint(pos));
+        var ret = GetNeighbourhoodPoints(closestPoint, points);
+        return ret;
+    }
+
+    private static ValuePoint GetClosestPointInXDirection(List<ValuePoint> points, ValuePoint point)
+    {
+        return points.MinByOrDefault(x => Math.Abs(x.X - point.X));
+    }
+
+    private List<Spectrum> GetCorrectedSpectra(List<Spectrum> spectra)
+    {
+        var ret = new List<Spectrum>();
+        foreach (var spectrum in spectra)
+        {
+            var newSpectrum = spectrum.IsVisible ? CorrectBaseline(spectrum, CorrectionPoints, AreCorrectionPointsAdjusted) : spectrum;
+            ret.Add(newSpectrum);
+        }
+        return ret;
+    }
+    
     private void ExportToOneFile(List<Spectrum> spectra)
     {
         using var saveFileDialog = new SaveFileDialog();

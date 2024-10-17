@@ -8,15 +8,15 @@ public class AppStatusStrip : StatusStrip
     {
         InitializeComponent();
     }
+    
+    public void ShowText(string text)
+    {
+        lblPosition.Text = text;
+    }
 
     private void InitializeComponent()
     {
         lblPosition = new ToolStripStatusLabel();
         Items.AddRange(new ToolStripItem[] {lblPosition});   
-    }
-
-    public void ShowText(string text)
-    {
-        lblPosition.Text = text;
     }
 }

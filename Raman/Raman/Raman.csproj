@@ -139,7 +139,6 @@
     <Compile Include="Core\Spectrum.cs" />
     <Compile Include="Core\ExceptionFormatter.cs" />
     <Compile Include="Core\Extensions.cs" />
-    <Compile Include="Core\Global.cs" />
     <Compile Include="Core\Line.cs" />
     <Compile Include="Core\Peak.cs" />
     <Compile Include="Core\ValuePoint.cs" />
