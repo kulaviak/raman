@@ -142,6 +142,11 @@ public class CanvasPanel : Panel
         MouseZoomLayer = new MouseZoomLayer(this);
     }
     
+    public void CancelMeasureMode()
+    {
+        MeasureLayer = null;
+    }
+    
     private void DoRefresh()
     {
         Invalidate();
@@ -273,10 +278,5 @@ public class CanvasPanel : Panel
             PeakAnalysisLayer?.HandleMouseUp(sender, e);
         }
         MouseZoomLayer?.HandleMouseUp(sender, e);
-    }
-
-    public void CancelMeasureMode()
-    {
-        MeasureLayer = null;
     }
 }

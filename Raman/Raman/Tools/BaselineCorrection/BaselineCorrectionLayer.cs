@@ -107,6 +107,21 @@ public class BaselineCorrectionLayer : LayerBase
         }
     }
     
+    public void UndoBaselineCorrection()
+    {
+        if (spectrumHistory.Count == 0)
+        {
+            MessageUtil.ShowInfo("There is no undo to do.", "Information");
+            return;
+        }
+
+        var spectra = spectrumHistory.Pop();
+        Util.SetSpectrumVisibilityAccordingToCurrentVisibleSpectra(spectra, canvasPanel.VisibleSpectra);
+        canvasPanel.Spectra = spectra;
+        CorrectionPoints = correctionPointHistory.Pop();
+        canvasPanel.ZoomToSeeAllSpectra();
+    }
+    
     private ValuePoint CalculateCorrectionPoint(Point pos, List<Spectrum> spectra, bool areCorrectionPointsAdjusted)
     {
         if (areCorrectionPointsAdjusted)
@@ -319,22 +334,7 @@ public class BaselineCorrectionLayer : LayerBase
         }
         return ret;
     }
-
-    public void UndoBaselineCorrection()
-    {
-        if (spectrumHistory.Count == 0)
-        {
-            MessageUtil.ShowInfo("There is no undo to do.", "Information");
-            return;
-        }
-
-        var spectra = spectrumHistory.Pop();
-        Util.SetSpectrumVisibilityAccordingToCurrentVisibleSpectra(spectra, canvasPanel.VisibleSpectra);
-        canvasPanel.Spectra = spectra;
-        CorrectionPoints = correctionPointHistory.Pop();
-        canvasPanel.ZoomToSeeAllSpectra();
-    }
-
+    
     private void ExportCorrectedSpectra(Spectrum spectrum, string folderPath)
     {
         var filePath = Path.Combine(folderPath, spectrum.Name + "_bc.txt");
