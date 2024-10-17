@@ -48,6 +48,23 @@ public class MeasureLayer : LayerBase
         canvasPanel.Refresh();
     }
     
+    public string GetDistanceText()
+    {
+        var currentEnd = GetCurrentEnd();
+        if (start != null && currentEnd != null)
+        {
+            var xDistance = Math.Abs(start.X - currentEnd.X);
+            var yDistance = Math.Abs(start.Y - currentEnd.Y);
+            var xStr = Util.Format(xDistance, AppSettings.XDecimalPlaces);
+            var yStr = Util.Format(yDistance, AppSettings.YDecimalPlaces);
+            return $"Distance [{xStr}, {yStr}]. Press Escape to cancel Measure mode.";
+        }
+        else
+        {
+            return null;
+        }
+    }
+    
     public override void Draw(Graphics graphics)
     {
         DrawLine(graphics);
@@ -68,23 +85,6 @@ public class MeasureLayer : LayerBase
     private ValuePoint GetCurrentEnd()
     {
         return end != null ? end : currentPoint;
-    }
-
-    public string GetDistanceText()
-    {
-        var currentEnd = GetCurrentEnd();
-        if (start != null && currentEnd != null)
-        {
-            var xDistance = Math.Abs(start.X - currentEnd.X);
-            var yDistance = Math.Abs(start.Y - currentEnd.Y);
-            var xStr = Util.Format(xDistance, AppSettings.XDecimalPlaces);
-            var yStr = Util.Format(yDistance, AppSettings.YDecimalPlaces);
-            return $"Distance [{xStr}, {yStr}]. Press Escape to cancel Measure mode.";
-        }
-        else
-        {
-            return null;
-        }
     }
     
     private void Refresh()

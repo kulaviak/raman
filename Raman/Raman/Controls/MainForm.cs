@@ -122,29 +122,27 @@ public partial class MainForm : Form
 
     private void OpenSingleSpectrumFiles()
     {
-        using (var openFileDialog = new OpenFileDialog())
+        using var openFileDialog = new OpenFileDialog();
+        openFileDialog.Title = "Open Single Spectrum Files";
+        openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+        openFileDialog.FilterIndex = 1;
+        openFileDialog.Multiselect = true;
+        if (AppSettings.SingleSpectrumOpenFileDirectory != null)
         {
-            openFileDialog.Title = "Open Single Spectrum Files";
-            openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
-            openFileDialog.FilterIndex = 1;
-            openFileDialog.Multiselect = true;
-            if (AppSettings.SingleSpectrumOpenFileDirectory != null)
-            {
-                openFileDialog.InitialDirectory = AppSettings.SingleSpectrumOpenFileDirectory;
-            }
+            openFileDialog.InitialDirectory = AppSettings.SingleSpectrumOpenFileDirectory;
+        }
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+        if (openFileDialog.ShowDialog() == DialogResult.OK)
+        {
+            var filePaths = openFileDialog.FileNames.ToList();
+            if (filePaths.Count == 0)
             {
-                var filePaths = openFileDialog.FileNames.ToList();
-                if (filePaths.Count == 0)
-                {
-                    MessageBox.Show("No files were selected.", "Error", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    return;
-                }
-                AppSettings.SingleSpectrumOpenFileDirectory = Path.GetDirectoryName(filePaths[0]);
-                OpenSingleSpectraFilesInternal(filePaths);
+                MessageBox.Show("No files were selected.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
             }
+            AppSettings.SingleSpectrumOpenFileDirectory = Path.GetDirectoryName(filePaths[0]);
+            OpenSingleSpectraFilesInternal(filePaths);
         }
     }
 

@@ -31,24 +31,22 @@ public partial class BaselineCorrectionForm : Form
 
     private void ImportPoints()
     {
-        using (var openFileDialog = new OpenFileDialog())
+        using var openFileDialog = new OpenFileDialog();
+        openFileDialog.Filter = FILE_DIALOG_FILTER;
+        openFileDialog.FilterIndex = 1;
+        openFileDialog.Multiselect = false;
+        if (openFileDialog.ShowDialog() == DialogResult.OK)
         {
-            openFileDialog.Filter = FILE_DIALOG_FILTER;
-            openFileDialog.FilterIndex = 1;
-            openFileDialog.Multiselect = false;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            var filePaths = openFileDialog.FileNames.ToList();
+            if (filePaths.Count == 0)
             {
-                var filePaths = openFileDialog.FileNames.ToList();
-                if (filePaths.Count == 0)
-                {
-                    MessageUtil.ShowUserError("No file was selected.", "No file selected");
-                    return;
-                }
-
-                var filePath = filePaths.First();
-                var points = new SingleSpectrumFileReader(filePath).TryReadFile();
-                baselineCorrectionLayer.ImportPoints(points);
+                MessageUtil.ShowUserError("No file was selected.", "No file selected");
+                return;
             }
+
+            var filePath = filePaths.First();
+            var points = new SingleSpectrumFileReader(filePath).TryReadFile();
+            baselineCorrectionLayer.ImportPoints(points);
         }
     }
 
@@ -66,27 +64,25 @@ public partial class BaselineCorrectionForm : Form
 
     private void ExportPoints()
     {
-        using (var saveFileDialog = new SaveFileDialog())
+        using var saveFileDialog = new SaveFileDialog();
+        saveFileDialog.Filter = FILE_DIALOG_FILTER;
+        saveFileDialog.FilterIndex = 1;
+        if (saveFileDialog.ShowDialog() == DialogResult.OK)
         {
-            saveFileDialog.Filter = FILE_DIALOG_FILTER;
-            saveFileDialog.FilterIndex = 1;
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            var filePaths = saveFileDialog.FileNames.ToList();
+            if (filePaths.Count == 0)
             {
-                var filePaths = saveFileDialog.FileNames.ToList();
-                if (filePaths.Count == 0)
-                {
-                    MessageUtil.ShowUserError("No file was selected.", "No file selected");
-                    return;
-                }
-                var filePath = filePaths.First();
-                if (!baselineCorrectionLayer.CorrectionPoints.Any())
-                {
-                    MessageUtil.ShowUserError("There are no baseline points to export.", "Error");
-                    return;
-                }
-                baselineCorrectionLayer.ExportPoints(filePath);
-                MessageUtil.ShowInfo("Points were exported successfully.", "Export finished");
+                MessageUtil.ShowUserError("No file was selected.", "No file selected");
+                return;
             }
+            var filePath = filePaths.First();
+            if (!baselineCorrectionLayer.CorrectionPoints.Any())
+            {
+                MessageUtil.ShowUserError("There are no baseline points to export.", "Error");
+                return;
+            }
+            baselineCorrectionLayer.ExportPoints(filePath);
+            MessageUtil.ShowInfo("Points were exported successfully.", "Export finished");
         }
     }
 

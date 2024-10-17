@@ -73,34 +73,32 @@ public partial class PeakAnalysisForm : Form
 
     private void ExportPeaks()
     {
-        using (var saveFileDialog = new SaveFileDialog())
+        using var saveFileDialog = new SaveFileDialog();
+        saveFileDialog.Title = "Export Peaks";
+        saveFileDialog.Filter = FILE_DIALOG_FILTER; 
+        saveFileDialog.FilterIndex = 1;
+        if (AppSettings.PeakAnalysisSaveFileDirectory != null)
         {
-            saveFileDialog.Title = "Export Peaks";
-            saveFileDialog.Filter = FILE_DIALOG_FILTER; 
-            saveFileDialog.FilterIndex = 1;
-            if (AppSettings.PeakAnalysisSaveFileDirectory != null)
+            saveFileDialog.InitialDirectory = AppSettings.PeakAnalysisSaveFileDirectory;
+        }
+        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+        {
+            var filePaths = saveFileDialog.FileNames.ToList();
+            if (filePaths.Count == 0)
             {
-                saveFileDialog.InitialDirectory = AppSettings.PeakAnalysisSaveFileDirectory;
+                MessageUtil.ShowUserError("No file was selected.", "No file selected");
+                return;
             }
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            try
             {
-                var filePaths = saveFileDialog.FileNames.ToList();
-                if (filePaths.Count == 0)
-                {
-                    MessageUtil.ShowUserError("No file was selected.", "No file selected");
-                    return;
-                }
-                try
-                {
-                    var filePath = filePaths.First();
-                    AppSettings.PeakAnalysisSaveFileDirectory = Path.GetDirectoryName(filePath);
-                    peakAnalysisLayer.ExportPeaks(filePath);
-                    MessageUtil.ShowInfo("Peaks were exported successfully.", "Export finished");
-                }
-                catch (Exception ex)
-                {
-                    MessageUtil.ShowAppError("Exporting peaks failed.", "Export failed", ex);
-                }
+                var filePath = filePaths.First();
+                AppSettings.PeakAnalysisSaveFileDirectory = Path.GetDirectoryName(filePath);
+                peakAnalysisLayer.ExportPeaks(filePath);
+                MessageUtil.ShowInfo("Peaks were exported successfully.", "Export finished");
+            }
+            catch (Exception ex)
+            {
+                MessageUtil.ShowAppError("Exporting peaks failed.", "Export failed", ex);
             }
         }
     }

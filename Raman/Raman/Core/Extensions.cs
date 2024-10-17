@@ -26,28 +26,27 @@ public static class Extensions
             maxValue = default(TSource);
             return false;
         }
-        using (var sourceIterator = source.GetEnumerator())
+
+        using var sourceIterator = source.GetEnumerator();
+        if (!sourceIterator.MoveNext())
         {
-            if (!sourceIterator.MoveNext())
-            {
-                maxValue = default(TSource);
-                return false;
-            }
-            var max = sourceIterator.Current;
-            var maxKey = selector(max);
-            while (sourceIterator.MoveNext())
-            {
-                var candidate = sourceIterator.Current;
-                var candidateProjected = selector(candidate);
-                if (Comparer<TKey>.Default.Compare(candidateProjected, maxKey) > 0)
-                {
-                    max = candidate;
-                    maxKey = candidateProjected;
-                }
-            }
-            maxValue = max;
-            return true;
+            maxValue = default(TSource);
+            return false;
         }
+        var max = sourceIterator.Current;
+        var maxKey = selector(max);
+        while (sourceIterator.MoveNext())
+        {
+            var candidate = sourceIterator.Current;
+            var candidateProjected = selector(candidate);
+            if (Comparer<TKey>.Default.Compare(candidateProjected, maxKey) > 0)
+            {
+                max = candidate;
+                maxKey = candidateProjected;
+            }
+        }
+        maxValue = max;
+        return true;
     }
 
     /// <summary>
@@ -109,26 +108,24 @@ public static class Extensions
     {
         if (selector == null) throw new ArgumentNullException("selector");
         if (source == null) return default(TSource);
-        using (var sourceIterator = source.GetEnumerator())
+        using var sourceIterator = source.GetEnumerator();
+        if (!sourceIterator.MoveNext())
         {
-            if (!sourceIterator.MoveNext())
-            {
-                return default(TSource);
-            }
-            var min = sourceIterator.Current;
-            var minKey = selector(min);
-            while (sourceIterator.MoveNext())
-            {
-                var candidate = sourceIterator.Current;
-                var candidateProjected = selector(candidate);
-                if (Comparer<TKey>.Default.Compare(candidateProjected, minKey) < 0)
-                {
-                    min = candidate;
-                    minKey = candidateProjected;
-                }
-            }
-            return min;
+            return default(TSource);
         }
+        var min = sourceIterator.Current;
+        var minKey = selector(min);
+        while (sourceIterator.MoveNext())
+        {
+            var candidate = sourceIterator.Current;
+            var candidateProjected = selector(candidate);
+            if (Comparer<TKey>.Default.Compare(candidateProjected, minKey) < 0)
+            {
+                min = candidate;
+                minKey = candidateProjected;
+            }
+        }
+        return min;
     }
 
     // https://stackoverflow.com/questions/19890301/distinctby-not-recognized-as-method
