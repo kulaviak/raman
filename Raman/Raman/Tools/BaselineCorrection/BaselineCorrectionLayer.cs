@@ -134,7 +134,10 @@ public class BaselineCorrectionLayer : LayerBase
         }
         else
         {
-            return CoordSystem.ToValuePoint(pos.X, pos.Y);
+            var closestSpectrum = new ClosestSpectrumCalculator().GetClosestSpectrum(spectra, pos, CoordSystem);
+            var valuePoint = CoordSystem.ToValuePoint(pos.X, pos.Y);
+            var closestPoint = GetClosestPointInXDirection(closestSpectrum.Points, valuePoint);
+            return closestPoint;
         }
     }
 
