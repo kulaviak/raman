@@ -1,14 +1,10 @@
 namespace Raman.File;
 
-public class MultiSpectrumFileReader
+public class MultiSpectrumFileReader(string filePath)
 {
-    private readonly string filePath;
-
-    public MultiSpectrumFileReader(string filePath)
-    {
-        this.filePath = filePath;
-    }
-
+    
+    private ILineParser lineParser = Util.GetLineParser(filePath);
+    
     /// <summary>
     /// Reads multi spectrum file. If x value or y value of the point is empty then the point is ignored.
     /// </summary>
@@ -30,7 +26,7 @@ public class MultiSpectrumFileReader
             if (lines.Count >= 2)
             {
                 var xLine = lines.First();
-                var xValues = TryParseLine(xLine);
+                var xValues = lineParser.ParseLine(xLine);
                 if (xValues.Count < 2)
                 {
                     throw new AppException($"There are less than two points. Line: {xLine}");
@@ -38,29 +34,22 @@ public class MultiSpectrumFileReader
                 for (var i = 1; i < lines.Count; i++)
                 {
                     var yLine = lines[i];
-                    var yValues = TryParseLine(yLine);
-                    if (yValues != null)
+                    var yValues = lineParser.ParseLine(yLine);
+                    if (yValues.Count < 2)
                     {
-                        if (yValues.Count < 2)
-                        {
-                            throw new AppException($"There are less than two points. Line: {yLine}");
-                        }
+                        throw new AppException($"Parsing line with y coordinates failed. There are less than two points. Line: {yLine}");
+                    }
 
-                        if (xValues.Count == yValues.Count)
-                        {
-                            var points = GetPoints(xValues, yValues);
-                            points = points.OrderBy(x => x.X).ToList();
-                            ret.Add(points);
-                        }
-                        else
-                        {
-                            throw new AppException(
-                                $"Line with y coordinates doesn't have same count of numbers as line with x coordinates. Line: {yLine}");
-                        }
+                    if (xValues.Count == yValues.Count)
+                    {
+                        var points = GetPoints(xValues, yValues);
+                        points = points.OrderBy(x => x.X).ToList();
+                        ret.Add(points);
                     }
                     else
                     {
-                        throw new AppException($"Parsing line with y coordinates failed. Line: {yLine}");
+                        throw new AppException(
+                            $"Line with y coordinates doesn't have same count of numbers as line with x coordinates. Line: {yLine}");
                     }
                 }
             }
@@ -81,29 +70,13 @@ public class MultiSpectrumFileReader
         var ret = new List<ValuePoint>();
         for (var i = 0; i < xValues.Count; i++)
         {
+            // in multispectrum files (like 1984.txt file) can be some x values missing (there are only tabs but no numbers) => they are null => ignore them
             if (xValues[i] != null && yValues[i] != null)
             {
                 var point = new ValuePoint(xValues[i].Value, yValues[i].Value);
                 ret.Add(point);
             }
-            // else ignore the point
         }
-
         return ret;
     }
-
-    private static List<double?> TryParseLine(string line)
-    {
-        try
-        {
-            var parts = line.Split(' ', '\t');
-            var numbers = parts.Select(x => !x.IsNullOrWhiteSpace() ? Util.UniversalParseDouble(x) : null).ToList();
-            var ret = numbers.Any() ? numbers : null;
-            return ret;
-        }
-        catch (Exception e)
-        {
-            throw new AppException($"Parsing line {line} failed.", e);
-        }
-    }
-}
+ }

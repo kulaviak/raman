@@ -1,14 +1,10 @@
 namespace Raman.File;
 
-public class SingleSpectrumFileReader
+public class SingleSpectrumFileReader(string filePath)
 {
-    private readonly string filePath;
 
-    public SingleSpectrumFileReader(string filePath)
-    {
-        this.filePath = filePath;
-    }
-
+    private ILineParser lineParser = Util.GetLineParser(filePath);
+    
     /// <summary>
     /// Reads single spectrum files. If x value or y value is missing then the point is ignored.
     /// </summary>
@@ -23,7 +19,6 @@ public class SingleSpectrumFileReader
             {
                 throw new AppException($"File {filePath} has less than two points.");
             }
-
             return points;
         }
         catch (Exception ex)
@@ -38,23 +33,14 @@ public class SingleSpectrumFileReader
         return ret;
     }
 
-    public static ValuePoint TryParseLine(string line)
+    private ValuePoint TryParseLine(string line)
     {
         try
         {
-            var parts = Util.SplitOnWhitespaceOrTab(line);
-            if (parts.Length >= 2)
+            var parts = lineParser.ParseLine(line);
+            if (parts.Count >= 2 && parts[0] != null && parts[1] != null)
             {
-                var x = Util.UniversalParseDouble(parts[0]);
-                var y = Util.UniversalParseDouble(parts[1]);
-                if (x != null && y != null)
-                {
-                    return new ValuePoint(x.Value, y.Value);
-                }
-                else
-                {
-                    return null;
-                }
+                return new ValuePoint(parts[0].Value, parts[1].Value);
             }
             else
             {

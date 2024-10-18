@@ -124,7 +124,7 @@ public partial class MainForm : Form
     {
         using var openFileDialog = new OpenFileDialog();
         openFileDialog.Title = "Open Single Spectrum Files";
-        openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+        openFileDialog.Filter = "Text Files (*.txt)|*.txt|CSV Files (*.*)|*.csv|All Files (*.*)|*.*";
         openFileDialog.FilterIndex = 1;
         openFileDialog.Multiselect = true;
         if (AppSettings.SingleSpectrumOpenFileDirectory != null)
@@ -379,7 +379,7 @@ public partial class MainForm : Form
     {
         using var openFileDialog = new OpenFileDialog();
         openFileDialog.Title = "Open Multiple Spectrum Files";
-        openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+        openFileDialog.Filter = "Text Files (*.txt)|*.txt|CSV Files (*.*)|*.csv|All Files (*.*)|*.*";
         openFileDialog.FilterIndex = 1;
         openFileDialog.Multiselect = true;
         if (AppSettings.MultipleSpectrumOpenFileDirectory != null)

@@ -59,7 +59,7 @@
   <ItemGroup>
     <Compile Include="Core\ClosestSpectrumCalculatorTest.cs" />
     <Compile Include="Core\MultiSpectrumFileReaderTest.cs" />
-    <Compile Include="Core\SingleSpectrumFileReaderTest.cs" />
+    <Compile Include="Core\TxtLineParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

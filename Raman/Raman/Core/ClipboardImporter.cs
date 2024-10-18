@@ -1,3 +1,5 @@
+using Raman.File;
+
 namespace Raman.Core;
 
 /// <summary>
@@ -18,8 +20,7 @@ public class ClipboardImporter
         var ret = new List<ValuePoint>();
         foreach (var row in rows)
         {
-            var cells = Util.SplitOnWhitespaceOrTab(row);
-            var point = ParseValuePoint(cells);
+            var point = ParseValuePoint(row);
             if (point != null)
             {
                 ret.Add(point);
@@ -28,16 +29,12 @@ public class ClipboardImporter
         return ret;
     }
 
-    private static ValuePoint ParseValuePoint(string[] cells)
+    private static ValuePoint ParseValuePoint(string line)
     {
-        if (cells.Length == 2)
+        var numbers = new TxtLineParser().ParseLine(line).Select(x => x.Value).ToList();
+        if (numbers.Count == 2)
         {
-            var x = Util.UniversalParseDouble(cells[0]);
-            var y = Util.UniversalParseDouble(cells[1]);
-            if (x != null && y != null)
-            {
-                return new ValuePoint(x.Value, y.Value);
-            }
+            return new ValuePoint(numbers[0], numbers[1]);
         }
         return null;
     }

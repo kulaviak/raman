@@ -1,4 +1,5 @@
 using System.Globalization;
+using Raman.File;
 
 namespace Raman.Core;
 
@@ -8,52 +9,23 @@ public abstract class Util
     {
         var x = Math.Abs(point1.X - point2.X);
         var y = Math.Abs(point1.Y - point2.Y);
-        var ret = (float) Math.Sqrt(x*x + y*y);
+        var ret = (float) Math.Sqrt(x * x + y * y);
         return ret;
     }
-    
+
     public static double GetDistance(ValuePoint point1, ValuePoint point2)
     {
         var x = Math.Abs(point1.X - point2.X);
         var y = Math.Abs(point1.Y - point2.Y);
-        var ret = Math.Sqrt(x*x + y*y);
+        var ret = Math.Sqrt(x * x + y * y);
         return ret;
     }
-        
-    /// <summary>
-    /// Universal decimal parser. Decimal delimiter can be both '.' and ','
-    /// </summary>
-    /// <param name="str"></param>
-    /// <returns></returns>
-    public static Double? UniversalParseDouble(string str)
-    {
-        if (str.IsNullOrWhiteSpace())
-        {
-            return null;
-        }
-        str = str.Replace(",", ".");
-        var style = NumberStyles.Number;
-        var culture = CultureInfo.CreateSpecificCulture("en-US");
-        if (Double.TryParse(str, style, culture, out var ret))
-        {
-            return ret;
-        }
-        else
-        {
-            throw new AppException($"Parsing string {str} as number failed.");
-        }
-    }
-
+    
     public static string Format(double value, int decimalPlaces)
     {
         var culture = new CultureInfo("en-US");
         culture.NumberFormat.NumberDecimalSeparator = AppSettings.DecimalSeparator;
         return Math.Round(value, decimalPlaces).ToString(culture);
-    }
-    
-    public static string Format(double number)
-    {
-        return Format(number, 0);
     }
 
     public static bool IsCtrlKeyPressed()
@@ -69,9 +41,20 @@ public abstract class Util
             spectrum.IsVisible = visibleSpectrumNames.Contains(spectrum.Name);
         }
     }
-
-    public static string[] SplitOnWhitespaceOrTab(string line)
+    
+    public static ILineParser GetLineParser(string filePath)
     {
-        return line.Split(new[] {' ', '\t'}, StringSplitOptions.RemoveEmptyEntries);
+        if (filePath.ToUpper().EndsWith("TXT"))
+        {
+            return new TxtLineParser();
+        }
+        else if (filePath.ToUpper().EndsWith("CSV"))
+        {
+            return new CsvLineParser();
+        }
+        else
+        {
+            return new TxtLineParser();
+        }
     }
-}
+}   
