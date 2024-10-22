@@ -33,7 +33,11 @@ public class BaselineCorrectionLayer : LayerBase
         if (e.Button == MouseButtons.Left)
         {
             var point = CalculateCorrectionPoint(e.Location, canvasPanel.VisibleSpectra, AreCorrectionPointsAdjusted);
-            CorrectionPoints.Add(point);
+            // if correction point is not there already (it can happen)
+            if (!CorrectionPoints.Exists(correctionPoint => correctionPoint.X == point.X))
+            {
+                CorrectionPoints.Add(point);
+            }
             Refresh();
         }
         else if (e.Button == MouseButtons.Middle && Util.IsCtrlKeyPressed())
