@@ -172,7 +172,7 @@ public class BaselineCorrectionLayer : LayerBase
     {
         using var saveFileDialog = new SaveFileDialog();
         saveFileDialog.Title = "Export Corrected Spectra";
-        saveFileDialog.Filter = "TXT Files (*.txt)|*.txt|All Files (*.*)|*.*";
+        saveFileDialog.Filter = "Text Files (*.txt)|*.txt|CSV Files (*.*)|*.csv|All Files (*.*)|*.*";
         saveFileDialog.FilterIndex = 1;
         if (AppSettings.BaselineCorrectionSaveFileDirectory != null)
         {
@@ -190,7 +190,7 @@ public class BaselineCorrectionLayer : LayerBase
             {
                 var filePath = filePaths.First();
                 AppSettings.BaselineCorrectionSaveFileDirectory = Path.GetDirectoryName(filePath);
-                new MultiplePointPerLineFileWriter().WritePoints(spectra, filePath);
+                new MultiplePointPerLineFileWriter(filePath).WritePoints(spectra);
                 MessageUtil.ShowInfo("Export finish successfully.", "Export finished");
             }
             catch (Exception ex)

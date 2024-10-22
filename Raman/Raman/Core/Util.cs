@@ -57,4 +57,20 @@ public abstract class Util
             return new TxtLineParser();
         }
     }
+    
+    public static char GetDelimiter(string filePath)
+    {
+        if (filePath.ToUpper().EndsWith("TXT"))
+        {
+            return '\t';
+        }
+        else if (filePath.ToUpper().EndsWith("CSV"))
+        {
+            return ',';
+        }
+        else
+        {
+            return '\t';
+        }
+    }
 }   

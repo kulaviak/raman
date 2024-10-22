@@ -5,9 +5,12 @@ namespace Raman.File;
 /// <summary>
 /// Export spectra to one file. First column contains x values. Other columns contains y values.
 /// </summary>
-public class MultiplePointPerLineFileWriter
+public class MultiplePointPerLineFileWriter(string filePath)
 {
-    public void WritePoints(List<Spectrum> spectra, string filePath)
+
+    private char delimiter = Util.GetDelimiter(filePath);
+    
+    public void WritePoints(List<Spectrum> spectra)
     {
         var lines = SpectraToLines(spectra);
         System.IO.File.WriteAllLines(filePath, lines);
@@ -31,7 +34,7 @@ public class MultiplePointPerLineFileWriter
         foreach (var spectrum in spectra)
         {
             var point = spectrum.Points.First(point => point.X == x);
-            sb.Append("\t"); 
+            sb.Append(delimiter); 
             if (point != null)
             {
                 sb.Append(Util.Format(point.Y, AppSettings.YDecimalPlaces));
