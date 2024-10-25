@@ -36,7 +36,7 @@ partial class MainForm
     this.miExit = new System.Windows.Forms.ToolStripMenuItem();
     this.miView = new System.Windows.Forms.ToolStripMenuItem();
     this.miZoomWindow = new System.Windows.Forms.ToolStripMenuItem();
-    this.miZoomToOriginalSize = new System.Windows.Forms.ToolStripMenuItem();
+    this.miResetView = new System.Windows.Forms.ToolStripMenuItem();
     this.miSelectSpectra = new System.Windows.Forms.ToolStripMenuItem();
     this.miTools = new System.Windows.Forms.ToolStripMenuItem();
     this.miBaselineCorrection = new System.Windows.Forms.ToolStripMenuItem();
@@ -104,7 +104,7 @@ partial class MainForm
     // 
     // miView
     // 
-    this.miView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miZoomWindow, this.miZoomToOriginalSize, this.miSelectSpectra});
+    this.miView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.miZoomWindow, this.miResetView, this.miSelectSpectra});
     this.miView.Name = "miView";
     this.miView.Size = new System.Drawing.Size(44, 20);
     this.miView.Text = "View";
@@ -113,23 +113,23 @@ partial class MainForm
     // 
     this.miZoomWindow.Name = "miZoomWindow";
     this.miZoomWindow.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
-    this.miZoomWindow.Size = new System.Drawing.Size(231, 22);
+    this.miZoomWindow.Size = new System.Drawing.Size(198, 22);
     this.miZoomWindow.Text = "Zoom Window";
     this.miZoomWindow.Click += new System.EventHandler(this.miZoomWindow_Click);
     // 
-    // miZoomToOriginalSize
+    // miResetView
     // 
-    this.miZoomToOriginalSize.Name = "miZoomToOriginalSize";
-    this.miZoomToOriginalSize.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-    this.miZoomToOriginalSize.Size = new System.Drawing.Size(231, 22);
-    this.miZoomToOriginalSize.Text = "Zoom To Original Size";
-    this.miZoomToOriginalSize.Click += new System.EventHandler(this.miZoomToOriginalSize_Click);
+    this.miResetView.Name = "miResetView";
+    this.miResetView.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+    this.miResetView.Size = new System.Drawing.Size(198, 22);
+    this.miResetView.Text = "Reset View";
+    this.miResetView.Click += new System.EventHandler(this.miResetView_Click);
     // 
     // miSelectSpectra
     // 
     this.miSelectSpectra.Name = "miSelectSpectra";
     this.miSelectSpectra.ShortcutKeys = ((System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.K)));
-    this.miSelectSpectra.Size = new System.Drawing.Size(231, 22);
+    this.miSelectSpectra.Size = new System.Drawing.Size(198, 22);
     this.miSelectSpectra.Text = "Select Spectra";
     this.miSelectSpectra.Click += new System.EventHandler(this.miSelectSpectra_Click);
     // 
@@ -367,7 +367,7 @@ partial class MainForm
   private System.Windows.Forms.ToolStripButton tsbBaselineCorrection;
   private System.Windows.Forms.ToolStripMenuItem miView;
   private System.Windows.Forms.ToolStripMenuItem miZoomWindow;
-  private System.Windows.Forms.ToolStripMenuItem miZoomToOriginalSize;
+  private System.Windows.Forms.ToolStripMenuItem miResetView;
   private System.Windows.Forms.ToolStripMenuItem miTools;
   private System.Windows.Forms.ToolStripMenuItem miBaselineCorrection;
   private System.Windows.Forms.ToolStrip toolStrip;

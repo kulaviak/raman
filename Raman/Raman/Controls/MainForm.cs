@@ -32,7 +32,7 @@ public partial class MainForm : Form
         miZoomWindow.Enabled = areAnySpectra;
         tsbZoomToWindow.Enabled = areAnySpectra;
 
-        miZoomToOriginalSize.Enabled = areAnySpectra;
+        miResetView.Enabled = areAnySpectra;
         tsbZoomToOriginalSize.Enabled = areAnySpectra;
 
         miBaselineCorrection.Enabled = areAnySpectra;
@@ -206,7 +206,7 @@ public partial class MainForm : Form
         canvasPanel.SetZoomToWindowMode();
     }
 
-    private void miZoomToOriginalSize_Click(object sender, EventArgs e)
+    private void miResetView_Click(object sender, EventArgs e)
     {
         try
         {
