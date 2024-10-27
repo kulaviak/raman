@@ -3,7 +3,7 @@
 Program is designed for analyzing Raman and infrared spectra but can also be used to display and measure any chart data defined by data points saved in TXT or CSV file.
 
 ## Download
-[Download](https://github.com/kulaviak/raman/releases/latest/Raman.zip) latest version as a zip file. 
+Go to download/latest directory to download latest version as a zip file. 
 
 ## Key Features
 
