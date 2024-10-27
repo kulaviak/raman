@@ -41,7 +41,7 @@ A sample file, spectrum.csv, is provided in the demo-data folder for testing pro
 - **Zoom Window**: Draw a rectangle to zoom into a specific area of the spectrum.
 - **Reset View**: Quickly return to the original spectrum size.
 
-## Tools Menu``
+## Tools Menu
 
 **Baseline Correction**
 
