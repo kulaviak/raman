@@ -320,7 +320,7 @@ partial class MainForm
     this.MinimumSize = new System.Drawing.Size(400, 400);
     this.Name = "MainForm";
     this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-    this.Text = "Raman";
+    this.Text = " Raman 5";
     this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
     this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RamanForm_FormClosing);
     this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
